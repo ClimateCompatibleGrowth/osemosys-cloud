@@ -1,0 +1,7 @@
+h1 View all runs
+
+ul
+  - @runs.each do |run|
+    li = run.name
+
+= link_to('New run', new_run_path)
