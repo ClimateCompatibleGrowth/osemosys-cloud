@@ -1,0 +1,29 @@
+#!/usr/bin/env ruby
+
+require_relative '../osemosys'
+
+begin
+  options = Slop.parse do |o|
+    o.string '-m', '--model', 'path to Osemosys model file', required: true
+    o.string '-d', '--data', 'path to input data file', required: true
+    o.string '--run-id', 'run id'
+    o.on '--help', '-h', 'display the help' do
+      puts o
+      exit
+    end
+  end
+rescue Slop::Error => e
+  puts 'Error processing the options:'
+  puts e.message
+  exit
+end
+
+if options[:'run-id']
+  Osemosys::Config.configure do |c|
+    c.run_id = options[:'run-id']
+  end
+end
+
+Osemosys::PrepareModel.new(model_path: options[:model], data_path: options[:data]).call
+
+# require 'pry'; binding.pry
