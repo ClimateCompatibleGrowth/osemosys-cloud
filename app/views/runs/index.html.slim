@@ -2,6 +2,17 @@ h1 View all runs
 
 ul
   - @runs.each do |run|
-    li = run.name
+    li
+      dl
+        dt Name
+        dd = run.name
+
+        - if run.model_file.attached?
+          dt Model file
+          dd = link_to('Download', rails_blob_path(run.model_file, disposition: 'attachment'))
+
+        - if run.data_file.attached?
+          dt Data file
+          dd = link_to('Download', rails_blob_path(run.data_file, disposition: 'attachment'))
 
 = link_to('New run', new_run_path)

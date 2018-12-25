@@ -2,4 +2,9 @@ h1 Schedule a new run
 
 = simple_form_for @run do |f|
   = f.input :name
+  br
+  = f.file_field :model_file, label: 'Model file'
+  br
+  = f.file_field :data_file, label: 'Data file'
+  br
   = f.submit
