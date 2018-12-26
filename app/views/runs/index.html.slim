@@ -7,6 +7,7 @@ table.table
     th Model file
     th Data file
     th Result file
+    th Log file
     th Run started at
     th Run finished at
     th Duration
@@ -24,6 +25,9 @@ table.table
       td
         - if run.result_file.attached?
           = link_to('Download', rails_blob_path(run.result_file, disposition: 'attachment'))
+      td
+        - if run.log_file.attached?
+          = link_to('Download', rails_blob_path(run.log_file, disposition: 'attachment'))
       td
         - if run.started_at?
           = distance_of_time_in_words_to_now(run.started_at) + ' ago'

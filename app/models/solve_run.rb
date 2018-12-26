@@ -9,6 +9,7 @@ class SolveRun
     solve_run
     save_result
     set_finished_at
+    save_log
   end
 
   private
@@ -32,6 +33,15 @@ class SolveRun
       io: @solved_file,
       filename: File.basename(@solved_file.to_path)
     )
+  end
+
+  def save_log
+    File.open("./log/run-#{run.id}.log") do |file|
+      run.log_file.attach(
+        io: file,
+        filename: File.basename(file.to_path)
+      )
+    end
   end
 
   def set_finished_at
