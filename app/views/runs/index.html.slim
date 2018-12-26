@@ -5,7 +5,7 @@ ul
     li
       dl
         dt Name
-        dd = run.name
+        dd = "#{run.id} - #{run.name}"
 
         - if run.model_file.attached?
           dt Model file
@@ -14,5 +14,9 @@ ul
         - if run.data_file.attached?
           dt Data file
           dd = link_to('Download', rails_blob_path(run.data_file, disposition: 'attachment'))
+
+        - if run.result_file.attached?
+          dt Result file
+          dd = link_to('Download', rails_blob_path(run.result_file, disposition: 'attachment'))
 
 = link_to('New run', new_run_path)

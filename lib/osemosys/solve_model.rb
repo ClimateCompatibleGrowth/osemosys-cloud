@@ -10,8 +10,9 @@ module Osemosys
       download_files_from_s3
       solve_model
       gzip_output
-      upload_results_to_s3
+      # upload_results_to_s3
       print_summary
+      output_file.file
     end
 
     private

@@ -19,16 +19,16 @@ module Osemosys
       s3_object.key
     end
 
+    def file
+      @file ||= File.open(path)
+    end
+
     private
 
     attr_reader :path
 
     def full_key
       "#{bucket}/#{s3_object.key}"
-    end
-
-    def file
-      @file ||= File.open(path)
     end
 
     def basename

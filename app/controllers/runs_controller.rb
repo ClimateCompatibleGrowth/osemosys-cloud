@@ -4,7 +4,7 @@ class RunsController < ApplicationController
   end
 
   def index
-    @runs = Run.all
+    @runs = Run.order(:id)
   end
 
   def create
