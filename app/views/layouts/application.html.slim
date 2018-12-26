@@ -8,5 +8,15 @@ html
     = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload'
     = javascript_include_tag 'application', 'data-turbolinks-track': 'reload'
   body
+    .navbar.navbar-expand-lg.navbar-dark.bg-dark.mb-4
+      a.navbar-brand href=runs_path Osemosys Cloud
+      ul.navbar-nav
+        li.nav-item = link_to('My runs', runs_path, class: 'nav-link')
+        li.nav-item = link_to('Machines', '#', class: 'nav-link')
+
+      ul.navbar-nav.ml-auto
+        li.nav-item = link_to('Youssef Boulkaid', '#', class: 'nav-link')
+        li.nav-item = link_to('Logout', '#', class: 'nav-link')
+
     .container
       = yield
