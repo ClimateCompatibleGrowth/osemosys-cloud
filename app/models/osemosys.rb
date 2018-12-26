@@ -1,0 +1,2 @@
+module Osemosys
+end

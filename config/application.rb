@@ -9,6 +9,5 @@ Bundler.require(*Rails.groups)
 module OsemosysCloud
   class Application < Rails::Application
     config.load_defaults 5.2
-    config.autoload_paths += %W( lib/ )
   end
 end
