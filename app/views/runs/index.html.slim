@@ -1,22 +1,37 @@
 h1 View all runs
 
-ul
+table
+  tr
+    th Id
+    th Name
+    th Model file
+    th Data file
+    th Result file
+    th Run started at
+    th Run finished at
+    th Duration
+
   - @runs.each do |run|
-    li
-      dl
-        dt Name
-        dd = "#{run.id} - #{run.name}"
-
+    tr
+      td = run.id
+      td = run.name
+      td
         - if run.model_file.attached?
-          dt Model file
-          dd = link_to('Download', rails_blob_path(run.model_file, disposition: 'attachment'))
-
+          = link_to('Download', rails_blob_path(run.model_file, disposition: 'attachment'))
+      td
         - if run.data_file.attached?
-          dt Data file
-          dd = link_to('Download', rails_blob_path(run.data_file, disposition: 'attachment'))
-
+          = link_to('Download', rails_blob_path(run.data_file, disposition: 'attachment'))
+      td
         - if run.result_file.attached?
-          dt Result file
-          dd = link_to('Download', rails_blob_path(run.result_file, disposition: 'attachment'))
+          = link_to('Download', rails_blob_path(run.result_file, disposition: 'attachment'))
+      td
+        - if run.started_at?
+          = distance_of_time_in_words_to_now(run.started_at) + ' ago'
+      td
+        - if run.finished_at?
+          = distance_of_time_in_words_to_now(run.started_at) + ' ago'
+      td
+        - if run.solving_time
+          = distance_of_time_in_words(run.started_at, run.finished_at, include_seconds: true)
 
 = link_to('New run', new_run_path)
