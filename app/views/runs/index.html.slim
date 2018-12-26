@@ -18,16 +18,16 @@ table.table
       td = run.name
       td
         - if run.model_file.attached?
-          = link_to('Download', rails_blob_path(run.model_file, disposition: 'attachment'))
+          = link_to(run.model_file.filename.to_s, rails_blob_path(run.model_file, disposition: 'attachment'))
       td
         - if run.data_file.attached?
-          = link_to('Download', rails_blob_path(run.data_file, disposition: 'attachment'))
+          = link_to(run.data_file.filename.to_s, rails_blob_path(run.data_file, disposition: 'attachment'))
       td
         - if run.result_file.attached?
-          = link_to('Download', rails_blob_path(run.result_file, disposition: 'attachment'))
+          = link_to(run.result_file.filename.to_s, rails_blob_path(run.result_file, disposition: 'attachment'))
       td
         - if run.log_file.attached?
-          = link_to('Download', rails_blob_path(run.log_file, disposition: 'attachment'))
+          = link_to(run.log_file.filename.to_s, rails_blob_path(run.log_file, disposition: 'attachment'))
       td
         - if run.started_at?
           = distance_of_time_in_words_to_now(run.started_at) + ' ago'
