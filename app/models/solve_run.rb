@@ -1,6 +1,7 @@
 class SolveRun
-  def initialize(run:)
+  def initialize(run:, logger: Osemosys::Config.logger)
     @run = run
+    @logger = logger
   end
 
   def call
@@ -12,7 +13,7 @@ class SolveRun
 
   private
 
-  attr_reader :run
+  attr_reader :run, :logger
 
   def set_started_at
     run.update_attributes(started_at: Time.current)
@@ -21,7 +22,8 @@ class SolveRun
   def solve_run
     @solved_file = Osemosys::SolveModel.new(
       s3_data_key: run.data_file.key,
-      s3_model_key: run.model_file.key
+      s3_model_key: run.model_file.key,
+      logger: logger
     ).call
   end
 

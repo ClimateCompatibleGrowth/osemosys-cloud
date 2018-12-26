@@ -1,8 +1,9 @@
 module Osemosys
   class SolveModel
-    def initialize(s3_data_key:, s3_model_key:)
+    def initialize(s3_data_key:, s3_model_key:, logger: Config.logger)
       @s3_model_key = s3_model_key
       @s3_data_key = s3_data_key
+      @logger = logger
     end
 
     def call
@@ -10,14 +11,13 @@ module Osemosys
       download_files_from_s3
       solve_model
       gzip_output
-      # upload_results_to_s3
       print_summary
       output_file.file
     end
 
     private
 
-    attr_reader :s3_model_key, :s3_data_key
+    attr_reader :s3_model_key, :s3_data_key, :logger
 
     def download_files_from_s3
       logger.info 'Downloading input files...'
@@ -39,11 +39,6 @@ module Osemosys
       tty_command.run(gzip_command)
     end
 
-    def upload_results_to_s3
-      logger.info 'Uploading the results...'
-      output_file.upload_to_s3!
-    end
-
     def print_summary
       logger.info 'Model solved!'
       logger.info ''
@@ -63,7 +58,7 @@ module Osemosys
     end
 
     def tty_command
-      @tty_command ||= TTY::Command.new
+      @tty_command ||= TTY::Command.new(output: logger, color: false)
     end
 
     def s3_data_object
@@ -97,10 +92,6 @@ module Osemosys
 
     def bucket
       Config.s3_bucket
-    end
-
-    def logger
-      Config.logger
     end
 
     def s3
