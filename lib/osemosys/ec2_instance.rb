@@ -1,16 +1,29 @@
 module Osemosys
   class Ec2Instance
+    def initialize(run_id:, async: true)
+      @run_id = run_id
+      @async = async
+    end
+
     def spawn!
       create!
+      return if async
       wait_until_running
+      puts instance.public_ip_address
       instance
     end
 
     private
 
+    attr_reader :run_id, :async
+
     def create!
       logger.info 'Creating instance'
-      @instances = resource.create_instances(
+      @instances = resource.create_instances(ec2_instance_params)
+    end
+
+    def ec2_instance_params
+      {
         image_id: 'ami-0b076da55f7be4124', # Osemosys Cloud - GLPK
         min_count: 1,
         max_count: 1,
@@ -22,7 +35,7 @@ module Osemosys
           name: 'Osemosys'
         },
         instance_initiated_shutdown_behavior: 'terminate'
-      )
+      }
     end
 
     def block_instance_store_settings
@@ -66,7 +79,7 @@ module Osemosys
       "su - ec2-user -c '#{solve_run_command}'"
     end
 
-    def solve_run_command(run_id: 2)
+    def solve_run_command
       'cd /home/ec2-user/osemosys-cloud && '\
       'git pull && '\
       'bundle install && '\
