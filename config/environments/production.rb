@@ -1,5 +1,7 @@
 Rails.application.configure do
-  # Settings specified here will take precedence over those in config/application.rb.
+  # Re-enable autoloading in prod
+  # https://edgeguides.rubyonrails.org/upgrading_ruby_on_rails.html#autoloading-is-disabled-after-booting-in-the-production-environment
+  config.enable_dependency_loading = true
 
   # Code is not reloaded between requests.
   config.cache_classes = true
