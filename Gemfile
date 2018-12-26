@@ -14,7 +14,6 @@ gem 'rails', '~> 5.2.0'
 gem 'sassc-rails'
 gem 'simple_form'
 gem 'slim-rails'
-gem 'slop', require: false
 gem 'tty-command', require: false
 gem 'turbolinks', '~> 5'
 gem 'uglifier', '>= 1.3.0'
