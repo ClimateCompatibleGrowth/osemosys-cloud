@@ -1,10 +1,10 @@
 h1 Schedule a new run
 
-= simple_form_for @run do |f|
+= simple_form_for(@run, html: { class: 'aform-inline' })do |f|
   = f.input :name
+  = f.label 'Model file'
+  = f.file_field :model_file, accept: 'text/plain'
+  = f.label 'Data file'
+  = f.file_field :data_file, accept: 'text/plain'
   br
-  = f.file_field :model_file, label: 'Model file'
-  br
-  = f.file_field :data_file, label: 'Data file'
-  br
-  = f.submit
+  = f.submit 'Create run', class: 'btn btn-primary'

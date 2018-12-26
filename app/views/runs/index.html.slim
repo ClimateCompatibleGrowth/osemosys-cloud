@@ -34,4 +34,4 @@ table.table
         - if run.solving_time
           = distance_of_time_in_words(run.started_at, run.finished_at, include_seconds: true)
 
-= link_to('New run', new_run_path)
+= link_to('New run', new_run_path, class: 'btn btn-primary')
