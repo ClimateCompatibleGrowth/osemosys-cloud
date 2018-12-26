@@ -11,7 +11,7 @@ module Osemosys
     def create!
       logger.info 'Creating instance'
       @instances = resource.create_instances(
-        image_id: 'ami-04e3d03d8c18b02f3',
+        image_id: 'ami-0b076da55f7be4124', # Osemosys Cloud - GLPK
         min_count: 1,
         max_count: 1,
         key_name: 'aws-perso',
@@ -19,8 +19,25 @@ module Osemosys
         instance_type: 't2.micro',
         iam_instance_profile: {
           name: 'Osemosys'
-        }
+        },
+        instance_initiated_shutdown_behavior: 'terminate'
       )
+    end
+
+    def block_instance_store_settings
+      # Used when creating a new image from scratch
+      {
+        image_id: 'ami-09693313102a30b2c', # Linux 2 AMI
+        block_device_mappings: [
+          {
+            device_name: '/dev/xvda',
+            ebs: {
+              delete_on_termination: true,
+              volume_size: 12
+            }
+          }
+        ]
+      }
     end
 
     def wait_until_running
