@@ -15,4 +15,28 @@ class Run < ApplicationRecord
     save
     result_file.purge
   end
+
+  def started?
+    started_at.present?
+  end
+
+  def finished?
+    finished_at.present?
+  end
+
+  def ongoing?
+    started? && !finished?
+  end
+
+  # To move to presenter
+  def can_be_started?
+    !started?
+  end
+
+  def status
+    return 'Finished' if finished?
+    return 'Ongoing' if ongoing?
+    return 'Started' if started?
+    'Not started yet'
+  end
 end

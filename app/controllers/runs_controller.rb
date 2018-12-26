@@ -12,6 +12,14 @@ class RunsController < ApplicationController
     redirect_to runs_path
   end
 
+  def start
+    run = Run.find(params[:id])
+    # TODO: bad UX here, index still shows "start" after clicking
+    # Maybe add a "Queued" status?
+    Osemosys::Ec2Instance.new(run_id: run.id).spawn!
+    redirect_to action: :index
+  end
+
   private
 
   def run_params
