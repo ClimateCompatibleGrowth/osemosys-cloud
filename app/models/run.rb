@@ -7,4 +7,11 @@ class Run < ApplicationRecord
     return unless started_at && finished_at
     finished_at - started_at
   end
+
+  def reset!
+    self.finished_at = nil
+    self.started_at = nil
+    save
+    result_file.purge
+  end
 end
