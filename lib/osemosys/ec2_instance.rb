@@ -15,6 +15,7 @@ module Osemosys
         min_count: 1,
         max_count: 1,
         key_name: 'aws-perso',
+        user_data: encoded_user_data,
         security_group_ids: ['sg-234d125d'],
         instance_type: 't2.micro',
         iam_instance_profile: {
@@ -54,6 +55,23 @@ module Osemosys
 
     def resource
       @resource ||= Aws::EC2::Resource.new(region: 'eu-west-1')
+    end
+
+    def encoded_user_data
+      Base64.encode64(user_data)
+    end
+
+    def user_data
+      "#!/usr/bin/env bash\n"\
+      "su - ec2-user -c '#{solve_run_command}'"
+    end
+
+    def solve_run_command(run_id: 2)
+      'cd /home/ec2-user/osemosys-cloud && '\
+      'git pull && '\
+      'bundle install && '\
+      "bundle exec rake solve_run[#{run_id}] && "\
+      'sudo shutdown -h now'
     end
 
     def logger

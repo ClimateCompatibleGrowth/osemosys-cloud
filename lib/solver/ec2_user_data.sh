@@ -47,4 +47,4 @@ cd osemosys-cloud/
 bundle install
 
 # Everything above here should be in the AMI
-bundle exec rake solve_run[1]
+cd osemosys-cloud && bundle exec rake solve_run[2] && sudo shutdown -h now
