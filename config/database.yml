@@ -20,5 +20,5 @@ test:
 
 production:
   <<: *default
-  username: tillin
+  username: osemosys-cloud
   password: <%= ENV['MYAPP_DATABASE_PASSWORD'] %>
