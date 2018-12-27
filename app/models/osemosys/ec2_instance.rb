@@ -84,7 +84,7 @@ module Osemosys
       'cd /home/ec2-user/osemosys-cloud && '\
       'git pull && '\
       'bundle install && '\
-      "bundle exec rake solve_run[#{run_id}] && "\
+      "bundle exec rake solve_cplex_run[#{run_id}] && "\
       'sudo shutdown -h now'
     end
 
