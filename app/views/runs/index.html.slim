@@ -32,16 +32,16 @@ table.table
           = link_to(run.log_file.filename.to_s, rails_blob_path(run.log_file, disposition: 'attachment'))
       td
         - if run.queued_at?
-          = distance_of_time_in_words_to_now(run.queued_at) + ' ago'
+          = format_datetime(run.queued_at)
       td
         - if run.started_at?
-          = distance_of_time_in_words_to_now(run.started_at) + ' ago'
+          = format_datetime(run.started_at)
       td
         - if run.finished_at?
-          = distance_of_time_in_words_to_now(run.started_at) + ' ago'
+          = format_datetime(run.started_at)
       td
         - if run.solving_time
-          = distance_of_time_in_words(run.started_at, run.finished_at, include_seconds: true)
+          = format_duration(run.solving_time)
       td
         - if run.can_be_queued?
           = link_to('start', start_run_path(run), method: :post)
