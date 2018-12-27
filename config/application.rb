@@ -8,6 +8,8 @@ Bundler.require(*Rails.groups)
 
 module OsemosysCloud
   class Application < Rails::Application
+    config.time_zone = 'Europe/Stockholm'
+
     config.load_defaults 5.2
   end
 end
