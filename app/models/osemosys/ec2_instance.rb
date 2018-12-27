@@ -25,7 +25,7 @@ module Osemosys
 
     def ec2_instance_params
       {
-        image_id: 'ami-0b076da55f7be4124', # Osemosys Cloud - GLPK
+        image_id: 'ami-04bb9524f91359304', # Osemosys Cloud - GLPK + CPLEX
         min_count: 1,
         max_count: 1,
         key_name: 'aws-perso',

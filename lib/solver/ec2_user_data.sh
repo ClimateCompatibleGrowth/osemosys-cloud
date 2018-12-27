@@ -1,5 +1,4 @@
 # TODO: Automate this to create new AMIs. Chef?
-# Use Amazon linux 2 instead of linux
 
 # Prerequisite to setup yarn
 # https://yarnpkg.com/lang/en/docs/install/#centos-stable
@@ -15,6 +14,7 @@ echo 'export PATH="$HOME/.rbenv/bin:$PATH"' >> ~/.bashrc
 echo 'eval "$(rbenv init -)"' >> ~/.bashrc
 source ~/.bashrc
 rbenv install 2.5.1
+rbenv global 2.5.1
 gem install bundler
 
 # Install CPLEX:
@@ -23,6 +23,7 @@ chmod +x cplex_studio128.linux-x86-64.bin
 sudo ./cplex_studio128.linux-x86-64.bin 
 # ...go through installation
 sudo ln -s /opt/ibm/ILOG/CPLEX_Studio128/cplex/bin/x86-64_linux/cplex /usr/bin/cplex
+rm cplex_studio128.linux-x86-64.bin
 
 # Install GLPK
 # https://en.wikibooks.org/wiki/GLPK/Linux_OS
@@ -32,19 +33,32 @@ cd glpk-4.55
 ./configure
 make
 sudo make install
+make clean
+cd ..
+rm -rf glpk-4.55*
 
 # Add to bashrc:
-export RAILS_ENV=production
-export RACK_ENV=production
-export DATABASE_URL=
-export RAILS_MASTER_KEY=
+# Values from heroku run printenv
+echo 'export RAILS_ENV=production' >> ~/.bashrc
+echo 'export RACK_ENV=production' >> ~/.bashrc
+echo 'export DATABASE_URL=' >> ~/.bashrc
+echo 'export RAILS_MASTER_KEY=' >> ~/.bashrc
 
 # Setup repo
 git clone https://github.com/yboulkaid/osemosys-cloud.git
 cd osemosys-cloud/
 
-# Only install for prod?
-bundle install
+bundle install --without development test
+
+# Clear bash history
+history -c
+history -w
 
 # Everything above here should be in the AMI
 cd osemosys-cloud && bundle exec rake solve_run[2] && sudo shutdown -h now
+
+# To solve cplex model:
+glpsol -m osemosys.txt -d data.txt --wlp input.lp
+# Maybe zip and upload lp file?
+cplex -c 'read input.lp' 'optimize' 'write output.sol'
+# Upload output.sol and cplex.log
