@@ -37,7 +37,7 @@ module Osemosys
         },
         cpu_options: {
           core_count: 2,
-          threads_per_core: 2
+          threads_per_core: 1
         },
         instance_initiated_shutdown_behavior: 'terminate'
       }
@@ -94,7 +94,8 @@ module Osemosys
 
     def instance_type
       # 't2.micro'
-      'c5.xlarge'
+      # 'c5.4xlarge'
+      'c5.9xlarge'
     end
 
     def logger
