@@ -5,6 +5,10 @@ class RunsController < ApplicationController
 
   def index
     @runs = Run.order(:id)
+               .with_attached_model_file
+               .with_attached_data_file
+               .with_attached_result_file
+               .with_attached_log_file
   end
 
   def create
