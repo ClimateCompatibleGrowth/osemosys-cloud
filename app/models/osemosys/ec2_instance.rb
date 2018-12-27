@@ -31,9 +31,13 @@ module Osemosys
         key_name: 'aws-perso',
         user_data: encoded_user_data,
         security_group_ids: ['sg-234d125d'],
-        instance_type: 't2.micro',
+        instance_type: instance_type,
         iam_instance_profile: {
           name: 'Osemosys'
+        },
+        cpu_options: {
+          core_count: 2,
+          threads_per_core: 2
         },
         instance_initiated_shutdown_behavior: 'terminate'
       }
@@ -86,6 +90,11 @@ module Osemosys
       'bundle install && '\
       "bundle exec rake solve_cplex_run[#{run_id}] && "\
       'sudo shutdown -h now'
+    end
+
+    def instance_type
+      # 't2.micro'
+      'c5.xlarge'
     end
 
     def logger
