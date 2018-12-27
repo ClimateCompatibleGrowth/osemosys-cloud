@@ -55,6 +55,7 @@ module Osemosys
       glpsol -m #{local_model_file_path}
              -d #{local_data_file_path}
              --wlp #{cplex_input_file}
+             --check
       ).delete("\n")
     end
 
