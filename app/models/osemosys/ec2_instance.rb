@@ -6,6 +6,7 @@ module Osemosys
     end
 
     def spawn!
+      return if Rails.env.development?
       create!
       return if async
       wait_until_running

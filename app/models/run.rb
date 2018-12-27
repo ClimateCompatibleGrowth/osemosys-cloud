@@ -12,6 +12,7 @@ class Run < ApplicationRecord
   def reset!
     self.finished_at = nil
     self.started_at = nil
+    self.queued_at = nil
     save
     result_file.purge
   end
@@ -28,15 +29,22 @@ class Run < ApplicationRecord
     started? && !finished?
   end
 
+  def in_queue?
+    return false if started? || finished?
+    queued_at.present?
+  end
+
   # To move to presenter
-  def can_be_started?
-    !started?
+  def can_be_queued?
+    return false if started? || finished?
+    !in_queue?
   end
 
   def status
     return 'Finished' if finished?
     return 'Ongoing' if ongoing?
     return 'Started' if started?
+    return 'In queue' if in_queue?
     'Not started yet'
   end
 end

@@ -8,8 +8,9 @@ table.table
     th Data file
     th Result file
     th Log file
-    th Run started at
-    th Run finished at
+    th Queued at
+    th Started at
+    th Finished at
     th Duration
     th Status
 
@@ -30,6 +31,9 @@ table.table
         - if run.log_file.attached?
           = link_to(run.log_file.filename.to_s, rails_blob_path(run.log_file, disposition: 'attachment'))
       td
+        - if run.queued_at?
+          = distance_of_time_in_words_to_now(run.queued_at) + ' ago'
+      td
         - if run.started_at?
           = distance_of_time_in_words_to_now(run.started_at) + ' ago'
       td
@@ -39,7 +43,7 @@ table.table
         - if run.solving_time
           = distance_of_time_in_words(run.started_at, run.finished_at, include_seconds: true)
       td
-        - if run.can_be_started?
+        - if run.can_be_queued?
           = link_to('start', start_run_path(run), method: :post)
         - else
           = run.status
