@@ -19,30 +19,14 @@ table.table.table-striped.table-responsive
     tr
       td = run.id
       td = run.name
-      td
-        - if run.model_file.attached?
-          = link_to(run.model_file.filename.to_s, rails_blob_path(run.model_file, disposition: 'attachment'))
-      td
-        - if run.data_file.attached?
-          = link_to(run.data_file.filename.to_s, rails_blob_path(run.data_file, disposition: 'attachment'))
-      td
-        - if run.result_file.attached?
-          = link_to(run.result_file.filename.to_s, rails_blob_path(run.result_file, disposition: 'attachment'))
-      td
-        - if run.log_file.attached?
-          = link_to(run.log_file.filename.to_s, rails_blob_path(run.log_file, disposition: 'attachment'))
-      td
-        - if run.queued_at?
-          = format_datetime(run.queued_at)
-      td
-        - if run.started_at?
-          = format_datetime(run.started_at)
-      td
-        - if run.finished_at?
-          = format_datetime(run.started_at)
-      td
-        - if run.solving_time
-          = format_duration(run.solving_time)
+      td = download_button(run.model_file) if run.model_file.attached?
+      td = download_button(run.data_file) if run.data_file.attached?
+      td = download_button(run.result_file) if run.result_file.attached?
+      td = download_button(run.log_file) if run.log_file.attached?
+      td = format_datetime(run.queued_at) if run.queued_at?
+      td = format_datetime(run.started_at) if run.started_at?
+      td = format_datetime(run.finished_at) if run.finished_at?
+      td = format_duration(run.solving_time) if run.solving_time
       td
         - if run.can_be_queued?
           = link_to('start', start_run_path(run), method: :post)
