@@ -1,15 +1,14 @@
 doctype html
 html
   head
-    title
-      | OsemosysCloud
+    title OsemosysCloud
     = csrf_meta_tags
     = csp_meta_tag
     = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload'
     = javascript_include_tag 'application', 'data-turbolinks-track': 'reload'
   body
     .navbar.navbar-expand-lg.navbar-dark.bg-dark.mb-4
-      a.navbar-brand href=runs_path Osemosys Cloud
+      a.navbar-brand href=root_path Osemosys Cloud (alpha)
       ul.navbar-nav
         li.nav-item = link_to('My runs', runs_path, class: 'nav-link')
         li.nav-item = link_to('Machines', '#', class: 'nav-link')

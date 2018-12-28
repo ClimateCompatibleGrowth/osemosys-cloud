@@ -1,18 +1,19 @@
-h1 My runs
+h1.mb-4 My runs
 
-table.table
-  tr
-    th Id
-    th Name
-    th Model file
-    th Data file
-    th Result file
-    th Log file
-    th Queued at
-    th Started at
-    th Finished at
-    th Duration
-    th Status
+table.table.table-striped.table-responsive
+  thead.thead-light
+    tr
+      th Id
+      th Name
+      th Model file
+      th Data file
+      th Result file
+      th Log file
+      th Queued
+      th Started
+      th Finished
+      th Duration
+      th Status
 
   - @runs.each do |run|
     tr
