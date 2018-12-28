@@ -4,7 +4,9 @@ module ApplicationHelper
   end
 
   def format_datetime(datetime)
-    datetime.strftime('%e %b %Y %H:%M:%S')
+    relative_time = distance_of_time_in_words_to_now(datetime) + ' ago'
+    tooltip = datetime.strftime('%e %b %Y %H:%M:%S')
+    render 'common/relative_time_with_tooltip', relative_time: relative_time, tooltip: tooltip
   end
 
   def download_button(attachment, tooltip: nil)
