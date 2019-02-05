@@ -91,15 +91,15 @@ module Osemosys
     end
 
     def cplex_input_file
-      './input.lp'
+      './data/input.lp'
     end
 
     def output_path
-      './output.sol'
+      './data/output.sol'
     end
 
     def gzipped_output_path
-      './output.sol.gz'
+      './data/output.sol.gz'
     end
 
     def output_file

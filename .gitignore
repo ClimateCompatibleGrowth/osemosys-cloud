@@ -31,3 +31,7 @@
 /config/master.key
 
 SelectedResults.csv
+tags
+/data
+!/data/.keep
+cplex.log
