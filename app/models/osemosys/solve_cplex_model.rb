@@ -11,6 +11,9 @@ module Osemosys
       generate_input_file
       solve_model
       gzip_output
+      transform_output
+      sort_transformed_output
+      gzip_sorted_output
       print_summary
       output_file.file
     end
@@ -44,6 +47,21 @@ module Osemosys
       tty_command.run(gzip_command)
     end
 
+    def transform_output
+      logger.info 'Transforming the output with the python script'
+      tty_command.run(python_transforming_command)
+    end
+
+    def sort_transformed_output
+      logger.info 'Sorting the transformed output'
+      tty_command.run(sorting_command)
+    end
+
+    def gzip_sorted_output
+      logger.info 'Gzipping the sorted output'
+      tty_command.run(gzip_sorted_output_command)
+    end
+
     def print_summary
       logger.info 'Model solved!'
       logger.info ''
@@ -60,13 +78,29 @@ module Osemosys
     end
 
     def gzip_command
-      "gzip -f #{output_path}"
+      "gzip -k -f #{output_path}"
     end
 
     def cplex_command
       %(
         cplex -c "read #{cplex_input_file}" "optimize" "write #{output_path}"
       )
+    end
+
+    def python_transforming_command
+      %(
+        python lib/solver/transform_31072013.py #{output_path} #{transformed_output_path}
+      )
+    end
+
+    def sorting_command
+      %(
+        sort #{transformed_output_path} -o #{sorted_output_path}
+      )
+    end
+
+    def gzip_sorted_output_command
+      "gzip -k -f #{sorted_output_path}"
     end
 
     def tty_command
@@ -102,8 +136,24 @@ module Osemosys
       './data/output.sol.gz'
     end
 
+    def transformed_output_path
+      './data/output_transformed.txt'
+    end
+
+    def sorted_output_path
+      './data/output_sorted.txt'
+    end
+
+    def gzipped_sorted_output_path
+      './data/output_sorted.txt.gz'
+    end
+
     def output_file
       OutputFile.new(gzipped_output_path)
+    end
+
+    def processed_output_file
+      OutputFile.new(gzipped_sorted_output_path)
     end
 
     def bucket
