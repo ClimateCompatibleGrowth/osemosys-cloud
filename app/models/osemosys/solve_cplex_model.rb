@@ -78,7 +78,7 @@ module Osemosys
     end
 
     def gzip_command
-      "gzip -k -f #{output_path}"
+      "gzip < #{output_path} > #{gzipped_output_path}"
     end
 
     def cplex_command
@@ -100,7 +100,7 @@ module Osemosys
     end
 
     def gzip_sorted_output_command
-      "gzip -k -f #{sorted_output_path}"
+      "gzip < #{sorted_output_path} > #{gzipped_sorted_output_path}"
     end
 
     def tty_command
