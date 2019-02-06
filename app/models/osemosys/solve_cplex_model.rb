@@ -10,6 +10,7 @@ module Osemosys
       download_files_from_s3
       generate_input_file
       solve_model
+      remove_constraints
       gzip_output
       # transform_output
       # sort_transformed_output
@@ -40,6 +41,11 @@ module Osemosys
     def solve_model
       logger.info 'Solving the model'
       tty_command.run(cplex_command)
+    end
+
+    def remove_constraints
+      logger.info 'Removing the constraints'
+      tty_command.run(sed_command)
     end
 
     def gzip_output
@@ -85,6 +91,10 @@ module Osemosys
       %(
         cplex -c "read #{cplex_input_file}" "optimize" "write #{output_path}"
       )
+    end
+
+    def sed_command
+      "sed -i '/<variable name=/!d' #{output_path}"
     end
 
     def python_transforming_command
