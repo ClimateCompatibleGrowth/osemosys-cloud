@@ -32,6 +32,6 @@
 
 SelectedResults.csv
 tags
-/data
+/data/*
 !/data/.keep
 cplex.log
