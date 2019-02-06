@@ -11,9 +11,9 @@ module Osemosys
       generate_input_file
       solve_model
       gzip_output
-      transform_output
-      sort_transformed_output
-      gzip_sorted_output
+      # transform_output
+      # sort_transformed_output
+      # gzip_sorted_output
       print_summary
       output_file.file
     end
