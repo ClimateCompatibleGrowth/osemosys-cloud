@@ -29,7 +29,7 @@ table.table.table-striped.table-responsive
       td = format_duration(run.solving_time) if run.solving_time
       td
         - if run.can_be_queued?
-          = link_to('start', start_run_path(run), method: :post)
+          / = link_to('start', start_run_path(run), method: :post)
         - else
           = run.status
 
