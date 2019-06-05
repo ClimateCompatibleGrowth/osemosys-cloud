@@ -8,7 +8,6 @@ module Osemosys
 
     def call
       # TODO: save logs
-      # download_files_from_s3
       solve_model
       gzip_output
       print_summary
@@ -50,7 +49,6 @@ module Osemosys
     def tty_command
       @tty_command ||= TTY::Command.new(output: logger, color: false)
     end
-
 
     def output_path
       './output.txt'
