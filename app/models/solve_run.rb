@@ -23,19 +23,16 @@ class SolveRun
   end
 
   def solve_run
-    if use_cplex
-      @solved_file = Osemosys::SolveCplexModel.new(
-        s3_data_key: run.data_file.key,
-        s3_model_key: run.model_file.key,
-        logger: logger
-      ).call
-    else
-      @solved_file = Osemosys::SolveModel.new(
-        s3_data_key: run.data_file.key,
-        s3_model_key: run.model_file.key,
-        logger: logger
-      ).call
-    end
+    local_files = Osemosys::DownloadModelFromS3.new(
+      s3_data_key: run.data_file.key,
+      s3_model_key: run.model_file.key
+    ).call
+
+    @solved_file = Osemosys::SolveModel.new(
+      local_model_path: local_files.local_model_path,
+      local_data_path: local_files.local_data_path,
+      logger: logger
+    ).call
   end
 
   def save_result

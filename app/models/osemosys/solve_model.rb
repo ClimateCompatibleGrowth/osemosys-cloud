@@ -1,14 +1,14 @@
 module Osemosys
   class SolveModel
-    def initialize(s3_data_key:, s3_model_key:, logger: Config.logger)
-      @s3_model_key = s3_model_key
-      @s3_data_key = s3_data_key
+    def initialize(local_model_path:, local_data_path:, logger: Config.logger)
+      @local_data_path = local_data_path
+      @local_model_path = local_model_path
       @logger = logger
     end
 
     def call
       # TODO: save logs
-      download_files_from_s3
+      # download_files_from_s3
       solve_model
       gzip_output
       print_summary
@@ -17,17 +17,7 @@ module Osemosys
 
     private
 
-    attr_reader :s3_model_key, :s3_data_key, :logger
-
-    def download_files_from_s3
-      logger.info 'Downloading input files...'
-
-      logger.info 'Downloading model file...'
-      s3_model_object.download_file(local_model_file_path)
-
-      logger.info 'Downloading data file...'
-      s3_data_object.download_file(local_data_file_path)
-    end
+    attr_reader :local_data_path, :local_model_path, :logger
 
     def solve_model
       logger.info 'Solving the model'
@@ -47,8 +37,8 @@ module Osemosys
 
     def glpsol_command
       %(
-      glpsol -m #{local_model_file_path}
-             -d #{local_data_file_path}
+      glpsol -m #{local_model_path}
+             -d #{local_data_path}
              -o #{output_path}
       ).delete("\n")
     end
@@ -61,22 +51,6 @@ module Osemosys
       @tty_command ||= TTY::Command.new(output: logger, color: false)
     end
 
-    def s3_data_object
-      @s3_data_object ||= s3.bucket(bucket).object(s3_data_key)
-    end
-
-    def s3_model_object
-      @s3_model_object ||= s3.bucket(bucket).object(s3_model_key)
-    end
-
-    # TODO: Extract these
-    def local_data_file_path
-      "/tmp/data_#{Config.run_id}.txt"
-    end
-
-    def local_model_file_path
-      "/tmp/model_#{Config.run_id}.txt"
-    end
 
     def output_path
       './output.txt'
@@ -88,14 +62,6 @@ module Osemosys
 
     def output_file
       OutputFile.new(gzipped_output_path)
-    end
-
-    def bucket
-      Config.s3_bucket
-    end
-
-    def s3
-      @s3 ||= Aws::S3::Resource.new(region: 'eu-west-1')
     end
   end
 end
