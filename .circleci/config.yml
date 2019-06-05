@@ -27,6 +27,11 @@ jobs:
           command: |
             bundle install --jobs=4 --retry=3 --path vendor/bundle
 
+      - run:
+          name: install yarn dependencies
+          command: |
+            yarn install
+
       - save_cache:
           paths:
             - ./vendor/bundle
