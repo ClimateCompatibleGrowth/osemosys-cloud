@@ -1,0 +1,36 @@
+version: 2
+jobs:
+  build:
+    docker:
+       - image: circleci/ruby:2.6.2-node-browsers
+       - image: circleci/postgres:10-alpine-postgis-ram
+    environment:
+      - RACK_ENV: test
+
+    steps:
+      - checkout
+
+      # Download and cache dependencies
+      - restore_cache:
+          keys:
+          - osemosys-cloud-dependencies-{{ checksum "Gemfile.lock" }}
+          # fallback to using the latest cache if no exact match is found
+          - osemosys-cloud-dependencies-
+
+      - run:
+          name: install dependencies
+          command: |
+            bundle install --jobs=4 --retry=3 --path vendor/bundle
+
+      - save_cache:
+          paths:
+            - ./vendor/bundle
+          key: osemosys-cloud-dependencies-{{ checksum "Gemfile.lock" }}
+
+      - run: bundle exec rake db:create
+      - run: bundle exec rake db:schema:load
+
+      - run:
+          name: run tests
+          command: |
+            bundle exec rspec --format progress
