@@ -28,7 +28,7 @@ class SolveRun
       s3_model_key: run.model_file.key
     ).call
 
-    @solved_file = Osemosys::SolveModel.new(
+    @solved_file_path = Osemosys::SolveModel.new(
       local_model_path: local_files.local_model_path,
       local_data_path: local_files.local_data_path,
       logger: logger
@@ -37,18 +37,17 @@ class SolveRun
 
   def save_result
     run.result_file.attach(
-      io: @solved_file,
-      filename: File.basename(@solved_file.to_path)
+      io: File.open(@solved_file_path),
+      filename: File.basename(@solved_file_path)
     )
   end
 
   def save_log
-    File.open("./log/run-#{run.id}.log") do |file|
-      run.log_file.attach(
-        io: file,
-        filename: File.basename(file.to_path)
-      )
-    end
+    log_path = "./log/run-#{run.id}.log"
+    run.log_file.attach(
+      io: file.open(log_path),
+      filename: File.basename(log_path)
+    )
   end
 
   def set_finished_at

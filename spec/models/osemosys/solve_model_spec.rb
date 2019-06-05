@@ -11,7 +11,7 @@ RSpec.describe Osemosys::SolveModel do
         local_data_path: atlantis_data_path
       ).call
 
-      expect(output_file).to be_instance_of File
+      expect(output_file).to eq('./output.txt.gz')
     end
   end
 end

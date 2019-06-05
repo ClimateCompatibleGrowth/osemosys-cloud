@@ -11,7 +11,7 @@ module Osemosys
       solve_model
       gzip_output
       print_summary
-      File.open(gzipped_output_path)
+      gzipped_output_path
     end
 
     private
