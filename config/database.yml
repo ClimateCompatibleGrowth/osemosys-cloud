@@ -9,14 +9,12 @@ default: &default
 development:
   <<: *default
   username: postgres
-  host: 127.0.0.1
-  password: ''
+  host: localhost
 
 test:
   <<: *default
   username: postgres
-  host: 127.0.0.1
-  password: ''
+  host: localhost
 
 production:
   <<: *default
