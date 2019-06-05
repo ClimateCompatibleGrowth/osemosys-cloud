@@ -11,7 +11,6 @@ class SolveRun
     save_result
     set_finished_at
     save_log
-    # save_cplex_log?
   end
 
   private

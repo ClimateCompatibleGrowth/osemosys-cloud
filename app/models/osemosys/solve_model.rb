@@ -7,10 +7,10 @@ module Osemosys
     end
 
     def call
-      # TODO: save logs
       solve_model
       gzip_output
       print_summary
+
       gzipped_output_path
     end
 
