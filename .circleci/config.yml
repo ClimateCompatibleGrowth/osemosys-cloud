@@ -10,6 +10,11 @@ jobs:
     steps:
       - checkout
 
+      - run:
+          name: install glpk
+          command: |
+            sudo apt-get install glpk-utils
+
       # Download and cache dependencies
       - restore_cache:
           keys:
