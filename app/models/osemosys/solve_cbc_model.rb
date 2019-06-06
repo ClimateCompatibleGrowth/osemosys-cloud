@@ -1,5 +1,5 @@
 module Osemosys
-  class SolveModel
+  class SolveCbcModel
     def initialize(local_model_path:, local_data_path:, logger: Config.logger)
       @local_data_path = local_data_path
       @local_model_path = local_model_path
@@ -7,6 +7,7 @@ module Osemosys
     end
 
     def call
+      generate_input_file
       solve_model
       gzip_output
       print_summary
@@ -18,9 +19,14 @@ module Osemosys
 
     attr_reader :local_data_path, :local_model_path, :logger
 
+    def generate_input_file
+      logger.info 'Generating input file'
+      tty_command.run(glpsol_command)
+    end
+
     def solve_model
       logger.info 'Solving the model'
-      tty_command.run(glpsol_command)
+      tty_command.run(cbc_command)
     end
 
     def gzip_output
@@ -38,24 +44,35 @@ module Osemosys
       %(
       glpsol -m #{local_model_path}
              -d #{local_data_path}
-             -o #{output_path}
+             --wlp #{lp_path}
+             --check
       ).delete("\n")
     end
 
     def gzip_command
-      "gzip -f #{output_path}"
+      "gzip < #{output_path} > #{gzipped_output_path}"
+    end
+
+    def cbc_command
+      %(
+        cbc #{lp_path} solve solu #{output_path}
+      )
     end
 
     def tty_command
       @tty_command ||= TTY::Command.new(output: logger, color: false)
     end
 
+    def lp_path
+      './data/input.lp'
+    end
+
     def output_path
-      './output.txt'
+      './data/output.sol'
     end
 
     def gzipped_output_path
-      './output.txt.gz'
+      './data/output.sol.gz'
     end
   end
 end
