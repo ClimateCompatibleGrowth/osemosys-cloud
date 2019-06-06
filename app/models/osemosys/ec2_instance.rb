@@ -100,7 +100,7 @@ module Osemosys
     end
 
     def instance_type
-      'c5.large'
+      'c5.xlarge'
       # 'c5.9xlarge'
     end
 
