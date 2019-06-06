@@ -51,8 +51,8 @@ cd osemosys-cloud/
 bundle install --without development test
 
 # Clear bash history
-history -c
 history -w
+history -c
 
 # Everything above here should be in the AMI
 cd osemosys-cloud && bundle exec rake solve_run[2] && sudo shutdown -h now

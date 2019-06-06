@@ -62,4 +62,9 @@ docker pull yboulkaid/osemosys
 
 # ^^^^^^^ IN AMI
 
-docker run -it -e RAILS_ENV=production -e DATABASE_URL -e RAILS_MASTER_KEY yboulkaid/osemosys bundle exec rake solve_run[3]
+mkdir data
+
+docker run -e RAILS_ENV=production -e DATABASE_URL -e RAILS_MASTER_KEY -v /tmp:/tmp -v /home/ec2-user/data:/osemosys-cloud/data yboulkaid/osemosys bundle exec rake solve_cbc_run[32]
+
+# View running logs:
+docker exec -it 529c381a02c8 tail -f log/run-32.log

@@ -25,7 +25,7 @@ module Osemosys
 
     def ec2_instance_params
       {
-        image_id: 'ami-04bb9524f91359304', # Osemosys Cloud - GLPK + CPLEX
+        image_id: 'ami-01a4b18debb890d7d', # Osemosys-Docker
         min_count: 1,
         max_count: 1,
         key_name: 'aws-perso',
