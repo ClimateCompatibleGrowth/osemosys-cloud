@@ -100,8 +100,8 @@ module Osemosys
     end
 
     def instance_type
-      # 't2.micro'
-      'c5.9xlarge'
+      't2.micro'
+      # 'c5.9xlarge'
     end
 
     def logger
