@@ -85,10 +85,17 @@ module Osemosys
     end
 
     def solve_run_command
-      'cd /home/ec2-user/osemosys-cloud && '\
-      'git pull && '\
-      'bundle install && '\
-      "bundle exec rake solve_cplex_run[#{run_id}] && "\
+      'docker pull yboulkaid/osemosys && '\
+      'mkdir data && '\
+      'sudo service docker start &&'\
+      'docker run '\
+      '-e RAILS_ENV=production '\
+      '-e DATABASE_URL '\
+      '-e RAILS_MASTER_KEY '\
+      '-v /tmp:/tmp '\
+      '-v /home/ec2-user/data:/osemosys-cloud/data '\
+      'yboulkaid/osemosys '\
+      "bundle exec rake solve_cbc_run[#{run_id}] && "\
       'sudo shutdown -h now'
     end
 
