@@ -48,13 +48,18 @@ set -e
 sudo yum install -y jq docker tmux htop
 sudo service docker start
 sudo usermod -aG docker ec2-user
-su - $USER
+sudo su - $USER
 
-# TODO: write in rc instead of exporting?
-database_url=$(aws secretsmanager get-secret-value --region eu-west-1 --secret-id OsemosysCloud-Prod | jq '.SecretString' | sed -e 's/^"//' -e 's/"$//' | tr -d '\' | jq -r '.DATABASE_URL')
-export DATABASE_URL=$database_url
+secret=$(aws secretsmanager get-secret-value --region eu-west-1 --secret-id OsemosysCloud-Prod | jq '.SecretString' | sed -e 's/^"//' -e 's/"$//' | tr -d '\')
 
-master_key=$(aws secretsmanager get-secret-value --region eu-west-1 --secret-id OsemosysCloud-Prod | jq '.SecretString' | sed -e 's/^"//' -e 's/"$//' | tr -d '\' | jq -r '.RAILS_MASTER_KEY')
-export RAILS_MASTER_KEY=$master_key
-docker-pull yboulkaid/osemosys
+database_url=$(echo $secret | jq -r '.DATABASE_URL')
+master_key=$(echo $secret | jq -r '.RAILS_MASTER_KEY')
+
+echo "export RAILS_MASTER_KEY=$master_key" >> /home/ec2-user/.bashrc
+echo "export DATABASE_URL=$database_url" >> /home/ec2-user/.bashrc
+source ~/.bashrc
+docker pull yboulkaid/osemosys
+
+# ^^^^^^^ IN AMI
+
 docker run -it -e RAILS_ENV=production -e DATABASE_URL -e RAILS_MASTER_KEY yboulkaid/osemosys bundle exec rake solve_run[3]
