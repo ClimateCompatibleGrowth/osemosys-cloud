@@ -1,3 +1,3 @@
 Bugsnag.configure do |config|
-  config.api_key = "9d9d6026eb576f32df6c90d0280479b4"
+  config.api_key = 'd62a3997c20dcc07a4fe6028bec32dd8'
 end
