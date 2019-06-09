@@ -100,18 +100,9 @@ module Osemosys
     end
 
     def solve_run_command
-      'sudo service docker start &&'\
-      'docker pull yboulkaid/osemosys && '\
-      'mkdir data && '\
-      'docker run '\
-      '-e RAILS_ENV=production '\
-      '-e DATABASE_URL '\
-      '-e RAILS_MASTER_KEY '\
-      '-v /tmp:/tmp '\
-      '-v /home/ec2-user/data:/osemosys-cloud/data '\
-      'yboulkaid/osemosys '\
-      "bundle exec rake solve_cbc_run[#{run_id}] && "\
-      'sudo shutdown -h now'
+      shutdown_on_finish = false
+
+      "curl https://raw.githubusercontent.com/yboulkaid/osemosys-cloud/master/lib/solver/user_data.sh | sh -s #{run_id} #{shutdown_on_finish}"
     end
 
     def supports_cpu_options?

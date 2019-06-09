@@ -1,14 +1,12 @@
 #bin/sh
 
 # set -e
-set -x
+
+# https://www.davidpashley.com/articles/writing-robust-shell-scripts/
+set -xu
 
 run_id=$1
-
-if [[ $1 == "" ]] ; then
-  echo 'Pass the run_id as an argument'
-  exit 0
-fi
+shutdown_on_finish=$2
 
 sudo service docker start
 docker pull yboulkaid/osemosys 
@@ -22,4 +20,7 @@ docker run \
   yboulkaid/osemosys \
   bundle exec rake solve_cbc_run[$run_id]
 
-sudo shutdown -h now
+if $shutdown_on_finish; then
+  # echo "Shutting down"
+  sudo shutdown -h now
+fi
