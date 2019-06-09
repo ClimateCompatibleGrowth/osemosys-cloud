@@ -6,6 +6,7 @@ ruby '2.6.2'
 gem 'aws-sdk-ec2'
 gem 'aws-sdk-s3'
 gem 'bootsnap', '>= 1.1.0', require: false
+gem 'bugsnag'
 gem 'coffee-rails', '~> 4.2'
 gem 'dry-configurable'
 gem 'font_awesome5_rails'
