@@ -1,7 +1,8 @@
 module Osemosys
   class Ec2Instance
-    def initialize(run_id:, async: true)
+    def initialize(run_id:, async: true, instance_type: 't2.micro')
       @run_id = run_id
+      @instance_type = instance_type
       @async = async
     end
 
@@ -14,16 +15,25 @@ module Osemosys
       instance
     end
 
+    def instance_params
+      params = base_params
+      if supports_cpu_options?
+        params.merge(cpu_options)
+      else
+        params
+      end
+    end
+
     private
 
-    attr_reader :run_id, :async
+    attr_reader :run_id, :async, :instance_type
 
     def create!
       logger.info 'Creating instance'
-      @instances = resource.create_instances(ec2_instance_params)
+      @instances = resource.create_instances(instance_params)
     end
 
-    def ec2_instance_params
+    def base_params
       {
         image_id: 'ami-01a4b18debb890d7d', # Osemosys-Docker
         min_count: 1,
@@ -35,11 +45,16 @@ module Osemosys
         iam_instance_profile: {
           name: 'Osemosys'
         },
+        instance_initiated_shutdown_behavior: 'terminate'
+      }
+    end
+
+    def cpu_options
+      {
         cpu_options: {
           core_count: 2,
           threads_per_core: 1
-        },
-        instance_initiated_shutdown_behavior: 'terminate'
+        }
       }
     end
 
@@ -99,9 +114,8 @@ module Osemosys
       'sudo shutdown -h now'
     end
 
-    def instance_type
-      'c5.xlarge'
-      # 'c5.9xlarge'
+    def supports_cpu_options?
+      instance_type == 'c5.xlarge' || instance_type == 'c5.9xlarge'
     end
 
     def logger
