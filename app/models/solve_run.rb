@@ -42,7 +42,7 @@ class SolveRun
   end
 
   def save_log
-    log_path = "./log/run-#{run.id}.log"
+    log_path = "/tmp/run-#{run.id}.log"
     run.log_file.attach(
       io: File.open(log_path),
       filename: File.basename(log_path)
