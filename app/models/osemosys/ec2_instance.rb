@@ -85,9 +85,9 @@ module Osemosys
     end
 
     def solve_run_command
+      'sudo service docker start &&'\
       'docker pull yboulkaid/osemosys && '\
       'mkdir data && '\
-      'sudo service docker start &&'\
       'docker run '\
       '-e RAILS_ENV=production '\
       '-e DATABASE_URL '\
