@@ -12,7 +12,7 @@ sudo service docker start
 docker pull yboulkaid/osemosys 
 mkdir data 
 docker run \
-  -e RAILS_ENV=production \
+  -e RAILS_ENV=production \
   -e DATABASE_URL \
   -e RAILS_MASTER_KEY \
   -v /tmp:/tmp \
