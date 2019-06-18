@@ -15,6 +15,7 @@ class Run < ApplicationRecord
     self.queued_at = nil
     save
     result_file.purge
+    log_file.purge
   end
 
   def started?
