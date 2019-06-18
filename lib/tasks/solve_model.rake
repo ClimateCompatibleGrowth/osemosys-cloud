@@ -12,10 +12,6 @@ task :solve_cbc_run, [:run_id] => :environment do |_task, args|
   begin
     SolveRun.new(run: run, logger: logger, solver_class: Osemosys::SolveCbcModel).call
   ensure
-    run.update_attributes(finished_at: Time.current) if run.finished_at.nil?
-    run.log_file.attach(
-      io: File.open(log_path),
-      filename: File.basename(log_path)
-    )
+    AfterFinishHook.new(run: run, log_path: log_path).call
   end
 end

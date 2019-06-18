@@ -9,8 +9,7 @@ class SolveRun
     set_started_at
     solve_run
     save_result
-    set_finished_at
-    save_log
+    perform_after_finish_hook
   end
 
   private
@@ -41,15 +40,8 @@ class SolveRun
     )
   end
 
-  def save_log
+  def perform_after_finish_hook
     log_path = "/tmp/run-#{run.id}.log"
-    run.log_file.attach(
-      io: File.open(log_path),
-      filename: File.basename(log_path)
-    )
-  end
-
-  def set_finished_at
-    run.update_attributes(finished_at: Time.current)
+    AfterFinishHook.new(run: run, log_path: log_path).call
   end
 end
