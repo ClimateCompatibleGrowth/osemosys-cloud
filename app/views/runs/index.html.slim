@@ -1,5 +1,9 @@
 h1.mb-4 My runs
 
+.mb-2 = link_to('New run', new_run_path, class: 'btn btn-primary')
+
+br
+
 table.table.table-striped.table-responsive
   thead.thead-light
     tr
@@ -35,5 +39,3 @@ table.table.table-striped.table-responsive
     tr
       td colspan=12
         = run.description
-
-= link_to('New run', new_run_path, class: 'btn btn-primary')
