@@ -9,13 +9,12 @@ curl --silent --location https://dl.yarnpkg.com/rpm/yarn.repo | sudo tee /etc/yu
 sudo yum install -y git gpg gcc gcc-c++ make glpk-utils tmux htop openssl-devel readline-devel zlib-devel postgresql-libs postgresql-devel yarn
 
 # Install ruby
-wget -q https://github.com/rbenv/rbenv-installer/raw/master/bin/rbenv-installer -O- | bash
-echo 'export PATH="$HOME/.rbenv/bin:$PATH"' >> ~/.bashrc
-echo 'eval "$(rbenv init -)"' >> ~/.bashrc
+git clone https://github.com/asdf-vm/asdf.git ~/.asdf --branch v0.7.2
+echo -e '\n. $HOME/.asdf/asdf.sh' >> ~/.bashrc
 source ~/.bashrc
-rbenv install 2.5.1
-rbenv global 2.5.1
-gem install bundler
+asdf plugin-add ruby
+asdf install ruby 2.6.2
+asdf global ruby 2.6.2
 
 # Install CPLEX:
 aws s3 cp "s3://osemosys-playground/cplex/cplex_studio128.linux-x86-64.bin" cplex_studio128.linux-x86-64.bin
