@@ -7,7 +7,7 @@ module Osemosys
     end
 
     def spawn!
-      return if Rails.env.development?
+      # return if Rails.env.development?
       create!
       return if async
       wait_until_running
@@ -100,7 +100,7 @@ module Osemosys
     end
 
     def solve_run_command
-      shutdown_on_finish = false
+      shutdown_on_finish = true
 
       "curl https://raw.githubusercontent.com/yboulkaid/osemosys-cloud/master/lib/solver/user_data.sh | sh -s #{run_id} #{shutdown_on_finish}"
     end
