@@ -4,7 +4,7 @@ class RunsController < ApplicationController
   end
 
   def index
-    @runs = Run.order(:id)
+    @runs = Run.order(id: :desc)
                .with_attached_model_file
                .with_attached_data_file
                .with_attached_result_file
