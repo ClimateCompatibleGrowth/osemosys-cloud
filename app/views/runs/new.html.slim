@@ -6,5 +6,6 @@ h1 Schedule a new run
   = f.file_field :model_file, accept: 'text/plain'
   = f.label 'Data file'
   = f.file_field :data_file, accept: 'text/plain'
+  = f.input :description
   br
   = f.submit 'Create run', class: 'btn btn-primary'

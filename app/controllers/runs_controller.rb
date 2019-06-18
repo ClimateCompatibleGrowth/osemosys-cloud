@@ -26,6 +26,6 @@ class RunsController < ApplicationController
   private
 
   def run_params
-    params.require(:run).permit(:name, :model_file, :data_file)
+    params.require(:run).permit(:name, :model_file, :data_file, :description)
   end
 end

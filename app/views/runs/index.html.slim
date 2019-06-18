@@ -32,5 +32,8 @@ table.table.table-striped.table-responsive
           / = link_to('start', start_run_path(run), method: :post)
         - else
           = run.status
+    tr
+      td colspan=12
+        = run.description
 
 = link_to('New run', new_run_path, class: 'btn btn-primary')
