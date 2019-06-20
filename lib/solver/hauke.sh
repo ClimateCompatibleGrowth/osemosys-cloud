@@ -19,3 +19,10 @@ rm CloudWatchMonitoringScripts-1.2.2.zip && \
 cd aws-scripts-mon
 crontab -e 
 # */1 * * * * ~/workspace/aws-scripts-mon/mon-put-instance-data.pl --mem-util --mem-used --mem-avail --from-cron
+
+
+# Writing and uploading
+gzip output.sol -f output.sol.gz
+gzip input.lp -f input.lp
+aws s3 cp output.sol.gz "s3://osemosys-playground/hauke/OSeMBE_V2_C1T0E1.sol.gz" 
+aws s3 cp input.lp.gz "s3://osemosys-playground/hauke/OSeMBE_V2_C1T0E1.lp.gz" 
