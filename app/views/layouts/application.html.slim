@@ -15,8 +15,14 @@ html
         li.nav-item = link_to('Machines', '#', class: 'nav-link')
 
       ul.navbar-nav.ml-auto
-        li.nav-item = link_to('Youssef Boulkaid', '#', class: 'nav-link')
-        li.nav-item = link_to('Logout', '#', class: 'nav-link')
+        - if current_user
+          li.nav-item
+            .nav-link = current_user.email
+          li.nav-item = link_to('Logout', destroy_user_session_path, method: :delete, class: 'nav-link')
+        - else
+          li.nav-item = link_to('Register', new_user_registration_path, class: 'nav-link')
+          li.nav-item = link_to('Sign in', new_user_session_path, class: 'nav-link')
+
 
     .container
       = yield
