@@ -26,6 +26,7 @@ RSpec.describe 'Creating a run', type: :system do
     click_on 'Create run'
 
     expect(page).to have_text 'Atlantis'
+    expect(page).to have_text 'Run created'
     expect(page).to have_text 'A Place Long Gone'
   end
 end

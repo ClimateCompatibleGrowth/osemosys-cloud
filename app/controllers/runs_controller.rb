@@ -13,6 +13,7 @@ class RunsController < ApplicationController
 
   def create
     Run.create!(run_params)
+    flash.notice = 'Run created'
     redirect_to runs_path
   end
 
