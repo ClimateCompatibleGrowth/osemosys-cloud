@@ -48,4 +48,20 @@ class Run < ApplicationRecord
     return 'In queue' if in_queue?
     'Not started yet'
   end
+
+  def timeline_passed
+    return 'Queued > Ongoing > Finished' if finished?
+    return 'Queued > Ongoing' if ongoing?
+    return 'Queued > Ongoing' if started?
+    return 'Queued' if in_queue?
+    ''
+  end
+
+  def timeline_future
+    return '' if finished?
+    return '> Finished' if ongoing?
+    return '> Finished' if started?
+    return '> Ongoing > Finished' if in_queue?
+    'Queued > Ongoing > Finished'
+  end
 end
