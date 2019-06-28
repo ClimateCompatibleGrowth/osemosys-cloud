@@ -4,38 +4,5 @@ h1.mb-4 My runs
 
 br
 
-table.table.table-striped.table-responsive
-  thead.thead-light
-    tr
-      th Id
-      th Name
-      th Model file
-      th Data file
-      th Result file
-      th Log file
-      th Queued
-      th Started
-      th Finished
-      th Duration
-      th Status
-
-  - @runs.each do |run|
-    tr
-      td = run.id
-      td = run.name
-      td = download_button(run.model_file) if run.model_file.attached?
-      td = download_button(run.data_file) if run.data_file.attached?
-      td = download_button(run.result_file) if run.result_file.attached?
-      td = download_button(run.log_file) if run.log_file.attached?
-      td = format_datetime(run.queued_at) if run.queued_at?
-      td = format_datetime(run.started_at) if run.started_at?
-      td = format_datetime(run.finished_at) if run.finished_at?
-      td = format_duration(run.solving_time) if run.solving_time
-      td
-        - if run.can_be_queued?
-          / = link_to('start', start_run_path(run), method: :post)
-        - else
-          = run.status
-    tr
-      td colspan=12
-        = run.description
+- @runs.each do |run|
+  = render 'runs/card', run: run

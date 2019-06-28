@@ -5,12 +5,12 @@ module ApplicationHelper
 
   def format_datetime(datetime)
     relative_time = distance_of_time_in_words_to_now(datetime) + ' ago'
-    tooltip = datetime.strftime('%e %b %Y %H:%M:%S')
-    render 'common/relative_time_with_tooltip', relative_time: relative_time, tooltip: tooltip
+    timestamp = datetime.strftime('%e %b %Y %H:%M:%S')
+    "#{timestamp} (#{relative_time})"
   end
 
-  def download_button(attachment, tooltip: nil)
+  def download_button(attachment, label: nil, tooltip: nil)
     tooltip ||= attachment.filename.to_s
-    render 'common/download_button', attachment: attachment, tooltip: tooltip
+    render 'common/download_button', attachment: attachment, tooltip: tooltip, label: label
   end
 end
