@@ -310,7 +310,6 @@ DEPENDENCIES
   devise-bootstrap-views
   dry-configurable
   font_awesome5_rails
-  guard
   guard-livereload
   listen (>= 3.0.5, < 3.2)
   pg
