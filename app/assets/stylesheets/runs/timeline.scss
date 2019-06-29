@@ -11,14 +11,30 @@
 
     &--passed {
       background: #eee;
+
+      &::before {
+        content: '\f00c';
+        font-weight: bold;
+        font-family: 'Font Awesome 5 Free';
+      }
     }
 
     &--future {
+      &::before {
+        content: '\f252';
+        font-weight: bold;
+        font-family: 'Font Awesome 5 Free';
+        color: lightblue;
+      }
       border: 1px solid lightblue;
     }
 
     &--current {
-      font-weight: bold;
+      &::before {
+        content: '\f2f2';
+        font-weight: bold;
+        font-family: 'Font Awesome 5 Free';
+      }
       background: lightblue;
     }
 
