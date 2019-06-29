@@ -1,10 +1,13 @@
 .run-card
-  .run-card__title-bar = "#{run.id} - #{run.name} (#{run.status})"
+  .run-card__title-bar
+    = "#{run.id} - #{run.name} (#{run.status})"
   .run-card__content
     .run-card__description = run.description
-    .run-card__section
-      - timeline = Run::Timeline.new(run)
-      = render 'runs/timeline', timeline: timeline
+    - timeline = Run::Timeline.new(run)
+    = render 'runs/timeline', timeline: timeline
+
+    - if run.can_be_queued?
+      = link_to('Start run', start_run_path(run), method: :post, class: 'btn btn-success btn-lg btn-block')
 
     hr
 
