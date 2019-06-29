@@ -1,13 +1,25 @@
 .timeline {
-  &__passed {
-    color: green;
-  }
+  text-align: center;
+  margin-bottom: 10px;
 
-  &__future {
-    color: #999;
-  }
+  &__item {
+    & + .timeline__item::before {
+      margin: 5px;
+      content: '\f30b';
+      font-weight: bold;
+      font-family: 'Font Awesome 5 Free';
+    }
 
-  &__current {
-    font-weight: bold;
+    &--passed {
+      color: #999;
+    }
+
+    &--future {
+      color: #999;
+    }
+
+    &--current {
+      font-weight: bold;
+    }
   }
 }

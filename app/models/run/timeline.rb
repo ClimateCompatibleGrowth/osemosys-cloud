@@ -1,32 +1,33 @@
 class Run < ApplicationRecord
   class Timeline
+    STATES = %w[Created Queued Ongoing Finished]
+
     def initialize(run)
       @run = run
     end
 
     def current
-      return '' if run.finished?
-      return 'Ongoing' if run.started?
-      return 'Queued' if run.in_queue?
-      ''
+      STATES[current_index]
     end
 
     def passed
-      return 'Queued > Ongoing > Finished' if run.finished?
-      return 'Queued >' if run.started?
-      return '' if run.in_queue?
-      ''
+      return [] if current_index.zero?
+      STATES[0..(current_index - 1)]
     end
 
     def future
-      return '' if run.finished?
-      return '> Finished' if run.started?
-      return '> Ongoing > Finished' if run.in_queue?
-      'Queued > Ongoing > Finished'
+      STATES[(current_index + 1)..-1]
     end
 
     private
 
     attr_reader :run
+
+    def current_index
+      return 3 if run.finished?
+      return 2 if run.started?
+      return 1 if run.in_queue?
+      0
+    end
   end
 end

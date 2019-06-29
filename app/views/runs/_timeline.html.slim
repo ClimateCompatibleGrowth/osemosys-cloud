@@ -1,3 +1,6 @@
-span.timeline__passed = timeline.passed
-span.timeline__current = timeline.current
-span.timeline__future = timeline.future
+.timeline
+  - timeline.passed.each do |item|
+    span.timeline__item.timeline__item--passed = item
+  span.timeline__item.timeline__item--current = timeline.current
+  - timeline.future.each do |item|
+    span.timeline__item.timeline__item--future = item
