@@ -9,8 +9,12 @@ module ApplicationHelper
     "#{timestamp} (#{relative_time})"
   end
 
-  def download_button(attachment, label: nil, tooltip: nil)
+  def download_button(attachment, label: nil, tooltip: nil, style: 'link')
     tooltip ||= attachment.filename.to_s
-    render 'common/download_button', attachment: attachment, tooltip: tooltip, label: label
+    render('common/download_button',
+           attachment: attachment,
+           tooltip: tooltip,
+           label: label,
+           style: style)
   end
 end
