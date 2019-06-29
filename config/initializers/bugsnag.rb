@@ -1,3 +1,5 @@
-Bugsnag.configure do |config|
-  config.api_key = 'd62a3997c20dcc07a4fe6028bec32dd8'
+if Rails.env.production?
+  Bugsnag.configure do |config|
+    config.api_key = Rails.application.credentials.dig(:bugsnag, :api_key)
+  end
 end
