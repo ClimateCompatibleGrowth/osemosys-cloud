@@ -2,8 +2,8 @@
   .run-card__title-bar = "#{run.id} - #{run.name} (#{run.status})"
   .run-card__content
     .run-card__section
-      span.run-card__timeline-passed = run.timeline_passed
-      span.run-card__timeline-future = run.timeline_future
+      - timeline = Run::Timeline.new(run)
+      = render 'runs/timeline', timeline: timeline
       / dl
 
       /   dt Queued

@@ -1,0 +1,13 @@
+.timeline {
+  &__passed {
+    color: green;
+  }
+
+  &__future {
+    color: #999;
+  }
+
+  &__current {
+    font-weight: bold;
+  }
+}
