@@ -1,29 +1,21 @@
 .run-card
   .run-card__title-bar = "#{run.id} - #{run.name} (#{run.status})"
   .run-card__content
+    .run-card__description = run.description
     .run-card__section
       - timeline = Run::Timeline.new(run)
       = render 'runs/timeline', timeline: timeline
-      / dl
 
-      /   dt Queued
-      /   dd = format_datetime(run.queued_at) if run.queued_at?
-
-      /   dt Started
-      /   dd = format_datetime(run.started_at) if run.started_at?
-
-      /   dt Finished
-      /   dd = format_datetime(run.finished_at) if run.finished_at?
-
-      /   dt Solving time
-      /   dd = format_duration(run.solving_time) if run.solving_time
-
-    .run-card__description = run.description
     hr
-    .run-card__section
-      .run-card__header Files:
-      =< download_button(run.result_file, label: 'Result', style: 'primary') if run.result_file.attached?
-      =< download_button(run.log_file, label: 'log') if run.log_file.attached?
-      =< download_button(run.model_file, label: 'Model') if run.model_file.attached?
-      =< download_button(run.data_file, label: 'Data') if run.data_file.attached?
+
+    .run-card__header Files:
+    =< download_button(run.result_file, label: 'Result', style: 'primary') if run.result_file.attached?
+    =< download_button(run.log_file, label: 'log') if run.log_file.attached?
+    =< download_button(run.model_file, label: 'Model') if run.model_file.attached?
+    =< download_button(run.data_file, label: 'Data') if run.data_file.attached?
+
+    - if run.solving_time
+      .run-card__header
+        ' Solving Time:
+        = format_duration(run.solving_time)
 
