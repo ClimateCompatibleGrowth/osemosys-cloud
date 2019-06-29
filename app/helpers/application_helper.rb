@@ -4,9 +4,10 @@ module ApplicationHelper
   end
 
   def format_datetime(datetime)
+    return unless datetime
     relative_time = distance_of_time_in_words_to_now(datetime) + ' ago'
     timestamp = datetime.strftime('%e %b %Y %H:%M:%S')
-    "#{timestamp} (#{relative_time})"
+    "#{relative_time} <br/> (#{timestamp})".html_safe
   end
 
   def download_button(attachment, label: nil, tooltip: nil, style: 'link')

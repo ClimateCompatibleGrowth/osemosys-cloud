@@ -1,22 +1,20 @@
 class Run < ApplicationRecord
   class Timeline
-    STATES = %w[Created Queued Ongoing Finished]
-
     def initialize(run)
       @run = run
     end
 
     def current
-      STATES[current_index]
+      states[current_index]
     end
 
     def passed
       return [] if current_index.zero?
-      STATES[0..(current_index - 1)]
+      states[0..(current_index - 1)]
     end
 
     def future
-      STATES[(current_index + 1)..-1]
+      states[(current_index + 1)..-1]
     end
 
     private
@@ -28,6 +26,27 @@ class Run < ApplicationRecord
       return 2 if run.started?
       return 1 if run.in_queue?
       0
+    end
+
+    def states
+      [
+        {
+          name: 'Created',
+          timestamp: run.created_at
+        },
+        {
+          name: 'Queued',
+          timestamp: run.queued_at
+        },
+        {
+          name: 'Ongoing',
+          timestamp: run.started_at
+        },
+        {
+          name: 'Finished',
+          timestamp: run.finished_at
+        },
+      ]
     end
   end
 end
