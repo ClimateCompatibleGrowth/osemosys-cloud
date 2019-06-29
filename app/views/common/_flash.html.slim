@@ -1,4 +1,9 @@
 - if notice
-  .alert.alert-primary = notice
+  .alert.alert-primary.alert-dismissible.fade.show
+    = notice
+    button.close data-dismiss='alert' = fa_icon('times')
+
 - if alert
-  .alert.alert-danger = alert
+  .alert.alert-danger.alert-dismissible.fade.show
+    = alert
+    button.close data-dismiss='alert' = fa_icon('times')

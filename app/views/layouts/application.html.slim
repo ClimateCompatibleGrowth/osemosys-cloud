@@ -7,7 +7,6 @@ html
     = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload'
     = javascript_include_tag 'application', 'data-turbolinks-track': 'reload'
   body
-    = render 'common/flash'
     .navbar.navbar-expand-lg.navbar-dark.bg-dark.mb-4
       a.navbar-brand href=root_path Osemosys Cloud (alpha)
       ul.navbar-nav
@@ -25,4 +24,5 @@ html
 
 
     .container
+      = render 'common/flash'
       = yield
