@@ -6,15 +6,16 @@ class RunsController < ApplicationController
   end
 
   def index
-    @runs = Run.order(id: :desc)
-               .with_attached_model_file
-               .with_attached_data_file
-               .with_attached_result_file
-               .with_attached_log_file
+    @runs = current_user.runs
+                        .order(id: :desc)
+                        .with_attached_model_file
+                        .with_attached_data_file
+                        .with_attached_result_file
+                        .with_attached_log_file
   end
 
   def create
-    Run.create!(run_params)
+    current_user.runs.create!(run_params)
     flash.notice = 'Run created'
     redirect_to runs_path
   end
