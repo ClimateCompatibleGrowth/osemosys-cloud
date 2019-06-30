@@ -24,6 +24,7 @@ class RunsController < ApplicationController
     run = Run.find(params[:id])
     Osemosys::Ec2Instance.new(run_id: run.id).spawn! if run_on_ec2?
     run.update_attributes(queued_at: Time.current)
+    flash.notice = 'Run started'
     redirect_to action: :index
   end
 
