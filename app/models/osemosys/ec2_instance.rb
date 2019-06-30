@@ -1,6 +1,6 @@
 module Osemosys
   class Ec2Instance
-    def initialize(run_id:, async: true, instance_type: 't2.micro')
+    def initialize(run_id:, async: true, instance_type: 'z1d.3xlarge')
       @run_id = run_id
       @instance_type = instance_type
       @async = async
@@ -105,7 +105,7 @@ module Osemosys
     end
 
     def supports_cpu_options?
-      instance_type == 'c5.xlarge' || instance_type == 'c5.9xlarge'
+      instance_type == 'z1d.3xlarge' || instance_type == 'c5.9xlarge'
     end
 
     def logger
