@@ -5,7 +5,8 @@ RSpec.describe 'Creating a run', type: :system do
     driven_by(:rack_test)
   end
 
-  it 'works' do
+  it 'works for logged in users' do
+    sign_in(User.create!(email: 'test@example.com', password: 'blehbleh'))
     visit root_path
 
     expect(page).to have_text('Osemosys Cloud')
@@ -28,5 +29,15 @@ RSpec.describe 'Creating a run', type: :system do
     expect(page).to have_text 'Atlantis'
     expect(page).to have_text 'Run created'
     expect(page).to have_text 'A Place Long Gone'
+  end
+
+  it 'redirects to root for logged out users' do
+    visit root_path
+
+    expect(page).to have_text('Sign in or register to start')
+
+    visit runs_path
+
+    expect(page).to have_text('Sign in or register to start')
   end
 end
