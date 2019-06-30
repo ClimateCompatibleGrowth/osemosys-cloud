@@ -5,6 +5,8 @@ class Run < ApplicationRecord
   has_one_attached :result_file
   has_one_attached :log_file
 
+  enum outcome: { success: 'success', failure: 'failure' }
+
   def solving_time
     return unless started_at && finished_at
     finished_at - started_at

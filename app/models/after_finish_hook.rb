@@ -5,14 +5,35 @@ class AfterFinishHook
   end
 
   def call
-    run.update_attributes(finished_at: Time.current) if run.finished_at.nil?
+    set_finished_at
+    set_outcome
+    upload_log_file
+  end
+
+  private
+
+  attr_reader :run, :log_path
+
+  def set_finished_at
+    run.update_attributes(finished_at: Time.current)
+  end
+
+  def upload_log_file
     run.log_file.attach(
       io: File.open(log_path),
       filename: File.basename(log_path)
     )
   end
 
-  private
+  def set_outcome
+    run.update_attributes(outcome: outcome)
+  end
 
-  attr_reader :run, :log_path
+  def outcome
+    if run.result_file.attached?
+      'success'
+    else
+      'failure'
+    end
+  end
 end
