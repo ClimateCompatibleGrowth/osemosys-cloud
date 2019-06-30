@@ -1,6 +1,6 @@
 .run-card
-  .run-card__title-bar
-    = "#{run.id} - #{run.name} (#{run.status})"
+  .run-card__title-bar class=("run-card__title-bar--#{run.outcome}" if run.outcome)
+    = "#{run.id} - #{run.name} (#{run.outcome.to_s.capitalize.presence || run.status})"
   .run-card__content
     .run-card__description = run.description
     - if !run.finished?

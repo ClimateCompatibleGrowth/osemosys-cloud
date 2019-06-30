@@ -9,6 +9,14 @@
   &__title-bar {
     background: #e0e0e0;
     padding: 5px;
+
+    &--success {
+      background: #bfe6b1;
+    }
+
+    &--failure {
+      background: #f7c1c1;
+    }
   }
 
   &__header {
