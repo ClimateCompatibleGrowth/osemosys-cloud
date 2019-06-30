@@ -1,4 +1,6 @@
 class RunsController < ApplicationController
+  before_action :ensure_logged_in_user
+
   def new
     @run = Run.new
   end
@@ -28,5 +30,9 @@ class RunsController < ApplicationController
 
   def run_params
     params.require(:run).permit(:name, :model_file, :data_file, :description)
+  end
+
+  def ensure_logged_in_user
+    redirect_to root_path and return unless current_user
   end
 end
