@@ -30,7 +30,7 @@ FactoryBot.define do
 
       model_file do
         fixture_file_upload(
-          Rails.root.join('spec', 'data', 'atlantis_model.txt'),
+          Rails.root.join('spec', 'data', 'empty_file.txt'),
           'text/plain'
         )
       end
