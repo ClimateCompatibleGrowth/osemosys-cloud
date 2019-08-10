@@ -35,3 +35,4 @@ tags
 /data/*
 !/data/.keep
 cplex.log
+output.txt.gz
