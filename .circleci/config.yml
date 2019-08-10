@@ -13,7 +13,7 @@ jobs:
       - run:
           name: install glpk
           command: |
-            sudo apt-get install glpk-utils
+            sudo apt-get install glpk-utils coinor-cbc
 
       # Download and cache dependencies
       - restore_cache:
