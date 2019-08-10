@@ -21,11 +21,6 @@ class SolveRun
   end
 
   def solve_run
-    local_files = Osemosys::DownloadModelFromS3.new(
-      s3_data_key: run.data_file.key,
-      s3_model_key: run.model_file.key
-    ).call
-
     @solved_file_path = solver_class.new(
       local_model_path: local_files.local_model_path,
       local_data_path: local_files.local_data_path,
@@ -43,5 +38,19 @@ class SolveRun
   def perform_after_finish_hook
     log_path = "/tmp/run-#{run.id}.log"
     AfterFinishHook.new(run: run, log_path: log_path).call
+  end
+
+  def local_files
+    if Rails.env.test?
+      OpenStruct.new(
+        local_model_path: ActiveStorage::Blob.service.send(:path_for, run.model_file.key),
+        local_data_path: ActiveStorage::Blob.service.send(:path_for, run.data_file.key)
+      )
+    else
+      Osemosys::DownloadModelFromS3.new(
+        s3_data_key: run.data_file.key,
+        s3_model_key: run.model_file.key
+      ).call
+    end
   end
 end
