@@ -45,7 +45,8 @@ jobs:
           command: |
             bundle exec rspec --format progress
 
-      - setup_remote_docker
+      - setup_remote_docker:
+          docker_layer_caching: true
 
       - run:
           name: Build docker image
@@ -55,4 +56,4 @@ jobs:
       - run:
           name: Publish docker image
           command: |
-            docker push yboulkaid/osemosys:latest
+            docker login -u $DOCKER_USER -p $DOCKER_PASS && docker push yboulkaid/osemosys:latest
