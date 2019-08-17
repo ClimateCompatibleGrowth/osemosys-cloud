@@ -1,0 +1,104 @@
+require: rubocop-rspec
+
+AllCops:
+  TargetRubyVersion: 2.4
+
+Metrics/LineLength:
+  Max: 100
+
+Metrics/ModuleLength:
+  Enabled: false
+
+Layout/MultilineOperationIndentation:
+  EnforcedStyle: indented
+
+Layout/FirstMethodArgumentLineBreak:
+  Enabled: true
+
+Layout/AlignParameters:
+  EnforcedStyle: with_fixed_indentation
+
+Layout/AlignArguments:
+  EnforcedStyle: with_fixed_indentation
+
+Layout/AlignHash:
+  Enabled: false
+
+Style/Documentation:
+  Enabled: false
+
+Style/FrozenStringLiteralComment:
+  Enabled: false
+
+Layout/IndentFirstArgument:
+  EnforcedStyle: consistent
+
+Layout/MultilineMethodCallIndentation:
+  EnforcedStyle: indented
+
+Layout/DotPosition:
+  EnforcedStyle: leading
+
+Style/StringLiterals:
+  EnforcedStyle: single_quotes
+
+Style/TrailingCommaInArguments:
+  Enabled: true
+  EnforcedStyleForMultiline: comma
+  SupportedStylesForMultiline:
+    - comma
+    - consistent_comma
+    - no_comma
+
+Style/TrailingCommaInHashLiteral:
+  Enabled: true
+  EnforcedStyleForMultiline: comma
+  SupportedStylesForMultiline:
+    - comma
+    - consistent_comma
+    - no_comma
+
+Style/TrailingCommaInArrayLiteral:
+  Enabled: true
+  EnforcedStyleForMultiline: comma
+  SupportedStylesForMultiline:
+    - comma
+    - consistent_comma
+    - no_comma
+
+Style/Attr:
+  Exclude:
+    - app/graphql/**/*.rb
+    - db/schema.rb
+
+Metrics/BlockLength:
+  Enabled: false
+
+Lint/AmbiguousBlockAssociation:
+  Enabled: true
+  Exclude:
+    - spec/**/*_spec.rb
+
+Naming/MemoizedInstanceVariableName:
+  EnforcedStyleForLeadingUnderscores: optional
+  SupportedStylesForLeadingUnderscores:
+    - disallowed
+    - required
+    - optional
+
+Naming/RescuedExceptionsVariableName:
+  PreferredName: exception
+
+Lint/InheritException:
+  EnforcedStyle: standard_error
+
+RSpec/ContextWording:
+  Prefixes:
+    - when
+    - with
+    - without
+    - as
+    - and
+
+RSpec/DescribedClass:
+  EnforcedStyle: explicit

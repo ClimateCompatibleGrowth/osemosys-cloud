@@ -15,6 +15,8 @@ gem 'font_awesome5_rails'
 gem 'pg'
 gem 'puma', '~> 3.11'
 gem 'rails', '~> 5.2.0'
+gem 'rubocop', require: false
+gem 'rubocop-rspec', require: false
 gem 'sassc-rails'
 gem 'simple_form'
 gem 'slim-rails'
