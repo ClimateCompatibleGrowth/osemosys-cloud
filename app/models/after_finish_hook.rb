@@ -1,7 +1,6 @@
 class AfterFinishHook
-  def initialize(run:, log_path:)
+  def initialize(run:)
     @run = run
-    @log_path = log_path
   end
 
   def call
@@ -12,7 +11,7 @@ class AfterFinishHook
 
   private
 
-  attr_reader :run, :log_path
+  attr_reader :run
 
   def set_finished_at
     run.update_attributes(finished_at: Time.current)
@@ -27,6 +26,10 @@ class AfterFinishHook
 
   def set_outcome
     run.update_attributes(outcome: outcome)
+  end
+
+  def log_path
+    run.local_log_path
   end
 
   def outcome

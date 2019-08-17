@@ -21,6 +21,10 @@ class Run < ApplicationRecord
     log_file.purge
   end
 
+  def local_log_path
+    "/tmp/run-#{id}.log"
+  end
+
   def started?
     started_at.present?
   end

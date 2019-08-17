@@ -1,8 +1,7 @@
 class SolveRun
-  def initialize(run:, logger: Osemosys::Config.logger, solver_class: Osemosys::SolveModel)
+  def initialize(run:, logger: Osemosys::Config.logger)
     @run = run
     @logger = logger
-    @solver_class = solver_class
   end
 
   def call
@@ -10,18 +9,20 @@ class SolveRun
     solve_run
     save_result
     perform_after_finish_hook
+  ensure
+    AfterFinishHook.new(run: run).call
   end
 
   private
 
-  attr_reader :run, :logger, :solver_class
+  attr_reader :run, :logger
 
   def set_started_at
     run.update_attributes(started_at: Time.current)
   end
 
   def solve_run
-    @solved_file_path = solver_class.new(
+    @solved_file_path = Osemosys::SolveCbcModel.new(
       local_model_path: local_files.local_model_path,
       local_data_path: local_files.local_data_path,
       logger: logger
@@ -36,8 +37,7 @@ class SolveRun
   end
 
   def perform_after_finish_hook
-    log_path = "/tmp/run-#{run.id}.log"
-    AfterFinishHook.new(run: run, log_path: log_path).call
+    AfterFinishHook.new(run: run).call
   end
 
   def local_files
