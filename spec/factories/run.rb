@@ -4,6 +4,15 @@ FactoryBot.define do
     description { 'My description' }
     user
 
+    trait :with_result do
+      result_file do
+        fixture_file_upload(
+          Rails.root.join('spec', 'data', 'empty_file.txt'),
+          'text/plain',
+        )
+      end
+    end
+
     trait :atlantis do
       data_file do
         fixture_file_upload(
