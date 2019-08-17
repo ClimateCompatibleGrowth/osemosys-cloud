@@ -22,7 +22,9 @@ class RunsController < ApplicationController
 
   def start
     run = Run.find(params[:id])
-    Osemosys::Ec2Instance.new(run_id: run.id).spawn! if run_on_ec2?
+    StartRunOnEc2Job.perform_later(
+      run_id: run.id,
+    )
     run.update_attributes(queued_at: Time.current)
     flash.notice = 'Run started'
     redirect_to action: :index
@@ -32,12 +34,6 @@ class RunsController < ApplicationController
 
   def run_params
     params.require(:run).permit(:name, :model_file, :data_file, :description)
-  end
-
-  def run_on_ec2?
-    return true if Rails.env.production?
-
-    false
   end
 
   def ensure_logged_in_user

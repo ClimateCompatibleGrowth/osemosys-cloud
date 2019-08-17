@@ -18,6 +18,7 @@ gem 'rails', '~> 5.2.0'
 gem 'rubocop', require: false
 gem 'rubocop-rspec', require: false
 gem 'sassc-rails'
+gem 'sidekiq'
 gem 'simple_form'
 gem 'slim-rails'
 gem 'tty-command'

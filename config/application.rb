@@ -11,5 +11,7 @@ module OsemosysCloud
     config.time_zone = 'Europe/Stockholm'
 
     config.load_defaults 5.2
+
+    config.active_job.queue_adapter = :sidekiq
   end
 end

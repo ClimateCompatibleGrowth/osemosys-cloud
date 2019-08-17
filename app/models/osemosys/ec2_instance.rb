@@ -1,6 +1,6 @@
 module Osemosys
   class Ec2Instance
-    def initialize(run_id:, async: true, instance_type: 'z1d.3xlarge')
+    def initialize(run_id:, async: true, instance_type:)
       @run_id = run_id
       @instance_type = instance_type
       @async = async
