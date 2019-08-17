@@ -16,7 +16,10 @@ module Osemosys
     end
 
     def instance_params
-      Ec2InstanceParams.new(instance_type: instance_type).to_h
+      Ec2InstanceParams.new(
+        instance_type: instance_type,
+        run_id: run_id,
+      ).to_h
     end
 
     private
