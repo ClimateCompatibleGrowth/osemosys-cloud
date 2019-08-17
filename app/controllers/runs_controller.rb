@@ -7,11 +7,11 @@ class RunsController < ApplicationController
 
   def index
     @runs = current_user.runs
-                        .order(id: :desc)
-                        .with_attached_model_file
-                        .with_attached_data_file
-                        .with_attached_result_file
-                        .with_attached_log_file
+      .order(id: :desc)
+      .with_attached_model_file
+      .with_attached_data_file
+      .with_attached_result_file
+      .with_attached_log_file
   end
 
   def create
@@ -36,6 +36,7 @@ class RunsController < ApplicationController
 
   def run_on_ec2?
     return true if Rails.env.production?
+
     false
   end
 

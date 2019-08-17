@@ -10,6 +10,7 @@ class Run < ApplicationRecord
 
     def passed
       return [] if current_index.zero?
+
       states[0..(current_index - 1)]
     end
 
@@ -25,6 +26,7 @@ class Run < ApplicationRecord
       return 3 if run.finished?
       return 2 if run.started?
       return 1 if run.in_queue?
+
       0
     end
 
@@ -32,19 +34,19 @@ class Run < ApplicationRecord
       [
         {
           name: 'Created',
-          timestamp: run.created_at
+          timestamp: run.created_at,
         },
         {
           name: 'Queued',
-          timestamp: run.queued_at
+          timestamp: run.queued_at,
         },
         {
           name: 'Ongoing',
-          timestamp: run.started_at
+          timestamp: run.started_at,
         },
         {
           name: 'Finished',
-          timestamp: run.finished_at
+          timestamp: run.finished_at,
         },
       ]
     end

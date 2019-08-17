@@ -9,6 +9,7 @@ module Osemosys
     def spawn!
       create!
       return if async
+
       wait_until_running
       puts instance.public_ip_address
       instance
@@ -42,9 +43,9 @@ module Osemosys
         security_group_ids: ['sg-234d125d'],
         instance_type: instance_type,
         iam_instance_profile: {
-          name: 'Osemosys'
+          name: 'Osemosys',
         },
-        instance_initiated_shutdown_behavior: 'terminate'
+        instance_initiated_shutdown_behavior: 'terminate',
       }
     end
 
@@ -52,8 +53,8 @@ module Osemosys
       {
         cpu_options: {
           core_count: 2,
-          threads_per_core: 1
-        }
+          threads_per_core: 1,
+        },
       }
     end
 
@@ -66,10 +67,10 @@ module Osemosys
             device_name: '/dev/xvda',
             ebs: {
               delete_on_termination: true,
-              volume_size: 12
-            }
-          }
-        ]
+              volume_size: 12,
+            },
+          },
+        ],
       }
     end
 
@@ -82,6 +83,7 @@ module Osemosys
 
     def instance
       return unless @instances
+
       @instances.first.load
     end
 

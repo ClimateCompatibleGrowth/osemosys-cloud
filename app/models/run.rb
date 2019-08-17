@@ -9,6 +9,7 @@ class Run < ApplicationRecord
 
   def solving_time
     return unless started_at && finished_at
+
     finished_at - started_at
   end
 
@@ -39,12 +40,14 @@ class Run < ApplicationRecord
 
   def in_queue?
     return false if started? || finished?
+
     queued_at.present?
   end
 
   # To move to presenter
   def can_be_queued?
     return false if started? || finished?
+
     !in_queue?
   end
 
@@ -53,6 +56,7 @@ class Run < ApplicationRecord
     return 'Ongoing' if ongoing?
     return 'Started' if started?
     return 'In queue' if in_queue?
+
     'Not started yet'
   end
 end

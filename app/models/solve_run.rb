@@ -25,14 +25,14 @@ class SolveRun
     @solved_file_path = Osemosys::SolveCbcModel.new(
       local_model_path: local_files.local_model_path,
       local_data_path: local_files.local_data_path,
-      logger: logger
+      logger: logger,
     ).call
   end
 
   def save_result
     run.result_file.attach(
       io: File.open(@solved_file_path),
-      filename: File.basename(@solved_file_path)
+      filename: File.basename(@solved_file_path),
     )
   end
 
@@ -44,12 +44,12 @@ class SolveRun
     if Rails.env.test?
       OpenStruct.new(
         local_model_path: ActiveStorage::Blob.service.send(:path_for, run.model_file.key),
-        local_data_path: ActiveStorage::Blob.service.send(:path_for, run.data_file.key)
+        local_data_path: ActiveStorage::Blob.service.send(:path_for, run.data_file.key),
       )
     else
       Osemosys::DownloadModelFromS3.new(
         s3_data_key: run.data_file.key,
-        s3_model_key: run.model_file.key
+        s3_model_key: run.model_file.key,
       ).call
     end
   end

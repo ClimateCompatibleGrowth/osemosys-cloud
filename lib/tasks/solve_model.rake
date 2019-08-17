@@ -6,6 +6,6 @@ task :solve_cbc_run, [:run_id] => :environment do |_task, args|
   logger = Logger.new(log_path)
   SolveRun.new(
     run: run,
-    logger: logger
+    logger: logger,
   ).call
 end

@@ -17,7 +17,7 @@ module Osemosys
 
       OpenStruct.new(
         local_model_path: local_model_file_path,
-        local_data_path: local_data_file_path
+        local_data_path: local_data_file_path,
       )
     end
 

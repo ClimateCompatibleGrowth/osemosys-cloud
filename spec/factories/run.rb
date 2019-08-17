@@ -8,14 +8,14 @@ FactoryBot.define do
       data_file do
         fixture_file_upload(
           Rails.root.join('spec', 'data', 'atlantis_data.txt'),
-          'text/plain'
+          'text/plain',
         )
       end
 
       model_file do
         fixture_file_upload(
           Rails.root.join('spec', 'data', 'atlantis_model.txt'),
-          'text/plain'
+          'text/plain',
         )
       end
     end
@@ -24,14 +24,14 @@ FactoryBot.define do
       data_file do
         fixture_file_upload(
           Rails.root.join('spec', 'data', 'empty_file.txt'),
-          'text/plain'
+          'text/plain',
         )
       end
 
       model_file do
         fixture_file_upload(
           Rails.root.join('spec', 'data', 'empty_file.txt'),
-          'text/plain'
+          'text/plain',
         )
       end
     end

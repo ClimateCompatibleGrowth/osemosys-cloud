@@ -8,7 +8,7 @@ RSpec.describe Osemosys::SolveCbcModel do
 
       output_file = Osemosys::SolveCbcModel.new(
         local_model_path: atlantis_model_path,
-        local_data_path: atlantis_data_path
+        local_data_path: atlantis_data_path,
       ).call
 
       expect(output_file).to eq('./data/output.sol.gz')
