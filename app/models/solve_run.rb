@@ -1,4 +1,6 @@
 class SolveRun
+  NoModelOrDataFile = Class.new(StandardError)
+
   def initialize(run:, logger: Osemosys::Config.logger)
     @run = run
     @logger = logger
@@ -8,7 +10,6 @@ class SolveRun
     set_started_at
     solve_run
     save_result
-    perform_after_finish_hook
   ensure
     AfterFinishHook.new(run: run).call
   end
@@ -36,11 +37,13 @@ class SolveRun
     )
   end
 
-  def perform_after_finish_hook
-    AfterFinishHook.new(run: run).call
+  def model_and_data_files_attached?
+    run.model_file.attached? && run.data_file.attached?
   end
 
   def local_files
+    raise NoModelOrDataFile unless model_and_data_files_attached?
+
     if Rails.env.test?
       OpenStruct.new(
         local_model_path: ActiveStorage::Blob.service.send(:path_for, run.model_file.key),
