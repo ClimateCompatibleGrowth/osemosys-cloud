@@ -44,3 +44,13 @@ jobs:
           name: run tests
           command: |
             bundle exec rspec --format progress
+
+      - run:
+          name: Build docker image
+          command: |
+            docker-compose build osemosys
+
+      - run:
+          name: Publish docker image
+          command: |
+            docker push yboulkaid/osemosys:latest
