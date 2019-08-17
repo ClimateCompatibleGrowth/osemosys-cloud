@@ -89,6 +89,9 @@ Naming/MemoizedInstanceVariableName:
 Naming/RescuedExceptionsVariableName:
   PreferredName: exception
 
+Naming/FileName:
+  Enabled: false
+
 Lint/InheritException:
   EnforcedStyle: standard_error
 
@@ -102,3 +105,9 @@ RSpec/ContextWording:
 
 RSpec/DescribedClass:
   EnforcedStyle: explicit
+
+RSpec/ExampleLength:
+  Enabled: false
+
+RSpec/MultipleExpectations:
+  Enabled: false
