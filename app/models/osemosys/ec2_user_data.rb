@@ -1,7 +1,8 @@
 module Osemosys
   class Ec2UserData
-    def initialize(shutdown_on_finish: true)
+    def initialize(shutdown_on_finish: true, run_id:)
       @shutdown_on_finish = shutdown_on_finish
+      @run_id = run_id
     end
 
     def to_base64_encoded
@@ -10,7 +11,7 @@ module Osemosys
 
     private
 
-    attr_reader :shutdown_on_finish
+    attr_reader :shutdown_on_finish, :run_id
 
     def user_data
       "#!/usr/bin/env bash\n"\
@@ -20,6 +21,5 @@ module Osemosys
     def solve_run_command
       "curl https://raw.githubusercontent.com/yboulkaid/osemosys-cloud/master/lib/solver/user_data.sh | sh -s #{run_id} #{shutdown_on_finish}"
     end
-
   end
 end

@@ -1,7 +1,8 @@
 module Osemosys
   class Ec2InstanceParams
-    def initialize(instance_type:)
+    def initialize(instance_type:, run_id:)
       @instance_type = instance_type
+      @run_id = run_id
     end
 
     def to_h
@@ -14,7 +15,7 @@ module Osemosys
 
     private
 
-    attr_reader :instance_type
+    attr_reader :instance_type, :run_id
 
     def base_params
       {
@@ -62,7 +63,7 @@ module Osemosys
     end
 
     def encoded_user_data
-      Ec2UserData.new.to_base64_encoded
+      Ec2UserData.new(run_id: run_id).to_base64_encoded
     end
   end
 end
