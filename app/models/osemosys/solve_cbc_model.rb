@@ -8,7 +8,7 @@ module Osemosys
 
     def call
       generate_input_file
-      solve_model
+      find_solution
       gzip_output
       print_summary
 
@@ -20,47 +20,34 @@ module Osemosys
     attr_reader :local_data_path, :local_model_path, :logger
 
     def generate_input_file
-      logger.info 'Generating input file'
-      tty_command.run(glpsol_command)
+      Commands::GenerateInputFile.new(
+        local_model_path: local_model_path,
+        local_data_path: local_data_path,
+        lp_path: lp_path,
+        logger: logger,
+      ).call
     end
 
-    def solve_model
-      logger.info 'Solving the model'
-      tty_command.run(cbc_command)
+    def find_solution
+      Commands::FindSolution.new(
+        lp_path: lp_path,
+        output_path: output_path,
+        logger: logger,
+      ).call
     end
 
     def gzip_output
-      logger.info 'Gzipping the output'
-      tty_command.run(gzip_command)
+      Commands::Gzip.new(
+        source: output_path,
+        destination: gzipped_output_path,
+        logger: logger,
+      ).call
     end
 
     def print_summary
       logger.info 'Model solved!'
       logger.info ''
       logger.info "run_id: #{Config.run_id}"
-    end
-
-    def glpsol_command
-      %(
-      glpsol -m #{local_model_path}
-             -d #{local_data_path}
-             --wlp #{lp_path}
-             --check
-      ).delete("\n")
-    end
-
-    def gzip_command
-      "gzip < #{output_path} > #{gzipped_output_path}"
-    end
-
-    def cbc_command
-      %(
-        cbc #{lp_path} solve solu #{output_path}
-      )
-    end
-
-    def tty_command
-      @tty_command ||= TTY::Command.new(output: logger, color: false)
     end
 
     def lp_path
