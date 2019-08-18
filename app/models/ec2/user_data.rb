@@ -1,5 +1,5 @@
-module Osemosys
-  class Ec2UserData
+module Ec2
+  class UserData
     def initialize(shutdown_on_finish: true, run_id:)
       @shutdown_on_finish = shutdown_on_finish
       @run_id = run_id

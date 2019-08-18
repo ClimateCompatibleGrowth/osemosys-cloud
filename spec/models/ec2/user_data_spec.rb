@@ -1,9 +1,9 @@
 require 'rails_helper'
 
-RSpec.describe Osemosys::Ec2UserData do
+RSpec.describe Ec2::UserData do
   describe '#to_base64_encoded' do
     it 'is a base64 encoded text' do
-      output = Osemosys::Ec2UserData.new(run_id: 1).to_base64_encoded
+      output = Ec2::UserData.new(run_id: 1).to_base64_encoded
 
       decoded_output = Base64.decode64(output)
 
@@ -11,7 +11,7 @@ RSpec.describe Osemosys::Ec2UserData do
     end
 
     it 'includes the run id' do
-      output = Osemosys::Ec2UserData.new(run_id: 1337).to_base64_encoded
+      output = Ec2::UserData.new(run_id: 1337).to_base64_encoded
 
       decoded_output = Base64.decode64(output)
 

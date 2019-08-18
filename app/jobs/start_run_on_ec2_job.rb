@@ -2,7 +2,7 @@ class StartRunOnEc2Job < ActiveJob::Base
   def perform(run_id:, instance_type: 'z1d.3xlarge')
     return unless run_on_ec2?
 
-    Osemosys::Ec2Instance.new(
+    Ec2::Instance.new(
       run_id: run_id,
       instance_type: instance_type,
     ).spawn!

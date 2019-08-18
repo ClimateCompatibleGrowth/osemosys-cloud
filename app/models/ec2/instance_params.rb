@@ -1,5 +1,5 @@
-module Osemosys
-  class Ec2InstanceParams
+module Ec2
+  class InstanceParams
     def initialize(instance_type:, run_id:)
       @instance_type = instance_type
       @run_id = run_id
@@ -63,7 +63,7 @@ module Osemosys
     end
 
     def encoded_user_data
-      Ec2UserData.new(run_id: run_id).to_base64_encoded
+      UserData.new(run_id: run_id).to_base64_encoded
     end
   end
 end

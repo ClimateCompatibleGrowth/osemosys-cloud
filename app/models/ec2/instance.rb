@@ -1,5 +1,5 @@
-module Osemosys
-  class Ec2Instance
+module Ec2
+  class Instance
     def initialize(run_id:, async: true, instance_type:)
       @run_id = run_id
       @instance_type = instance_type
@@ -16,7 +16,7 @@ module Osemosys
     end
 
     def instance_params
-      Ec2InstanceParams.new(
+      InstanceParams.new(
         instance_type: instance_type,
         run_id: run_id,
       ).to_h
@@ -49,7 +49,7 @@ module Osemosys
     end
 
     def logger
-      Config.logger
+      Osemosys::Config.logger
     end
   end
 end
