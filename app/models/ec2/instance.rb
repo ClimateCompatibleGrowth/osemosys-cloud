@@ -1,14 +1,12 @@
 module Ec2
   class Instance
-    def initialize(run_id:, async: true, instance_type:)
+    def initialize(run_id:, instance_type:)
       @run_id = run_id
       @instance_type = instance_type
-      @async = async
     end
 
     def spawn!
       create!
-      return if async
 
       wait_until_running
       puts instance.public_ip_address
@@ -24,7 +22,7 @@ module Ec2
 
     private
 
-    attr_reader :run_id, :async, :instance_type
+    attr_reader :run_id, :instance_type
 
     def create!
       logger.info 'Creating instance'
