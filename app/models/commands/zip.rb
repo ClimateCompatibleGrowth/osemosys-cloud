@@ -14,7 +14,7 @@ module Commands
     private
 
     def zip_command
-      "zip #{destination} #{source}"
+      "zip -j #{destination} #{source}"
     end
 
     attr_reader :source, :destination, :logger
