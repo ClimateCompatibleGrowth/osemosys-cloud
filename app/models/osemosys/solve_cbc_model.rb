@@ -51,15 +51,15 @@ module Osemosys
     end
 
     def lp_path
-      './data/input.lp'
+      "./data/input_#{Config.run_id}.lp"
     end
 
     def output_path
-      './data/output.txt'
+      "./data/output_#{Config.run_id}.txt"
     end
 
     def zipped_output_path
-      './data/output.zip'
+      "./data/output_#{Config.run_id}.zip"
     end
   end
 end
