@@ -9,10 +9,10 @@ module Osemosys
     def call
       generate_input_file
       find_solution
-      gzip_output
+      zip_output
       print_summary
 
-      gzipped_output_path
+      zipped_output_path
     end
 
     private
@@ -36,10 +36,10 @@ module Osemosys
       ).call
     end
 
-    def gzip_output
-      Commands::Gzip.new(
+    def zip_output
+      Commands::Zip.new(
         source: output_path,
-        destination: gzipped_output_path,
+        destination: zipped_output_path,
         logger: logger,
       ).call
     end
@@ -55,11 +55,11 @@ module Osemosys
     end
 
     def output_path
-      './data/output.sol'
+      './data/output.txt'
     end
 
-    def gzipped_output_path
-      './data/output.sol.gz'
+    def zipped_output_path
+      './data/output.zip'
     end
   end
 end

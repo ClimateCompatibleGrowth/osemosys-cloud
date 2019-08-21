@@ -11,7 +11,7 @@ RSpec.describe Osemosys::SolveCbcModel do
         local_data_path: atlantis_data_path,
       ).call
 
-      expect(output_file).to eq('./data/output.sol.gz')
+      expect(output_file).to eq('./data/output.zip')
     end
   end
 end

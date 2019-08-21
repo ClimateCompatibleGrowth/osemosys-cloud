@@ -1,5 +1,5 @@
 module Commands
-  class Gzip
+  class Zip
     def initialize(source:, destination:, logger:)
       @source = source
       @destination = destination
@@ -7,14 +7,14 @@ module Commands
     end
 
     def call
-      logger.info 'Gzipping the output'
-      tty_command.run(gzip_command)
+      logger.info 'Zipping the output'
+      tty_command.run(zip_command)
     end
 
     private
 
-    def gzip_command
-      "gzip < #{source} > #{destination}"
+    def zip_command
+      "zip #{destination} #{source}"
     end
 
     attr_reader :source, :destination, :logger
