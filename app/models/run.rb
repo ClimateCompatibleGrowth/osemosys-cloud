@@ -55,11 +55,11 @@ class Run < ApplicationRecord
   end
 
   def state_machine
-    @state_machine ||= StateMachine.new(self, transition_class: Run::Transition)
+    @state_machine ||= StateMachine.new(self, transition_class: RunTransition)
   end
 
   def self.transition_class
-    Run::Transition
+    RunTransition
   end
 
   def self.initial_state
