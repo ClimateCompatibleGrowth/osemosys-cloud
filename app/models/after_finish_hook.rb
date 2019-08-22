@@ -14,7 +14,7 @@ class AfterFinishHook
   attr_reader :run
 
   def set_finished_at
-    run.update_attributes(finished_at: Time.current)
+    run.update(finished_at: Time.current)
   end
 
   def upload_log_file
@@ -27,7 +27,7 @@ class AfterFinishHook
   end
 
   def set_outcome
-    run.update_attributes(outcome: outcome)
+    run.update(outcome: outcome)
   end
 
   def log_path
