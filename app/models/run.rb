@@ -1,4 +1,7 @@
 class Run < ApplicationRecord
+  include Statesman::Adapters::ActiveRecordQueries
+  has_many :run_transitions, autosave: false
+
   belongs_to :user
   has_one_attached :model_file
   has_one_attached :data_file
@@ -50,6 +53,19 @@ class Run < ApplicationRecord
 
     !in_queue?
   end
+
+  def state_machine
+    @state_machine ||= StateMachine.new(self, transition_class: Run::Transition)
+  end
+
+  def self.transition_class
+    Run::Transition
+  end
+
+  def self.initial_state
+    :new
+  end
+  private_class_method :new
 
   def status
     return 'Finished' if finished?
