@@ -19,7 +19,7 @@ class SolveRun
   attr_reader :run, :logger
 
   def set_started_at
-    run.update_attributes(started_at: Time.current)
+    run.update(started_at: Time.current)
   end
 
   def solve_run

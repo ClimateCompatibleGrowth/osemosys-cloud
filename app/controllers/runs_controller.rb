@@ -25,7 +25,7 @@ class RunsController < ApplicationController
     StartRunOnEc2Job.perform_later(
       run_id: run.id,
     )
-    run.update_attributes(queued_at: Time.current)
+    run.update(queued_at: Time.current)
     flash.notice = 'Run started'
     redirect_to action: :index
   end
