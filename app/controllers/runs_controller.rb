@@ -26,6 +26,7 @@ class RunsController < ApplicationController
       run_id: run.id,
     )
     run.update(queued_at: Time.current)
+    run.transition_to!(:queued)
     flash.notice = 'Run started'
     redirect_to action: :index
   end

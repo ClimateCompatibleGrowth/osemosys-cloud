@@ -1,6 +1,7 @@
 class Run < ApplicationRecord
   include Statesman::Adapters::ActiveRecordQueries
-  delegate :current_state, :history, :transition_to, to: :state_machine
+  delegate :current_state, :history, :transition_to, :transition_to!,
+    to: :state_machine
 
   has_many :run_transitions, autosave: false
 

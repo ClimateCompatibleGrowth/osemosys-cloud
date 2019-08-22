@@ -20,6 +20,7 @@ class SolveRun
 
   def set_started_at
     run.update(started_at: Time.current)
+    run.transition_to!(:ongoing)
   end
 
   def solve_run
