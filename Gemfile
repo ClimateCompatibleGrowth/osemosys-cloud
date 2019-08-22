@@ -7,14 +7,13 @@ gem 'aws-sdk-ec2'
 gem 'aws-sdk-s3'
 gem 'bootsnap', '>= 1.1.0', require: false
 gem 'bugsnag'
-gem 'coffee-rails', '~> 4.2'
 gem 'devise'
 gem 'devise-bootstrap-views'
 gem 'dry-configurable'
 gem 'font_awesome5_rails'
 gem 'pg'
-gem 'puma', '~> 3.11'
-gem 'rails', '~> 5.2.0'
+gem 'puma'
+gem 'rails', '~> 6'
 gem 'rubocop', require: false
 gem 'rubocop-rspec', require: false
 gem 'sassc-rails'
@@ -29,11 +28,11 @@ group :development do
   gem 'better_errors'
   gem 'binding_of_caller'
   gem 'guard-livereload'
-  gem 'listen', '>= 3.0.5', '< 3.2'
+  gem 'listen'
   gem 'pry-rails'
   gem 'spring'
   gem 'spring-commands-rspec'
-  gem 'spring-watcher-listen', '~> 2.0.0'
+  gem 'spring-watcher-listen'
 end
 
 group :test do
