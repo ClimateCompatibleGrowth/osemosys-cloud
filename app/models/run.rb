@@ -68,7 +68,7 @@ class Run < ApplicationRecord
   def self.initial_state
     :new
   end
-  private_class_method :new
+  private_class_method :initial_state
 
   def status
     return 'Finished' if finished?
