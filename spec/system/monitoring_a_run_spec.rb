@@ -20,6 +20,7 @@ RSpec.describe 'Creating a run', type: :system do
     expect(page).to have_content('Start run')
 
     run.update(queued_at: Time.current)
+    run.transition_to(:queued)
     visit current_path
 
     expect(page).to have_content('Run number 1 (In queue)')
@@ -28,6 +29,7 @@ RSpec.describe 'Creating a run', type: :system do
     end
 
     run.update(started_at: Time.current)
+    run.transition_to(:ongoing)
     visit current_path
 
     expect(page).to have_content('Run number 1 (Ongoing)')
@@ -37,6 +39,7 @@ RSpec.describe 'Creating a run', type: :system do
 
     run.update(finished_at: Time.current)
     run.update(outcome: 'success')
+    run.transition_to(:succeeded)
     visit current_path
 
     expect(page).to have_content('Run number 1 (Success)')
