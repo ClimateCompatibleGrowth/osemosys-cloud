@@ -58,6 +58,7 @@ ActiveRecord::Schema.define(version: 2019_08_22_164540) do
     t.text "description", default: "", null: false
     t.bigint "user_id"
     t.string "outcome"
+    t.string "state", default: "new", null: false
     t.index ["user_id"], name: "index_runs_on_user_id"
   end
 

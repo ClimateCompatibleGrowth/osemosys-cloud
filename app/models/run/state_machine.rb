@@ -11,5 +11,10 @@ class Run < ApplicationRecord
     transition from: :new, to: :queued
     transition from: :queued, to: :ongoing
     transition from: :ongoing, to: %i[succeeded failed]
+
+    after_transition do |model, transition|
+      model.state = transition.to_state
+      model.save!
+    end
   end
 end

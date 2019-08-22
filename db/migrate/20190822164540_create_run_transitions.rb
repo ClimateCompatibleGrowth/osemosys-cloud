@@ -20,5 +20,7 @@ class CreateRunTransitions < ActiveRecord::Migration[6.0]
               unique: true,
               where: "most_recent",
               name: "index_transitions_parent_most_recent")
+
+    add_column :runs, :state, :string, null: false, default: 'new'
   end
 end
