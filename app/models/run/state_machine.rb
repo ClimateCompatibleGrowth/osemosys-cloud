@@ -8,7 +8,7 @@ class Run < ApplicationRecord
     state :succeeded
     state :failed
 
-    transition from: :new, to: :queued
+    transition from: :new, to: %i[queued ongoing succeeded failed]
     transition from: :queued, to: :ongoing
     transition from: :ongoing, to: %i[succeeded failed]
 
