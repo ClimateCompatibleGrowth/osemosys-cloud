@@ -16,9 +16,15 @@ class RunsController < ApplicationController
   end
 
   def create
-    current_user.runs.create!(run_params)
-    flash.notice = 'Run created'
-    redirect_to runs_path
+    @run = current_user.runs.create(run_params)
+
+    if @run.persisted?
+      flash.notice = 'Run created'
+      redirect_to runs_path
+    else
+      flash.now.alert =  @run.errors.full_messages.to_sentence
+      render :new
+    end
   end
 
   def start

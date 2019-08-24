@@ -11,6 +11,10 @@ class Run < ApplicationRecord
   has_one_attached :result_file
   has_one_attached :log_file
 
+  validates :name, presence: true
+  validates :model_file, attached: true
+  validates :data_file, attached: true
+
   def solving_time
     transitions = history
 
