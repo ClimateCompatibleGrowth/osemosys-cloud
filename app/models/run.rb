@@ -14,30 +14,15 @@ class Run < ApplicationRecord
   enum outcome: { success: 'success', failure: 'failure' }
 
   def solving_time
-    return unless finished?
-
     transitions = history
+
+    return unless transitions.last&.final?
+
     transitions.last.created_at - transitions.first.created_at
   end
 
   def local_log_path
     "/tmp/run-#{id}.log"
-  end
-
-  def started?
-    state != 'new'
-  end
-
-  def finished?
-    state == 'succeeded' || state == 'failed'
-  end
-
-  def ongoing?
-    state == 'ongoing'
-  end
-
-  def in_queue?
-    state == 'queued'
   end
 
   def can_be_queued?
@@ -54,7 +39,7 @@ class Run < ApplicationRecord
     RunTransition
   end
 
-  def status
+  def humanized_status
     state.capitalize.to_s
   end
 
