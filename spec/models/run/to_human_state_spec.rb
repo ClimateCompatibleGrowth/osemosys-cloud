@@ -10,8 +10,6 @@ RSpec.describe Run::ToHumanState do
   end
 
   it 'translates the state to a human readable name' do
-    run = build(:run, state: 'queued')
-
-    expect(Run::ToHumanState.call(run: run)).to eq('Creating server')
+    expect(Run::ToHumanState.call(state_slug: 'queued')).to eq('Creating server')
   end
 end

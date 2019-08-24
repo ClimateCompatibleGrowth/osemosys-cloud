@@ -22,15 +22,24 @@ RSpec.describe 'Creating a run', type: :system do
 
     expect(page).to have_content('Run number 1 (Creating server)')
     within('.timeline__item--current') do
-      expect(page).to have_content('Queued')
+      expect(page).to have_content('Creating server')
     end
 
-    run.transition_to(:ongoing)
+    run.transition_to!(:generating_matrix)
     visit current_path
-
-    expect(page).to have_content('Run number 1 (Ongoing)')
     within('.timeline__item--current') do
-      expect(page).to have_content('Ongoing')
+      expect(page).to have_content('Generating matrix')
+    end
+
+    run.transition_to!(:finding_solution)
+    visit current_path
+    within('.timeline__item--current') do
+      expect(page).to have_content('Solving model')
+    end
+
+    expect(page).to have_content('Run number 1 (Solving model)')
+    within('.timeline__item--current') do
+      expect(page).to have_content('Solving model')
     end
 
     run.transition_to(:succeeded)

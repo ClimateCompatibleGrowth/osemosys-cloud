@@ -6,7 +6,7 @@ RSpec.describe AfterFinishHook do
     context 'when the run has a result file attached' do
       it 'transitions to the succeeded state' do
         run = create(:run, :ongoing, :with_result)
-        expect(run.state).to eq('ongoing')
+        expect(run.state).to eq('finding_solution')
 
         AfterFinishHook.new(run: run).call
 
@@ -17,7 +17,7 @@ RSpec.describe AfterFinishHook do
     context 'when the run has no result file attached' do
       it 'sets the outcome to failure' do
         run = create(:run, :ongoing)
-        expect(run.state).to eq('ongoing')
+        expect(run.state).to eq('finding_solution')
 
         AfterFinishHook.new(run: run).call
 

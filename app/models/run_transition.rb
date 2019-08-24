@@ -4,7 +4,7 @@ class RunTransition < ApplicationRecord
   belongs_to :run, inverse_of: :run_transitions
 
   def humanized_to_state
-    to_state.capitalize.to_s
+    Run::ToHumanState.call(state_slug: to_state)
   end
 
   def final?

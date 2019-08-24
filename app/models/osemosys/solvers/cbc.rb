@@ -1,14 +1,17 @@
 module Osemosys
   module Solvers
     class Cbc
-      def initialize(local_model_path:, local_data_path:, logger: Config.logger)
+      def initialize(local_model_path:, local_data_path:, logger: Config.logger, run:)
         @local_data_path = local_data_path
         @local_model_path = local_model_path
         @logger = logger
+        @run = run
       end
 
       def call
+        run.transition_to!(:generating_matrix)
         generate_input_file
+        run.transition_to!(:finding_solution)
         find_solution
         zip_output
         print_summary
@@ -18,7 +21,7 @@ module Osemosys
 
       private
 
-      attr_reader :local_data_path, :local_model_path, :logger
+      attr_reader :local_data_path, :local_model_path, :logger, :run
 
       def generate_input_file
         Commands::GenerateInputFile.new(

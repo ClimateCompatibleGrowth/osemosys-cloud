@@ -2,7 +2,6 @@ require 'rails_helper'
 
 RSpec.describe SolveRun do
   describe '#call' do
-    # We need to test the transition to ongoing
     it 'transitions the run to succeeded' do
       run = create(:run, :queued, :atlantis)
       expect(run.state).to eq('queued')
@@ -19,7 +18,7 @@ RSpec.describe SolveRun do
     end
 
     it 'performs the after finish hook' do
-      run = create(:run, :atlantis)
+      run = create(:run, :queued, :atlantis)
       allow(AfterFinishHook).to receive(:new).with(run: run).and_return(
         instance_double('AfterFinishHook', call: 'OK'),
       )
