@@ -3,21 +3,16 @@
   .timeline__item.timeline__item--passed
     .timeline__item-state Created
     .timeline__item-timestamp = format_datetime(timeline.created_at)
-  br
-  - timeline.transitions.each do |transition|
+
+  - timeline.past_transitions.each do |transition|
     .timeline__item.timeline__item--passed
       .timeline__item-state = transition.humanized_to_state
       .timeline__item-timestamp = format_datetime(transition.created_at)
 
-    br
-  / - timeline.passed.each do |state|
-    / .timeline__item.timeline__item--passed
-    /   .timeline__item-state = state[:name]
-    /   .timeline__item-timestamp = format_datetime(state[:timestamp])
-
-  / .timeline__item.timeline__item--current
-    / .timeline__item-state = timeline.current_state
-    / .timeline__item-timestamp = format_datetime(timeline.current[:timestamp])
+  - if timeline.last_transition
+    .timeline__item.timeline__item--current
+      .timeline__item-state = timeline.last_transition.humanized_to_state
+      .timeline__item-timestamp = format_datetime(timeline.last_transition.created_at)
 
   / - timeline.future.each do |state|
   /   .timeline__item.timeline__item--future

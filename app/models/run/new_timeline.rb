@@ -11,11 +11,15 @@ class Run < ApplicationRecord
     def created_at
       run.created_at
     end
-    def transitions
-      run.history
+
+    def past_transitions
+      all_transitions[0...-1]
     end
 
     def last_transition
+      return unless all_transitions.present?
+
+      all_transitions[-1]
     end
 
     def past_states_transitions
@@ -33,33 +37,8 @@ class Run < ApplicationRecord
 
     attr_reader :run
 
-    def current_index
-      return 3 if run.finished?
-      return 2 if run.started?
-      return 1 if run.in_queue?
-
-      0
-    end
-
-    def states
-      [
-        {
-          name: 'Created',
-          timestamp: run.created_at,
-        },
-        {
-          name: 'Queued',
-          timestamp: run.queued_at,
-        },
-        {
-          name: 'Ongoing',
-          timestamp: run.started_at,
-        },
-        {
-          name: 'Finished',
-          timestamp: run.finished_at,
-        },
-      ]
+    def all_transitions
+      @all_transitions ||= run.history
     end
   end
 end
