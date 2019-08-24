@@ -1,9 +1,10 @@
 class SolveRun
   NoModelOrDataFile = Class.new(StandardError)
 
-  def initialize(run:, logger: Osemosys::Config.logger)
+  def initialize(run:, logger: Osemosys::Config.logger, solver:)
     @run = run
     @logger = logger
+    @solver = solver
   end
 
   def call
@@ -16,14 +17,14 @@ class SolveRun
 
   private
 
-  attr_reader :run, :logger
+  attr_reader :run, :logger, :solver
 
   def transition_to_ongoing
     run.transition_to!(:ongoing)
   end
 
   def solve_run
-    @solved_file_path = Osemosys::SolveCbcModel.new(
+    @solved_file_path = solver.new(
       local_model_path: local_files.local_model_path,
       local_data_path: local_files.local_data_path,
       logger: logger,
