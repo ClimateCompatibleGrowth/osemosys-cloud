@@ -14,10 +14,10 @@ class Run < ApplicationRecord
   enum outcome: { success: 'success', failure: 'failure' }
 
   def solving_time
-    # To convert to sue states
-    return unless started_at && finished_at
+    return unless finished?
 
-    finished_at - started_at
+    transitions = history
+    transitions.last.created_at - transitions.first.created_at
   end
 
   def local_log_path
