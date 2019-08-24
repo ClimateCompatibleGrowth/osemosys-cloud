@@ -29,7 +29,7 @@ class RunsController < ApplicationController
 
   def start
     run = Run.find(params[:id])
-    StartRunOnEc2Job.perform_later(
+    SolveRunJob.perform_later(
       run_id: run.id,
     )
     run.transition_to!(:queued)
