@@ -2,16 +2,6 @@ require 'rails_helper'
 
 RSpec.describe SolveRun do
   describe '#call' do
-    context 'when missing the model or data file' do
-      it 'raises an error' do
-        run = create(:run)
-
-        expect { SolveRun.new(run: run, solver: Osemosys::Solvers::Dummy).call }.to raise_error(
-          SolveRun::NoModelOrDataFile,
-        )
-      end
-    end
-
     # We need to test the transition to ongoing
     it 'transitions the run to succeeded' do
       run = create(:run, :queued, :atlantis)
