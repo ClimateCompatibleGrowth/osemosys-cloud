@@ -19,16 +19,6 @@
       }
     }
 
-    &--future {
-      &::before {
-        content: '\f252';
-        font-weight: bold;
-        font-family: 'Font Awesome 5 Free';
-        color: lightblue;
-      }
-      border: 1px solid lightblue;
-    }
-
     &--current {
       &::before {
         content: '\f2f2';

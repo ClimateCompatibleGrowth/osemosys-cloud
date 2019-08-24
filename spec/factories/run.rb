@@ -4,6 +4,23 @@ FactoryBot.define do
     description { 'My description' }
     user
 
+    trait :queued do
+      state { 'queued' }
+      after(:create) { |run| run.transition_to!(:queued) }
+    end
+
+    trait :ongoing do
+      state { 'ongoing' }
+      queued
+      after(:create) { |run| run.transition_to!(:ongoing) }
+    end
+
+    trait :finished do
+      state { 'succeeded' }
+      ongoing
+      after(:create) { |run| run.transition_to!(:succeeded) }
+    end
+
     trait :with_result do
       result_file do
         fixture_file_upload(
