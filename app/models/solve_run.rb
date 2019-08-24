@@ -6,7 +6,6 @@ class SolveRun
   end
 
   def call
-    transition_to_ongoing
     solve_run
     save_result
   ensure
@@ -26,6 +25,7 @@ class SolveRun
       local_model_path: local_files.local_model_path,
       local_data_path: local_files.local_data_path,
       logger: logger,
+      run: run,
     ).call
   end
 

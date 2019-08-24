@@ -12,7 +12,10 @@ FactoryBot.define do
     trait :ongoing do
       state { 'ongoing' }
       queued
-      after(:create) { |run| run.transition_to!(:ongoing) }
+      after(:create) do |run|
+        run.transition_to!(:generating_matrix)
+        run.transition_to!(:finding_solution)
+      end
     end
 
     trait :finished do

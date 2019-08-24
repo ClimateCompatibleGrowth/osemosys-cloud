@@ -6,6 +6,8 @@ class Run < ApplicationRecord
       ongoing: 'Ongoing',
       succeeded: 'Succeeded',
       failed: 'Failed',
+      finding_solution: 'Solving model',
+      generating_matrix: 'Generating matrix',
     }
 
     def self.call(run:)
