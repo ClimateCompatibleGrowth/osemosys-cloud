@@ -1,7 +1,7 @@
 class Run < ApplicationRecord
   include Statesman::Adapters::ActiveRecordQueries
   delegate :current_state, :history, :transition_to, :transition_to!,
-    to: :state_machine
+    :can_transition_to?, to: :state_machine
 
   has_many :run_transitions, autosave: false
 
@@ -14,18 +14,10 @@ class Run < ApplicationRecord
   enum outcome: { success: 'success', failure: 'failure' }
 
   def solving_time
+    # To convert to sue states
     return unless started_at && finished_at
 
     finished_at - started_at
-  end
-
-  def reset!
-    self.finished_at = nil
-    self.started_at = nil
-    self.queued_at = nil
-    save
-    result_file.purge
-    log_file.purge
   end
 
   def local_log_path
@@ -33,49 +25,43 @@ class Run < ApplicationRecord
   end
 
   def started?
-    started_at.present?
+    state != 'new'
   end
 
   def finished?
-    finished_at.present?
+    state == 'succeeded' || state == 'failed'
   end
 
   def ongoing?
-    started? && !finished?
+    state == 'ongoing'
   end
 
   def in_queue?
-    return false if started? || finished?
-
-    queued_at.present?
+    state == 'queued'
   end
 
-  # To move to presenter
   def can_be_queued?
-    return false if started? || finished?
-
-    !in_queue?
+    can_transition_to? :queued
   end
 
   def state_machine
-    @state_machine ||= StateMachine.new(self, transition_class: RunTransition)
+    @state_machine ||= StateMachine.new(
+      self, transition_class: RunTransition
+    )
   end
 
   def self.transition_class
     RunTransition
   end
 
+  def status
+    state.capitalize.to_s
+  end
+
+  private
+
   def self.initial_state
     :new
   end
   private_class_method :initial_state
-
-  def status
-    return 'Finished' if finished?
-    return 'Ongoing' if ongoing?
-    return 'Started' if started?
-    return 'In queue' if in_queue?
-
-    'Not started yet'
-  end
 end
