@@ -28,6 +28,7 @@ class AfterFinishHook
 
   def set_outcome
     run.update(outcome: outcome)
+    run.transition_to!(new_state)
   end
 
   def log_path
@@ -39,6 +40,14 @@ class AfterFinishHook
       'success'
     else
       'failure'
+    end
+  end
+
+  def new_state
+    if run.result_file.attached?
+      :succeeded
+    else
+      :failed
     end
   end
 end
