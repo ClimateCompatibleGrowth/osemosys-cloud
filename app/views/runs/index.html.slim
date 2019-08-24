@@ -4,5 +4,7 @@ h1.mb-4 My runs
 
 br
 
+= paginate @runs
+
 - @runs.each do |run|
   = render 'runs/card', run: run
