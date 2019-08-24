@@ -33,11 +33,10 @@ RSpec.describe 'Creating a run', type: :system do
       expect(page).to have_content('Ongoing')
     end
 
-    run.update(outcome: 'success')
     run.transition_to(:succeeded)
     visit current_path
 
-    expect(page).to have_content('Run number 1 (Success)')
+    expect(page).to have_content('Run number 1 (Succeeded)')
     expect(page).to have_content('Run finished in 00:00:00')
   end
 end
