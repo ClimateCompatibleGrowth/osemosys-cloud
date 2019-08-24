@@ -4,18 +4,13 @@ class AfterFinishHook
   end
 
   def call
-    set_finished_at
-    set_outcome
+    transition_to_next_state
     upload_log_file
   end
 
   private
 
   attr_reader :run
-
-  def set_finished_at
-    run.update(finished_at: Time.current)
-  end
 
   def upload_log_file
     return unless File.exist?(log_path)
@@ -26,21 +21,12 @@ class AfterFinishHook
     )
   end
 
-  def set_outcome
-    run.update(outcome: outcome)
+  def transition_to_next_state
     run.transition_to!(new_state)
   end
 
   def log_path
     run.local_log_path
-  end
-
-  def outcome
-    if run.result_file.attached?
-      'success'
-    else
-      'failure'
-    end
   end
 
   def new_state
