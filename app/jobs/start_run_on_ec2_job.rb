@@ -1,18 +1,22 @@
 class StartRunOnEc2Job < ActiveJob::Base
   def perform(run_id:, instance_type: 'z1d.3xlarge')
-    return unless run_on_ec2?
 
-    Ec2::Instance.new(
-      run_id: run_id,
-      instance_type: instance_type,
-    ).spawn!
+    if run_on_ec2?
+      Ec2::Instance.new(
+        run_id: run_id,
+        instance_type: instance_type,
+      ).spawn!
+    else
+      SolveRun.new(
+        run: Run.find(run_id),
+        solver: Osemosys::Solvers::Cbc,
+      ).call
+    end
   end
 
   private
 
   def run_on_ec2?
-    return true if Rails.env.production?
-
-    false
+    Rails.env.production?
   end
 end
