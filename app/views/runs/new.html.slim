@@ -3,9 +3,9 @@ h1 Schedule a new run
 = simple_form_for(@run, html: { class: 'aform-inline' })do |f|
   = f.input :name
   = f.label 'Model file'
-  = f.file_field :model_file, accept: 'text/plain', direct_upload: true
+  = f.file_field :model_file, accept: 'text/plain'
   = f.label 'Data file'
-  = f.file_field :data_file, accept: 'text/plain', direct_upload: true
+  = f.file_field :data_file, accept: 'text/plain'
   = f.input :description
   br
   = f.submit 'Create run', class: 'btn btn-primary'
