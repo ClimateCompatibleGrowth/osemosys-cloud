@@ -3,8 +3,8 @@
     = "#{run.id} - #{run.name} (#{run.outcome.to_s.capitalize.presence || run.status})"
   .run-card__content
     .run-card__description = run.description
-    - timeline = Run::NewTimeline.new(run)
-    = render 'runs/new_timeline', timeline: timeline
+    - timeline = Run::Timeline.new(run)
+    = render 'runs/timeline', timeline: timeline
 
     - if run.can_be_queued?
       = link_to('Start run', start_run_path(run), method: :post, class: 'btn btn-success btn-lg btn-block')
