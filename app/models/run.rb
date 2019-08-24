@@ -42,7 +42,7 @@ class Run < ApplicationRecord
   end
 
   def humanized_status
-    state.capitalize.to_s
+    Run::ToHumanState.call(run: self)
   end
 
   private

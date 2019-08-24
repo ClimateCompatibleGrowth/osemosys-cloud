@@ -20,7 +20,7 @@ RSpec.describe 'Creating a run', type: :system do
     run.transition_to(:queued)
     visit current_path
 
-    expect(page).to have_content('Run number 1 (Queued)')
+    expect(page).to have_content('Run number 1 (Creating server)')
     within('.timeline__item--current') do
       expect(page).to have_content('Queued')
     end
