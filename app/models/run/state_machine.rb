@@ -4,7 +4,7 @@ class Run < ApplicationRecord
 
     state :new, initial: true
     state :queued
-    state :ongoing
+    state :ongoing # Legacy
     state :generating_matrix
     state :finding_solution
     state :succeeded
