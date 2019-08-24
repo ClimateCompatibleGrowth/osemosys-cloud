@@ -16,10 +16,6 @@ class SolveRun
 
   attr_reader :run, :logger, :solver
 
-  def transition_to_ongoing
-    run.transition_to!(:ongoing)
-  end
-
   def solve_run
     @solved_file_path = solver.new(
       local_model_path: local_files.local_model_path,
