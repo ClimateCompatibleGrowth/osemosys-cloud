@@ -6,7 +6,7 @@ RSpec.describe SolveRun do
       it 'raises an error' do
         run = create(:run)
 
-        expect { SolveRun.new(run: run).call }.to raise_error(
+        expect { SolveRun.new(run: run, solver: Osemosys::SolveDummyModel).call }.to raise_error(
           SolveRun::NoModelOrDataFile,
         )
       end
@@ -17,7 +17,7 @@ RSpec.describe SolveRun do
       run = create(:run, :queued, :atlantis)
       expect(run.state).to eq('queued')
 
-      SolveRun.new(run: run).call
+      SolveRun.new(run: run, solver: Osemosys::SolveDummyModel).call
 
       expect(run.state).to eq('succeeded')
     end
@@ -34,7 +34,7 @@ RSpec.describe SolveRun do
         instance_double('AfterFinishHook', call: 'OK'),
       )
 
-      SolveRun.new(run: run).call
+      SolveRun.new(run: run, solver: Osemosys::SolveDummyModel).call
 
       expect(AfterFinishHook).to have_received(:new).once
     end
@@ -46,7 +46,7 @@ RSpec.describe SolveRun do
           instance_double('AfterFinishHook', call: 'OK'),
         )
 
-        expect { SolveRun.new(run: run).call }.to raise_error(
+        expect { SolveRun.new(run: run, solver: Osemosys::SolveDummyModel).call }.to raise_error(
           TTY::Command::ExitError,
         )
 

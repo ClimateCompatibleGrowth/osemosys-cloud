@@ -8,5 +8,6 @@ task :solve_cbc_run, [:run_id] => :environment do |_task, args|
   SolveRun.new(
     run: run,
     logger: logger,
+    solver: Osemosys::SolveCbcModel,
   ).call
 end
