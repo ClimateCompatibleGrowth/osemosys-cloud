@@ -18,7 +18,7 @@ RSpec.describe SolveRun do
     end
 
     it 'performs the after finish hook' do
-      run = create(:run, :atlantis)
+      run = create(:run, :queued, :atlantis)
       allow(AfterFinishHook).to receive(:new).with(run: run).and_return(
         instance_double('AfterFinishHook', call: 'OK'),
       )

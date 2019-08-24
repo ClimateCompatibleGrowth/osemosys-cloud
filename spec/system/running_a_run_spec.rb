@@ -3,8 +3,8 @@ require 'rake'
 
 RSpec.describe 'Running a run' do
   it 'Solves a valid run' do
-    run = create(:run, :atlantis)
-    expect(run.state).to eq('new')
+    run = create(:run, :queued, :atlantis)
+    expect(run.state).to eq('queued')
 
     OsemosysCloud::Application.load_tasks
     Rake::Task['solve_cbc_run'].invoke(run.id)
@@ -18,8 +18,8 @@ RSpec.describe 'Running a run' do
   end
 
   it 'Handles a faulty run' do
-    run = create(:run, :faulty)
-    expect(run.state).to eq('new')
+    run = create(:run, :queued, :faulty)
+    expect(run.state).to eq('queued')
 
     OsemosysCloud::Application.load_tasks
     expect {
