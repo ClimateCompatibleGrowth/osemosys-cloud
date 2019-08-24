@@ -12,13 +12,14 @@ RSpec.describe SolveRun do
       end
     end
 
-    it 'sets started_at on the run' do
-      run = create(:run, :atlantis)
-      expect(run.started_at).to be nil
+    # We need to test the transition to ongoing
+    it 'transitions the run to succeeded' do
+      run = create(:run, :queued, :atlantis)
+      expect(run.state).to eq('queued')
 
       SolveRun.new(run: run).call
 
-      expect(run.started_at).to be_past
+      expect(run.state).to eq('succeeded')
     end
 
     xit 'triggers the run solving' do

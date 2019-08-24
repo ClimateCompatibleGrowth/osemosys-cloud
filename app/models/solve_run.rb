@@ -7,7 +7,7 @@ class SolveRun
   end
 
   def call
-    set_started_at
+    transition_to_ongoing
     solve_run
     save_result
   ensure
@@ -18,8 +18,7 @@ class SolveRun
 
   attr_reader :run, :logger
 
-  def set_started_at
-    run.update(started_at: Time.current)
+  def transition_to_ongoing
     run.transition_to!(:ongoing)
   end
 

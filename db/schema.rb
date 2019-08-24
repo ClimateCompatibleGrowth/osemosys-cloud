@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_08_22_164540) do
+ActiveRecord::Schema.define(version: 2019_08_24_092015) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -50,14 +50,10 @@ ActiveRecord::Schema.define(version: 2019_08_22_164540) do
 
   create_table "runs", force: :cascade do |t|
     t.string "name"
-    t.datetime "started_at"
-    t.datetime "finished_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.datetime "queued_at"
     t.text "description", default: "", null: false
     t.bigint "user_id"
-    t.string "outcome"
     t.string "state", default: "new", null: false
     t.index ["user_id"], name: "index_runs_on_user_id"
   end

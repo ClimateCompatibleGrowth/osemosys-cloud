@@ -3,34 +3,25 @@ require 'fileutils'
 
 RSpec.describe AfterFinishHook do
   describe '#call' do
-    it 'sets finished_at' do
-      run = create(:run)
-      expect(run.finished_at).to be nil
-
-      AfterFinishHook.new(run: run).call
-
-      expect(run.finished_at).to be_past
-    end
-
     context 'when the run has a result file attached' do
-      it 'sets the outcome to success' do
-        run = create(:run, :with_result)
-        expect(run.outcome).to be nil
+      it 'transitions to the succeeded state' do
+        run = create(:run, :ongoing, :with_result)
+        expect(run.state).to eq('ongoing')
 
         AfterFinishHook.new(run: run).call
 
-        expect(run.outcome).to eq('success')
+        expect(run.state).to eq('succeeded')
       end
     end
 
     context 'when the run has no result file attached' do
       it 'sets the outcome to failure' do
-        run = create(:run)
-        expect(run.outcome).to be nil
+        run = create(:run, :ongoing)
+        expect(run.state).to eq('ongoing')
 
         AfterFinishHook.new(run: run).call
 
-        expect(run.outcome).to eq('failure')
+        expect(run.state).to eq('failed')
       end
     end
 

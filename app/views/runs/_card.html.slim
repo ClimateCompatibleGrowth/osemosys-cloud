@@ -1,6 +1,6 @@
 .run-card
-  .run-card__title-bar class=("run-card__title-bar--#{run.outcome}" if run.outcome)
-    = "#{run.id} - #{run.name} (#{run.outcome.to_s.capitalize.presence || run.humanized_status})"
+  .run-card__title-bar class=("run-card__title-bar--#{run.state}")
+    = "#{run.id} - #{run.name} (#{run.humanized_status})"
   .run-card__content
     .run-card__description = run.description
     - timeline = Run::Timeline.new(run)
