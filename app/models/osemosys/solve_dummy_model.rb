@@ -9,7 +9,7 @@ module Osemosys
     def call
       raise dummy_tty_exit_error if faulty_model?
 
-      './data/empty_file.txt'
+      '/dev/null'
     end
 
     private
