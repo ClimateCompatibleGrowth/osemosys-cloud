@@ -3,7 +3,6 @@ h1.mb-4 My runs
 .mb-2 = link_to('New run', new_run_path, class: 'btn btn-primary')
 
 br
-
 = paginate @runs
 
 - @runs.each do |run|
