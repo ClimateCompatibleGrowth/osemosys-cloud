@@ -6,4 +6,8 @@ class RunTransition < ApplicationRecord
   def humanized_to_state
     to_state.capitalize.to_s
   end
+
+  def final?
+    to_state == 'succeeded' || to_state == 'failed'
+  end
 end
