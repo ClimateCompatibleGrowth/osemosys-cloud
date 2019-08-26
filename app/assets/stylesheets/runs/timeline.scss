@@ -29,7 +29,19 @@
     }
 
   }
+
   &__item-timestamp {
+    font-size: 0.8em;
+    color: darkgray;
+  }
+
+  &__item-duration {
+    &::before {
+      content: '\f2f2';
+      font-family: 'Font Awesome 5 Free';
+      margin-right: 3px;
+    }
+    font-weight: bold;
     font-size: 0.8em;
   }
 }
