@@ -10,4 +10,8 @@ class RunTransition < ApplicationRecord
   def final?
     to_state == 'succeeded' || to_state == 'failed'
   end
+
+  def duration
+    metadata['duration']
+  end
 end
