@@ -1,8 +1,4 @@
 .timeline
-  .timeline__item.timeline__item--passed
-    .timeline__item-state Created
-    .timeline__item-timestamp = format_datetime(timeline.created_at)
-
   - timeline.past_transitions.each do |transition|
     .timeline__item.timeline__item--passed
       .timeline__item-state = transition.humanized_to_state

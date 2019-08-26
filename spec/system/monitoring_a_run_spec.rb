@@ -13,8 +13,6 @@ RSpec.describe 'Creating a run', type: :system do
     visit runs_path
 
     expect(page).to have_content('Run number 1 (New)')
-    expect(page).to have_content('Created')
-
     expect(page).to have_content('Start run')
 
     run.transition_to(:queued)
