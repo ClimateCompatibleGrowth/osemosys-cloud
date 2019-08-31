@@ -4,6 +4,7 @@ class Run < ApplicationRecord
     :can_transition_to?, :last_transition, to: :state_machine
 
   has_many :run_transitions, autosave: false
+  has_one :ec2_instance
 
   belongs_to :user
   has_one_attached :model_file

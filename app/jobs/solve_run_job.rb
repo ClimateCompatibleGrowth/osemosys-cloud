@@ -19,10 +19,10 @@ class SolveRunJob < ActiveJob::Base
   end
 
   def spawn_ec2_instance
-    Ec2::Instance.new(
+    Ec2::CreateInstance.call(
       run_id: run_id,
       instance_type: instance_type,
-    ).spawn!
+    )
   end
 
   def run_inline
