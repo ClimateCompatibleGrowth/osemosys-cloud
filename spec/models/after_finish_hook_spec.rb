@@ -49,5 +49,17 @@ RSpec.describe AfterFinishHook do
         expect(run.log_file).not_to be_attached
       end
     end
+
+    context 'when there is an attached instance' do
+      it 'sets stopped_at' do
+        run = create(:run)
+        ec2_instance = create(:ec2_instance, run: run)
+        expect(ec2_instance.stopped_at).to be nil
+
+        AfterFinishHook.new(run: run).call
+
+        expect(ec2_instance.reload.stopped_at).to be_past
+      end
+    end
   end
 end

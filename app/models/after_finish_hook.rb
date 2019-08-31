@@ -6,6 +6,7 @@ class AfterFinishHook
   def call
     transition_to_next_state
     upload_log_file
+    log_instance_shutdown
   end
 
   private
@@ -23,6 +24,12 @@ class AfterFinishHook
 
   def transition_to_next_state
     run.transition_to!(new_state)
+  end
+
+  def log_instance_shutdown
+    return unless run.ec2_instance.present?
+
+    run.ec2_instance.update!(stopped_at: Time.current)
   end
 
   def log_path
