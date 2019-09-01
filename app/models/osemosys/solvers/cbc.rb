@@ -84,7 +84,7 @@ module Osemosys
       end
 
       def preprocessed_data_path
-        "#{local_data_path}_preprocessed.txt"
+        "#{local_data_path}.pre"
       end
     end
   end

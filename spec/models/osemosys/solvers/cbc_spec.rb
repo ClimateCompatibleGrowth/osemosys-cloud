@@ -1,9 +1,9 @@
 require 'rails_helper'
 
 RSpec.describe Osemosys::Solvers::Cbc do
-  context 'with a model and data' do
+  context 'without preprocessing' do
     it 'solves the model with glpsol and cbc' do
-      run = create(:run, :queued)
+      run = create(:run, :queued, pre_process: false)
       atlantis_model_path = "#{Rails.root}/spec/data/atlantis_model.txt"
       atlantis_data_path = "#{Rails.root}/spec/data/atlantis_data.txt"
 
