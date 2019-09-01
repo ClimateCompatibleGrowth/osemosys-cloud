@@ -8,6 +8,7 @@ class Run < ApplicationRecord
       failed: 'Failed',
       finding_solution: 'Solving model',
       generating_matrix: 'Generating matrix',
+      preprocessing_data: 'Preprocessing data',
     }
 
     def self.call(state_slug:)

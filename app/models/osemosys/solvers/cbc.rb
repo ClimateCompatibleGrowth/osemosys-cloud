@@ -10,7 +10,7 @@ module Osemosys
 
       def call
         if preprocess_data_file?
-          # run.transition_to!(:generating_matrix)
+          run.transition_to!(:preprocessing_data)
           preprocess_data_file
         end
         run.transition_to!(:generating_matrix)
