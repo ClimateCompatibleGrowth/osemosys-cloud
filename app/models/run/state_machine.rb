@@ -13,7 +13,7 @@ class Run < ApplicationRecord
 
     transition from: :new, to: %i[queued ongoing succeeded failed]
     transition from: :queued, to: %i[generating_matrix preprocessing_data]
-    transition from: :preprocessing_data, to: :generating_matrix
+    transition from: :preprocessing_data, to: %i[generating_matrix failed]
     transition from: :generating_matrix, to: %i[finding_solution failed]
     transition from: :finding_solution, to: %i[succeeded failed]
 
