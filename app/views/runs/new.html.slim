@@ -8,4 +8,6 @@ h1 Schedule a new run
   = f.file_field :data_file, accept: 'text/plain'
   = f.input :description
   br
+  = f.input :pre_process, label: 'Run pre-processing script'
+  br
   = f.submit 'Create run', class: 'btn btn-primary'

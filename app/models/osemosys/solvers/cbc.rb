@@ -26,7 +26,7 @@ module Osemosys
       private
 
       def preprocess_data_file?
-        true
+        run.pre_process?
       end
 
       attr_reader :local_data_path, :local_model_path, :logger, :run
