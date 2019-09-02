@@ -3,7 +3,7 @@ require 'rake'
 
 RSpec.describe 'Running a run' do
   it 'Solves a valid run' do
-    run = create(:run, :queued, :atlantis)
+    run = create(:run, :queued, :atlantis, pre_process: false)
     expect(run.state).to eq('queued')
 
     OsemosysCloud::Application.load_tasks
