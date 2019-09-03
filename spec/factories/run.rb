@@ -48,6 +48,8 @@ FactoryBot.define do
     end
 
     trait :atlantis do
+      pre_process { false }
+
       data_file do
         fixture_file_upload(
           Rails.root.join('spec', 'data', 'atlantis_data.txt'),
@@ -58,6 +60,24 @@ FactoryBot.define do
       model_file do
         fixture_file_upload(
           Rails.root.join('spec', 'data', 'atlantis_model.txt'),
+          'text/plain',
+        )
+      end
+    end
+
+    trait :atlantis_preprocessed do
+      pre_process { true }
+
+      data_file do
+        fixture_file_upload(
+          Rails.root.join('spec', 'data', 'atlantis_data_preprocessing.txt'),
+          'text/plain',
+        )
+      end
+
+      model_file do
+        fixture_file_upload(
+          Rails.root.join('spec', 'data', 'osemosys_with_preprocessed.txt'),
           'text/plain',
         )
       end
