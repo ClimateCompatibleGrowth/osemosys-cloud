@@ -6,7 +6,7 @@ ruby '2.6.2'
 gem 'active_storage_validations'
 gem 'aws-sdk-ec2'
 gem 'aws-sdk-s3'
-gem 'bootsnap', '>= 1.1.0', require: false
+gem 'bootsnap', require: false
 gem 'bugsnag'
 gem 'devise'
 gem 'devise-bootstrap-views'
@@ -24,8 +24,8 @@ gem 'simple_form'
 gem 'slim-rails'
 gem 'statesman'
 gem 'tty-command'
-gem 'turbolinks', '~> 5'
-gem 'uglifier', '>= 1.3.0'
+gem 'turbolinks'
+gem 'uglifier'
 
 group :development do
   gem 'better_errors'
