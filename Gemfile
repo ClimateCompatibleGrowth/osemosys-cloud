@@ -43,5 +43,6 @@ group :test do
   gem 'factory_bot'
   gem 'rspec-rails'
   gem 'selenium-webdriver'
+  gem 'simplecov', require: false
   gem 'webdrivers'
 end
