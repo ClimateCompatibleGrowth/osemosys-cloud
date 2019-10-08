@@ -6,8 +6,10 @@ class SolveRun
   end
 
   def call
-    solve_run
-    save_result
+    Timeout.timeout Osemosys::Config.run_timeout do
+      solve_run
+      save_result
+    end
   ensure
     AfterFinishHook.new(run: run).call
   end
