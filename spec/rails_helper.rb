@@ -46,6 +46,10 @@ RSpec.configure do |config|
     FactoryBot.find_definitions
   end
 
+  config.before(:each) do
+    Osemosys::Config.reset_config
+  end
+
   config.use_transactional_fixtures = true
 
   config.filter_rails_from_backtrace!

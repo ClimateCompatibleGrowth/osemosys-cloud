@@ -6,7 +6,7 @@ class SolveRun
   end
 
   def call
-    timeout Osemosys::Config.run_timeout do
+    Timeout.timeout Osemosys::Config.run_timeout do
       solve_run
       save_result
     end

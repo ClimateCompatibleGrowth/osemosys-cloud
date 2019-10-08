@@ -1,6 +1,9 @@
+require 'dry/configurable/test_interface'
+
 module Osemosys
   class Config
     extend Dry::Configurable
+    enable_test_interface
 
     setting :run_id, Time.now.strftime('%Y-%m-%d_%H-%M-%S'), reader: true
 
