@@ -59,7 +59,8 @@ RSpec.describe Osemosys::Solvers::Dummy do
     end
 
     context 'with a sleep duration' do
-      it 'is instant' do
+      it 'is around the sleep duration' do
+        Osemosys::Config.config.dummy_solver_sleep_duration = 0.5
         run = create(:run, :queued)
         atlantis_model_path = "#{Rails.root}/spec/data/atlantis_model.txt"
         atlantis_data_path = "#{Rails.root}/spec/data/atlantis_data.txt"
@@ -69,7 +70,6 @@ RSpec.describe Osemosys::Solvers::Dummy do
           local_model_path: atlantis_model_path,
           local_data_path: atlantis_data_path,
           run: run,
-          sleep_duration: 0.5,
         ).call
         end_time = Time.now
 
