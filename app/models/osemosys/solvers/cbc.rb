@@ -9,6 +9,10 @@ module Osemosys
       end
 
       def call
+        if preprocess_data_file?
+          run.transition_to!(:preprocessing_data)
+          preprocess_data_file
+        end
         run.transition_to!(:generating_matrix)
         generate_input_file
         run.transition_to!(:finding_solution)
@@ -21,12 +25,25 @@ module Osemosys
 
       private
 
+      def preprocess_data_file?
+        run.pre_process?
+      end
+
       attr_reader :local_data_path, :local_model_path, :logger, :run
 
+      def preprocess_data_file
+        Commands::PreprocessDataFile.new(
+          local_data_path: local_data_path,
+          preprocessed_data_path: preprocessed_data_path,
+          logger: logger,
+        ).call
+      end
+
       def generate_input_file
+        input_file = preprocess_data_file? ? preprocessed_data_path : local_data_path
         Commands::GenerateInputFile.new(
           local_model_path: local_model_path,
-          local_data_path: local_data_path,
+          local_data_path: input_file,
           lp_path: lp_path,
           logger: logger,
         ).call
@@ -64,6 +81,10 @@ module Osemosys
 
       def zipped_output_path
         "./data/output_#{Config.run_id}.zip"
+      end
+
+      def preprocessed_data_path
+        "#{local_data_path}.pre"
       end
     end
   end

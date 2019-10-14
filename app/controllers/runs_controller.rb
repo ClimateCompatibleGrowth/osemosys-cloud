@@ -18,11 +18,11 @@ class RunsController < ApplicationController
   def create
     @run = current_user.runs.create(run_params)
 
-    if @run.persisted?
+    if @run.valid?
       flash.notice = 'Run created'
       redirect_to runs_path
     else
-      flash.now.alert =  @run.errors.full_messages.to_sentence
+      flash.now.alert = @run.errors.full_messages.to_sentence
       render :new
     end
   end
@@ -40,7 +40,7 @@ class RunsController < ApplicationController
   private
 
   def run_params
-    params.require(:run).permit(:name, :model_file, :data_file, :description)
+    params.require(:run).permit(:name, :model_file, :data_file, :description, :pre_process)
   end
 
   def ensure_logged_in_user
