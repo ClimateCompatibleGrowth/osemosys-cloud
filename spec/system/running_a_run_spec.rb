@@ -6,7 +6,7 @@ RSpec.describe 'Running a run' do
     run = create(:run, :queued, :atlantis)
     expect(run.state).to eq('queued')
 
-    OsemosysCloud::Application.load_tasks
+    OsemosysCloud::Application.load_tasks if Rake::Task.tasks.empty?
     Rake::Task['solve_cbc_run'].invoke(run.id)
     Rake::Task['solve_cbc_run'].reenable
 
@@ -21,7 +21,7 @@ RSpec.describe 'Running a run' do
     run = create(:run, :queued, :atlantis_preprocessed)
     expect(run.state).to eq('queued')
 
-    OsemosysCloud::Application.load_tasks
+    OsemosysCloud::Application.load_tasks if Rake::Task.tasks.empty?
     Rake::Task['solve_cbc_run'].invoke(run.id)
     Rake::Task['solve_cbc_run'].reenable
 
@@ -36,7 +36,7 @@ RSpec.describe 'Running a run' do
     run = create(:run, :queued, :faulty)
     expect(run.state).to eq('queued')
 
-    OsemosysCloud::Application.load_tasks
+    OsemosysCloud::Application.load_tasks if Rake::Task.tasks.empty?
     expect {
       Rake::Task['solve_cbc_run'].invoke(run.id)
     }.to raise_error(TTY::Command::ExitError)
