@@ -1,1 +1,2 @@
-$('[data-run-card-run-id=<%= @run.id %>]').html("<%= j render('runs/card', run: @run) %>")
+$('[data-run-card-run-id=<%= @run.id %>]').replaceWith("<%= j render('runs/card', run: @run) %>")
+<%# $('[data-run-card-run-id=<%= @run.id %1>]') %>
