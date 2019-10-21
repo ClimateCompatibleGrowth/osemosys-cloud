@@ -22,7 +22,7 @@ module Ec2
     end
 
     def set_run_as_failed
-      Run.find_by(aws_id: aws_id).transition_to!(:failed)
+      Ec2::Instance.find_by(aws_id: aws_id).run.transition_to!(:failed)
     end
 
     def resource
