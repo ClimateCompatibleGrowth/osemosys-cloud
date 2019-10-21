@@ -27,7 +27,7 @@ RSpec.describe AfterFinishHook do
 
     context 'when a log file exists' do
       it 'uploads the log file' do
-        run = create(:run)
+        run = create(:run, :ongoing)
         FileUtils.touch(
           Rails.root.join('tmp', run.local_log_path),
         )
@@ -41,7 +41,7 @@ RSpec.describe AfterFinishHook do
 
     context 'when there is no log file' do
       it 'does not attach the log file' do
-        run = create(:run)
+        run = create(:run, :ongoing)
         expect(run.log_file).not_to be_attached
 
         AfterFinishHook.new(run: run).call
@@ -52,7 +52,7 @@ RSpec.describe AfterFinishHook do
 
     context 'when there is an attached instance' do
       it 'sets stopped_at' do
-        run = create(:run)
+        run = create(:run, :ongoing)
         ec2_instance = create(:ec2_instance, run: run)
         expect(ec2_instance.stopped_at).to be nil
 
