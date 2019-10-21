@@ -15,6 +15,12 @@ class RunsController < ApplicationController
       .with_attached_log_file
   end
 
+  def show
+    head :not_found unless request.xhr?
+
+    @run = current_user.runs.find_by(id: params[:id])
+  end
+
   def create
     @run = current_user.runs.create(run_params)
 

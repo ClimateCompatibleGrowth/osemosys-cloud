@@ -36,6 +36,12 @@ class Run < ApplicationRecord
     can_transition_to? :failed
   end
 
+  def in_progress?
+    return false unless last_transition.present?
+
+    !last_transition.final?
+  end
+
   def state_machine
     @state_machine ||= StateMachine.new(
       self, transition_class: RunTransition
