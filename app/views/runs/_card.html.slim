@@ -1,6 +1,15 @@
 .run-card
   .run-card__title-bar class=("run-card__title-bar--#{run.state}")
     = "#{run.id} - #{run.name} (#{run.humanized_status})"
+
+    - if run.can_be_stopped?
+      = link_to(stop_run_path(run),
+        method: :post,
+        class: 'btn btn-outline-danger btn-sm',
+        data: { disable_with: 'Stopping...' }) do
+        =<> fa_icon('stop-circle')
+        ' Stop
+
   .run-card__content
     .run-card__description = run.description
     - timeline = Run::Timeline.new(run)
