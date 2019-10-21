@@ -19,7 +19,11 @@ module Ec2
 
       wait_until_running
 
-      instance.update!(ip: spawned_instance.public_ip_address)
+      instance.update!(
+        ip: spawned_instance.public_ip_address,
+        instance_type: instance_type,
+        aws_id: spawned_instance.id,
+      )
     end
 
     private
@@ -46,7 +50,7 @@ module Ec2
     def spawned_instance
       return unless @instances
 
-      @instances.first.load
+      @spawned_instance ||= @instances.first.load
     end
 
     def resource
