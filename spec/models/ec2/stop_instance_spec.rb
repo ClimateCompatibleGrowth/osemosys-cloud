@@ -2,7 +2,8 @@ require 'rails_helper'
 
 RSpec.describe Ec2::StopInstance do
   it 'stops the instance' do
-    create(:ec2_instance, aws_id: 'abc')
+    run = create(:run, :ongoing)
+    create(:ec2_instance, run: run, aws_id: 'abc')
     instance = instance_double(
       'Instance',
       id: 'abc',
