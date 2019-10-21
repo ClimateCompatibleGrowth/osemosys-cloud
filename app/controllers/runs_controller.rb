@@ -37,6 +37,13 @@ class RunsController < ApplicationController
     redirect_to action: :index
   end
 
+  def stop
+    run = Run.find(params[:id])
+    Ec2::StopInstance.call(aws_id: run.ec2_instance.aws_id)
+    flash.notice = 'Run stopped'
+    redirect_to action: :index
+  end
+
   private
 
   def run_params

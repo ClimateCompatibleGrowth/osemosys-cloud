@@ -10,4 +10,5 @@ Rails.application.routes.draw do
   root to: 'pages#home'
   resources :runs, only: %i[new create index]
   post '/run/:id/start', to: 'runs#start', as: :start_run
+  post '/run/:id/stop', to: 'runs#stop', as: :stop_run
 end

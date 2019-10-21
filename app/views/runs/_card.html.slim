@@ -9,6 +9,9 @@
     - if run.can_be_queued?
       = link_to('Start run', start_run_path(run), method: :post, class: 'btn btn-success btn-lg btn-block')
 
+    - if run.can_be_stopped?
+      = link_to('Stop run', stop_run_path(run), method: :post, class: 'btn btn-danger btn-sm')
+
     hr
 
     - if run.solving_time

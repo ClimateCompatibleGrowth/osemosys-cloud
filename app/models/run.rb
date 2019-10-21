@@ -32,6 +32,10 @@ class Run < ApplicationRecord
     can_transition_to? :queued
   end
 
+  def can_be_stopped?
+    can_transition_to? :failed
+  end
+
   def state_machine
     @state_machine ||= StateMachine.new(
       self, transition_class: RunTransition
