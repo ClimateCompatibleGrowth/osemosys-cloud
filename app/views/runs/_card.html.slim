@@ -4,15 +4,14 @@
       =<> link_to(run_path(run), class: 'btn btn-light btn-sm', remote: true) do
         = fa_icon('sync')
 
-    = "#{run.id} - #{run.name} (#{run.humanized_status})"
-
     - if run.can_be_stopped?
       = link_to(stop_run_path(run),
         method: :post,
         class: 'btn btn-outline-danger btn-sm',
         data: { disable_with: 'Stopping...' }) do
-        =<> fa_icon('stop-circle')
-        ' Stop
+        =<> fa_icon('stop')
+
+    =<> "#{run.id} - #{run.name} (#{run.humanized_status})"
 
   .run-card__content
     .run-card__description = run.description
