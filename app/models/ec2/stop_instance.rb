@@ -11,6 +11,7 @@ module Ec2
     def call
       terminate_instance
       set_run_as_failed
+      set_instance_stopped_at
     end
 
     private
@@ -22,7 +23,15 @@ module Ec2
     end
 
     def set_run_as_failed
-      Ec2::Instance.find_by(aws_id: aws_id).run.transition_to!(:failed)
+      ec2_instance.run.transition_to!(:failed)
+    end
+
+    def set_instance_stopped_at
+      ec2_instance.update!(stopped_at: Time.current)
+    end
+
+    def ec2_instance
+      @ec2_instance ||= Ec2::Instance.find_by(aws_id: aws_id)
     end
 
     def resource
