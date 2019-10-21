@@ -37,6 +37,8 @@ class Run < ApplicationRecord
   end
 
   def in_progress?
+    return false unless last_transition.present?
+
     !last_transition.final?
   end
 
