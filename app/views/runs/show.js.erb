@@ -1,2 +1,3 @@
 $('[data-run-card-run-id=<%= @run.id %>]').replaceWith("<%= j render('runs/card', run: @run) %>")
-<%# $('[data-run-card-run-id=<%= @run.id %1>]') %>
+$('[data-run-card-run-id=<%= @run.id %>]').animate( {'backgroundColor': '#c6dcef'}, 200)
+$('[data-run-card-run-id=<%= @run.id %>]').animate( {'backgroundColor': 'white'}, 200)
