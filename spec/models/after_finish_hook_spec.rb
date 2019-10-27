@@ -61,5 +61,17 @@ RSpec.describe AfterFinishHook do
         expect(ec2_instance.reload.stopped_at).to be_past
       end
     end
+
+    it 'sends an email' do
+      run = create(:run, :ongoing)
+
+      AfterFinishHook.new(run: run).call
+      perform_enqueued_jobs
+
+      expect(ActionMailer::Base.deliveries.count).to eq(1)
+      sent_mail = ActionMailer::Base.deliveries.last
+      expect(sent_mail.to).to include(run.user.email)
+      expect(sent_mail.body).to include('Run finished: ')
+    end
   end
 end

@@ -6,6 +6,7 @@ class AfterFinishHook
   def call
     transition_to_next_state
     upload_log_file
+    send_run_finished_email
     log_instance_shutdown
   end
 
@@ -30,6 +31,10 @@ class AfterFinishHook
     return unless run.ec2_instance.present?
 
     run.ec2_instance.update!(stopped_at: Time.current)
+  end
+
+  def send_run_finished_email
+    RunMailer.with(run: run).run_finished_email.deliver_later
   end
 
   def log_path

@@ -1,0 +1,12 @@
+doctype html
+html
+  head
+    meta content=('text/html; charset=UTF-8') http-equiv="Content-Type"
+  body
+    h1 = "Run finished: #{@run.name}"
+    dl
+      dt Status
+      dd = @run.humanized_status
+
+      dt Solving time
+      dd = format_duration(@run.solving_time)
