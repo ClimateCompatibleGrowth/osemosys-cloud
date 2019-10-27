@@ -62,16 +62,29 @@ RSpec.describe AfterFinishHook do
       end
     end
 
-    it 'sends an email' do
-      run = create(:run, :ongoing)
+    context 'when the run is not set to notify when finished' do
+      it 'does not send an email' do
+        run = create(:run, :ongoing, notify_when_finished: false)
 
-      AfterFinishHook.new(run: run).call
-      perform_enqueued_jobs
+        AfterFinishHook.new(run: run).call
+        perform_enqueued_jobs
 
-      expect(ActionMailer::Base.deliveries.count).to eq(1)
-      sent_mail = ActionMailer::Base.deliveries.last
-      expect(sent_mail.to).to include(run.user.email)
-      expect(sent_mail.body).to include('Run finished: ')
+        expect(ActionMailer::Base.deliveries.count).to eq(0)
+      end
+    end
+
+    context 'when the run is set to notify when finished' do
+      it 'sends an email' do
+        run = create(:run, :ongoing, notify_when_finished: true)
+
+        AfterFinishHook.new(run: run).call
+        perform_enqueued_jobs
+
+        expect(ActionMailer::Base.deliveries.count).to eq(1)
+        sent_mail = ActionMailer::Base.deliveries.last
+        expect(sent_mail.to).to include(run.user.email)
+        expect(sent_mail.body).to include('Run finished: ')
+      end
     end
   end
 end

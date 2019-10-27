@@ -6,7 +6,7 @@ class AfterFinishHook
   def call
     transition_to_next_state
     upload_log_file
-    send_run_finished_email
+    send_run_finished_email if run.notify_when_finished?
     log_instance_shutdown
   end
 

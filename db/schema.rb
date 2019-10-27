@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_10_21_101559) do
+ActiveRecord::Schema.define(version: 2019_10_27_150002) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -68,6 +68,7 @@ ActiveRecord::Schema.define(version: 2019_10_21_101559) do
     t.bigint "user_id"
     t.string "state", default: "new", null: false
     t.boolean "pre_process", default: true, null: false
+    t.boolean "notify_when_finished", default: true, null: false
     t.index ["user_id"], name: "index_runs_on_user_id"
   end
 
