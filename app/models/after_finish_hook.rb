@@ -7,6 +7,7 @@ class AfterFinishHook
     transition_to_next_state
     upload_log_file
     log_instance_shutdown
+    RunMailer.with(run: run).run_finished_email.deliver_later
   end
 
   private
