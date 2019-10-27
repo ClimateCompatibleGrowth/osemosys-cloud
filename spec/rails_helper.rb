@@ -50,6 +50,7 @@ RSpec.configure do |config|
 
   config.before(:each) do
     Osemosys::Config.reset_config
+    ActionMailer::Base.deliveries.clear
     clear_enqueued_jobs
   end
 

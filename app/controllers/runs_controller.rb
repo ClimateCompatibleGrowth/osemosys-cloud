@@ -53,7 +53,10 @@ class RunsController < ApplicationController
   private
 
   def run_params
-    params.require(:run).permit(:name, :model_file, :data_file, :description, :pre_process)
+    params.require(:run).permit(
+      :name, :model_file, :data_file, :description, :pre_process,
+      :notify_when_finished
+    )
   end
 
   def ensure_logged_in_user
