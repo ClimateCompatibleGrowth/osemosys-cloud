@@ -11,4 +11,8 @@ Rails.application.routes.draw do
   resources :runs, only: %i[new create index show]
   post '/run/:id/start', to: 'runs#start', as: :start_run
   post '/run/:id/stop', to: 'runs#stop', as: :stop_run
+
+  namespace :admin do
+    resources :stats, only: %i[index]
+  end
 end

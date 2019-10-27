@@ -6,5 +6,9 @@ FactoryBot.define do
   factory :user do
     email { generate :email }
     password { 'f4k3p455w0rd' }
+
+    trait :admin do
+      admin { true }
+    end
   end
 end
