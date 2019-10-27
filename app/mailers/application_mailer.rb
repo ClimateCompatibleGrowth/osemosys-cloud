@@ -1,4 +1,4 @@
 class ApplicationMailer < ActionMailer::Base
-  default from: 'noreply@osemosys-cloud.com'
+  default from: 'OSeMOSYS Cloud <noreply@osemosys-cloud.com>'
   layout 'mailer'
 end
