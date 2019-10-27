@@ -3,6 +3,10 @@ html
   head
     meta content=('text/html; charset=UTF-8') http-equiv="Content-Type"
   body
-    h1 Run finished
-    ' Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc haec primum fortasse audientis servire debemus. Mihi enim satis est, ipsis non satis. Ergo ita: non posse honeste vivi, nisi honeste vivatur? Quae adhuc, Cato, a te dicta sunt, eadem, inquam, dicere posses, si sequerere Pyrrhonem aut Aristonem. Atqui iste locus est, Piso, tibi etiam atque etiam confirmandus, inquam; Duo Reges: constructio interrete. Paulum, cum regem Persem captum adduceret, eodem flumine invectio? Quorum sine causa fieri nihil putandum est. Quis suae urbis conservatorem Codrum, quis Erechthei filias non maxime laudat?
+    h1 = "Run finished: #{@run.name}"
+    dl
+      dt Status
+      dd = @run.humanized_status
 
+      dt Solving time
+      dd = format_duration(@run.solving_time)
