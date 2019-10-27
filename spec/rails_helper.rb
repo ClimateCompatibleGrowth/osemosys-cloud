@@ -39,7 +39,9 @@ end
 RSpec.configure do |config|
   config.include Devise::Test::IntegrationHelpers, type: :system
   config.include FactoryBot::Syntax::Methods
+  config.include ActiveJob::TestHelper
 
+  ActiveJob::Base.queue_adapter = :test
   # config.fixture_path = "#{::Rails.root}/spec/fixtures"
 
   config.before(:suite) do
@@ -48,6 +50,7 @@ RSpec.configure do |config|
 
   config.before(:each) do
     Osemosys::Config.reset_config
+    clear_enqueued_jobs
   end
 
   config.use_transactional_fixtures = true
