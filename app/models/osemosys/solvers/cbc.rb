@@ -18,6 +18,10 @@ module Osemosys
         run.transition_to!(:finding_solution)
         find_solution
         zip_output
+        if true # postprocess_results?
+          # run.transition_to!(:preprocessing_data)
+          postprocess_results
+        end
         print_summary
 
         zipped_output_path
@@ -65,6 +69,20 @@ module Osemosys
         ).call
       end
 
+      def postprocess_results
+        Commands::PostProcessResultFiles.new(
+          preprocessed_data_path: preprocessed_data_path,
+          solution_file_path: output_path,
+          logger: logger,
+        ).call
+
+        Commands::ZipFolder.new(
+          folder: 'csv/',
+          destination: zipped_csv_path,
+          logger: logger,
+        ).call
+      end
+
       def print_summary
         logger.info 'Model solved!'
         logger.info ''
@@ -81,6 +99,10 @@ module Osemosys
 
       def zipped_output_path
         "./data/output_#{Config.run_id}.zip"
+      end
+
+      def zipped_csv_path
+        "./data/csv_#{Config.run_id}.zip"
       end
 
       def preprocessed_data_path
