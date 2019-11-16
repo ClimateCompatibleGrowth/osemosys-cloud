@@ -1,5 +1,5 @@
 class Run < ApplicationRecord
-  include Statesman::Adapters::ActiveRecordQueries
+  extend Statesman::Adapters::ActiveRecordQueries[transition_class: RunTransition, initial_state: :new]
   delegate :current_state, :history, :transition_to, :transition_to!,
     :can_transition_to?, :last_transition, to: :state_machine
 
@@ -48,18 +48,7 @@ class Run < ApplicationRecord
     )
   end
 
-  def self.transition_class
-    RunTransition
-  end
-
   def humanized_status
     Run::ToHumanState.call(state_slug: state)
   end
-
-  private
-
-  def self.initial_state
-    :new
-  end
-  private_class_method :initial_state
 end
