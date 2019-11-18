@@ -11,6 +11,7 @@ class Run < ApplicationRecord
   has_one_attached :data_file
   has_one_attached :result_file
   has_one_attached :log_file
+  has_one_attached :csv_results
 
   validates :name, presence: true
   validates :model_file, attached: true
