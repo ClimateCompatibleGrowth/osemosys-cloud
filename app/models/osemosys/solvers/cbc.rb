@@ -18,8 +18,8 @@ module Osemosys
         run.transition_to!(:finding_solution)
         find_solution
         zip_output
-        if true # postprocess_results?
-          # run.transition_to!(:preprocessing_data)
+        if postprocess_results?
+          run.transition_to!(:postprocessing)
           postprocess_results
         end
         print_summary
@@ -31,6 +31,10 @@ module Osemosys
 
       def preprocess_data_file?
         run.pre_process?
+      end
+
+      def postprocess_results?
+        run.post_process?
       end
 
       attr_reader :local_data_path, :local_model_path, :logger, :run
