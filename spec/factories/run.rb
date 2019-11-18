@@ -49,6 +49,7 @@ FactoryBot.define do
 
     trait :atlantis do
       pre_process { false }
+      post_process { false }
 
       data_file do
         fixture_file_upload(
@@ -67,6 +68,7 @@ FactoryBot.define do
 
     trait :atlantis_preprocessed do
       pre_process { true }
+      post_process { true }
 
       data_file do
         fixture_file_upload(
