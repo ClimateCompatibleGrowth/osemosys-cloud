@@ -23,6 +23,12 @@ RSpec.describe 'Creating a run', type: :system do
       expect(page).to have_content('Creating server')
     end
 
+    run.transition_to!(:preprocessing_data)
+    visit current_path
+    within('.timeline__item--current') do
+      expect(page).to have_content('Preprocessing data')
+    end
+
     run.transition_to!(:generating_matrix)
     visit current_path
     within('.timeline__item--current') do
@@ -38,6 +44,12 @@ RSpec.describe 'Creating a run', type: :system do
     expect(page).to have_content('Run number 1 (Solving model)')
     within('.timeline__item--current') do
       expect(page).to have_content('Solving model')
+    end
+
+    run.transition_to!(:postprocessing)
+    visit current_path
+    within('.timeline__item--current') do
+      expect(page).to have_content('Postprocessing result')
     end
 
     run.transition_to(:succeeded)

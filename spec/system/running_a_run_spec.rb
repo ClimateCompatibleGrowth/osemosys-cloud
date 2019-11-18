@@ -3,7 +3,7 @@ require 'rake'
 
 RSpec.describe 'Running a run' do
   it 'Solves a valid run without preprocessing' do
-    run = create(:run, :queued, :atlantis)
+    run = create(:run, :queued, :atlantis, post_process: false)
     expect(run.state).to eq('queued')
 
     OsemosysCloud::Application.load_tasks if Rake::Task.tasks.empty?
@@ -17,8 +17,8 @@ RSpec.describe 'Running a run' do
     expect(run.result_file.attached?).to be true
   end
 
-  it 'Solves a valid run with preprocessing' do
-    run = create(:run, :queued, :atlantis_preprocessed)
+  it 'Solves a valid run with pre and post processing' do
+    run = create(:run, :queued, :atlantis_preprocessed, post_process: true)
     expect(run.state).to eq('queued')
 
     OsemosysCloud::Application.load_tasks if Rake::Task.tasks.empty?
@@ -30,6 +30,7 @@ RSpec.describe 'Running a run' do
 
     expect(run.log_file).to be_present
     expect(run.result_file.attached?).to be true
+    expect(run.csv_results.attached?).to be true
   end
 
   it 'Handles a faulty run' do
