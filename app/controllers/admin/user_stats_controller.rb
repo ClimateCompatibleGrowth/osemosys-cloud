@@ -1,5 +1,5 @@
 module Admin
-  class StatsController < AdminController
+  class UserStatsController < AdminController
     def index
       @all_users = User.order(:id)
     end

@@ -1,0 +1,11 @@
+h1 User statistics
+
+table.table
+  tr
+    th User id
+    th email
+    th Created
+    th Runs
+    th Last run at
+  - @all_users.each do |user|
+    = render 'user', user: user

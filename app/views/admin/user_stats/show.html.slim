@@ -1,0 +1,11 @@
+dl
+  dt Id
+  dd = user.id
+  dt email
+  dd = user.email
+  dt Created at
+  dd = format_datetime(user.created_at)
+  dt Runs
+  dd = user.runs.count
+  dt Last run created at
+  dd = format_datetime(user.runs&.last&.created_at)
