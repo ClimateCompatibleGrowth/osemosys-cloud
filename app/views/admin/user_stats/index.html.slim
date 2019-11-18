@@ -8,4 +8,9 @@ table.table
     th Runs
     th Last run at
   - @all_users.each do |user|
-    = render 'user', user: user
+    tr
+      td = user.id
+      td = link_to(user.email, admin_user_stat_path(user.id))
+      td = format_datetime(user.created_at)
+      td = user.runs.count
+      td = format_datetime(user.runs&.last&.created_at)
