@@ -17,6 +17,8 @@ class Run < ApplicationRecord
   validates :model_file, attached: true
   validates :data_file, attached: true
 
+  validate :only_postprocess_preprocessed_runs
+
   def solving_time
     transitions = history
 
@@ -51,5 +53,13 @@ class Run < ApplicationRecord
 
   def humanized_status
     Run::ToHumanState.call(state_slug: state)
+  end
+
+  private
+
+  def only_postprocess_preprocessed_runs
+    if post_process.present? && pre_process.blank?
+      errors.add(:post_process, 'can only be enabled if pre-processing is enabled')
+    end
   end
 end
