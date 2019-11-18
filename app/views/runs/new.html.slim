@@ -9,6 +9,7 @@ h1 Schedule a new run
   = f.input :description
   br
   = f.input :pre_process, label: 'Run pre-processing script'
+  = f.input :post_process, label: 'Generate CSV files (run post-processing script)'
   = f.input :notify_when_finished, label: 'Send me an email when the run finishes'
   br
   = f.submit 'Create run', class: 'btn btn-primary'

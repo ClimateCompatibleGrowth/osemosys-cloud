@@ -9,6 +9,7 @@ class Run < ApplicationRecord
       finding_solution: 'Solving model',
       generating_matrix: 'Generating matrix',
       preprocessing_data: 'Preprocessing data',
+      postprocessing: 'Postprocessing result',
     }
 
     def self.call(state_slug:)

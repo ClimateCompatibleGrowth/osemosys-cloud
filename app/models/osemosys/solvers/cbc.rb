@@ -18,6 +18,10 @@ module Osemosys
         run.transition_to!(:finding_solution)
         find_solution
         zip_output
+        if postprocess_results?
+          run.transition_to!(:postprocessing)
+          postprocess_results
+        end
         print_summary
 
         zipped_output_path
@@ -27,6 +31,10 @@ module Osemosys
 
       def preprocess_data_file?
         run.pre_process?
+      end
+
+      def postprocess_results?
+        run.post_process?
       end
 
       attr_reader :local_data_path, :local_model_path, :logger, :run
@@ -65,6 +73,25 @@ module Osemosys
         ).call
       end
 
+      def postprocess_results
+        Commands::PostProcessResultFiles.new(
+          preprocessed_data_path: preprocessed_data_path,
+          solution_file_path: output_path,
+          logger: logger,
+        ).call
+
+        Commands::ZipFolder.new(
+          folder: 'csv/',
+          destination: zipped_csv_path,
+          logger: logger,
+        ).call
+
+        run.csv_results.attach(
+          io: File.open(zipped_csv_path),
+          filename: File.basename(zipped_csv_path),
+        )
+      end
+
       def print_summary
         logger.info 'Model solved!'
         logger.info ''
@@ -81,6 +108,10 @@ module Osemosys
 
       def zipped_output_path
         "./data/output_#{Config.run_id}.zip"
+      end
+
+      def zipped_csv_path
+        "./data/csv_#{Config.run_id}.zip"
       end
 
       def preprocessed_data_path
