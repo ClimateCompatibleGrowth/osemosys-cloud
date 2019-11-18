@@ -1,4 +1,4 @@
-h1 Stats
+h1 User statistics
 
 table.table
   tr
@@ -10,7 +10,7 @@ table.table
   - @all_users.each do |user|
     tr
       td = user.id
-      td = user.email
+      td = link_to(user.email, admin_user_stat_path(user.id))
       td = format_datetime(user.created_at)
       td = user.runs.count
       td = format_datetime(user.runs&.last&.created_at)

@@ -1,0 +1,50 @@
+h1 = "Statistics for #{@user.email}"
+
+= link_to('< Back', admin_user_stats_path, class: 'btn btn-primary')
+
+hr
+
+h2 User information
+
+ul.list-group
+  li.list-group-item
+    dt Id
+    dd = @user.id
+  li.list-group-item
+    dt Email
+    dd = @user.email
+li.list-group-item
+  dt Sign up date
+  dd = format_datetime(@user.created_at)
+
+hr
+
+h2 Runs
+
+ul.list-group
+  li.list-group-item
+    ' Last run:
+    - if @last_run
+      = render 'runs/card', run: @last_run
+
+br
+
+ul.list-group
+  li.list-group-item.list-group-item-secondary
+    - total_duration_for_state = @user_runs.map(&:solving_time).compact.sum
+    ' Total run duration:
+    = format_duration(total_duration_for_state)
+
+hr
+
+h2 Runs by state
+- @run_count_by_state.each do |state, run_count|
+  ul.list-group
+    li.list-group-item
+      - humanized_status = Run::ToHumanState.call(state_slug: state)
+      = "#{humanized_status}: #{run_count}"
+    li.list-group-item.list-group-item-secondary
+      - total_duration_for_state = @user_runs.where(state: state).map(&:solving_time).compact.sum
+      ' Total duration for state:
+      = format_duration(total_duration_for_state)
+    hr

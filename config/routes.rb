@@ -13,6 +13,6 @@ Rails.application.routes.draw do
   post '/run/:id/stop', to: 'runs#stop', as: :stop_run
 
   namespace :admin do
-    resources :stats, only: %i[index]
+    resources :user_stats, only: %i[index show]
   end
 end
