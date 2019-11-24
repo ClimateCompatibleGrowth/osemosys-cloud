@@ -1,6 +1,11 @@
-h1.mb-4 = "Showing runs for #{@user.email}"
+- if @user.runs_visible_to_admins?
+  h1.mb-4 = "Showing runs for #{@user.email}"
 
-br
+  br
 
-- @runs.each do |run|
-  = render 'runs/card', run: run
+  - @runs.each do |run|
+    = render 'runs/card', run: run
+
+- else
+  h1 Access Denied
+  ' Not allowed to see runs for this user.

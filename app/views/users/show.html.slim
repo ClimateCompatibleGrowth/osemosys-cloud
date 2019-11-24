@@ -1,4 +1,6 @@
 h1 My User Profile
 
-= simple_form_for(@user, html: { class: 'aform-inline' })do |f|
+= simple_form_for(@user)do |f|
   = f.input :email, disabled: true
+  = f.input :runs_visible_to_admins, as: :boolean
+  = f.submit

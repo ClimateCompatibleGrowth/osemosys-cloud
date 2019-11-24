@@ -5,7 +5,7 @@ RSpec.describe 'Viewing the admin stats', type: :system do
     driven_by(:rack_test)
   end
 
-  it 'works for admin in users' do
+  it 'works for admins when a user agreed to share their runs' do
     normal_user = create(:user)
     admin = create(:user, :admin)
     create(:run, :ongoing, name: 'My Run 1', user: normal_user)
@@ -18,6 +18,18 @@ RSpec.describe 'Viewing the admin stats', type: :system do
     expect(page).to have_content('My Run 1')
     expect(page).to have_content('My Run 2')
     expect(page).to have_content('My Run 3')
+  end
+
+  it 'shows an error message when the user has not agreed to share their runs' do
+    normal_user = create(:user, runs_visible_to_admins: false)
+    admin = create(:user, :admin)
+    create(:run, :ongoing, name: 'My Run 1', user: normal_user)
+
+    sign_in(admin)
+    visit admin_user_runs_path(normal_user)
+    expect(page).not_to have_content("Showing runs for #{normal_user.email}")
+    expect(page).not_to have_content('My Run 1')
+    expect(page).to have_content('Not allowed to see runs for this user')
   end
 
   it 'redirects to root for non admin users' do
