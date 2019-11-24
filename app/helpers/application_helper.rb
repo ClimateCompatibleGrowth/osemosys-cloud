@@ -1,6 +1,6 @@
 module ApplicationHelper
   def format_duration(duration)
-    Time.at(duration).utc.strftime('%H:%M:%S')
+    (duration / 3600).to_i.to_s.rjust(2, '0') + ':' + Time.at(duration).utc.strftime('%M:%S')
   end
 
   def format_datetime(datetime)
