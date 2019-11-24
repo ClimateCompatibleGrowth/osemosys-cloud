@@ -30,7 +30,7 @@ ul.list-group
 br
 
 ul.list-group
-  li.list-group-item.list-group-item-secondary
+  li.list-group-item
     - total_duration_for_state = @user_runs.map(&:solving_time).compact.sum
     ' Total run duration:
     = format_duration(total_duration_for_state)
@@ -43,7 +43,7 @@ h2 Runs by state
     li.list-group-item
       - humanized_status = Run::ToHumanState.call(state_slug: state)
       = "#{humanized_status}: #{run_count}"
-    li.list-group-item.list-group-item-secondary
+    li.list-group-item
       - total_duration_for_state = @user_runs.where(state: state).map(&:solving_time).compact.sum
       ' Total duration for state:
       = format_duration(total_duration_for_state)
