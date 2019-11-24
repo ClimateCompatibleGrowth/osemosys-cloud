@@ -1,3 +1,16 @@
+h1 Platform statistics
+
+ul.list-group
+  li.list-group-item
+    ' Registered users:
+    = @all_users.count
+  li.list-group-item
+    ' Total server time used:
+    - total_duration = Run.all.map(&:solving_time).compact.sum
+    = format_duration(total_duration)
+
+hr
+
 h1 User statistics
 
 table.table
