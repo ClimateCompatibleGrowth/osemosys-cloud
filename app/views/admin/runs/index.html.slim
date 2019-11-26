@@ -3,6 +3,8 @@
 
   br
 
+  = paginate @runs
+
   - @runs.each do |run|
     = render 'runs/card', run: run
 
