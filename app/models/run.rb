@@ -55,6 +55,12 @@ class Run < ApplicationRecord
     Run::ToHumanState.call(state_slug: state)
   end
 
+  def visualization_url(csv_results_url)
+    return unless csv_results.attached?
+
+    "https://osemosys-cloud-visualization.herokuapp.com/?url=#{URI.encode(csv_results_url)}"
+  end
+
   private
 
   def only_postprocess_preprocessed_runs
