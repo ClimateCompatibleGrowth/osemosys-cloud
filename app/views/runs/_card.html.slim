@@ -31,9 +31,8 @@
     .run-card__header Files:
     =< download_button(run.result_file, label: 'Result', style: 'primary') if run.result_file.attached?
     =< download_button(run.csv_results, label: 'Results (CSV)', style: 'primary') if run.csv_results.attached?
-    - if run.csv_results.attached?
-      - visualization_url = run.visualization_url(rails_blob_path(run.csv_results, disposition: 'attachment'))
-      =<> link_to(visualization_url, class: 'btn btn-primary btn-sm') do
+    - if run.visualization_url
+      =<> link_to(run.visualization_url, class: 'btn btn-primary btn-sm', target: '_blank') do
         =<> fa_icon('chart-bar')
     =< download_button(run.log_file, label: 'log') if run.log_file.attached?
     =< download_button(run.model_file, label: 'Model') if run.model_file.attached?

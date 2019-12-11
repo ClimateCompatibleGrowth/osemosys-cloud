@@ -55,10 +55,10 @@ class Run < ApplicationRecord
     Run::ToHumanState.call(state_slug: state)
   end
 
-  def visualization_url(csv_results_url)
-    return unless csv_results.attached?
+  def visualization_url
+    return unless csv_results_url
 
-    "https://osemosys-cloud-visualization.herokuapp.com/?url=#{URI.encode(csv_results_url)}"
+    "https://osemosys-cloud-visualization.herokuapp.com/?url=#{CGI.escape(csv_results_url)}"
   end
 
   private
@@ -67,5 +67,14 @@ class Run < ApplicationRecord
     if post_process.present? && pre_process.blank?
       errors.add(:post_process, 'can only be enabled if pre-processing is enabled')
     end
+  end
+
+  def csv_results_url
+    return unless csv_results.attached?
+
+    Rails.application.routes.url_helpers.rails_blob_path(
+      csv_results,
+      host: 'osemosys-cloud.herokuapp.com',
+    )
   end
 end
