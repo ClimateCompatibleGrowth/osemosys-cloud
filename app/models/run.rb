@@ -72,7 +72,7 @@ class Run < ApplicationRecord
   def csv_results_url
     return unless csv_results.attached?
 
-    Rails.application.routes.url_helpers.rails_blob_path(
+    Rails.application.routes.url_helpers.rails_blob_url(
       csv_results,
       host: 'osemosys-cloud.herokuapp.com',
     )
