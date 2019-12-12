@@ -16,8 +16,6 @@ gem 'kaminari'
 gem 'pg'
 gem 'puma'
 gem 'rails', '~> 6'
-gem 'rubocop', require: false
-gem 'rubocop-rspec', require: false
 gem 'sassc-rails'
 gem 'sidekiq'
 gem 'simple_form'
@@ -33,6 +31,8 @@ group :development do
   gem 'guard-livereload'
   gem 'listen'
   gem 'pry-rails'
+  gem 'rubocop', '0.74', require: false
+  gem 'rubocop-rspec', '1.36', require: false
   gem 'spring'
   gem 'spring-commands-rspec'
   gem 'spring-watcher-listen'

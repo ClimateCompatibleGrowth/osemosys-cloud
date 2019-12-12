@@ -267,14 +267,14 @@ GEM
       rspec-mocks (~> 3.9.0)
       rspec-support (~> 3.9.0)
     rspec-support (3.9.0)
-    rubocop (0.77.0)
+    rubocop (0.74.0)
       jaro_winkler (~> 1.5.1)
       parallel (~> 1.10)
       parser (>= 2.6)
       rainbow (>= 2.2.2, < 4.0)
       ruby-progressbar (~> 1.7)
       unicode-display_width (>= 1.4.0, < 1.7)
-    rubocop-rspec (1.37.0)
+    rubocop-rspec (1.36.0)
       rubocop (>= 0.68.1)
     ruby-progressbar (1.10.1)
     rubyzip (2.0.0)
@@ -377,8 +377,8 @@ DEPENDENCIES
   puma
   rails (~> 6)
   rspec-rails
-  rubocop
-  rubocop-rspec
+  rubocop (= 0.74)
+  rubocop-rspec (= 1.36)
   sassc-rails
   selenium-webdriver
   sidekiq
