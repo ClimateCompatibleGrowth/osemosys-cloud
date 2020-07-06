@@ -29,8 +29,8 @@
         = format_duration(run.solving_time)
 
     .run-card__header Files:
-    =< download_button(run.result_file, label: 'Result', style: 'primary') if run.result_file.attached?
-    =< download_button(run.csv_results, label: 'Results (CSV)', style: 'primary') if run.csv_results.attached?
+    =< download_button(run.result_file, label: 'Result', style: 'primary') if run.result_file&.attached?
+    =< download_button(run.csv_results, label: 'Results (CSV)', style: 'primary') if run.csv_results&.attached?
     - if run.visualization_url
       =<> link_to(run.visualization_url, class: 'btn btn-primary btn-sm', target: '_blank') do
         =<> fa_icon('chart-bar')

@@ -19,7 +19,7 @@ class SolveRun
   attr_reader :run, :logger, :solver
 
   def solve_run
-    @solved_file_path = solver.new(
+    @result = solver.new(
       local_model_path: local_files.local_model_path,
       local_data_path: local_files.local_data_path,
       logger: logger,
@@ -28,10 +28,16 @@ class SolveRun
   end
 
   def save_result
-    run.result_file.attach(
-      io: File.open(@solved_file_path),
-      filename: File.basename(@solved_file_path),
+    run_result.result_file.attach(
+      io: File.open(@result.solved_file_path),
+      filename: File.basename(@result.solved_file_path),
     )
+    if run.post_process?
+      run_result.csv_results.attach(
+        io: File.open(@result.csv_file_path),
+        filename: File.basename(@result.csv_file_path),
+      )
+    end
   end
 
   def local_files
@@ -46,5 +52,9 @@ class SolveRun
         s3_model_key: run.model_file.key,
       ).call
     end
+  end
+
+  def run_result
+    @run_result ||= RunResult.create!(run_id: run.id)
   end
 end

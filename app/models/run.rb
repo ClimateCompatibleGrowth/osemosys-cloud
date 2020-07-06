@@ -9,15 +9,26 @@ class Run < ApplicationRecord
   belongs_to :user
   has_one_attached :model_file
   has_one_attached :data_file
-  has_one_attached :result_file
   has_one_attached :log_file
-  has_one_attached :csv_results
+  has_one :run_result
 
   validates :name, presence: true
   validates :model_file, attached: true
   validates :data_file, attached: true
 
   validate :only_postprocess_preprocessed_runs
+
+  def result_file
+    return unless run_result.present?
+
+    run_result.result_file
+  end
+
+  def csv_results
+    return unless run_result.present?
+
+    run_result.csv_results
+  end
 
   def solving_time
     transitions = history
@@ -70,7 +81,7 @@ class Run < ApplicationRecord
   end
 
   def csv_results_url
-    return unless csv_results.attached?
+    return unless csv_results&.attached?
 
     Rails.application.routes.url_helpers.rails_blob_url(
       csv_results,

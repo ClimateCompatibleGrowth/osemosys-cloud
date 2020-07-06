@@ -11,13 +11,13 @@ RSpec.describe Osemosys::Solvers::Cbc do
       allow(run).to receive(:transition_to!).with(:generating_matrix).and_call_original
       allow(run).to receive(:transition_to!).with(:finding_solution).and_call_original
 
-      output_file = Osemosys::Solvers::Cbc.new(
+      output = Osemosys::Solvers::Cbc.new(
         local_model_path: atlantis_model_path,
         local_data_path: atlantis_data_path,
         run: run,
       ).call
 
-      expect(output_file).to match(%r{\.\/data\/output.+\.zip})
+      expect(output.solved_file_path).to match(%r{\.\/data\/output.+\.zip})
       expect(run.state).to eq('finding_solution')
       expect(run).to have_received(:transition_to!).with(:generating_matrix)
       expect(run).to have_received(:transition_to!).with(:finding_solution)
@@ -34,13 +34,13 @@ RSpec.describe Osemosys::Solvers::Cbc do
       allow(run).to receive(:transition_to!).with(:finding_solution).and_call_original
       allow(run).to receive(:transition_to!).with(:postprocessing).and_call_original
 
-      output_file = Osemosys::Solvers::Cbc.new(
+      output = Osemosys::Solvers::Cbc.new(
         local_model_path: model_path,
         local_data_path: atlantis_data_path,
         run: run,
       ).call
 
-      expect(output_file).to match(%r{\.\/data\/output.+\.zip})
+      expect(output.solved_file_path).to match(%r{\.\/data\/output.+\.zip})
       expect(run.state).to eq('postprocessing')
       expect(run).to have_received(:transition_to!).with(:generating_matrix)
       expect(run).to have_received(:transition_to!).with(:finding_solution)
