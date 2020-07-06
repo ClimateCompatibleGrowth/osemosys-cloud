@@ -18,17 +18,7 @@ class Run < ApplicationRecord
 
   validate :only_postprocess_preprocessed_runs
 
-  def result_file
-    return unless run_result.present?
-
-    run_result.result_file
-  end
-
-  def csv_results
-    return unless run_result.present?
-
-    run_result.csv_results
-  end
+  delegate :result_file, :csv_results, to: :run_result, allow_nil: true
 
   def solving_time
     transitions = history

@@ -42,7 +42,7 @@ class AfterFinishHook
   end
 
   def new_state
-    if run.result_file&.attached?
+    if run.result_file.present?
       :succeeded
     else
       :failed
