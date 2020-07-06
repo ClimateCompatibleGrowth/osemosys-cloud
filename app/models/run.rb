@@ -46,6 +46,10 @@ class Run < ApplicationRecord
     Run::ToHumanState.call(state_slug: state)
   end
 
+  def finished?
+    finished_in.present?
+  end
+
   private
 
   def only_postprocess_preprocessed_runs

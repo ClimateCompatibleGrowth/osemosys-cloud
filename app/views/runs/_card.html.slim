@@ -12,20 +12,25 @@
         =<> fa_icon('stop')
 
     =<> "#{run.id} - #{run.name} (#{run.humanized_status})"
+    - if run.finished?
+      a.text-right data-toggle='collapse' href="#timeline-#{run.id}"
+        =<> fa_icon('table')
+        ' Show steps
 
   .run-card__content
-    .run-card__description = run.description
     - timeline = Run::Timeline.new(run)
-    = render 'runs/timeline', timeline: timeline
+    div id="timeline-#{run.id}" class=('collapse' if run.finished?)
+      .run-card__description = run.description
+      = render 'runs/timeline', timeline: timeline
+      hr
 
     - if run.can_be_queued?
       = link_to('Start run', start_run_path(run), method: :post, class: 'btn btn-success btn-lg btn-block')
+      hr
 
-    hr
-
-    - if run.finished_in
+    - if run.finished?
       .run-card__header
-        ' Run finished in
+        =<> fa_icon('stopwatch')
         = format_duration(run.finished_in)
 
     .run-card__header Files:

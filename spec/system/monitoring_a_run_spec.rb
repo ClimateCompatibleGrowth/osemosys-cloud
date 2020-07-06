@@ -56,6 +56,6 @@ RSpec.describe 'Creating a run', type: :system do
     visit current_path
 
     expect(page).to have_content('Run number 1 (Succeeded)')
-    expect(page).to have_content('Run finished in 00:00:00')
+    expect(page).to have_content('00:00:00')
   end
 end

@@ -1,6 +1,7 @@
 .run-card {
   margin-bottom: 20px;
-  box-shadow: 0px 0px 10px -5px rgba(0,0,0,0.5);
+  border: 1px solid #ccc;
+  border-radius: 5px;
 
   &__content {
     padding: 10px;
@@ -21,7 +22,6 @@
 
   &__header {
     display: inline;
-    font-weight: bold;
     margin-right: 10px;
     margin-left: 20px;
   }
