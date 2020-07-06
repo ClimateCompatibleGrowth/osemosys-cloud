@@ -9,19 +9,11 @@ module Osemosys
       end
 
       def call
-        if preprocess_data_file?
-          run.transition_to!(:preprocessing_data)
-          preprocess_data_file
-        end
-        run.transition_to!(:generating_matrix)
+        preprocess_data_file if preprocess_data_file?
         generate_input_file
-        run.transition_to!(:finding_solution)
         find_solution
         zip_output
-        if postprocess_results?
-          run.transition_to!(:postprocessing)
-          postprocess_results
-        end
+        postprocess_results if postprocess_results?
         print_summary
 
         SolvedFiles.new(solved_file_path: zipped_output_path, csv_file_path: zipped_csv_path)
@@ -40,6 +32,7 @@ module Osemosys
       attr_reader :local_data_path, :local_model_path, :logger, :run
 
       def preprocess_data_file
+        run.transition_to!(:preprocessing_data)
         Commands::PreprocessDataFile.new(
           local_data_path: local_data_path,
           preprocessed_data_path: preprocessed_data_path,
@@ -48,6 +41,7 @@ module Osemosys
       end
 
       def generate_input_file
+        run.transition_to!(:generating_matrix)
         input_file = preprocess_data_file? ? preprocessed_data_path : local_data_path
         Commands::GenerateInputFile.new(
           local_model_path: local_model_path,
@@ -58,6 +52,7 @@ module Osemosys
       end
 
       def find_solution
+        run.transition_to!(:finding_solution)
         Commands::FindSolution.new(
           lp_path: lp_path,
           output_path: output_path,
@@ -74,6 +69,8 @@ module Osemosys
       end
 
       def postprocess_results
+        run.transition_to!(:postprocessing)
+
         Commands::PostProcessResultFiles.new(
           preprocessed_data_path: preprocessed_data_path,
           solution_file_path: output_path,
