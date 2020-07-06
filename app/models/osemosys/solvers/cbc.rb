@@ -24,7 +24,7 @@ module Osemosys
         end
         print_summary
 
-        OpenStruct.new(solved_file_path: zipped_output_path, csv_file_path: zipped_csv_path)
+        SolvedFiles.new(solved_file_path: zipped_output_path, csv_file_path: zipped_csv_path)
       end
 
       private

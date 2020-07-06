@@ -13,7 +13,7 @@ module Osemosys
         sleep Osemosys::Config.dummy_solver_sleep_duration
         run.transition_to!(:finding_solution)
 
-        OpenStruct.new(solved_file_path: '/dev/null', csv_file_path: '/dev/null')
+        SolvedFiles.new(solved_file_path: '/dev/null', csv_file_path: '/dev/null')
       end
 
       private

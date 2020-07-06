@@ -17,7 +17,7 @@ RSpec.describe Osemosys::Solvers::Dummy do
         run: run,
       ).call
 
-      expect(output_file).to eq(OpenStruct.new(
+      expect(output_file).to eq(Osemosys::SolvedFiles.new(
         solved_file_path: '/dev/null',
         csv_file_path: '/dev/null'
       ))

@@ -47,6 +47,6 @@ RSpec.describe 'Running a run' do
     expect(run.state).to eq('failed')
 
     expect(run.log_file).to be_present
-    expect(run.result_file.attached?).to be false
+    expect(run.result_file).to be(nil)
   end
 end
