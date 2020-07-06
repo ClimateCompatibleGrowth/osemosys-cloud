@@ -1,13 +1,12 @@
 module Commands
   class FindSolution
-    def initialize(lp_path:, output_path:, logger: Config.logger)
+    def initialize(lp_path:, output_path:)
       @lp_path = lp_path
       @output_path = output_path
-      @logger = logger
     end
 
     def call
-      logger.info 'Solving the model'
+      Osemosys::Config.logger.info 'Solving the model'
       tty_command.run(cbc_command)
     end
 
@@ -19,10 +18,10 @@ module Commands
 
     private
 
-    attr_reader :lp_path, :output_path, :logger
+    attr_reader :lp_path, :output_path
 
     def tty_command
-      @tty_command ||= TTY::Command.new(output: logger, color: false)
+      @tty_command ||= TTY::Command.new(output: Osemosys::Config.logger, color: false)
     end
   end
 end

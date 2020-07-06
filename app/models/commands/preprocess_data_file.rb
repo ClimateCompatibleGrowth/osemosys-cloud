@@ -1,19 +1,18 @@
 module Commands
   class PreprocessDataFile
-    def initialize(local_data_path:, preprocessed_data_path:, logger:)
+    def initialize(local_data_path:, preprocessed_data_path:)
       @local_data_path = local_data_path
       @preprocessed_data_path = preprocessed_data_path
-      @logger = logger
     end
 
     def call
-      logger.info 'Preprocessing data file'
+      Osemosys::Config.logger.info 'Preprocessing data file'
       tty_command.run(preprocessing_command)
     end
 
     private
 
-    attr_reader :preprocessed_data_path, :local_data_path, :logger
+    attr_reader :preprocessed_data_path, :local_data_path
 
     def preprocessing_command
       %(
@@ -24,7 +23,7 @@ module Commands
     end
 
     def tty_command
-      @tty_command ||= TTY::Command.new(output: logger, color: false)
+      @tty_command ||= TTY::Command.new(output: Osemosys::Config.logger, color: false)
     end
   end
 end

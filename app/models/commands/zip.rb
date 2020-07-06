@@ -1,13 +1,12 @@
 module Commands
   class Zip
-    def initialize(source:, destination:, logger:)
+    def initialize(source:, destination:)
       @source = source
       @destination = destination
-      @logger = logger
     end
 
     def call
-      logger.info 'Zipping the output'
+      Osemosys::Config.logger.info 'Zipping the output'
       tty_command.run(zip_command)
     end
 
@@ -17,10 +16,10 @@ module Commands
       "zip -j #{destination} #{source}"
     end
 
-    attr_reader :source, :destination, :logger
+    attr_reader :source, :destination
 
     def tty_command
-      @tty_command ||= TTY::Command.new(output: logger, color: false)
+      @tty_command ||= TTY::Command.new(output: Osemosys::Config.logger, color: false)
     end
   end
 end
