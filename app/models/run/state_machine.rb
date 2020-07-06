@@ -32,5 +32,9 @@ class Run < ApplicationRecord
         last_transition.save
       end
     end
+
+    after_transition(to: %i[succeeded failed]) do |run, _new_transition|
+      run.update!(finished_in: run.solving_time)
+    end
   end
 end

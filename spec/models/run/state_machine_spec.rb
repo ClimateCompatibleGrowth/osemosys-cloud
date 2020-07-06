@@ -20,4 +20,25 @@ RSpec.describe Run::StateMachine do
     run.transition_to!(:queued)
     expect(run.reload.state).to eq('queued')
   end
+
+  it 'sets `finished_in` when transitioning to completed' do
+    run = create(:run)
+    run.transition_to!(:queued)
+    sleep(2)
+    run.transition_to!(:generating_matrix)
+    run.transition_to!(:finding_solution)
+    run.transition_to!(:succeeded)
+
+    expect(run.finished_in).to eq(2)
+  end
+
+  it 'sets `finished_in` when transitioning to failed' do
+    run = create(:run)
+    run.transition_to!(:queued)
+    sleep(2)
+    run.transition_to!(:generating_matrix)
+    run.transition_to!(:failed)
+
+    expect(run.finished_in).to eq(2)
+  end
 end
