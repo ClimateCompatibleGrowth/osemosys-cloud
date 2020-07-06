@@ -17,7 +17,10 @@ RSpec.describe Osemosys::Solvers::Dummy do
         run: run,
       ).call
 
-      expect(output_file).to eq('/dev/null')
+      expect(output_file).to eq(Osemosys::SolvedFiles.new(
+        solved_file_path: '/dev/null',
+        csv_file_path: '/dev/null'
+      ))
       expect(run.state).to eq('finding_solution')
       expect(run).to have_received(:transition_to!).with(:generating_matrix)
       expect(run).to have_received(:transition_to!).with(:finding_solution)

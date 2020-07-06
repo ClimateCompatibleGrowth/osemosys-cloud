@@ -9,9 +9,8 @@ class Run < ApplicationRecord
   belongs_to :user
   has_one_attached :model_file
   has_one_attached :data_file
-  has_one_attached :result_file
   has_one_attached :log_file
-  has_one_attached :csv_results
+  has_one :run_result
 
   validates :name, presence: true
   validates :model_file, attached: true
@@ -55,26 +54,11 @@ class Run < ApplicationRecord
     Run::ToHumanState.call(state_slug: state)
   end
 
-  def visualization_url
-    return unless csv_results_url
-
-    "https://osemosys-cloud-visualization.herokuapp.com/?url=#{CGI.escape(csv_results_url)}"
-  end
-
   private
 
   def only_postprocess_preprocessed_runs
     if post_process.present? && pre_process.blank?
       errors.add(:post_process, 'can only be enabled if pre-processing is enabled')
     end
-  end
-
-  def csv_results_url
-    return unless csv_results.attached?
-
-    Rails.application.routes.url_helpers.rails_blob_url(
-      csv_results,
-      host: 'osemosys-cloud.herokuapp.com',
-    )
   end
 end

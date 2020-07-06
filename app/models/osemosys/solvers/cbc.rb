@@ -24,7 +24,7 @@ module Osemosys
         end
         print_summary
 
-        zipped_output_path
+        SolvedFiles.new(solved_file_path: zipped_output_path, csv_file_path: zipped_csv_path)
       end
 
       private
@@ -85,11 +85,6 @@ module Osemosys
           destination: zipped_csv_path,
           logger: logger,
         ).call
-
-        run.csv_results.attach(
-          io: File.open(zipped_csv_path),
-          filename: File.basename(zipped_csv_path),
-        )
       end
 
       def print_summary

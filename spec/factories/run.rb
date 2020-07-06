@@ -39,12 +39,7 @@ FactoryBot.define do
     end
 
     trait :with_result do
-      result_file do
-        fixture_file_upload(
-          Rails.root.join('spec', 'data', 'empty_file.txt'),
-          'text/plain',
-        )
-      end
+      run_result
     end
 
     trait :atlantis do
