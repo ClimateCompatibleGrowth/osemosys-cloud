@@ -38,6 +38,7 @@ jobs:
             - ./vendor/bundle
           key: osemosys-cloud-dependencies-{{ checksum "Gemfile.lock" }}
 
+      - run: bundle exec srb tc
       - run: bundle exec rake db:create
       - run: bundle exec rake db:schema:load
 
