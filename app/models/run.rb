@@ -18,8 +18,6 @@ class Run < ApplicationRecord
 
   validate :only_postprocess_preprocessed_runs
 
-  delegate :result_file, :csv_results, to: :run_result, allow_nil: true
-
   def solving_time
     transitions = history
 

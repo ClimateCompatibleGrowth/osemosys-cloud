@@ -14,7 +14,8 @@ RSpec.describe 'Running a run' do
     expect(run.state).to eq('succeeded')
 
     expect(run.log_file).to be_present
-    expect(run.result_file.attached?).to be true
+    expect(run.run_result).to be_present
+    expect(run.run_result.result_file.attached?).to be true
   end
 
   it 'Solves a valid run with pre and post processing' do
@@ -29,8 +30,9 @@ RSpec.describe 'Running a run' do
     expect(run.state).to eq('succeeded')
 
     expect(run.log_file).to be_present
-    expect(run.result_file.attached?).to be true
-    expect(run.csv_results.attached?).to be true
+    expect(run.run_result).to be_present
+    expect(run.run_result.result_file.attached?).to be true
+    expect(run.run_result.csv_results.attached?).to be true
   end
 
   it 'Handles a faulty run' do
@@ -47,6 +49,6 @@ RSpec.describe 'Running a run' do
     expect(run.state).to eq('failed')
 
     expect(run.log_file).to be_present
-    expect(run.result_file).to be(nil)
+    expect(run.run_result).to be(nil)
   end
 end
