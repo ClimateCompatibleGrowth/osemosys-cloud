@@ -34,7 +34,17 @@ class Run < ApplicationRecord
     end
 
     after_transition(to: %i[succeeded failed]) do |run, _new_transition|
-      run.update!(finished_in: run.solving_time)
+      run.update!(finished_in: solving_time_for(run))
+    end
+
+    private
+
+    def solving_time_for(run)
+      transitions = run.history
+
+      return unless transitions.last&.final?
+
+      transitions.last.created_at - transitions.first.created_at
     end
   end
 end

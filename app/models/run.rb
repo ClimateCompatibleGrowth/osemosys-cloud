@@ -18,14 +18,6 @@ class Run < ApplicationRecord
 
   validate :only_postprocess_preprocessed_runs
 
-  def solving_time
-    transitions = history
-
-    return unless transitions.last&.final?
-
-    transitions.last.created_at - transitions.first.created_at
-  end
-
   def local_log_path
     "/tmp/run-#{id}.log"
   end
