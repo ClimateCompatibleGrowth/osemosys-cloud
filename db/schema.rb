@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_07_06_134727) do
+ActiveRecord::Schema.define(version: 2020_07_06_182004) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -77,6 +77,7 @@ ActiveRecord::Schema.define(version: 2020_07_06_134727) do
     t.boolean "pre_process", default: true, null: false
     t.boolean "notify_when_finished", default: true, null: false
     t.boolean "post_process", default: true, null: false
+    t.integer "finished_in"
     t.index ["user_id"], name: "index_runs_on_user_id"
   end
 

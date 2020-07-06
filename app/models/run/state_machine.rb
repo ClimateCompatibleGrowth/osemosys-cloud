@@ -32,5 +32,13 @@ class Run < ApplicationRecord
         last_transition.save
       end
     end
+
+    after_transition(to: %i[succeeded failed]) do |run, _new_transition|
+      transitions = run.history
+      if transitions.last.final?
+        finished_in = transitions.last.created_at - transitions.first.created_at
+        run.update!(finished_in: finished_in)
+      end
+    end
   end
 end
