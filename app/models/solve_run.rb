@@ -1,7 +1,6 @@
 class SolveRun
-  def initialize(run:, logger: Osemosys::Config.logger, solver:)
+  def initialize(run:, solver:)
     @run = run
-    @logger = logger
     @solver = solver
   end
 
@@ -16,13 +15,12 @@ class SolveRun
 
   private
 
-  attr_reader :run, :logger, :solver
+  attr_reader :run, :solver
 
   def solve_run
     @solved_files = solver.new(
       local_model_path: local_files.local_model_path,
       local_data_path: local_files.local_data_path,
-      logger: logger,
       run: run,
     ).call
   end

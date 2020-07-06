@@ -1,10 +1,9 @@
 module Osemosys
   module Solvers
     class Cbc
-      def initialize(local_model_path:, local_data_path:, logger: Config.logger, run:)
+      def initialize(local_model_path:, local_data_path:, run:)
         @local_data_path = local_data_path
         @local_model_path = local_model_path
-        @logger = logger
         @run = run
       end
 
@@ -29,14 +28,13 @@ module Osemosys
         run.post_process?
       end
 
-      attr_reader :local_data_path, :local_model_path, :logger, :run
+      attr_reader :local_data_path, :local_model_path, :run
 
       def preprocess_data_file
         run.transition_to!(:preprocessing_data)
         Commands::PreprocessDataFile.new(
           local_data_path: local_data_path,
           preprocessed_data_path: preprocessed_data_path,
-          logger: logger,
         ).call
       end
 
@@ -47,7 +45,6 @@ module Osemosys
           local_model_path: local_model_path,
           local_data_path: input_file,
           lp_path: lp_path,
-          logger: logger,
         ).call
       end
 
@@ -56,7 +53,6 @@ module Osemosys
         Commands::FindSolution.new(
           lp_path: lp_path,
           output_path: output_path,
-          logger: logger,
         ).call
       end
 
@@ -64,7 +60,6 @@ module Osemosys
         Commands::Zip.new(
           source: output_path,
           destination: zipped_output_path,
-          logger: logger,
         ).call
       end
 
@@ -74,20 +69,18 @@ module Osemosys
         Commands::PostProcessResultFiles.new(
           preprocessed_data_path: preprocessed_data_path,
           solution_file_path: output_path,
-          logger: logger,
         ).call
 
         Commands::ZipFolder.new(
           folder: 'csv/',
           destination: zipped_csv_path,
-          logger: logger,
         ).call
       end
 
       def print_summary
-        logger.info 'Model solved!'
-        logger.info ''
-        logger.info "run_id: #{Config.run_id}"
+        Config.logger.info 'Model solved!'
+        Config.logger.info ''
+        Config.logger.info "run_id: #{Config.run_id}"
       end
 
       def lp_path

@@ -7,7 +7,6 @@ task :solve_cbc_run, [:run_id] => :environment do |_task, args|
   Osemosys::Config.config.run_id = run.id
   SolveRun.new(
     run: run,
-    logger: logger,
     solver: Osemosys::Solvers::Cbc,
   ).call
 end

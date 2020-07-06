@@ -1,7 +1,7 @@
 module Osemosys
   module Solvers
     class Dummy
-      def initialize(local_model_path:, local_data_path:, logger: Config.logger, run:)
+      def initialize(local_model_path:, local_data_path:, run:)
         @local_data_path = local_data_path
         @run = run
       end
