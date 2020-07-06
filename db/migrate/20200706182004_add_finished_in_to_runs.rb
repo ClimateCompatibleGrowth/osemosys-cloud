@@ -4,7 +4,11 @@ class AddFinishedInToRuns < ActiveRecord::Migration[6.0]
 
     Run.transaction do
       Run.all.each do |run|
-        run.update(finished_in: run.solving_time)
+        transitions = run.history
+        if transitions.last&.final?
+          finished_in = transitions.last.created_at - transitions.first.created_at
+          run.update(finished_in: finished_in)
+        end
       end
     end
   end
