@@ -1,3 +1,4 @@
+# typed: false
 module Commands
   class FindSolution
     def initialize(lp_path:, output_path:, logger: Config.logger)

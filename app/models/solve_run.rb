@@ -1,3 +1,4 @@
+# typed: false
 class SolveRun
   def initialize(run:, logger: Osemosys::Config.logger, solver:)
     @run = run

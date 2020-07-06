@@ -1,3 +1,4 @@
+# typed: false
 module ApplicationHelper
   def format_duration(duration)
     (duration / 3600).to_i.to_s.rjust(2, '0') + ':' + Time.at(duration).utc.strftime('%M:%S')

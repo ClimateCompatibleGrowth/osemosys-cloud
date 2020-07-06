@@ -1,3 +1,4 @@
+# typed: true
 module Admin
   class RunsController < AdminController
     def index

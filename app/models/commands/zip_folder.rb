@@ -1,3 +1,4 @@
+# typed: true
 module Commands
   class ZipFolder
     def initialize(folder:, destination:, logger:)

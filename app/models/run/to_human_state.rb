@@ -1,3 +1,4 @@
+# typed: true
 class Run < ApplicationRecord
   class ToHumanState
     HUMANIZED_STATES = {

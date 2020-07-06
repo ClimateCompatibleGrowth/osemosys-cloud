@@ -1,3 +1,4 @@
+# typed: strict
 User.create!(
   email: 'hello@world.com',
   password: 'testtest',

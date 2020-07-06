@@ -1,3 +1,4 @@
+# typed: true
 module Ec2
   class UserData
     def initialize(shutdown_on_finish: true, run_id:)

@@ -1,3 +1,4 @@
+# typed: false
 module Ec2
   class StopInstance
     def self.call(*args)

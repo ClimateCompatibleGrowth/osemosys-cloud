@@ -1,3 +1,4 @@
+# typed: true
 class CreateRunTransitions < ActiveRecord::Migration[6.0]
   def change
     create_table :run_transitions do |t|

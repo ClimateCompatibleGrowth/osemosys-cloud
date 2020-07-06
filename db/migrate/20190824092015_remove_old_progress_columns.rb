@@ -1,3 +1,4 @@
+# typed: true
 class RemoveOldProgressColumns < ActiveRecord::Migration[6.0]
   def change
     remove_column :runs, :started_at

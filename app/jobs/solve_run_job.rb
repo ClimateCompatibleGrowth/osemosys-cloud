@@ -1,3 +1,4 @@
+# typed: true
 class SolveRunJob < ActiveJob::Base
   def perform(run_id:, instance_type: 'z1d.3xlarge')
     @run_id = run_id

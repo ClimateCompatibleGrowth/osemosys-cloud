@@ -20,6 +20,7 @@ gem 'sassc-rails'
 gem 'sidekiq'
 gem 'simple_form'
 gem 'slim-rails'
+gem 'sorbet-runtime'
 gem 'statesman'
 gem 'tty-command'
 gem 'turbolinks'
@@ -33,6 +34,7 @@ group :development do
   gem 'pry-rails'
   gem 'rubocop', '0.74', require: false
   gem 'rubocop-rspec', '1.36', require: false
+  gem 'sorbet'
   gem 'spring'
   gem 'spring-commands-rspec'
   gem 'spring-watcher-listen'

@@ -1,3 +1,4 @@
+# typed: false
 module Osemosys
   class DownloadModelFromS3
     def initialize(s3_data_key:, s3_model_key:, logger: Config.logger)

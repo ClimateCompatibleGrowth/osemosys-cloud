@@ -1,3 +1,4 @@
+# typed: ignore
 class Run < ApplicationRecord
   extend Statesman::Adapters::ActiveRecordQueries[transition_class: RunTransition, initial_state: :new]
   delegate :current_state, :history, :transition_to, :transition_to!,

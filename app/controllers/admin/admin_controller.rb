@@ -1,3 +1,4 @@
+# typed: false
 module Admin
   class AdminController < ApplicationController
     before_action :restrict_access_to_admins

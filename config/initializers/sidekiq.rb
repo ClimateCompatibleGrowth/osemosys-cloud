@@ -1,3 +1,4 @@
+# typed: true
 module OsemosysCloud
   class Redis
     def self.redis_url

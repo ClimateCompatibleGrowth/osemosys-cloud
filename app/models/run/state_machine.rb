@@ -1,3 +1,4 @@
+# typed: false
 class Run < ApplicationRecord
   class StateMachine
     include Statesman::Machine

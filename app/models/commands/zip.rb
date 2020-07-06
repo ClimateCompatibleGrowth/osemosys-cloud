@@ -1,3 +1,4 @@
+# typed: true
 module Commands
   class Zip
     def initialize(source:, destination:, logger:)

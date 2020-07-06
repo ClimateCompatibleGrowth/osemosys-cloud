@@ -1,3 +1,4 @@
+# typed: true
 module Commands
   class PostProcessResultFiles
     def initialize(preprocessed_data_path:, solution_file_path:, logger:)

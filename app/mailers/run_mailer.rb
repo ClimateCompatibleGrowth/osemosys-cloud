@@ -1,3 +1,4 @@
+# typed: false
 class RunMailer < ApplicationMailer
   add_template_helper(ApplicationHelper)
 

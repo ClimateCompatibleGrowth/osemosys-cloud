@@ -1,3 +1,4 @@
+# typed: true
 module Commands
   class GenerateInputFile
     def initialize(local_model_path:, local_data_path:, lp_path:, logger:)

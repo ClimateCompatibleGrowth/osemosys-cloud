@@ -1,3 +1,4 @@
+# typed: true
 module Commands
   class PreprocessDataFile
     def initialize(local_data_path:, preprocessed_data_path:, logger:)

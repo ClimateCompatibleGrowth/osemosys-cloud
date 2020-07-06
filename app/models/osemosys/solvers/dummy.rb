@@ -1,3 +1,4 @@
+# typed: false
 module Osemosys
   module Solvers
     class Dummy

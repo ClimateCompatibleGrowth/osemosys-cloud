@@ -1,3 +1,4 @@
+# typed: false
 class UsersController < ApplicationController
   before_action :restrict_access_to_correct_user
 

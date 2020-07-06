@@ -1,3 +1,4 @@
+# typed: false
 Rails.application.configure do
   # Re-enable autoloading in prod
   # https://edgeguides.rubyonrails.org/upgrading_ruby_on_rails.html#autoloading-is-disabled-after-booting-in-the-production-environment

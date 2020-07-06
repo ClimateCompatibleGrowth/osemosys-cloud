@@ -1,3 +1,4 @@
+# typed: true
 class AfterFinishHook
   def initialize(run:)
     @run = run

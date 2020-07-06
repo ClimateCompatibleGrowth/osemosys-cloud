@@ -1,3 +1,4 @@
+# typed: true
 class CreateEc2Instances < ActiveRecord::Migration[6.0]
   def change
     create_table :ec2_instances do |t|

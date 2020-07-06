@@ -1,3 +1,4 @@
+# typed: strict
 require 'dry/configurable/test_interface'
 
 module Osemosys

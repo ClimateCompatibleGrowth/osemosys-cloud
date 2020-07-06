@@ -1,3 +1,4 @@
+# typed: true
 module Ec2
   class InstanceParams
     def initialize(instance_type:, run_id:)
