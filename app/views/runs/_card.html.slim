@@ -23,10 +23,10 @@
 
     hr
 
-    - if run.solving_time
+    - if run.finished_in
       .run-card__header
         ' Run finished in
-        = format_duration(run.solving_time)
+        = format_duration(run.finished_in)
 
     .run-card__header Files:
     - run_result = run.run_result

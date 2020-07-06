@@ -6,7 +6,7 @@ ul.list-group
     = @all_users.count
   li.list-group-item
     ' Total server time used:
-    - total_duration = Run.all.map(&:solving_time).compact.sum
+    - total_duration = Run.all.sum(:finished_in)
     = format_duration(total_duration)
 
 hr
