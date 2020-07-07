@@ -6,12 +6,7 @@ class RunsController < ApplicationController
   end
 
   def index
-    @runs = current_user.runs
-      .order(id: :desc)
-      .page(params[:page])
-      .with_attached_model_file
-      .with_attached_data_file
-      .with_attached_log_file
+    @runs = current_user.runs.for_index_view(params[:page])
   end
 
   def show

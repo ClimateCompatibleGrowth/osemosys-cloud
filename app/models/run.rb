@@ -19,6 +19,14 @@ class Run < ApplicationRecord
 
   validate :only_postprocess_preprocessed_runs
 
+  def self.for_index_view(page)
+    order(id: :desc)
+      .page(page)
+      .with_attached_model_file
+      .with_attached_data_file
+      .with_attached_log_file
+  end
+
   def local_log_path
     "/tmp/run-#{id}.log"
   end

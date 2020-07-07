@@ -9,7 +9,7 @@ class VersionsController < ApplicationController
 
   def show
     @version = current_user.versions.find_by(id: params[:id])
-    @runs = @version.runs
+    @runs = @version.runs.for_index_view(params[:page])
   end
 
   def create
