@@ -2,6 +2,7 @@ FactoryBot.define do
   factory :run do
     name { 'My run' }
     description { 'My description' }
+    version
     user
 
     trait :queued do
