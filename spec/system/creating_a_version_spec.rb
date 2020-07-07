@@ -7,7 +7,7 @@ RSpec.describe 'Creating a version and a run', type: :system do
 
   it 'works for logged in users' do
     sign_in(User.create!(email: 'test@example.com', password: 'blehbleh'))
-    visit versions_path
+    visit root_path
 
     click_on 'New version'
 
