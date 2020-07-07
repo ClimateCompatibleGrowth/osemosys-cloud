@@ -2,7 +2,7 @@ class RunsController < ApplicationController
   before_action :ensure_logged_in_user
 
   def new
-    @run = Run.new
+    @run = Run.new(version_id: params[:version_id])
   end
 
   def index

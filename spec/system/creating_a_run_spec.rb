@@ -16,8 +16,9 @@ RSpec.describe 'Creating a run', type: :system do
     click_on 'New run'
 
     expect(page).to have_text('Schedule a new run')
+    # Preselected version
+    expect(page.find('#run_version_id').value).to eq(version.id.to_s)
 
-    select 'Ethopia 2014', from: 'Version'
     fill_in 'Name', with: 'Atlantis'
     fill_in 'Description', with: 'A Place Long Gone'
 

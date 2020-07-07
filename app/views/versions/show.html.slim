@@ -1,6 +1,6 @@
 h1 = @version.name
 
-.mb-2 = link_to('New run', new_run_path, class: 'btn btn-primary')
+.mb-2 = link_to('New run', new_run_path(version_id: @version.id), class: 'btn btn-primary')
 
 - @runs.each do |run|
   = render 'runs/card', run: run
