@@ -26,6 +26,6 @@ RSpec.describe 'Editing my profile', type: :system do
     sign_in(user)
     visit user_path(other_user)
     expect(page).not_to have_content('My User Profile')
-    expect(page).to have_current_path('/runs')
+    expect(page).to have_current_path('/versions')
   end
 end

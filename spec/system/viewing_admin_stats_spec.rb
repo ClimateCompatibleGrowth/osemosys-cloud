@@ -30,7 +30,7 @@ RSpec.describe 'Viewing the admin stats', type: :system do
     sign_in(create(:user))
     visit admin_user_stats_path
     expect(page).not_to have_content('User statistics')
-    expect(page).to have_current_path('/runs')
+    expect(page).to have_current_path('/versions')
   end
 
   it 'redirects to root for non signed in users' do

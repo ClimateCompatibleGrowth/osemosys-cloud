@@ -5,9 +5,9 @@ class RunsController < ApplicationController
     @run = Run.new(version_id: params[:version_id])
   end
 
-  def index
-    @runs = current_user.runs.for_index_view(params[:page])
-  end
+  # def index
+  #   @runs = current_user.runs.for_index_view(params[:page])
+  # end
 
   def show
     head :not_found unless request.xhr?
@@ -20,7 +20,7 @@ class RunsController < ApplicationController
 
     if @run.valid?
       flash.notice = 'Run created'
-      redirect_to runs_path
+      redirect_to version_path(@run.version)
     else
       flash.now.alert = @run.errors.full_messages.to_sentence
       render :new

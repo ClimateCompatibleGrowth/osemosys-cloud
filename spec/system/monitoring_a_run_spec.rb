@@ -8,9 +8,10 @@ RSpec.describe 'Creating a run', type: :system do
   it 'works for logged in users' do
     user = create :user
     sign_in(user)
-    run = create(:run, name: 'Run number 1', user: user)
+    version = create(:version, user: user)
+    run = create(:run, name: 'Run number 1', user: user, version: version)
 
-    visit runs_path
+    visit version_path(version)
 
     expect(page).to have_content('Run number 1 (New)')
     expect(page).to have_content('Start run')
