@@ -1,6 +1,7 @@
 h1 Schedule a new run
 
 = simple_form_for(@run, html: { class: 'aform-inline' })do |f|
+  = f.association :version, collection: current_user.versions
   = f.input :name
   = f.label 'Model file'
   = f.file_field :model_file, accept: 'text/plain'

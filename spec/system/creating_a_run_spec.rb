@@ -6,8 +6,10 @@ RSpec.describe 'Creating a run', type: :system do
   end
 
   it 'works for logged in users' do
-    sign_in(User.create!(email: 'test@example.com', password: 'blehbleh'))
-    visit root_path
+    user = create(:user)
+    sign_in(user)
+    version = create(:version, name: 'Ethopia 2014', user: user)
+    visit version_path(version)
 
     expect(page).to have_text('Osemosys Cloud')
 
@@ -15,6 +17,7 @@ RSpec.describe 'Creating a run', type: :system do
 
     expect(page).to have_text('Schedule a new run')
 
+    select 'Ethopia 2014', from: 'Version'
     fill_in 'Name', with: 'Atlantis'
     fill_in 'Description', with: 'A Place Long Gone'
 
