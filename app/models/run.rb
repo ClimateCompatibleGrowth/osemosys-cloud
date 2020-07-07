@@ -25,6 +25,10 @@ class Run < ApplicationRecord
       .with_attached_model_file
       .with_attached_data_file
       .with_attached_log_file
+      .includes(
+        :run_transitions,
+        run_result: { result_file_attachment: :blob, csv_results_attachment: :blob },
+      )
   end
 
   def local_log_path
