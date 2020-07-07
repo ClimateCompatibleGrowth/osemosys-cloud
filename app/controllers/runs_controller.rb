@@ -5,10 +5,6 @@ class RunsController < ApplicationController
     @run = Run.new(version_id: params[:version_id])
   end
 
-  # def index
-  #   @runs = current_user.runs.for_index_view(params[:page])
-  # end
-
   def show
     head :not_found unless request.xhr?
 
