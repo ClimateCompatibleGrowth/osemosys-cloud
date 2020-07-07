@@ -1,0 +1,16 @@
+h1.mb-4 My versions
+
+.mb-2 = link_to('New version', new_version_path, class: 'btn btn-primary')
+
+br
+= paginate @versions
+
+table.table.table-striped.table-hover
+  tr
+    th ID
+    th Name
+  - @versions.each do |version|
+    = link_to(version) do
+      tr
+        td = version.id
+        td = link_to(version.name, version)

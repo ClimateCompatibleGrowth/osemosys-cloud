@@ -7,6 +7,7 @@ class Run < ApplicationRecord
   has_one :ec2_instance, class_name: 'Ec2::Instance'
 
   belongs_to :user
+  belongs_to :version
   has_one_attached :model_file
   has_one_attached :data_file
   has_one_attached :log_file
@@ -17,6 +18,18 @@ class Run < ApplicationRecord
   validates :data_file, attached: true
 
   validate :only_postprocess_preprocessed_runs
+
+  def self.for_index_view(page)
+    order(id: :desc)
+      .page(page)
+      .with_attached_model_file
+      .with_attached_data_file
+      .with_attached_log_file
+      .includes(
+        :run_transitions,
+        run_result: { result_file_attachment: :blob, csv_results_attachment: :blob },
+      )
+  end
 
   def local_log_path
     "/tmp/run-#{id}.log"

@@ -2,16 +2,7 @@ class RunsController < ApplicationController
   before_action :ensure_logged_in_user
 
   def new
-    @run = Run.new
-  end
-
-  def index
-    @runs = current_user.runs
-      .order(id: :desc)
-      .page(params[:page])
-      .with_attached_model_file
-      .with_attached_data_file
-      .with_attached_log_file
+    @run = Run.new(version_id: params[:version_id])
   end
 
   def show
@@ -25,7 +16,7 @@ class RunsController < ApplicationController
 
     if @run.valid?
       flash.notice = 'Run created'
-      redirect_to runs_path
+      redirect_to version_path(@run.version)
     else
       flash.now.alert = @run.errors.full_messages.to_sentence
       render :new
@@ -54,7 +45,7 @@ class RunsController < ApplicationController
   def run_params
     params.require(:run).permit(
       :name, :model_file, :data_file, :description, :pre_process, :post_process,
-      :notify_when_finished
+      :notify_when_finished, :version_id
     )
   end
 
