@@ -30,14 +30,14 @@ class RunsController < ApplicationController
     )
     run.transition_to!(:queued)
     flash.notice = 'Run started'
-    redirect_to action: :index
+    redirect_to version_path(run.version)
   end
 
   def stop
     run = Run.find(params[:id])
     Ec2::StopInstance.call(aws_id: run.ec2_instance.aws_id)
     flash.notice = 'Run stopped'
-    redirect_to action: :index
+    redirect_to version_path(run.version)
   end
 
   private

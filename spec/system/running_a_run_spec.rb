@@ -40,15 +40,19 @@ RSpec.describe 'Running a run' do
     expect(run.state).to eq('queued')
 
     OsemosysCloud::Application.load_tasks if Rake::Task.tasks.empty?
-    expect {
-      Rake::Task['solve_cbc_run'].invoke(run.id)
-    }.to raise_error(TTY::Command::ExitError)
+    expect { Rake::Task['solve_cbc_run'].invoke(run.id) }.to raise_error(TTY::Command::ExitError)
+
     Rake::Task['solve_cbc_run'].reenable
 
     run.reload
     expect(run.state).to eq('failed')
 
     expect(run.log_file).to be_present
+    log_path = run.local_log_path
+    File.open(log_path) do |f|
+      log_content = f.read
+      expect(log_content).to include('Preprocessing data file')
+    end
     expect(run.run_result).to be(nil)
   end
 end
