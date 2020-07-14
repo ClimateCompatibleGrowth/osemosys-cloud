@@ -58,7 +58,7 @@ module Osemosys
 
       def zip_output
         Commands::Zip.new(
-          source: output_path,
+          source: files_to_zip,
           destination: zipped_output_path,
         ).call
       end
@@ -81,6 +81,12 @@ module Osemosys
         Config.logger.info 'Model solved!'
         Config.logger.info ''
         Config.logger.info "run_id: #{Config.run_id}"
+      end
+
+      def files_to_zip
+        `cp #{output_path} tmp/result.txt`
+        `cp #{local_data_path} tmp/data.txt`
+        'tmp/result.txt tmp/data.txt'
       end
 
       def lp_path
