@@ -1,4 +1,6 @@
 class SolveRunJob < ActiveJob::Base
+  sidekiq_options retry: 0
+
   def perform(run_id:, instance_type: 'z1d.3xlarge')
     @run_id = run_id
     @instance_type = instance_type
