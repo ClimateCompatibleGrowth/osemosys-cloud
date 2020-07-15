@@ -1,1 +1,1 @@
-coinor-cbc python3-pandas glpk-utils liblapack-dev
+coinor-cbc python3-pandas glpk-utils liblapack-dev liblapack3
