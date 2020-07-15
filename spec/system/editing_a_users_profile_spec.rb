@@ -17,7 +17,7 @@ RSpec.describe 'Editing my profile', type: :system do
     user = create(:user)
     visit user_path(user)
     expect(page).not_to have_content('My User Profile')
-    expect(page).to have_current_path('/')
+    expect(page).to have_current_path('/users/sign_in')
   end
 
   it 'redirects to root for other users' do

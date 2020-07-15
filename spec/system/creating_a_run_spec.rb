@@ -38,10 +38,10 @@ RSpec.describe 'Creating a run', type: :system do
   it 'redirects to root for logged out users' do
     visit root_path
 
-    expect(page).to have_text('Sign in or register to start')
+    expect(page).to have_text('Sign in or register to start.')
 
     visit versions_path
 
-    expect(page).to have_text('Sign in or register to start')
+    expect(page).to have_text('You need to sign in or sign up before continuing.')
   end
 end

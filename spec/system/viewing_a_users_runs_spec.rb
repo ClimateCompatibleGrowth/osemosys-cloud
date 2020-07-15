@@ -44,6 +44,6 @@ RSpec.describe 'Viewing the admin stats', type: :system do
     normal_user = create(:user)
     visit admin_user_runs_path(normal_user)
     expect(page).not_to have_content('User statistics')
-    expect(page).to have_current_path('/')
+    expect(page).to have_current_path('/users/sign_in')
   end
 end
