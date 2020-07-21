@@ -17,8 +17,6 @@ class SolveRunJob < ActiveJob::Base
   attr_reader :run_id, :instance_type
 
   def run_on_ec2?
-    return false
-
     Rails.env.production?
   end
 
