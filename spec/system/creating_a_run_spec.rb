@@ -22,6 +22,8 @@ RSpec.describe 'Creating a run', type: :system do
     fill_in 'Name', with: 'Atlantis'
     fill_in 'Description', with: 'A Place Long Gone'
 
+    select('Large server', from: 'run_server_type')
+
     atlantis_model = "#{Rails.root}/spec/data/atlantis_model.txt"
     atlantis_data = "#{Rails.root}/spec/data/atlantis_data.txt"
 

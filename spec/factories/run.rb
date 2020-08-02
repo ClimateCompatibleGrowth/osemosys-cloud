@@ -4,6 +4,7 @@ FactoryBot.define do
     description { 'My description' }
     version
     user
+    server_type { 'z1d.3xlarge' }
 
     trait :queued do
       state { 'queued' }

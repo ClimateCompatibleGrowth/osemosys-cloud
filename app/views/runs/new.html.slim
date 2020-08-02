@@ -9,6 +9,8 @@ h1 Schedule a new run
   = f.file_field :data_file, accept: 'text/plain'
   = f.input :description
   br
+  = f.input :server_type, label: 'Server type', collection: ServerType.all, include_blank: false,
+      label_method: :name, value_method: :slug, default: 'sidekiq'
   = f.input :pre_process, label: 'Run pre-processing script'
   = f.input :post_process, label: 'Generate CSV files (run post-processing script)'
   = f.input :notify_when_finished, label: 'Send me an email when the run finishes'
