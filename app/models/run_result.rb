@@ -7,7 +7,7 @@ class RunResult < ApplicationRecord
   def visualization_url
     return unless result_file_url
 
-    "https://osemosys-cloud-visualization.herokuapp.com/?model=#{CGI.escape(result_file_url)}"
+    "http://visualization.osemosys-cloud.com/?model=#{CGI.escape(result_file_url)}"
   end
 
   private
@@ -17,7 +17,7 @@ class RunResult < ApplicationRecord
 
     Rails.application.routes.url_helpers.rails_blob_url(
       result_file,
-      host: 'osemosys-cloud.herokuapp.com',
+      host: 'www.osemosys-cloud.com',
     )
   end
 end
