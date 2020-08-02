@@ -46,4 +46,26 @@ RSpec.describe Run do
       expect(run.sidekiq?).to be(false)
     end
   end
+
+  describe '#can_be_stopped?' do
+    it 'is true for a running ec2 run' do
+      run = create(:run, :ongoing, :ec2)
+
+      expect(run.can_be_stopped?).to be(true)
+    end
+
+    it 'is false for a running sidekiq run' do
+      run = create(:run, :ongoing, :sidekiq)
+
+      expect(run.can_be_stopped?).to be(false)
+    end
+
+    it 'is false for finished or new ec2 runs' do
+      succeeded_run = create(:run, :finished, :ec2)
+      new_run = create(:run, :ec2)
+
+      expect(succeeded_run.can_be_stopped?).to be(false)
+      expect(new_run.can_be_stopped?).to be(false)
+    end
+  end
 end

@@ -42,7 +42,7 @@ class Run < ApplicationRecord
   end
 
   def can_be_stopped?
-    can_transition_to? :failed
+    ec2? && can_transition_to?(:failed)
   end
 
   def in_progress?
