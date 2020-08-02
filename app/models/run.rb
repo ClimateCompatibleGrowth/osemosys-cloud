@@ -19,6 +19,8 @@ class Run < ApplicationRecord
 
   validate :only_postprocess_preprocessed_runs
 
+  enum server_type: ServerType.to_enum_definition
+
   def self.for_index_view(page)
     order(id: :desc)
       .page(page)

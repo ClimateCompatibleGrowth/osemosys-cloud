@@ -4,10 +4,8 @@ RSpec.describe ServerType do
   describe '.to_enum_definition' do
     it 'is the list of all types as an enum definition' do
       expect(ServerType.to_enum_definition).to eq(
-        [
-          { 'sidekiq' => 'sidekiq' },
-          { 'z1d.3xlarge' => 'z1d.3xlarge' },
-        ],
+        'sidekiq' => 'sidekiq',
+        'z1d.3xlarge' => 'z1d.3xlarge',
       )
     end
   end

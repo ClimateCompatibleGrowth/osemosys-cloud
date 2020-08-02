@@ -9,7 +9,7 @@ class ServerType
   def self.to_enum_definition
     all.map do |server_type|
       { server_type.slug => server_type.slug }
-    end
+    end.inject(:merge)
   end
 
   def self.from_slug(slug)
