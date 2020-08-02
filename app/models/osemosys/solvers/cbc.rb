@@ -11,7 +11,7 @@ module Osemosys
         preprocess_data_file if preprocess_data_file?
         generate_input_file
         find_solution
-        zip_output
+        prepare_results
         postprocess_results if postprocess_results?
         print_summary
 
@@ -56,13 +56,6 @@ module Osemosys
         ).call
       end
 
-      def zip_output
-        Commands::Zip.new(
-          source: files_to_zip,
-          destination: zipped_output_path,
-        ).call
-      end
-
       def postprocess_results
         run.transition_to!(:postprocessing)
 
@@ -83,12 +76,6 @@ module Osemosys
         Config.logger.info "run_id: #{Config.run_id}"
       end
 
-      def files_to_zip
-        `cp #{output_path} tmp/result.txt`
-        `cp #{local_data_path} tmp/data.txt`
-        'tmp/result.txt tmp/data.txt'
-      end
-
       def lp_path
         "./data/input_#{Config.run_id}.lp"
       end
@@ -105,8 +92,17 @@ module Osemosys
         "./data/csv_#{Config.run_id}.zip"
       end
 
-      def metadata_file
-        @metadata_file ||= GenerateMetadata.call(run: fun)
+      def metadata_path
+        @metadata_path ||= GenerateMetadata.call(run: run)
+      end
+
+      def prepare_results
+        PrepareResults.call(
+          output_path: output_path,
+          data_path: local_data_path,
+          metadata_path: metadata_path,
+          destination: zipped_output_path,
+        )
       end
 
       def preprocessed_data_path
