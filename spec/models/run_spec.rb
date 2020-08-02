@@ -18,4 +18,68 @@ RSpec.describe Run do
       end
     end
   end
+
+  describe '#ec2?' do
+    it 'is true when the server type is an EC2 instance' do
+      run = build(:run, :ec2)
+
+      expect(run.ec2?).to be(true)
+    end
+
+    it 'is false when the server type is sidekiq' do
+      run = build(:run, :sidekiq)
+
+      expect(run.ec2?).to be(false)
+    end
+  end
+
+  describe '#sidekiq?' do
+    it 'is true when the server type is an sidekiq instance' do
+      run = build(:run, :sidekiq)
+
+      expect(run.sidekiq?).to be(true)
+    end
+
+    it 'is false when the server type is sidekiq' do
+      run = build(:run, :ec2)
+
+      expect(run.sidekiq?).to be(false)
+    end
+  end
+
+  describe '#can_be_stopped?' do
+    it 'is true for a running ec2 run' do
+      run = create(:run, :ongoing, :ec2)
+
+      expect(run.can_be_stopped?).to be(true)
+    end
+
+    it 'is false for a running sidekiq run' do
+      run = create(:run, :ongoing, :sidekiq)
+
+      expect(run.can_be_stopped?).to be(false)
+    end
+
+    it 'is false for finished or new ec2 runs' do
+      succeeded_run = create(:run, :finished, :ec2)
+      new_run = create(:run, :ec2)
+
+      expect(succeeded_run.can_be_stopped?).to be(false)
+      expect(new_run.can_be_stopped?).to be(false)
+    end
+  end
+
+  describe '#timeout' do
+    it 'is 10 hours for EC2 runs' do
+      run = build(:run, :ec2)
+
+      expect(run.timeout).to eq(10.hours)
+    end
+
+    it 'is 5 minutes for sidekiq runs' do
+      run = build(:run, :sidekiq)
+
+      expect(run.timeout).to eq(5.minutes)
+    end
+  end
 end

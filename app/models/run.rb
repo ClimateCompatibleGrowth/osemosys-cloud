@@ -19,6 +19,8 @@ class Run < ApplicationRecord
 
   validate :only_postprocess_preprocessed_runs
 
+  enum server_type: ServerType.to_enum_definition
+
   def self.for_index_view(page)
     order(id: :desc)
       .page(page)
@@ -40,7 +42,7 @@ class Run < ApplicationRecord
   end
 
   def can_be_stopped?
-    can_transition_to? :failed
+    ec2? && can_transition_to?(:failed)
   end
 
   def in_progress?
@@ -61,6 +63,22 @@ class Run < ApplicationRecord
 
   def finished?
     finished_in.present?
+  end
+
+  def ec2?
+    !sidekiq?
+  end
+
+  def sidekiq?
+    server_type == 'sidekiq'
+  end
+
+  def timeout
+    if ec2?
+      10.hours
+    else
+      5.minutes
+    end
   end
 
   private

@@ -4,6 +4,7 @@ FactoryBot.define do
     description { 'My description' }
     version
     user
+    server_type { 'z1d.3xlarge' }
 
     trait :queued do
       state { 'queued' }
@@ -95,6 +96,14 @@ FactoryBot.define do
           'text/plain',
         )
       end
+    end
+
+    trait :ec2 do
+      server_type { 'z1d.3xlarge' }
+    end
+
+    trait :sidekiq do
+      server_type { 'sidekiq' }
     end
   end
 end
