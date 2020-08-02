@@ -68,4 +68,18 @@ RSpec.describe Run do
       expect(new_run.can_be_stopped?).to be(false)
     end
   end
+
+  describe '#timeout' do
+    it 'is 10 hours for EC2 runs' do
+      run = build(:run, :ec2)
+
+      expect(run.timeout).to eq(10.hours)
+    end
+
+    it 'is 5 minutes for sidekiq runs' do
+      run = build(:run, :sidekiq)
+
+      expect(run.timeout).to eq(5.minutes)
+    end
+  end
 end

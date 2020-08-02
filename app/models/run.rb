@@ -73,6 +73,14 @@ class Run < ApplicationRecord
     server_type == 'sidekiq'
   end
 
+  def timeout
+    if ec2?
+      10.hours
+    else
+      5.minutes
+    end
+  end
+
   private
 
   def only_postprocess_preprocessed_runs

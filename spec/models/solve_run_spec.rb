@@ -45,10 +45,9 @@ RSpec.describe SolveRun do
 
     describe 'timeout' do
       it 'times out when the run takes longer than expected' do
-        Osemosys::Config.config.dummy_solver_sleep_duration = 2.seconds
-        Osemosys::Config.config.run_timeout = 1.seconds
-
         run = create(:run, :queued, :atlantis)
+        allow(run).to receive(:timeout).and_return(1.second)
+        Osemosys::Config.config.dummy_solver_sleep_duration = 2.seconds
         allow(AfterFinishHook).to receive(:new).with(run: run).and_return(
           instance_double('AfterFinishHook', call: 'OK'),
         )
@@ -56,7 +55,6 @@ RSpec.describe SolveRun do
         expect { SolveRun.new(run: run, solver: Osemosys::Solvers::Dummy).call }.to raise_error(
           Timeout::Error,
         )
-
         expect(AfterFinishHook).to have_received(:new).once
       end
     end
