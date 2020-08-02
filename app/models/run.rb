@@ -65,6 +65,14 @@ class Run < ApplicationRecord
     finished_in.present?
   end
 
+  def ec2?
+    !sidekiq?
+  end
+
+  def sidekiq?
+    server_type == 'sidekiq'
+  end
+
   private
 
   def only_postprocess_preprocessed_runs

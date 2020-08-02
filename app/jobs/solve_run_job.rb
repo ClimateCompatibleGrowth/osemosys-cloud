@@ -16,7 +16,7 @@ class SolveRunJob < ActiveJob::Base
   attr_reader :run
 
   def run_on_ec2?
-    Rails.env.production? && run.server_type != 'sidekiq'
+    Rails.env.production? && run.ec2?
   end
 
   def spawn_ec2_instance
