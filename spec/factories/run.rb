@@ -97,5 +97,13 @@ FactoryBot.define do
         )
       end
     end
+
+    trait :ec2 do
+      server_type { 'z1d.3xlarge' }
+    end
+
+    trait :sidekiq do
+      server_type { 'sidekiq' }
+    end
   end
 end
