@@ -105,6 +105,10 @@ module Osemosys
         "./data/csv_#{Config.run_id}.zip"
       end
 
+      def metadata_file
+        @metadata_file ||= GenerateMetadata.call(run: fun)
+      end
+
       def preprocessed_data_path
         "#{local_data_path}.pre"
       end
