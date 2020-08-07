@@ -1,6 +1,6 @@
 class SolveRunJob < ActiveJob::Base
-  sidekiq_options retry: 0, queue: 'osemosys'
-
+  queue_as :osemosys
+  sidekiq_options retry: 0
 
   def perform(run_id:)
     @run = Run.find(run_id)
