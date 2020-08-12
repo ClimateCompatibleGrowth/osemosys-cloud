@@ -10,7 +10,7 @@ class RunsController < ApplicationController
 
     @run =
       if current_user.admin?
-        Rum.find(id: params[:id])
+        Run.find(id: params[:id])
       else
         current_user.runs.find_by(id: params[:id])
       end
