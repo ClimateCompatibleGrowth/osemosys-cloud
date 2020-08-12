@@ -19,7 +19,7 @@ module Ec2
     end
 
     def solve_run_command
-      "curl https://raw.githubusercontent.com/yboulkaid/osemosys-cloud/master/lib/solver/user_data.sh | sh -s #{run_id} #{shutdown_on_finish}"
+      "curl https://gist.githubusercontent.com/yboulkaid/4df07a12a050a8f8470bdcf30470e077/raw/91504c0d7b30226032017feef740b4b5f31a7f55/ec2_osemosys_user_data.sh | sh -s #{run_id} #{shutdown_on_finish}"
     end
   end
 end
