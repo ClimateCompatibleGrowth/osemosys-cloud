@@ -8,7 +8,12 @@ class RunsController < ApplicationController
   def show
     head :not_found unless request.xhr?
 
-    @run = current_user.runs.find_by(id: params[:id])
+    @run =
+      if current_user.admin?
+        Rum.find(id: params[:id])
+      else
+        current_user.runs.find_by(id: params[:id])
+      end
   end
 
   def create
