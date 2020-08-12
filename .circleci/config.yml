@@ -14,7 +14,7 @@ jobs:
       - run:
           name: install glpk
           command: |
-            sudo apt-get install glpk-utils coinor-cbc python3-pandas
+            sudo apt-get update && sudo apt-get install glpk-utils coinor-cbc python3-pandas
 
       # Download and cache dependencies
       - restore_cache:
