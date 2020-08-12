@@ -77,7 +77,7 @@ class Run < ApplicationRecord
     if ec2?
       10.hours
     else
-      5.minutes
+      2.minutes
     end
   end
 

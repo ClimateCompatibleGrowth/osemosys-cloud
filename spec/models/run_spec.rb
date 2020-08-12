@@ -79,7 +79,7 @@ RSpec.describe Run do
     it 'is 5 minutes for sidekiq runs' do
       run = build(:run, :sidekiq)
 
-      expect(run.timeout).to eq(5.minutes)
+      expect(run.timeout).to eq(2.minutes)
     end
   end
 end
