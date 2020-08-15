@@ -75,12 +75,27 @@ jobs:
           command: |
             git push https://heroku:$HEROKU_API_KEY@git.heroku.com/$HEROKU_APP_NAME.git master
 
+  deploy_to_lighsail:
+    machine:
+      enabled: true
+    steps:
+      - run:
+          name: Deploy Over SSH
+          command: |
+            ssh $SSH_USER@$SSH_HOST "bash -ic 'cd osemosys-cloud && ./script/deploy.sh'"
+
 workflows:
   version: 2
   test-deploy:
     jobs:
       - test
       - deploy_to_heroku:
+          requires:
+            - test
+          filters:
+            branches:
+              only: master
+      - deploy_to_lighsail:
           requires:
             - test
           filters:
