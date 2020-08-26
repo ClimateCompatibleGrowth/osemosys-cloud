@@ -15,6 +15,7 @@ gem 'font_awesome5_rails'
 gem 'kaminari'
 gem 'pg'
 gem 'puma'
+gem 'rack', '2.2.2' # https://github.com/heartcombo/devise/issues/5273
 gem 'rails', '~> 6'
 gem 'sassc-rails'
 gem 'sidekiq'
