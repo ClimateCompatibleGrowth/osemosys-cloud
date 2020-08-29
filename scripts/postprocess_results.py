@@ -1,9 +1,7 @@
-
 import pandas as pd
 import os, sys
-from collections import defaultdict
 
-def main(data_file, results_file):
+def generate_csv_files(data_file, results_file, base_folder=os.getcwd()):
 
     pd.set_option('mode.chained_assignment', None)
 
@@ -23,9 +21,9 @@ def main(data_file, results_file):
         for line in f:
             if line.startswith('set YEAR'):
                 start_year = line.split(' ')[3]
-            if line.startswith('set COMMODITY'): # Extracts list of COMMODITIES from data file. Some models use FUEL instead. 
+            if line.startswith('set COMMODITY'): # Extracts list of COMMODITIES from data file. Some models use FUEL instead.
                 fuel_list = line.split(' ')[3:-1]
-            if line.startswith('set FUEL'): # Extracts list of FUELS from data file. Some models use COMMODITIES instead. 
+            if line.startswith('set FUEL'): # Extracts list of FUELS from data file. Some models use COMMODITIES instead.
                 fuel_list = line.split(' ')[3:-1]
             if line.startswith('set TECHNOLOGY'):
                 tech_list = line.split(' ')[3:-1]
@@ -33,10 +31,10 @@ def main(data_file, results_file):
                 storage_list = line.split(' ')[3:-1]
             if line.startswith('set MODE_OF_OPERATION'):
                 mode_list = line.split(' ')[3:-1]
-            
+
             if line.startswith(";"):
-                    parsing = False   
-            
+                    parsing = False
+
             if parsing:
                 if line.startswith('['):
                     fuel = line.split(',')[2]
@@ -47,19 +45,19 @@ def main(data_file, results_file):
                 else:
                     values = line.rstrip().split(' ')[1:]
                     mode = line.split(' ')[0]
-                    
-                    if param_current=='OutputActivityRatio':    
+
+                    if param_current=='OutputActivityRatio':
                         #data_out.append(tuple([fuel,tech,mode]))
                         #data_all.append(tuple([tech,mode]))
                         for i in range(0,len(years)):
                             output_table.append(tuple([tech,fuel,mode,years[i],values[i]]))
-                    
+
                     if param_current=='InputActivityRatio':
-                        #data_inp.append(tuple([fuel,tech,mode]))   
+                        #data_inp.append(tuple([fuel,tech,mode]))
                         #data_all.append(tuple([tech,mode]))
                         for i in range(0,len(years)):
                             input_table.append(tuple([tech,fuel,mode,years[i],values[i]]))
-                    
+
                     if param_current == 'TechnologyToStorage' or param_current == 'TechnologyFromStorage':
                         if not line.startswith(mode_list[0]):
                             storage = line.split(' ')[0]
@@ -72,19 +70,19 @@ def main(data_file, results_file):
                                     if param_current == 'TechnologyFromStorage':
                                         storage_from.append(tuple([storage,tech,mode_list[i]]))
                                         data_all.append(tuple([tech,mode_list[i]]))
-                    
+
             if line.startswith(('param OutputActivityRatio','param InputActivityRatio','param TechnologyToStorage','param TechnologyFromStorage')):
                 param_current = line.split(' ')[1]
                 parsing = True
-            
+
     try:
-        os.makedirs(os.path.join(os.getcwd(), 'csv'))
+        os.makedirs(os.path.join(base_folder, 'csv'))
     except FileExistsError:
-        pass        
+        pass
 
     #Read CBC output file
     df = pd.read_csv(results_file, sep='\t')
-    
+
     df.columns = ['temp']
     df['temp'] = df['temp'].str.lstrip(' *\n\t')
     df[['temp','value']] = df['temp'].str.split(')', expand=True)
@@ -98,23 +96,33 @@ def main(data_file, results_file):
     params = df.parameter.unique()
     all_params = {}
     cols = {'NewCapacity':['r','t','y'],
-                'AccumulatedNewCapacity':['r','t','y'], 
-                'TotalCapacityAnnual':['r','t','y'],
-                'CapitalInvestment':['r','t','y'],
-                'AnnualVariableOperatingCost':['r','t','y'],
-                'AnnualFixedOperatingCost':['r','t','y'],
-                'SalvageValue':['r','t','y'],
-                'DiscountedSalvageValue':['r','t','y'],
-                'TotalTechnologyAnnualActivity':['r','t','y'],
-                'RateOfActivity':['r','l','t','m','y'],
-                'RateOfTotalActivity':['r','t','l','y'],
-                'Demand':['r','l','f','y'],
-                'TotalAnnualTechnologyActivityByMode':['r','t','m','y'],
-                'TotalTechnologyModelPeriodActivity':['r','t'],
-                'ProductionByTechnologyAnnual':['r','t','f','y'],
-                'AnnualTechnologyEmissionByMode':['r','t','e','m','y'],
-                'AnnualTechnologyEmission':['r','t','e','y'],
-                'AnnualEmissions':['r','e','y']}
+            'AccumulatedNewCapacity':['r','t','y'],
+            'TotalCapacityAnnual':['r','t','y'],
+            'CapitalInvestment':['r','t','y'],
+            'AnnualVariableOperatingCost':['r','t','y'],
+            'AnnualFixedOperatingCost':['r','t','y'],
+            'SalvageValue':['r','t','y'],
+            'DiscountedSalvageValue':['r','t','y'],
+            'TotalTechnologyAnnualActivity':['r','t','y'],
+            'RateOfActivity':['r','l','t','m','y'],
+            'RateOfTotalActivity':['r','t','l','y'],
+            'Demand':['r','l','f','y'],
+            'TotalAnnualTechnologyActivityByMode':['r','t','m','y'],
+            'TotalTechnologyModelPeriodActivity':['r','t'],
+            'ProductionByTechnology':['r','l','t','f','y'],
+            'ProductionByTechnologyAnnual':['r','t','f','y'],
+            'AnnualTechnologyEmissionByMode':['r','t','e','m','y'],
+            'AnnualTechnologyEmission':['r','t','e','y'],
+            'AnnualEmissions':['r','e','y'],
+            'DiscountedTechnologyEmissionsPenalty':['r','t','y'],
+            'RateOfProductionByTechnology':['r','l','t','f','y'],
+            'RateOfUseByTechnology':['r','l','t','f','y'],
+            'UseByTechnology':['r','l','t','f','y'],
+            'RateOfProductionByTechnologyByMode':['r','l','t','f','m','y'],
+            'RateOfUseByTechnologyByMode':['r','l','t','f','m','y'],
+            'TechnologyActivityChangeByMode':['r','t','m','y'],
+            'TechnologyActivityChangeByModeCostTotal':['r','t','m','y'],
+            }
 
     for each in params:
         df_p = df[df.parameter == each]
@@ -123,7 +131,7 @@ def main(data_file, results_file):
         df_p = df_p[cols[each]] # Reorder dataframe to include 'value' as last column
         all_params[each] = pd.DataFrame(df_p) # Create a dataframe for each parameter
         df_p = df_p.rename(columns={'value':each})
-        df_p.to_csv(os.path.join(os.getcwd(), 'csv', str(each) + '.csv'), index=None) # Print data for each paramter to a CSV file
+        df_p.to_csv(os.path.join(base_folder, 'csv', str(each) + '.csv'), index=None) # Print data for each paramter to a CSV file
 
     year_split = []
     parsing = False
@@ -131,7 +139,7 @@ def main(data_file, results_file):
     with open(data_file, 'r') as f:
         for line in f:
             if line.startswith(";"):
-                parsing = False   
+                parsing = False
             if parsing:
                 if line.startswith(start_year):
                     years = line.rstrip().split(' ')[0:]
@@ -157,7 +165,7 @@ def main(data_file, results_file):
     df_prod = df_prod.drop(['OutputActivityRatio','YearSplit','RateOfActivity'], axis=1)
     df_prod = df_prod.groupby(['r','t','f','y'])['ProductionByTechnologyAnnual'].sum().reset_index()
     df_prod['ProductionByTechnologyAnnual'] = df_prod['ProductionByTechnologyAnnual'].astype(float).round(4)
-    df_prod.to_csv(os.path.join(os.getcwd(), 'csv', 'ProductionByTechnologyAnnual.csv'), index=None)
+    df_prod.to_csv(os.path.join(base_folder, 'csv', 'ProductionByTechnologyAnnual.csv'), index=None)
     all_params['ProductionByTechnologyAnnual'] = df_prod.rename(columns={'ProductionByTechnologyAnnual':'value'})
 
 
@@ -171,7 +179,7 @@ def main(data_file, results_file):
     df_use = df_use.drop(['InputActivityRatio','YearSplit','RateOfActivity'], axis=1)
     df_use = df_use.groupby(['r','t','f','y'])['UseByTechnologyAnnual'].sum().reset_index()
     df_use['UseByTechnologyAnnual'] = df_use['UseByTechnologyAnnual'].astype(float).round(4)
-    df_use.to_csv(os.path.join(os.getcwd(), 'csv', 'UseByTechnologyAnnual.csv'), index=None)
+    df_use.to_csv(os.path.join(base_folder, 'csv', 'UseByTechnologyAnnual.csv'), index=None)
     all_params['UseByTechnologyAnnual'] = df_use.rename(columns={'UseByTechnologyAnnual':'value'})
 
 if __name__ == '__main__':
@@ -183,4 +191,4 @@ if __name__ == '__main__':
     else:
         data_file = sys.argv[1]
         results_file = sys.argv[2]
-        main(data_file, results_file)
+        generate_csv_files(data_file, results_file)
