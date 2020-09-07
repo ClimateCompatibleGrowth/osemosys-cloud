@@ -41,7 +41,7 @@
       - if run_result.visualization_url
         =<> link_to(run_result.visualization_url, class: 'btn btn-primary btn-sm', target: '_blank') do
           =<> fa_icon('chart-bar')
-        =<> link_to('#', class: 'btn btn-outline-secondary btn-sm', data: { url: run_result.visualization_url }, onclick: "copyToClipboard('#{run_result.result_file_url}')") do
+        =<> link_to('#', class: 'btn btn-outline-secondary btn-sm', data: { 'copy-to-clipboard' => run_result.result_file_url }) do
           =<> fa_icon('clipboard')
     =< download_button(run.log_file, label: 'log') if run.log_file.attached?
     =< download_button(run.model_file, label: 'Model') if run.model_file.attached?
