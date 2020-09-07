@@ -10,8 +10,6 @@ class RunResult < ApplicationRecord
     "http://visualization.osemosys-cloud.com/?model=#{CGI.escape(result_file_url)}"
   end
 
-  private
-
   def result_file_url
     return unless result_file.attached?
 
