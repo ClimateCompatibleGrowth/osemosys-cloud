@@ -12,7 +12,6 @@ module Commands
 
     def cbc_command
       %(
-        LD_LIBRARY_PATH=/app/.apt/usr/lib/x86_64-linux-gnu/blas:/app/.apt/usr/lib/x86_64-linux-gnu/lapack:$LD_LIBRARY_PATH \
         cbc #{lp_path} solve solu #{output_path}
       )
     end
