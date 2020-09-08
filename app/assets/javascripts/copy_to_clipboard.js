@@ -1,4 +1,4 @@
-window.addEventListener('DOMContentLoaded', () => {
+window.addEventListener('turbolinks:load', () => {
   clipboardIcons = document.querySelectorAll('[data-copy-to-clipboard]');
   clipboardIcons.forEach(function(clipboardIcon) {
     clipboardIcon.addEventListener('click', event => {
