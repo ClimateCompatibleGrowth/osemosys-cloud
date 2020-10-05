@@ -19,7 +19,7 @@ module Ec2
 
     def base_params
       {
-        image_id: 'ami-01a4b18debb890d7d', # Osemosys-Docker
+        image_id: 'ami-0942ea792bd48e31b', # Osemosys-Docker-new-db
         min_count: 1,
         max_count: 1,
         key_name: 'aws-perso',
