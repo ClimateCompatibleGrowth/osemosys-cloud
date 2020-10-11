@@ -1,7 +1,7 @@
 module Osemosys
   module Solvers
     class Cbc
-      def initialize(local_model_path:, local_data_path:, run:, logger: Osemosys::Config.logger)
+      def initialize(local_model_path:, local_data_path:, run:, logger:)
         @local_data_path = local_data_path
         @local_model_path = local_model_path
         @run = run
