@@ -1,17 +1,18 @@
 module Osemosys
   class DownloadModelFromS3
-    def initialize(s3_data_key:, s3_model_key:)
+    def initialize(s3_data_key:, s3_model_key:, logger:)
       @s3_model_key = s3_model_key
       @s3_data_key = s3_data_key
+      @logger = logger
     end
 
     def call
-      Config.logger.info 'Downloading input files...'
+      logger.info 'Downloading input files...'
 
-      Config.logger.info 'Downloading model file...'
+      logger.info 'Downloading model file...'
       s3_model_object.download_file(local_model_file_path)
 
-      Config.logger.info 'Downloading data file...'
+      logger.info 'Downloading data file...'
       s3_data_object.download_file(local_data_file_path)
 
       OpenStruct.new(
@@ -22,7 +23,7 @@ module Osemosys
 
     private
 
-    attr_reader :s3_model_key, :s3_data_key
+    attr_reader :s3_model_key, :s3_data_key, :logger
 
     def s3_data_object
       @s3_data_object ||= s3.bucket(bucket).object(s3_data_key)

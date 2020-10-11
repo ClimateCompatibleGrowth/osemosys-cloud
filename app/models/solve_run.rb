@@ -1,5 +1,5 @@
 class SolveRun
-  def initialize(run:, solver:, logger: Osemosys::Config.logger)
+  def initialize(run:, solver:, logger:)
     @run = run
     @solver = solver
     @logger = logger
@@ -50,6 +50,7 @@ class SolveRun
       Osemosys::DownloadModelFromS3.new(
         s3_data_key: run.data_file.key,
         s3_model_key: run.model_file.key,
+        logger: logger,
       ).call
     end
   end
