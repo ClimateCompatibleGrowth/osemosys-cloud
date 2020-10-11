@@ -17,6 +17,7 @@ RSpec.describe Osemosys::PrepareResults do
       data_path: data_path,
       metadata_path: metadata_path,
       destination: zip_path,
+      logger: Logger.new($stdout),
     )
 
     `unzip -d #{unzip_directory} /tmp/test-zip-output `

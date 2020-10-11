@@ -15,6 +15,7 @@ RSpec.describe Osemosys::Solvers::Cbc do
         local_model_path: atlantis_model_path,
         local_data_path: atlantis_data_path,
         run: run,
+        logger: Logger.new($stdout),
       ).call
 
       expect(output.solved_file_path).to match(%r{\.\/data\/output.+\.zip})
@@ -38,6 +39,7 @@ RSpec.describe Osemosys::Solvers::Cbc do
         local_model_path: model_path,
         local_data_path: atlantis_data_path,
         run: run,
+        logger: Logger.new($stdout),
       ).call
 
       expect(output.solved_file_path).to match(%r{\.\/data\/output.+\.zip})

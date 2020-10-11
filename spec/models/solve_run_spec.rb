@@ -6,7 +6,7 @@ RSpec.describe SolveRun do
       run = create(:run, :queued, :atlantis)
       expect(run.state).to eq('queued')
 
-      SolveRun.new(run: run, solver: Osemosys::Solvers::Dummy).call
+      SolveRun.new(run: run, solver: Osemosys::Solvers::Dummy, logger: Logger.new($stdout)).call
 
       expect(run.state).to eq('succeeded')
     end
@@ -23,7 +23,7 @@ RSpec.describe SolveRun do
         instance_double('AfterFinishHook', call: 'OK'),
       )
 
-      SolveRun.new(run: run, solver: Osemosys::Solvers::Dummy).call
+      SolveRun.new(run: run, solver: Osemosys::Solvers::Dummy, logger: Logger.new($stdout)).call
 
       expect(AfterFinishHook).to have_received(:new).once
     end
@@ -35,10 +35,9 @@ RSpec.describe SolveRun do
           instance_double('AfterFinishHook', call: 'OK'),
         )
 
-        expect { SolveRun.new(run: run, solver: Osemosys::Solvers::Dummy).call }.to raise_error(
-          TTY::Command::ExitError,
-        )
-
+        expect do
+          SolveRun.new(run: run, solver: Osemosys::Solvers::Dummy, logger: Logger.new($stdout)).call
+        end.to raise_error(TTY::Command::ExitError)
         expect(AfterFinishHook).to have_received(:new).once
       end
     end
@@ -52,9 +51,9 @@ RSpec.describe SolveRun do
           instance_double('AfterFinishHook', call: 'OK'),
         )
 
-        expect { SolveRun.new(run: run, solver: Osemosys::Solvers::Dummy).call }.to raise_error(
-          Timeout::Error,
-        )
+        expect do
+          SolveRun.new(run: run, solver: Osemosys::Solvers::Dummy, logger: Logger.new($stdout)).call
+        end.to raise_error(Timeout::Error)
         expect(AfterFinishHook).to have_received(:new).once
       end
     end

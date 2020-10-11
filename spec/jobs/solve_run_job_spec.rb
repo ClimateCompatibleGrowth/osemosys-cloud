@@ -24,7 +24,11 @@ RSpec.describe SolveRunJob do
 
       SolveRunJob.new.perform(run_id: run.id)
 
-      expect(SolveRun).to have_received(:new).with(run: run, solver: Osemosys::Solvers::Cbc)
+      expect(SolveRun).to have_received(:new).with(
+        run: run,
+        solver: Osemosys::Solvers::Cbc,
+        logger: instance_of(Logger),
+      )
       expect(Ec2::CreateInstance).not_to have_received(:call)
     end
   end
@@ -37,7 +41,11 @@ RSpec.describe SolveRunJob do
 
       SolveRunJob.new.perform(run_id: run.id)
 
-      expect(SolveRun).to have_received(:new).with(run: run, solver: Osemosys::Solvers::Cbc)
+      expect(SolveRun).to have_received(:new).with(
+        run: run,
+        solver: Osemosys::Solvers::Cbc,
+        logger: instance_of(Logger),
+      )
       expect(Ec2::CreateInstance).not_to have_received(:call)
     end
 
@@ -48,7 +56,11 @@ RSpec.describe SolveRunJob do
 
       SolveRunJob.new.perform(run_id: run.id)
 
-      expect(SolveRun).to have_received(:new).with(run: run, solver: Osemosys::Solvers::Cbc)
+      expect(SolveRun).to have_received(:new).with(
+        run: run,
+        solver: Osemosys::Solvers::Cbc,
+        logger: instance_of(Logger),
+      )
       expect(Ec2::CreateInstance).not_to have_received(:call)
     end
   end

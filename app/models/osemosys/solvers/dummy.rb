@@ -1,7 +1,8 @@
 module Osemosys
   module Solvers
     class Dummy
-      def initialize(local_data_path:, run:, logger:)
+      def initialize(local_model_path: nil, local_data_path:, run:, logger:)
+        # local_model_path to keep the same API as the CBC solver.
         @local_data_path = local_data_path
         @run = run
         @logger = logger
