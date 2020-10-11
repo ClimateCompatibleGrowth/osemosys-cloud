@@ -1,18 +1,19 @@
 module Commands
   class PostProcessResultFiles
-    def initialize(preprocessed_data_path:, solution_file_path:)
+    def initialize(preprocessed_data_path:, solution_file_path:, logger: Osemosys::Config.logger)
       @preprocessed_data_path = preprocessed_data_path
       @solution_file_path = solution_file_path
+      @logger = logger
     end
 
     def call
-      Osemosys::Config.logger.info 'Postprocessing result file'
+      logger.info 'Postprocessing result file'
       tty_command.run(postprocessing_command)
     end
 
     private
 
-    attr_reader :preprocessed_data_path, :solution_file_path
+    attr_reader :preprocessed_data_path, :solution_file_path, :logger
 
     def postprocessing_command
       %(
@@ -23,8 +24,7 @@ module Commands
     end
 
     def tty_command
-      @tty_command ||= TTY::Command.new(output: Osemosys::Config.logger, color: false)
+      @tty_command ||= TTY::Command.new(output: logger, color: false)
     end
   end
 end
-
