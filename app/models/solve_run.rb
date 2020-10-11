@@ -48,8 +48,7 @@ class SolveRun
       )
     else
       Osemosys::DownloadModelFromS3.new(
-        s3_data_key: run.data_file.key,
-        s3_model_key: run.model_file.key,
+        run: run,
         logger: logger,
       ).call
     end

@@ -79,23 +79,23 @@ module Osemosys
       def print_summary
         logger.info 'Model solved!'
         logger.info ''
-        logger.info "run_id: #{Config.run_id}"
+        logger.info "run_id: #{run.id}"
       end
 
       def lp_path
-        "./data/input_#{Config.run_id}.lp"
+        "./data/input_#{run.id}.lp"
       end
 
       def output_path
-        "./data/output_#{Config.run_id}.txt"
+        "./data/output_#{run.id}.txt"
       end
 
       def zipped_output_path
-        "./data/output_#{Config.run_id}.zip"
+        "./data/output_#{run.id}.zip"
       end
 
       def zipped_csv_path
-        "./data/csv_#{Config.run_id}.zip"
+        "./data/csv_#{run.id}.zip"
       end
 
       def metadata_path

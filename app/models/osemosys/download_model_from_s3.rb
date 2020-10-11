@@ -1,8 +1,7 @@
 module Osemosys
   class DownloadModelFromS3
-    def initialize(s3_data_key:, s3_model_key:, logger:)
-      @s3_model_key = s3_model_key
-      @s3_data_key = s3_data_key
+    def initialize(run:, logger:)
+      @run = run
       @logger = logger
     end
 
@@ -23,7 +22,15 @@ module Osemosys
 
     private
 
-    attr_reader :s3_model_key, :s3_data_key, :logger
+    attr_reader :run, :logger
+
+    def s3_data_key
+      run.data_file.key
+    end
+
+    def s3_model_key
+      run.model_file.key
+    end
 
     def s3_data_object
       @s3_data_object ||= s3.bucket(bucket).object(s3_data_key)
@@ -34,11 +41,11 @@ module Osemosys
     end
 
     def local_data_file_path
-      "/tmp/data_#{Config.run_id}.txt"
+      "/tmp/data_#{run.id}.txt"
     end
 
     def local_model_file_path
-      "/tmp/model_#{Config.run_id}.txt"
+      "/tmp/model_#{run.id}.txt"
     end
 
     def bucket
