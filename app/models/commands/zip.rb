@@ -1,6 +1,6 @@
 module Commands
   class Zip
-    def initialize(source:, destination:, logger: Osemosys::Config.logger)
+    def initialize(source:, destination:, logger:)
       @source = source
       @destination = destination
       @logger = logger

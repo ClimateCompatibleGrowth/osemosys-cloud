@@ -1,6 +1,6 @@
 module Commands
   class FindSolution
-    def initialize(lp_path:, output_path:, logger: Osemosys::Config.logger)
+    def initialize(lp_path:, output_path:, logger:)
       @lp_path = lp_path
       @output_path = output_path
       @logger = logger

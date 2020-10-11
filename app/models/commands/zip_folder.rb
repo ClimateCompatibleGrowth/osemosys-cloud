@@ -1,6 +1,6 @@
 module Commands
   class ZipFolder
-    def initialize(folder:, destination:, logger: Osemosys::Config.logger)
+    def initialize(folder:, destination:, logger:)
       @folder = folder
       @destination = destination
       @logger = logger

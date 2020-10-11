@@ -1,6 +1,6 @@
 module Commands
   class GenerateInputFile
-    def initialize(local_model_path:, local_data_path:, lp_path:, logger: Osemosys::Config.logger)
+    def initialize(local_model_path:, local_data_path:, lp_path:, logger:)
       @local_model_path = local_model_path
       @local_data_path = local_data_path
       @lp_path = lp_path

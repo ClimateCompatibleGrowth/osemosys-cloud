@@ -1,6 +1,6 @@
 module Commands
   class PreprocessDataFile
-    def initialize(local_data_path:, preprocessed_data_path:, logger: Osemosys::Config.logger)
+    def initialize(local_data_path:, preprocessed_data_path:, logger:)
       @local_data_path = local_data_path
       @preprocessed_data_path = preprocessed_data_path
       @logger = logger

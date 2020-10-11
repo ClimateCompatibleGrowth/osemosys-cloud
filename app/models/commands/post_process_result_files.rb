@@ -1,6 +1,6 @@
 module Commands
   class PostProcessResultFiles
-    def initialize(preprocessed_data_path:, solution_file_path:, logger: Osemosys::Config.logger)
+    def initialize(preprocessed_data_path:, solution_file_path:, logger:)
       @preprocessed_data_path = preprocessed_data_path
       @solution_file_path = solution_file_path
       @logger = logger
