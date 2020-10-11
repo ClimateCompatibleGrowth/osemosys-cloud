@@ -1,9 +1,11 @@
 module Osemosys
   module Solvers
     class Dummy
-      def initialize(local_model_path:, local_data_path:, run:)
+      def initialize(local_model_path: nil, local_data_path:, run:, logger:)
+        # local_model_path to keep the same API as the CBC solver.
         @local_data_path = local_data_path
         @run = run
+        @logger = logger
       end
 
       def call
@@ -18,7 +20,7 @@ module Osemosys
 
       private
 
-      attr_reader :run, :sleep_duration, :local_data_path
+      attr_reader :run, :sleep_duration, :local_data_path, :logger
 
       def faulty_model?
         File.open(local_data_path).size.zero?

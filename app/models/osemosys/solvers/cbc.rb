@@ -1,10 +1,11 @@
 module Osemosys
   module Solvers
     class Cbc
-      def initialize(local_model_path:, local_data_path:, run:)
+      def initialize(local_model_path:, local_data_path:, run:, logger:)
         @local_data_path = local_data_path
         @local_model_path = local_model_path
         @run = run
+        @logger = logger
       end
 
       def call
@@ -28,13 +29,14 @@ module Osemosys
         run.post_process?
       end
 
-      attr_reader :local_data_path, :local_model_path, :run
+      attr_reader :local_data_path, :local_model_path, :run, :logger
 
       def preprocess_data_file
         run.transition_to!(:preprocessing_data)
         Commands::PreprocessDataFile.new(
           local_data_path: local_data_path,
           preprocessed_data_path: preprocessed_data_path,
+          logger: logger,
         ).call
       end
 
@@ -45,6 +47,7 @@ module Osemosys
           local_model_path: local_model_path,
           local_data_path: input_file,
           lp_path: lp_path,
+          logger: logger,
         ).call
       end
 
@@ -53,6 +56,7 @@ module Osemosys
         Commands::FindSolution.new(
           lp_path: lp_path,
           output_path: output_path,
+          logger: logger,
         ).call
       end
 
@@ -62,34 +66,36 @@ module Osemosys
         Commands::PostProcessResultFiles.new(
           preprocessed_data_path: preprocessed_data_path,
           solution_file_path: output_path,
+          logger: logger,
         ).call
 
         Commands::ZipFolder.new(
           folder: 'csv/',
           destination: zipped_csv_path,
+          logger: logger,
         ).call
       end
 
       def print_summary
-        Config.logger.info 'Model solved!'
-        Config.logger.info ''
-        Config.logger.info "run_id: #{Config.run_id}"
+        logger.info 'Model solved!'
+        logger.info ''
+        logger.info "run_id: #{run.id}"
       end
 
       def lp_path
-        "./data/input_#{Config.run_id}.lp"
+        "./data/input_#{run.id}.lp"
       end
 
       def output_path
-        "./data/output_#{Config.run_id}.txt"
+        "./data/output_#{run.id}.txt"
       end
 
       def zipped_output_path
-        "./data/output_#{Config.run_id}.zip"
+        "./data/output_#{run.id}.zip"
       end
 
       def zipped_csv_path
-        "./data/csv_#{Config.run_id}.zip"
+        "./data/csv_#{run.id}.zip"
       end
 
       def metadata_path
@@ -102,6 +108,7 @@ module Osemosys
           data_path: local_data_path,
           metadata_path: metadata_path,
           destination: zipped_output_path,
+          logger: logger,
         )
       end
 

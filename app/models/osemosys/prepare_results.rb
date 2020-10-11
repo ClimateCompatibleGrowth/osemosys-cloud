@@ -4,11 +4,12 @@ module Osemosys
       new(*args).call
     end
 
-    def initialize(output_path:, data_path:, metadata_path:, destination:)
+    def initialize(output_path:, data_path:, metadata_path:, destination:, logger:)
       @output_path = output_path
       @data_path = data_path
       @metadata_path = metadata_path
       @destination = destination
+      @logger = logger
     end
 
     def call
@@ -18,12 +19,13 @@ module Osemosys
 
     private
 
-    attr_reader :output_path, :data_path, :metadata_path, :destination
+    attr_reader :output_path, :data_path, :metadata_path, :destination, :logger
 
     def zip_output
       Commands::Zip.new(
         source: files_to_zip,
         destination: destination,
+        logger: logger,
       ).call
     end
 

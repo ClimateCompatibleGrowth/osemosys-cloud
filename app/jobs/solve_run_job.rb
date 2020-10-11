@@ -31,6 +31,7 @@ class SolveRunJob < ActiveJob::Base
     SolveRun.new(
       run: run,
       solver: Osemosys::Solvers::Cbc,
+      logger: Logger.new(run.local_log_path),
     ).call
   end
 end

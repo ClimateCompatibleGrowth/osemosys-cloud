@@ -10,6 +10,7 @@ RSpec.describe Commands::PreprocessDataFile do
     Commands::PreprocessDataFile.new(
       local_data_path: input_file_path,
       preprocessed_data_path: ouput_file_path,
+      logger: Logger.new($stdout),
     ).call
 
     expect(File.exist?(ouput_file_path)).to be true
