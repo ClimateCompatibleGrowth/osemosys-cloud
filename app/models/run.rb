@@ -33,6 +33,10 @@ class Run < ApplicationRecord
       )
   end
 
+  def model
+    version.model
+  end
+
   def local_log_path
     "/tmp/run-#{id}.log"
   end

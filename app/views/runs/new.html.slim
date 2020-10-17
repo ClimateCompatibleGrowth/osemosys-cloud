@@ -1,7 +1,14 @@
 h1 Schedule a new run
 
-= simple_form_for(@run, html: { class: 'aform-inline' })do |f|
-  = f.association :version, collection: current_user.versions, include_blank: false
+= simple_form_for(@run) do |f|
+  .card
+    .card-body
+      ' Model:
+      = @run.model.name
+      br
+      ' Version:
+      = @run.version.name
+  br
   = f.input :name
   = f.label 'Model file'
   = f.file_field :model_file, accept: 'text/plain'
@@ -14,5 +21,6 @@ h1 Schedule a new run
   = f.input :pre_process, label: 'Run pre-processing script'
   = f.input :post_process, label: 'Generate CSV files (run post-processing script)'
   = f.input :notify_when_finished, label: 'Send me an email when the run finishes'
+  = f.hidden_field :version_id, value: params[:version_id]
   br
   = f.submit 'Create run', class: 'btn btn-primary'
