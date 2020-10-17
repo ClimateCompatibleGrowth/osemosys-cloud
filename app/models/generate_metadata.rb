@@ -21,9 +21,10 @@ class GenerateMetadata
 
   def metadata
     {
+      description: run.description,
+      model_name: run.model.name,
       run_name: run.name,
       version_name: run.version.name,
-      description: run.description,
     }
   end
 
