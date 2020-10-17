@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_08_02_101425) do
+ActiveRecord::Schema.define(version: 2020_10_17_151420) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -46,6 +46,14 @@ ActiveRecord::Schema.define(version: 2020_08_02_101425) do
     t.string "instance_type"
     t.string "aws_id"
     t.index ["run_id"], name: "index_ec2_instances_on_run_id"
+  end
+
+  create_table "models", force: :cascade do |t|
+    t.string "name", null: false
+    t.bigint "user_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["user_id"], name: "index_models_on_user_id"
   end
 
   create_table "run_results", force: :cascade do |t|
@@ -103,13 +111,17 @@ ActiveRecord::Schema.define(version: 2020_08_02_101425) do
     t.bigint "user_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.bigint "model_id"
+    t.index ["model_id"], name: "index_versions_on_model_id"
     t.index ["user_id"], name: "index_versions_on_user_id"
   end
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "models", "users"
   add_foreign_key "run_results", "runs"
   add_foreign_key "run_transitions", "runs"
   add_foreign_key "runs", "users"
   add_foreign_key "runs", "versions"
+  add_foreign_key "versions", "models"
   add_foreign_key "versions", "users"
 end
