@@ -1,6 +1,6 @@
 class VersionsController < ApplicationController
   def new
-    @version = Version.new
+    @version = Version.new(model_id: params[:model_id])
   end
 
   def index
@@ -17,7 +17,7 @@ class VersionsController < ApplicationController
 
     if @version.valid?
       flash.notice = 'Run version created'
-      redirect_to versions_path
+      redirect_to version_path(@version)
     else
       flash.now.alert = @version.errors.full_messages.to_sentence
       render :new
@@ -27,6 +27,6 @@ class VersionsController < ApplicationController
   private
 
   def version_params
-    params.require(:version).permit(:name)
+    params.require(:version).permit(:name, :model_id)
   end
 end

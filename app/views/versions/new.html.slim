@@ -1,6 +1,7 @@
 h1 Create a new version
 
 = simple_form_for(@version, html: { class: 'aform-inline' }) do |f|
+  = f.association :model, collection: current_user.models, include_blank: false
   = f.input :name
   br
   = f.submit 'Create version', class: 'btn btn-primary'
