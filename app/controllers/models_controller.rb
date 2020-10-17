@@ -17,7 +17,7 @@ class ModelsController < ApplicationController
 
     if @model.valid?
       flash.notice = 'Model created'
-      redirect_to models_path
+      redirect_to model_path(@model)
     else
       flash.now.alert = @model.errors.full_messages.to_sentence
       render :new

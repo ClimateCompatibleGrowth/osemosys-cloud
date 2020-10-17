@@ -6,5 +6,6 @@ FactoryBot.define do
   factory :version do
     name { generate :version_name }
     user
+    model
   end
 end
