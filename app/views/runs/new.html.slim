@@ -21,6 +21,6 @@ h1 Schedule a new run
   = f.input :pre_process, label: 'Run pre-processing script'
   = f.input :post_process, label: 'Generate CSV files (run post-processing script)'
   = f.input :notify_when_finished, label: 'Send me an email when the run finishes'
-  = f.hidden_field :version_id, value: params[:version_id]
+  = f.hidden_field :version_id
   br
   = f.submit 'Create run', class: 'btn btn-primary'

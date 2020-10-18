@@ -8,7 +8,7 @@ Rails.application.routes.draw do
   end
 
   root to: 'pages#home'
-  resources :runs, only: %i[new create index show]
+  resources :runs, only: %i[new create show]
   resources :versions, only: %i[new create index show]
   resources :models, only: %i[new create index show]
   post '/run/:id/start', to: 'runs#start', as: :start_run
