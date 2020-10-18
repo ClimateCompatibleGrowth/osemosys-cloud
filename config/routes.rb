@@ -21,4 +21,6 @@ Rails.application.routes.draw do
       resources :runs, only: %i[index]
     end
   end
+
+  get '*unmatched_route', to: 'pages#not_found'
 end
