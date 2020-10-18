@@ -30,12 +30,10 @@ class RunsController < ApplicationController
 
   def start
     run = Run.find(params[:id])
-    if run.transition_to!(:queued)
-      SolveRunJob.perform_later(
-        run_id: run.id,
-      )
+    if run.transition_to(:queued)
+      SolveRunJob.perform_later(run_id: run.id)
+      flash.notice = 'Run started'
     end
-    flash.notice = 'Run started'
     redirect_to version_path(run.version)
   end
 
