@@ -21,6 +21,7 @@ RSpec.describe 'Creating a run', type: :system do
     fill_in 'Description', with: 'A Place Long Gone'
 
     select('Large server', from: 'run_server_type')
+    select('Spanish', from: 'run_language')
 
     atlantis_model = "#{Rails.root}/spec/data/atlantis_model.txt"
     atlantis_data = "#{Rails.root}/spec/data/atlantis_data.txt"
@@ -33,6 +34,7 @@ RSpec.describe 'Creating a run', type: :system do
     expect(page).to have_text 'Atlantis'
     expect(page).to have_text 'Run created'
     expect(page).to have_text 'A Place Long Gone'
+    expect(page).to have_text 'Spanish'
   end
 
   it 'redirects to root for logged out users' do
