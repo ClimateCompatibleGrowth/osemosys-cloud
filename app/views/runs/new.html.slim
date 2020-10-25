@@ -1,26 +1,32 @@
 h1 Schedule a new run
 
-= simple_form_for(@run) do |f|
-  .card
-    .card-body
-      ' Model:
-      = @run.model.name
-      br
-      ' Version:
-      = @run.version.name
-  br
-  = f.input :name
-  = f.label 'Model file'
-  = f.file_field :model_file, accept: 'text/plain'
-  = f.label 'Data file'
-  = f.file_field :data_file, accept: 'text/plain'
-  = f.input :description
-  br
-  = f.input :server_type, label: 'Server type', collection: ServerType.all, include_blank: false,
-      label_method: :name, value_method: :slug, default: 'sidekiq'
-  = f.input :pre_process, label: 'Run pre-processing script'
-  = f.input :post_process, label: 'Generate CSV files (run post-processing script)'
-  = f.input :notify_when_finished, label: 'Send me an email when the run finishes'
-  = f.hidden_field :version_id
-  br
-  = f.submit 'Create run', class: 'btn btn-primary'
+.container
+  = simple_form_for(@run) do |f|
+    .card
+      .card-body
+        ' Model:
+        = @run.model.name
+        br
+        ' Version:
+        = @run.version.name
+    br
+    = f.input :name
+    = f.label 'Model file'
+    = f.file_field :model_file, accept: 'text/plain'
+    = f.label 'Data file'
+    = f.file_field :data_file, accept: 'text/plain'
+    .row
+      .col-sm
+        = f.input :description
+      .col-sm
+        = f.input :language, label: 'Language', collection: Language.all, include_blank: false,
+          label_method: :name, value_method: :slug, default: 'en'
+    br
+    = f.input :server_type, label: 'Server type', collection: ServerType.all, include_blank: false,
+        label_method: :name, value_method: :slug, default: 'sidekiq'
+    = f.input :pre_process, label: 'Run pre-processing script'
+    = f.input :post_process, label: 'Generate CSV files (run post-processing script)'
+    = f.input :notify_when_finished, label: 'Send me an email when the run finishes'
+    = f.hidden_field :version_id
+    br
+    = f.submit 'Create run', class: 'btn btn-primary'

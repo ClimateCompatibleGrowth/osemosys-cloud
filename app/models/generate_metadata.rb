@@ -25,6 +25,7 @@ class GenerateMetadata
       model_name: run.model.name,
       run_name: run.name,
       version_name: run.version.name,
+      language: run.language,
     }
   end
 

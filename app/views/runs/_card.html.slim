@@ -16,6 +16,8 @@
       a.text-right data-toggle='collapse' href="#timeline-#{run.id}"
         =<> fa_icon('table')
         ' Show steps
+    span.float-right
+      = Language.from_slug(run.language).name
 
   .run-card__content
     - timeline = Run::Timeline.new(run)
