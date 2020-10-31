@@ -8,6 +8,7 @@ Bundler.require(*Rails.groups)
 
 module OsemosysCloud
   class Application < Rails::Application
+    config.lograge.enabled = true
     config.time_zone = 'Europe/Stockholm'
 
     config.load_defaults 6.0
