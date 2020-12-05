@@ -69,8 +69,8 @@ Rails.application.configure do
   config.action_mailer.default_url_options = { host: 'www.osemosys-cloud.com' }
 
   ActionMailer::Base.smtp_settings = {
-    user_name: Rails.application.credentials.dig(:sendgrid, :username),
-    password: Rails.application.credentials.dig(:sendgrid, :password),
+    user_name: 'apikey',
+    password: Rails.application.credentials.dig(:sendgrid, :api_key),
     domain: 'www.osemosys-cloud.com',
     address: 'smtp.sendgrid.net',
     port: 587,
