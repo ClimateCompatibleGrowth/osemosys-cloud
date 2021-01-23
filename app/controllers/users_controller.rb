@@ -6,8 +6,14 @@ class UsersController < ApplicationController
   end
 
   def update
-    current_user.update!(user_params)
-    redirect_to action: :show
+    @user = current_user
+    if @user.update(user_params)
+      flash.notice = t('users_controller.user_updated')
+      redirect_to action: :show
+    else
+      flash.now.alert = @user.errors.full_messages.to_sentence
+      render :show
+    end
   end
 
   private

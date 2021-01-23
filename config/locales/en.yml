@@ -17,10 +17,14 @@ en:
       version:
         model: Model
         name: Name
+      user:
+        email: Email
+        runs_visible_to_admins: Runs visible to admins
     models:
       model: Model
       run: Run
       version: Version
+      user: User
   admin:
     runs:
       index:
@@ -122,6 +126,8 @@ en:
     run_created: Run created
     run_started: Run started
     run_stopped: Run stopped
+  users_controller:
+    user_updated: User updated
   server_type:
     large: Large server
     small: Small server

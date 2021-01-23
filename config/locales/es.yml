@@ -17,10 +17,14 @@ es:
       version:
         model: MODEL
         name: NAME
+      user:
+        email: EMAIL
+        runs_visible_to_admins: RUNS VISIBLE TO ADMINS
     models:
       model: MODEL
       run: RUN
       version: VERSION
+      user: USER
   admin:
     runs:
       index:
@@ -122,6 +126,8 @@ es:
     run_created: RUN CREATED
     run_started: RUN STARTED
     run_stopped: RUN STOPPED
+  users_controller:
+    user_updated: USER UPDATED
   server_type:
     large: LARGE SERVER
     small: SMALL SERVER

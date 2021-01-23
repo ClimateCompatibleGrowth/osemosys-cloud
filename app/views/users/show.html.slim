@@ -3,4 +3,4 @@ h1= t('.my_user_profile')
 = simple_form_for(@user)do |f|
   = f.input :email, disabled: true
   = f.input :runs_visible_to_admins, as: :boolean
-  = f.submit
+  = f.button :submit, class: 'btn btn-primary'
