@@ -14,5 +14,8 @@ module OsemosysCloud
     config.load_defaults 6.0
 
     config.active_job.queue_adapter = :sidekiq
+
+    config.i18n.available_locales = %i[en es]
+    config.i18n.default_locale = :en
   end
 end
