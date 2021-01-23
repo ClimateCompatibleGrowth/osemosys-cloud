@@ -12,7 +12,7 @@ RSpec.describe 'Creating a model, version and a run', type: :system do
     click_on 'New Model'
 
     fill_in 'Name', with: 'My model 123'
-    click_on 'Create model'
+    click_on 'Create Model'
 
     expect(page).to have_text('Model created')
     expect(page).to have_text('My model 123')
@@ -20,7 +20,7 @@ RSpec.describe 'Creating a model, version and a run', type: :system do
     click_on 'New version'
 
     fill_in 'Name', with: 'My version 123'
-    click_on 'Create version'
+    click_on 'Create Version'
 
     expect(page).to have_text('Run version created')
     expect(page).to have_text('My version 123')

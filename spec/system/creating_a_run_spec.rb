@@ -29,7 +29,7 @@ RSpec.describe 'Creating a run', type: :system do
     attach_file 'run_model_file', atlantis_model
     attach_file 'run_data_file', atlantis_data
 
-    click_on 'Create run'
+    click_on 'Create Run'
 
     expect(page).to have_text 'Atlantis'
     expect(page).to have_text 'Run created'
