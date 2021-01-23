@@ -7,3 +7,8 @@ en:
       logout: Logout
       register: Register
       sign_in: Sign in
+  admin:
+    runs:
+      index:
+        access_denied: Access Denied
+        not_allowed_to_see: Not allowed to see runs for this user.

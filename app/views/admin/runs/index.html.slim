@@ -11,5 +11,5 @@
   = paginate @runs
 
 - else
-  h1 Access Denied
-  ' Not allowed to see runs for this user.
+  h1= t('.access_denied')
+  => t('.not_allowed_to_see_runs')
