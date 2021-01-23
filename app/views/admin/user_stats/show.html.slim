@@ -41,8 +41,8 @@ h2= t('.runs_by_state')
 - @run_count_by_state.each do |state, run_count|
   ul.list-group
     li.list-group-item
-      - humanized_status = Run::ToHumanState.call(state_slug: state)
-      = "#{humanized_status}: #{run_count}"
+      = t("run_state.#{state}")
+      = ": #{run_count}"
     li.list-group-item
       - total_duration_for_state = @user_runs.where(state: state).sum(:finished_in)
       => t('.total_duration_for_state')

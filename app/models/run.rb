@@ -63,7 +63,7 @@ class Run < ApplicationRecord
   end
 
   def humanized_status
-    Run::ToHumanState.call(state_slug: state)
+    I18n.t("runs_state.#{state}")
   end
 
   def finished?

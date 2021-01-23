@@ -1,12 +1,26 @@
 ---
 en:
-  layouts:
-    application:
-      my_models: My models
-      admin: Admin
-      logout: Logout
-      register: Register
-      sign_in: Sign in
+  activerecord:
+    attributes:
+      model:
+        name: Name
+      run:
+        data_file: Data file
+        description: Description
+        language: Language
+        model_file: Model file
+        name: Name
+        notify_when_finished: Send me an email when the run finishes
+        post_process: Generate CSV files (run post-processing script)
+        pre_process: Run pre-processing script
+        server_type: Server type
+      version:
+        model: Model
+        name: Name
+    models:
+      model: Model
+      run: Run
+      version: Version
   admin:
     runs:
       index:
@@ -14,128 +28,124 @@ en:
         not_allowed_to_see_runs: Not allowed to see runs for this user.
     user_stats:
       index:
+        created: Created
+        email: email
+        last_run_at: Last run at
         platform_statistics: Platform statistics
         registered_users: 'Registered users:'
-        total_server_time_used: 'Total server time used:'
-        user_statistics: User statistics
-        user_id: User id
-        email: email
-        created: Created
         runs: Runs
-        last_run_at: Last run at
+        total_server_time_used: 'Total server time used:'
+        user_id: User id
+        user_statistics: User statistics
       show:
         back: "< Back"
-        user_information: User information
-        id: Id
         email: Email
-        sign_up_date: Sign up date
-        runs: Runs
+        id: Id
         last_run: 'Last run:'
-        total_run_duration: 'Total run duration:'
+        runs: Runs
         runs_by_state: Runs by state
+        sign_up_date: Sign up date
         total_duration_for_state: 'Total duration for state:'
-  models:
-    new:
-      create_a_new_model: Create a new model
-    index:
-      my_models: My models
-      new_model: New Model
-      id: ID
-      name: Name
-    show:
-      new_version: New version
-      id: ID
-      name: Name
-  pages:
-    not_found:
-      page_not_found: Page not found
-      this_page_has_not: This page has not been found. Try going back to
-      the_home_page: 'the home page '
-      to_access_your_models: to access your models, versions and runs.
-    home:
-      sign_in: Sign in
-      or: or
-      register: register
-      to_start: to start.
-  runs:
-    new:
-      schedule_a_new_run: Schedule a new run
-    card:
-      show_steps: Show steps
-      start_run: Start run
-      files: 'Files:'
-      result: Result
-      results_csv: Results (CSV)
-      copied_to_clipboard: Copied to clipboard!
-      model: Model
-      data: Data
-      log: Logs
-  users:
-    show:
-      my_user_profile: My User Profile
-  versions:
-    new:
-      create_a_new_version: Create a new version
-    index:
-      my_versions: My versions
-      new_version: New version
-      id: ID
-      name: Name
-      model: Model
-    show:
-      new_run: New run
-  models_controller:
-    model_created: Model created
-  runs_controller:
-    run_created: Run created
-    run_started: Run started
-    run_stopped: Run stopped
-  versions_controller:
-    run_version_created: Run version created
-  server_type:
-    small: Small server
-    large: Large server
-  language:
-    en: English
-    es: Spanish
+        total_run_duration: 'Total run duration:'
+        user_information: User information
   helpers:
-    time_ago: "%{time} AGO"
     submit:
       user:
         create: Add %{model}
         update: Save Changes
-  activerecord:
-    models:
-      model: Model
-      version: Version
-      run: Run
-    attributes:
-      model:
-        name: Name
-      version:
-        name: Name
-        model: Model
-      run:
-        name: Name
-        model_file: Model file
-        data_file: Data file
-        description: Description
-        language: Language
-        server_type: Server type
-        pre_process: Run pre-processing script
-        post_process: Generate CSV files (run post-processing script)
-        notify_when_finished: Send me an email when the run finishes
-  simple_form:
-    "yes": Yes
-    "no": No
-    required:
-      text: required
-      mark: '*'
-    error_notification:
-      default_message: "Please review the problems below:"
+    time_ago: "%{time} AGO"
+  language:
+    en: English
+    es: Spanish
+  layouts:
+    application:
+      admin: Admin
+      logout: Logout
+      my_models: My models
+      register: Register
+      sign_in: Sign in
+  models:
+    index:
+      id: ID
+      my_models: My models
+      name: Name
+      new_model: New Model
+    new:
+      create_a_new_model: Create a new model
+    show:
+      id: ID
+      name: Name
+      new_version: New version
+  models_controller:
+    model_created: Model created
+  pages:
+    home:
+      or: or
+      register: register
+      sign_in: Sign in
+      to_start: to start.
+    not_found:
+      page_not_found: Page not found
+      the_home_page: 'the home page '
+      this_page_has_not: This page has not been found. Try going back to
+      to_access_your_models: to access your models, versions and runs.
   run_mailer:
     run_finished_email:
+      solving_time: Solving time
+      status: Status
       subject: Run finished
       title: "Run finished: %{run_name}"
-      status: Status
-      solving_time: Solving time
+  run_state:
+    new: New
+    queued: Creating server
+    ongoing: Ongoing
+    succeeded: Succeeded
+    failed: Failed
+    finding_solution: Solving model
+    generating_matrix: Generating matrix
+    preprocessing_data: Preprocessing data
+    postprocessing: Postprocessing result
+  runs:
+    card:
+      copied_to_clipboard: Copied to clipboard!
+      data: Data
+      files: 'Files:'
+      log: Logs
+      model: Model
+      result: Result
+      results_csv: Results (CSV)
+      show_steps: Show steps
+      start_run: Start run
+    new:
+      schedule_a_new_run: Schedule a new run
+  runs_controller:
+    run_created: Run created
+    run_started: Run started
+    run_stopped: Run stopped
+  server_type:
+    large: Large server
+    small: Small server
+  simple_form:
+    error_notification:
+      default_message: "Please review the problems below:"
+    "no": No
+    required:
+      mark: '*'
+      text: required
+    "yes": Yes
+  users:
+    show:
+      my_user_profile: My User Profile
+  versions:
+    index:
+      id: ID
+      model: Model
+      my_versions: My versions
+      name: Name
+      new_version: New version
+    new:
+      create_a_new_version: Create a new version
+    show:
+      new_run: New run
+  versions_controller:
+    run_version_created: Run version created

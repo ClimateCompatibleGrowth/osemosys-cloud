@@ -1,12 +1,26 @@
 ---
 es:
-  layouts:
-    application:
-      my_models: MY MODELS
-      admin: ADMIN
-      logout: LOGOUT
-      register: REGISTER
-      sign_in: SIGN IN
+  activerecord:
+    attributes:
+      model:
+        name: NAME
+      run:
+        data_file: DATA FILE
+        description: DESCRIPTION
+        language: LANGUAGE
+        model_file: MODEL FILE
+        name: NAME
+        notify_when_finished: SEND ME AN EMAIL WHEN THE RUN FINISHES
+        post_process: GENERATE CSV FILES (RUN POST-PROCESSING SCRIPT)
+        pre_process: RUN PRE-PROCESSING SCRIPT
+        server_type: SERVER TYPE
+      version:
+        model: MODEL
+        name: NAME
+    models:
+      model: MODEL
+      run: RUN
+      version: VERSION
   admin:
     runs:
       index:
@@ -14,128 +28,124 @@ es:
         not_allowed_to_see_runs: NOT ALLOWED TO SEE RUNS FOR THIS USER.
     user_stats:
       index:
+        created: CREATED
+        email: EMAIL
+        last_run_at: LAST RUN AT
         platform_statistics: PLATFORM STATISTICS
         registered_users: 'REGISTERED USERS:'
-        total_server_time_used: 'TOTAL SERVER TIME USED:'
-        user_statistics: USER STATISTICS
-        user_id: USER ID
-        email: EMAIL
-        created: CREATED
         runs: RUNS
-        last_run_at: LAST RUN AT
+        total_server_time_used: 'TOTAL SERVER TIME USED:'
+        user_id: USER ID
+        user_statistics: USER STATISTICS
       show:
         back: "< BACK"
-        user_information: USER INFORMATION
-        id: ID
         email: EMAIL
-        sign_up_date: SIGN UP DATE
-        runs: RUNS
+        id: ID
         last_run: 'LAST RUN:'
-        total_run_duration: 'TOTAL RUN DURATION:'
+        runs: RUNS
         runs_by_state: RUNS BY STATE
+        sign_up_date: SIGN UP DATE
         total_duration_for_state: 'TOTAL DURATION FOR STATE:'
-  models:
-    new:
-      create_a_new_model: CREATE A NEW MODEL
-    index:
-      my_models: MY MODELS
-      new_model: NEW MODEL
-      id: ID
-      name: NAME
-    show:
-      new_version: NEW VERSION
-      id: ID
-      name: NAME
-  pages:
-    not_found:
-      page_not_found: PAGE NOT FOUND
-      this_page_has_not: THIS PAGE HAS NOT BEEN FOUND. TRY GOING BACK TO
-      the_home_page: 'THE HOME PAGE '
-      to_access_your_models: TO ACCESS YOUR MODELS, VERSIONS AND RUNS.
-    home:
-      sign_in: SIGN IN
-      or: OR
-      register: REGISTER
-      to_start: TO START.
-  runs:
-    new:
-      schedule_a_new_run: SCHEDULE A NEW RUN
-    card:
-      show_steps: SHOW STEPS
-      start_run: START RUN
-      files: 'FILES:'
-      result: RESULT
-      results_csv: RESULTS (CSV)
-      copied_to_clipboard: COPIED TO CLIPBOARD!
-      model: MODEL
-      data: DATA
-      log: LOG
-  users:
-    show:
-      my_user_profile: MY USER PROFILE
-  versions:
-    new:
-      create_a_new_version: CREATE A NEW VERSION
-    index:
-      my_versions: MY VERSIONS
-      new_version: NEW VERSION
-      id: ID
-      name: NAME
-      model: MODEL
-    show:
-      new_run: NEW RUN
-  models_controller:
-    model_created: MODEL CREATED
-  runs_controller:
-    run_created: RUN CREATED
-    run_started: RUN STARTED
-    run_stopped: RUN STOPPED
-  versions_controller:
-    run_version_created: RUN VERSION CREATED
-  server_type:
-    small: SMALL SERVER
-    large: LARGE SERVER
-  language:
-    en: ENGLISH
-    es: SPANISH
+        total_run_duration: 'TOTAL RUN DURATION:'
+        user_information: USER INFORMATION
   helpers:
-    time_ago: "%{time} AGO"
     submit:
       user:
         create: ADD %{MODEL}
         update: SAVE CHANGES
-  activerecord:
-    models:
-      model: MODEL
-      version: VERSION
-      run: RUN
-    attributes:
-      model:
-        name: NAME
-      version:
-        name: NAME
-        model: MODEL
-      run:
-        name: NAME
-        model_file: MODEL FILE
-        data_file: DATA FILE
-        description: DESCRIPTION
-        language: LANGUAGE
-        server_type: SERVER TYPE
-        pre_process: RUN PRE-PROCESSING SCRIPT
-        post_process: GENERATE CSV FILES (RUN POST-PROCESSING SCRIPT)
-        notify_when_finished: SEND ME AN EMAIL WHEN THE RUN FINISHES
-  simple_form:
-    "yes": YES
-    "no": NO
-    required:
-      text: REQUIRED
-      mark: '*'
-    error_notification:
-      default_message: "PLEASE REVIEW THE PROBLEMS BELOW:"
+    time_ago: "%{time} AGO"
+  language:
+    en: ENGLISH
+    es: SPANISH
+  layouts:
+    application:
+      admin: ADMIN
+      logout: LOGOUT
+      my_models: MY MODELS
+      register: REGISTER
+      sign_in: SIGN IN
+  models:
+    index:
+      id: ID
+      my_models: MY MODELS
+      name: NAME
+      new_model: NEW MODEL
+    new:
+      create_a_new_model: CREATE A NEW MODEL
+    show:
+      id: ID
+      name: NAME
+      new_version: NEW VERSION
+  models_controller:
+    model_created: MODEL CREATED
+  pages:
+    home:
+      or: OR
+      register: REGISTER
+      sign_in: SIGN IN
+      to_start: TO START.
+    not_found:
+      page_not_found: PAGE NOT FOUND
+      the_home_page: 'THE HOME PAGE '
+      this_page_has_not: THIS PAGE HAS NOT BEEN FOUND. TRY GOING BACK TO
+      to_access_your_models: TO ACCESS YOUR MODELS, VERSIONS AND RUNS.
   run_mailer:
     run_finished_email:
+      solving_time: SOLVING TIME
+      status: STATUS
       subject: RUN FINISHED
       title: "RUN FINISHED: %{RUN_NAME}"
-      status: STATUS
-      solving_time: SOLVING TIME
+  run_state:
+    new: NEW
+    queued: CREATING SERVER
+    ongoing: ONGOING
+    succeeded: SUCCEEDED
+    failed: FAILED
+    finding_solution: SOLVING MODEL
+    generating_matrix: GENERATING MATRIX
+    preprocessing_data: PREPROCESSING DATA
+    postprocessing: POSTPROCESSING RESULT
+  runs:
+    card:
+      copied_to_clipboard: COPIED TO CLIPBOARD!
+      data: DATA
+      files: 'FILES:'
+      log: LOG
+      model: MODEL
+      result: RESULT
+      results_csv: RESULTS (CSV)
+      show_steps: SHOW STEPS
+      start_run: START RUN
+    new:
+      schedule_a_new_run: SCHEDULE A NEW RUN
+  runs_controller:
+    run_created: RUN CREATED
+    run_started: RUN STARTED
+    run_stopped: RUN STOPPED
+  server_type:
+    large: LARGE SERVER
+    small: SMALL SERVER
+  simple_form:
+    error_notification:
+      default_message: "PLEASE REVIEW THE PROBLEMS BELOW:"
+    "no": NO
+    required:
+      mark: '*'
+      text: REQUIRED
+    "yes": YES
+  users:
+    show:
+      my_user_profile: MY USER PROFILE
+  versions:
+    index:
+      id: ID
+      model: MODEL
+      my_versions: MY VERSIONS
+      name: NAME
+      new_version: NEW VERSION
+    new:
+      create_a_new_version: CREATE A NEW VERSION
+    show:
+      new_run: NEW RUN
+  versions_controller:
+    run_version_created: RUN VERSION CREATED
