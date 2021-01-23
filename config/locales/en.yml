@@ -64,13 +64,6 @@ en:
   runs:
     new:
       schedule_a_new_run: Schedule a new run
-      model: 'Model:'
-      version: 'Version:'
-      language: Language
-      server_type: Server type
-      run_pre_processing_script: Run pre-processing script
-      generate_csv_files_run: Generate CSV files (run post-processing script)
-      send_me_an_email: Send me an email when the run finishes
     card:
       show_steps: Show steps
       start_run: Start run
@@ -101,3 +94,37 @@ en:
     run_stopped: Run stopped
   versions_controller:
     run_version_created: Run version created
+  helpers:
+    submit:
+      user:
+        create: Add %{model}
+        update: Save Changes
+  activerecord:
+    models:
+      model: Model
+      version: Version
+      run: Run
+    attributes:
+      model:
+        name: Name
+      version:
+        name: Name
+        model: Model
+      run:
+        name: Name
+        model_file: Model file
+        data_file: Data file
+        description: Description
+        language: Language
+        server_type: Server type
+        pre_process: Run pre-processing script
+        post_process: Generate CSV files (run post-processing script)
+        notify_when_finished: Send me an email when the run finishes
+  simple_form:
+    "yes": 'Yes'
+    "no": 'No'
+    required:
+      text: 'required'
+      mark: '*'
+    error_notification:
+      default_message: "Please review the problems below:"
