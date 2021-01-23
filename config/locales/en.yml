@@ -11,7 +11,7 @@ en:
     runs:
       index:
         access_denied: Access Denied
-        not_allowed_to_see: Not allowed to see runs for this user.
+        not_allowed_to_see_runs: Not allowed to see runs for this user.
     user_stats:
       index:
         platform_statistics: Platform statistics
@@ -93,3 +93,11 @@ en:
       model: Model
     show:
       new_run: New run
+  models_controller:
+    model_created: Model created
+  runs_controller:
+    run_created: Run created
+    run_started: Run started
+    run_stopped: Run stopped
+  versions_controller:
+    run_version_created: Run version created

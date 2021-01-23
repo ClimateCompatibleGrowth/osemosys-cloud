@@ -20,7 +20,7 @@ class RunsController < ApplicationController
     @run = current_user.runs.create(run_params)
 
     if @run.valid?
-      flash.notice = 'Run created'
+      flash.notice = t('runs_controller.run_created')
       redirect_to version_path(@run.version)
     else
       flash.now.alert = @run.errors.full_messages.to_sentence
@@ -32,7 +32,7 @@ class RunsController < ApplicationController
     run = Run.find(params[:id])
     if run.transition_to(:queued)
       SolveRunJob.perform_later(run_id: run.id)
-      flash.notice = 'Run started'
+      flash.notice = t('runs_controller.run_started')
     end
     redirect_to version_path(run.version)
   end
@@ -40,7 +40,7 @@ class RunsController < ApplicationController
   def stop
     run = Run.find(params[:id])
     Ec2::StopInstance.call(aws_id: run.ec2_instance.aws_id)
-    flash.notice = 'Run stopped'
+    flash.notice = t('runs_controller.run_stopped')
     redirect_to version_path(run.version)
   end
 
