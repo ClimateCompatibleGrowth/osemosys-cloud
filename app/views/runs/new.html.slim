@@ -1,13 +1,15 @@
-h1= t('.schedule_a_new_run')
+h1 = t('.schedule_a_new_run')
 
 .container
   = simple_form_for(@run) do |f|
     .card
       .card-body
-        => t('.model')
+        = t('activerecord.models.model')
+        ':
         = @run.model.name
         br
-        => t('.version')
+        = t('activerecord.models.version')
+        ':
         = @run.version.name
     br
     = f.input :name
