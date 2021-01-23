@@ -17,4 +17,10 @@ RSpec.describe ServerType do
       expect(server_type.name).to eq('Large server')
     end
   end
+
+  it 'has translations for all server types' do
+    ServerType.all.each do |server_type|
+      expect(I18n.exists?(server_type.i18n_key, I18n.locale)).to be(true)
+    end
+  end
 end

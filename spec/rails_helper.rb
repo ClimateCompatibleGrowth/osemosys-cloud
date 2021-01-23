@@ -48,6 +48,10 @@ RSpec.configure do |config|
     FactoryBot.find_definitions
   end
 
+  config.before(:all) do
+    I18n.locale = :en
+  end
+
   config.before(:each) do
     Osemosys::Config.reset_config
     ActionMailer::Base.deliveries.clear
