@@ -10,6 +10,7 @@ gem 'bootsnap', require: false
 gem 'bugsnag'
 gem 'devise'
 gem 'devise-bootstrap-views'
+gem 'devise-i18n'
 gem 'dry-configurable'
 gem 'font_awesome5_rails'
 gem 'kaminari'
