@@ -95,6 +95,9 @@ es:
   server_type:
     small: SMALL SERVER
     large: LARGE SERVER
+  language:
+    en: ENGLISH
+    es: SPANISH
   helpers:
     time_ago: "%{time} AGO"
     submit:

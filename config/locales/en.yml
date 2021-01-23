@@ -95,6 +95,9 @@ en:
   server_type:
     small: Small server
     large: Large server
+  language:
+    en: English
+    es: Spanish
   helpers:
     time_ago: "%{time} AGO"
     submit:

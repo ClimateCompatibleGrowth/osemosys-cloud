@@ -17,4 +17,10 @@ RSpec.describe Language do
       expect(language.name).to eq('Spanish')
     end
   end
+
+  it 'has translations for all server types' do
+    Language.all.each do |server_type|
+      expect(I18n.exists?(server_type.i18n_key, I18n.locale)).to be(true)
+    end
+  end
 end
