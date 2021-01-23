@@ -63,7 +63,7 @@ class Run < ApplicationRecord
   end
 
   def humanized_status
-    I18n.t("runs_state.#{state}")
+    I18n.t("run_state.#{state}")
   end
 
   def finished?

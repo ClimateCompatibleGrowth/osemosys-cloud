@@ -3,12 +3,9 @@ require 'rails_helper'
 RSpec.describe RunTransition do
   describe 'humanized_to_state' do
     it 'delegates to Run::ToHumanState' do
-      transition = build(:run_transition, to_state: 'my-state')
-      allow(Run::ToHumanState).to(
-        receive(:call).with(state_slug: 'my-state').and_return('My State'),
-      )
+      transition = build(:run_transition, to_state: 'succeeded')
 
-      expect(transition.humanized_to_state).to eq('My State')
+      expect(transition.humanized_to_state).to eq('Succeeded')
     end
   end
 
