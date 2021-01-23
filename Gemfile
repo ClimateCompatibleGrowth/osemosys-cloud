@@ -39,7 +39,6 @@ group :development do
   gem 'pry-rails'
   gem 'rubocop', '0.74', require: false
   gem 'rubocop-rspec', '1.36', require: false
-  gem 'slimkeyfy'
   gem 'spring'
   gem 'spring-commands-rspec'
   gem 'spring-watcher-listen'
