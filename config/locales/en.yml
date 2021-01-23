@@ -1,3 +1,9 @@
+---
 en:
-  navbar:
-    my_models: 'My Models'
+  layouts:
+    application:
+      my_models: My models
+      admin: Admin
+      logout: Logout
+      register: Register
+      sign_in: Sign in
