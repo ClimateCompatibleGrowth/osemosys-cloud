@@ -1,15 +1,15 @@
-h1.mb-4 My versions
+h1.mb-4= t('.my_versions')
 
-.mb-2 = link_to('New version', new_version_path, class: 'btn btn-primary')
+.mb-2 = link_to(t('.new_version'), new_version_path, class: 'btn btn-primary')
 
 br
 = paginate @versions
 
 table.table.table-striped.table-hover
   tr
-    th ID
-    th Name
-    th Model
+    th= t('.id')
+    th= t('.name')
+    th= t('.model')
   - @versions.each do |version|
     = link_to(version) do
       tr

@@ -82,3 +82,14 @@ en:
   users:
     show:
       my_user_profile: My User Profile
+  versions:
+    new:
+      create_a_new_version: Create a new version
+    index:
+      my_versions: My versions
+      new_version: New version
+      id: ID
+      name: Name
+      model: Model
+    show:
+      new_run: New run
