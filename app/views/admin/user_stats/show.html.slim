@@ -4,14 +4,14 @@ h1 = "Statistics for #{@user.email}"
 
 hr
 
-h2= t('.user_information')
+h2= User.model_name.human
 
 ul.list-group
   li.list-group-item
-    dt= t('.id')
+    dt= User.human_attribute_name(:id)
     dd = @user.id
   li.list-group-item
-    dt= t('.email')
+    dt= User.human_attribute_name(:email)
     dd = @user.email
 li.list-group-item
   dt= t('.sign_up_date')
@@ -19,7 +19,7 @@ li.list-group-item
 
 hr
 
-h2= t('.runs')
+h2= Run.model_name.human.pluralize
 
 ul.list-group
   li.list-group-item
@@ -45,6 +45,6 @@ h2= t('.runs_by_state')
       = ": #{run_count}"
     li.list-group-item
       - total_duration_for_state = @user_runs.where(state: state).sum(:finished_in)
-      => t('.total_duration_for_state')
+      => t('.total_run_duration')
       = format_duration(total_duration_for_state)
     hr

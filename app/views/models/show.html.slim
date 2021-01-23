@@ -4,8 +4,8 @@ h1 = @model.name
 
 table.table.table-striped.table-hover
   tr
-    th= t('.id')
-    th= t('.name')
+    th= Version.human_attribute_name(:id)
+    th= Version.human_attribute_name(:name)
   - @versions.each do |version|
     = link_to(version) do
       tr

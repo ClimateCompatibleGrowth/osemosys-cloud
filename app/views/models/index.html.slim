@@ -7,8 +7,8 @@ br
 
 table.table.table-striped.table-hover
   tr
-    th= t('.id')
-    th= t('.name')
+    th= Model.human_attribute_name(:id)
+    th= Model.human_attribute_name(:name)
   - @models.each do |model|
     = link_to(model) do
       tr

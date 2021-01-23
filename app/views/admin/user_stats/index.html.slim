@@ -15,10 +15,10 @@ h1= t('.user_statistics')
 
 table.table
   tr
-    th= t('.user_id')
-    th= t('.email')
-    th= t('.created')
-    th= t('.runs')
+    th= User.human_attribute_name(:id)
+    th= User.human_attribute_name(:email)
+    th= User.human_attribute_name(:created_at)
+    th= Run.model_name.human.pluralize
     th= t('.last_run_at')
   - @all_users.each do |user|
     tr

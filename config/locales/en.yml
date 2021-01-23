@@ -32,32 +32,22 @@ en:
         not_allowed_to_see_runs: Not allowed to see runs for this user.
     user_stats:
       index:
-        created: Created
-        email: email
         last_run_at: Last run at
         platform_statistics: Platform statistics
         registered_users: 'Registered users:'
-        runs: Runs
         total_server_time_used: 'Total server time used:'
-        user_id: User id
         user_statistics: User statistics
       show:
-        back: "< Back"
-        email: Email
-        id: Id
+        back: "Back"
         last_run: 'Last run:'
-        runs: Runs
         runs_by_state: Runs by state
         sign_up_date: Sign up date
-        total_duration_for_state: 'Total duration for state:'
         total_run_duration: 'Total run duration:'
-        user_information: User information
   helpers:
     submit:
-      user:
-        create: Add %{model}
-        update: Save Changes
-    time_ago: "%{time} AGO"
+      run:
+        create: Create Run
+    time_ago: "%{time} ago"
   language:
     en: English
     es: Spanish
@@ -70,15 +60,11 @@ en:
       sign_in: Sign in
   models:
     index:
-      id: ID
       my_models: My models
-      name: Name
       new_model: New Model
     new:
       create_a_new_model: Create a new model
     show:
-      id: ID
-      name: Name
       new_version: New version
   models_controller:
     model_created: Model created
@@ -90,9 +76,7 @@ en:
       to_start: to start.
     not_found:
       page_not_found: Page not found
-      the_home_page: 'the home page '
-      this_page_has_not: This page has not been found. Try going back to
-      to_access_your_models: to access your models, versions and runs.
+      page_not_found_body: This page has not been found. Try going back to the home page to access your models, versions and runs.
   run_mailer:
     run_finished_email:
       solving_time: Solving time
@@ -134,21 +118,15 @@ en:
   simple_form:
     error_notification:
       default_message: "Please review the problems below:"
-    "no": No
+    no: No
     required:
       mark: '*'
       text: required
-    "yes": Yes
+    yes: Yes
   users:
     show:
       my_user_profile: My User Profile
   versions:
-    index:
-      id: ID
-      model: Model
-      my_versions: My versions
-      name: Name
-      new_version: New version
     new:
       create_a_new_version: Create a new version
     show:
