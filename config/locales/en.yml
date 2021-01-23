@@ -79,3 +79,6 @@ en:
       results_csv: Results (CSV)
       copied_to_clipboard: "'Copied to clipboard!') do"
       model: Model
+  users:
+    show:
+      my_user_profile: My User Profile
