@@ -77,7 +77,7 @@ en:
       files: 'Files:'
       result: Result
       results_csv: Results (CSV)
-      copied_to_clipboard: "'Copied to clipboard!') do"
+      copied_to_clipboard: Copied to clipboard!
       model: Model
   users:
     show:
