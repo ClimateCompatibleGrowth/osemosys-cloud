@@ -61,3 +61,21 @@ en:
     run_finished_email:
       status: Status
       solving_time: Solving time
+  runs:
+    new:
+      schedule_a_new_run: Schedule a new run
+      model: 'Model:'
+      version: 'Version:'
+      language: Language
+      server_type: Server type
+      run_pre_processing_script: Run pre-processing script
+      generate_csv_files_run: Generate CSV files (run post-processing script)
+      send_me_an_email: Send me an email when the run finishes
+    card:
+      show_steps: Show steps
+      start_run: Start run
+      files: 'Files:'
+      result: Result
+      results_csv: Results (CSV)
+      copied_to_clipboard: "'Copied to clipboard!') do"
+      model: Model

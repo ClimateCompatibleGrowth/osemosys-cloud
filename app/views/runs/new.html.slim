@@ -1,13 +1,13 @@
-h1 Schedule a new run
+h1= t('.schedule_a_new_run')
 
 .container
   = simple_form_for(@run) do |f|
     .card
       .card-body
-        ' Model:
+        => t('.model')
         = @run.model.name
         br
-        ' Version:
+        => t('.version')
         = @run.version.name
     br
     = f.input :name
@@ -19,14 +19,14 @@ h1 Schedule a new run
       .col-sm
         = f.input :description
       .col-sm
-        = f.input :language, label: 'Language', collection: Language.all, include_blank: false,
+        = f.input :language, label: t('.language'), collection: Language.all, include_blank: false,
           label_method: :name, value_method: :slug, default: 'en'
     br
-    = f.input :server_type, label: 'Server type', collection: ServerType.all, include_blank: false,
+    = f.input :server_type, label: t('.server_type'), collection: ServerType.all, include_blank: false,
         label_method: :name, value_method: :slug, default: 'sidekiq'
-    = f.input :pre_process, label: 'Run pre-processing script'
-    = f.input :post_process, label: 'Generate CSV files (run post-processing script)'
-    = f.input :notify_when_finished, label: 'Send me an email when the run finishes'
+    = f.input :pre_process, label: t('.run_pre_processing_script')
+    = f.input :post_process, label: t('.generate_csv_files_run')
+    = f.input :notify_when_finished, label: t('.send_me_an_email')
     = f.hidden_field :version_id
     br
     = f.submit 'Create run', class: 'btn btn-primary'

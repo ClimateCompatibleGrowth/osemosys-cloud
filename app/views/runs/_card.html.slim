@@ -15,7 +15,7 @@
     - if run.finished?
       a.text-right data-toggle='collapse' href="#timeline-#{run.id}"
         =<> fa_icon('table')
-        ' Show steps
+        => t('.show_steps')
     span.float-right
       = Language.from_slug(run.language).name
 
@@ -27,7 +27,7 @@
       hr
 
     - if run.can_be_queued?
-      = link_to('Start run', start_run_path(run), method: :post, class: 'btn btn-success btn-lg btn-block')
+      = link_to(t('.start_run'), start_run_path(run), method: :post, class: 'btn btn-success btn-lg btn-block')
       hr
 
     - if run.finished?
@@ -35,18 +35,18 @@
         =<> fa_icon('stopwatch')
         = format_duration(run.finished_in)
 
-    .run-card__header Files:
+    .run-card__header= t('.files')
     - run_result = run.run_result
     - if run_result.present?
-      =< download_button(run_result.result_file, label: 'Result', style: 'primary') if run_result.result_file.attached?
-      =< download_button(run_result.csv_results, label: 'Results (CSV)', style: 'primary') if run_result.csv_results.attached?
+      =< download_button(run_result.result_file, label: t('.result'), style: 'primary') if run_result.result_file.attached?
+      =< download_button(run_result.csv_results, label: t('.results_csv'), style: 'primary') if run_result.csv_results.attached?
       - if run_result.visualization_url
         =<> link_to(run_result.visualization_url, class: 'btn btn-primary btn-sm', target: '_blank') do
           =<> fa_icon('chart-bar')
         =<> button_tag(type: :button, class: 'btn btn-outline-secondary btn-sm',
           data: { 'copy-to-clipboard' => run_result.result_file_url, toggle: 'tooltip', trigger: 'manual' },
-          title: 'Copied to clipboard!') do
+          title:= t('.copied_to_clipboard')
           =<> fa_icon('clipboard')
     =< download_button(run.log_file, label: 'log') if run.log_file.attached?
-    =< download_button(run.model_file, label: 'Model') if run.model_file.attached?
+    =< download_button(run.model_file, label: t('.model')) if run.model_file.attached?
     =< download_button(run.data_file, label: 'Data') if run.data_file.attached?
