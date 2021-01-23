@@ -12,3 +12,25 @@ en:
       index:
         access_denied: Access Denied
         not_allowed_to_see: Not allowed to see runs for this user.
+    user_stats:
+      index:
+        platform_statistics: Platform statistics
+        registered_users: 'Registered users:'
+        total_server_time_used: 'Total server time used:'
+        user_statistics: User statistics
+        user_id: User id
+        email: email
+        created: Created
+        runs: Runs
+        last_run_at: Last run at
+      show:
+        back: "< Back"
+        user_information: User information
+        id: Id
+        email: Email
+        sign_up_date: Sign up date
+        runs: Runs
+        last_run: 'Last run:'
+        total_run_duration: 'Total run duration:'
+        runs_by_state: Runs by state
+        total_duration_for_state: 'Total duration for state:'

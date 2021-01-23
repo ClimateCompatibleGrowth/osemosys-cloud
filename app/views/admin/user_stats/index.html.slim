@@ -1,25 +1,25 @@
-h1 Platform statistics
+h1= t('.platform_statistics')
 
 ul.list-group
   li.list-group-item
-    ' Registered users:
+    => t('.registered_users')
     = @all_users.count
   li.list-group-item
-    ' Total server time used:
+    => t('.total_server_time_used')
     - total_duration = Run.all.sum(:finished_in)
     = format_duration(total_duration)
 
 hr
 
-h1 User statistics
+h1= t('.user_statistics')
 
 table.table
   tr
-    th User id
-    th email
-    th Created
-    th Runs
-    th Last run at
+    th= t('.user_id')
+    th= t('.email')
+    th= t('.created')
+    th= t('.runs')
+    th= t('.last_run_at')
   - @all_users.each do |user|
     tr
       td = user.id
