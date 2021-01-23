@@ -5,8 +5,8 @@ html
   body
     h1 = "Run finished: #{@run.name}"
     dl
-      dt Status
+      dt= t('.status')
       dd = @run.humanized_status
 
-      dt Solving time
+      dt= t('.solving_time')
       dd = format_duration(@run.finished_in)

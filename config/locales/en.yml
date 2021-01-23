@@ -57,3 +57,7 @@ en:
       or: or
       register: register
       to_start: to start.
+  run_mailer:
+    run_finished_email:
+      status: Status
+      solving_time: Solving time
