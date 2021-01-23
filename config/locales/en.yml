@@ -121,10 +121,10 @@ en:
         post_process: Generate CSV files (run post-processing script)
         notify_when_finished: Send me an email when the run finishes
   simple_form:
-    "yes": 'Yes'
-    "no": 'No'
+    "yes": Yes
+    "no": No
     required:
-      text: 'required'
+      text: required
       mark: '*'
     error_notification:
       default_message: "Please review the problems below:"
