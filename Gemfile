@@ -34,15 +34,15 @@ group :development do
   gem 'better_errors'
   gem 'binding_of_caller'
   gem 'guard-livereload'
+  gem 'i18n_yaml_sorter'
   gem 'listen'
   gem 'pry-rails'
   gem 'rubocop', '0.74', require: false
   gem 'rubocop-rspec', '1.36', require: false
+  gem 'slimkeyfy'
   gem 'spring'
   gem 'spring-commands-rspec'
   gem 'spring-watcher-listen'
-
-  gem 'slimkeyfy'
 end
 
 group :test do

@@ -157,6 +157,7 @@ GEM
       multi_xml (>= 0.5.2)
     i18n (1.8.7)
       concurrent-ruby (~> 1.0)
+    i18n_yaml_sorter (0.2.0)
     jaro_winkler (1.5.4)
     jmespath (1.4.0)
     kaminari (1.2.1)
@@ -397,6 +398,7 @@ DEPENDENCIES
   factory_bot
   font_awesome5_rails
   guard-livereload
+  i18n_yaml_sorter
   kaminari
   kaminari-i18n
   listen
