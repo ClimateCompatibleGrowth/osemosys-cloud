@@ -34,3 +34,15 @@ en:
         total_run_duration: 'Total run duration:'
         runs_by_state: Runs by state
         total_duration_for_state: 'Total duration for state:'
+  models:
+    new:
+      create_a_new_model: Create a new model
+    index:
+      my_models: My models
+      new_model: New Model
+      id: ID
+      name: Name
+    show:
+      new_version: New version
+      id: ID
+      name: Name
