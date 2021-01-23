@@ -57,10 +57,6 @@ en:
       or: or
       register: register
       to_start: to start.
-  run_mailer:
-    run_finished_email:
-      status: Status
-      solving_time: Solving time
   runs:
     new:
       schedule_a_new_run: Schedule a new run
@@ -128,3 +124,9 @@ en:
       mark: '*'
     error_notification:
       default_message: "Please review the problems below:"
+  run_mailer:
+    run_finished_email:
+      subject: Run finished
+      title: Run finished: %{run_name}
+      status: Status
+      solving_time: Solving time

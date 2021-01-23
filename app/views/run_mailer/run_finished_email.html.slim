@@ -3,10 +3,10 @@ html
   head
     meta content=('text/html; charset=UTF-8') http-equiv="Content-Type"
   body
-    h1 = "Run finished: #{@run.name}"
+    h1 = t('title', run_name: @run.name)
     dl
-      dt= t('.status')
+      dt = t('.status')
       dd = @run.humanized_status
 
-      dt= t('.solving_time')
+      dt = t('.solving_time')
       dd = format_duration(@run.finished_in)
