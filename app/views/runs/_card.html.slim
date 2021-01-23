@@ -47,6 +47,6 @@
           data: { 'copy-to-clipboard' => run_result.result_file_url, toggle: 'tooltip', trigger: 'manual' },
           title: t('.copied_to_clipboard'))
           =<> fa_icon('clipboard')
-    =< download_button(run.log_file, label: 'log') if run.log_file.attached?
+    =< download_button(run.log_file, label: t('.log')) if run.log_file.attached?
     =< download_button(run.model_file, label: t('.model')) if run.model_file.attached?
-    =< download_button(run.data_file, label: 'Data') if run.data_file.attached?
+    =< download_button(run.data_file, label: t('.data')) if run.data_file.attached?

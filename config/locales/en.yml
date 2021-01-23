@@ -68,6 +68,8 @@ en:
       results_csv: Results (CSV)
       copied_to_clipboard: Copied to clipboard!
       model: Model
+      data: Data
+      log: Logs
   users:
     show:
       my_user_profile: My User Profile
@@ -90,7 +92,11 @@ en:
     run_stopped: Run stopped
   versions_controller:
     run_version_created: Run version created
+  server_type:
+    small: Small server
+    large: Large server
   helpers:
+    time_ago: "%{time} AGO"
     submit:
       user:
         create: Add %{model}
@@ -127,6 +133,6 @@ en:
   run_mailer:
     run_finished_email:
       subject: Run finished
-      title: Run finished: %{run_name}
+      title: "Run finished: %{run_name}"
       status: Status
       solving_time: Solving time
