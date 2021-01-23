@@ -46,3 +46,14 @@ en:
       new_version: New version
       id: ID
       name: Name
+  pages:
+    not_found:
+      page_not_found: Page not found
+      this_page_has_not: This page has not been found. Try going back to
+      the_home_page: 'the home page '
+      to_access_your_models: to access your models, versions and runs.
+    home:
+      sign_in: Sign in
+      or: or
+      register: register
+      to_start: to start.
