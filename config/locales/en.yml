@@ -57,17 +57,17 @@ en:
   helpers:
     back: Go Back
     submit:
-      run:
-        new: New run
-        create: Create run
-        update: Update run
       model:
-        new: New model
         create: Create model
+        new: New model
         update: Update model
+      run:
+        create: Create run
+        new: New run
+        update: Update run
       version:
-        new: New version
         create: Create version
+        new: New version
         update: Update version
     time_ago: "%{time} ago"
   language:
@@ -85,8 +85,8 @@ en:
       my_models: My models
   pages:
     home:
-      register: register
       or: or
+      register: register
       sign_in: Sign in
       to_start: to start.
     not_found:
@@ -97,17 +97,7 @@ en:
       solving_time: Solving time
       status: Status
       subject: Run finished
-      title: "Run finished: %{run_name}"
-  run_state:
-    failed: Failed
-    finding_solution: Solving model
-    generating_matrix: Generating matrix
-    new: New
-    ongoing: Ongoing
-    postprocessing: Postprocessing result
-    preprocessing_data: Preprocessing data
-    queued: Creating server
-    succeeded: Succeeded
+      title: 'Run finished: %{run_name}'
   runs:
     card:
       copied_to_clipboard: Copied to clipboard!
@@ -119,17 +109,27 @@ en:
       results_csv: Results (CSV)
       show_steps: Show steps
       start_run: Start run
+  run_state:
+    failed: Failed
+    finding_solution: Solving model
+    generating_matrix: Generating matrix
+    new: New
+    ongoing: Ongoing
+    postprocessing: Postprocessing result
+    preprocessing_data: Preprocessing data
+    queued: Creating server
+    succeeded: Succeeded
   server_type:
     large: Large server
     small: Small server
   simple_form:
     error_notification:
-      default_message: "Please review the problems below:"
-    no: No
+      default_message: 'Please review the problems below:'
+    'false': false
     required:
-      mark: '*'
+      mark: "*"
       text: required
-    yes: Yes
+    'true': true
   users:
     show:
       my_user_profile: My User Profile

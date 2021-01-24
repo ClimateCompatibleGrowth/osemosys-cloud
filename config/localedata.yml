@@ -1,0 +1,5 @@
+projects:
+  - id: "badf3c1e-ac49-48ec-b90f-bf5bd9ff2924"
+    locales:
+      en: "config/locales/en.yml"
+      es: "config/locales/es.yml"

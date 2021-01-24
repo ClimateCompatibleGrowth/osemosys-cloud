@@ -43,6 +43,7 @@ group :development do
   gem 'spring'
   gem 'spring-commands-rspec'
   gem 'spring-watcher-listen'
+  gem 'localedata'
 end
 
 group :test do
