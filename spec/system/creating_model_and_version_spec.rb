@@ -9,7 +9,7 @@ RSpec.describe 'Creating a model, version and a run', type: :system do
     sign_in(User.create!(email: 'test@example.com', password: 'blehbleh'))
     visit root_path
 
-    click_on 'New Model'
+    click_on 'New model'
 
     fill_in 'Name', with: 'My model 123'
     click_on 'Create model'

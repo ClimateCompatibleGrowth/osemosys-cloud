@@ -82,4 +82,18 @@ RSpec.describe Run do
       expect(run.timeout).to eq(2.minutes)
     end
   end
+
+  describe '#humanized_status' do
+    it 'translates into a human readable state' do
+      succeeded_run = create(:run, :finished)
+
+      expect(succeeded_run.humanized_status).to eq('Succeeded')
+    end
+
+    it 'has translations for all states' do
+      Run::StateMachine.states.each do |state|
+        expect(I18n.exists?("run_state.#{state}", I18n.locale)).to be(true)
+      end
+    end
+  end
 end

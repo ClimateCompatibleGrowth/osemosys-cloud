@@ -1,8 +1,8 @@
 class Language
   def self.all
     [
-      new(name: 'English', slug: 'en'),
-      new(name: 'Spanish', slug: 'es'),
+      new(slug: 'en', i18n_key: 'language.en'),
+      new(slug: 'es', i18n_key: 'language.es'),
     ].freeze
   end
 
@@ -16,10 +16,14 @@ class Language
     all.find { |language| language.slug == slug }
   end
 
-  def initialize(name:, slug:)
-    @name = name
+  def initialize(slug:, i18n_key:)
     @slug = slug
+    @i18n_key = i18n_key
   end
 
-  attr_reader :name, :slug
+  def name
+    I18n.t(i18n_key)
+  end
+
+  attr_reader :slug, :i18n_key
 end

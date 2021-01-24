@@ -39,3 +39,4 @@ tags
 !/data/.keep
 cplex.log
 output.txt.gz
+.DS_Store

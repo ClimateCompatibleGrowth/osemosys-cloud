@@ -16,7 +16,7 @@ class VersionsController < ApplicationController
     @version = current_user.versions.create(version_params)
 
     if @version.valid?
-      flash.notice = 'Run version created'
+      flash.notice = t('flash.version.created')
       redirect_to version_path(@version)
     else
       flash.now.alert = @version.errors.full_messages.to_sentence

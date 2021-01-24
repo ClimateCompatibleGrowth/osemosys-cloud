@@ -1,33 +1,135 @@
-# Files in the config/locales directory are used for internationalization
-# and are automatically loaded by Rails. If you want to use locales other
-# than English, add the necessary files in this directory.
-#
-# To use the locales, use `I18n.t`:
-#
-#     I18n.t 'hello'
-#
-# In views, this is aliased to just `t`:
-#
-#     <%= t('hello') %>
-#
-# To use a different locale, set it with `I18n.locale`:
-#
-#     I18n.locale = :es
-#
-# This would use the information in config/locales/es.yml.
-#
-# The following keys must be escaped otherwise they will not be retrieved by
-# the default I18n backend:
-#
-# true, false, on, off, yes, no
-#
-# Instead, surround them with single quotes.
-#
-# en:
-#   'true': 'foo'
-#
-# To learn more, please read the Rails Internationalization guide
-# available at http://guides.rubyonrails.org/i18n.html.
-
+---
 en:
-  hello: "Hello world"
+  activerecord:
+    attributes:
+      model:
+        name: Name
+      run:
+        data_file: Data file
+        description: Description
+        language: Language
+        model_file: Model file
+        name: Name
+        notify_when_finished: Send me an email when the run finishes
+        post_process: Generate CSV files (run post-processing script)
+        pre_process: Run pre-processing script
+        server_type: Server type
+      user:
+        email: Email
+        locale: Language
+        runs_visible_to_admins: Runs visible to admins
+      version:
+        model: Model
+        name: Name
+    models:
+      model: Model
+      run: Run
+      user: User
+      version: Version
+  admin:
+    runs:
+      index:
+        access_denied: Access Denied
+        not_allowed_to_see_runs: Not allowed to see runs for this user.
+    user_stats:
+      index:
+        last_run_at: Last run at
+        platform_statistics: Platform statistics
+        registered_users: 'Registered users:'
+        total_server_time_used: 'Total server time used:'
+        user_statistics: User statistics
+      show:
+        last_run: 'Last run:'
+        runs_by_state: Runs by state
+        sign_up_date: Sign up date
+        total_run_duration: 'Total run duration:'
+  flash:
+    model:
+      created: Model created
+    run:
+      created: Run created
+      started: Run started
+      stopeed: Run stopped
+    user:
+      updated: User updated
+    version:
+      created: Run version created
+  helpers:
+    back: Go Back
+    submit:
+      model:
+        create: Create model
+        new: New model
+        update: Update model
+      run:
+        create: Create run
+        new: New run
+        update: Update run
+      version:
+        create: Create version
+        new: New version
+        update: Update version
+    time_ago: "%{time} ago"
+  language:
+    en: English
+    es: Spanish
+  layouts:
+    application:
+      admin: Admin
+      logout: Logout
+      my_models: My models
+      register: Register
+      sign_in: Sign in
+  models:
+    index:
+      my_models: My models
+  pages:
+    home:
+      or: or
+      register: register
+      sign_in: Sign in
+      to_start: to start.
+    not_found:
+      page_not_found: Page not found
+      page_not_found_body: This page has not been found. Try going back to the home page to access your models, versions and runs.
+  run_mailer:
+    run_finished_email:
+      solving_time: Solving time
+      status: Status
+      subject: Run finished
+      title: 'Run finished: %{run_name}'
+  runs:
+    card:
+      copied_to_clipboard: Copied to clipboard!
+      data: Data
+      files: 'Files:'
+      log: Logs
+      model: Model
+      result: Result
+      results_csv: Results (CSV)
+      show_steps: Show steps
+      start_run: Start run
+  run_state:
+    failed: Failed
+    finding_solution: Solving model
+    generating_matrix: Generating matrix
+    new: New
+    ongoing: Ongoing
+    postprocessing: Postprocessing result
+    preprocessing_data: Preprocessing data
+    queued: Creating server
+    succeeded: Succeeded
+  server_type:
+    large: Large server
+    small: Small server
+  simple_form:
+    error_notification:
+      default_message: 'Please review the problems below:'
+    'false': false
+    required:
+      mark: "*"
+      text: required
+    'true': true
+  users:
+    show:
+      my_user_profile: My User Profile

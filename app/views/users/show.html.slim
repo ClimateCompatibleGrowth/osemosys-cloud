@@ -1,6 +1,8 @@
-h1 My User Profile
+h1= t('.my_user_profile')
 
-= simple_form_for(@user)do |f|
+= simple_form_for(@user) do |f|
   = f.input :email, disabled: true
+  = f.input :locale, collection: Language.all, include_blank: false,
+            label_method: :name, value_method: :slug
   = f.input :runs_visible_to_admins, as: :boolean
-  = f.submit
+  = f.button :submit, class: 'btn btn-primary'

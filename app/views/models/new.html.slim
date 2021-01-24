@@ -1,6 +1,6 @@
-h1 Create a new model
+h1= t('helpers.submit.model.new')
 
 = simple_form_for(@model) do |f|
   = f.input :name
   br
-  = f.submit 'Create model', class: 'btn btn-primary'
+  = f.button :submit, class: 'btn btn-primary'

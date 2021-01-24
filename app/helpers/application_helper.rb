@@ -6,7 +6,7 @@ module ApplicationHelper
   def format_datetime(datetime)
     return unless datetime
 
-    relative_time = distance_of_time_in_words_to_now(datetime) + ' ago'
+    relative_time = I18n.t('helpers.time_ago', time: distance_of_time_in_words_to_now(datetime))
     timestamp = datetime.strftime('%e %b %Y %H:%M:%S')
     "#{relative_time} <br/> (#{timestamp})".html_safe
   end

@@ -1,29 +1,29 @@
 h1 = "Statistics for #{@user.email}"
 
-= link_to('< Back', admin_user_stats_path, class: 'btn btn-primary')
+= link_to(t('helpers.back'), admin_user_stats_path, class: 'btn btn-primary')
 
 hr
 
-h2 User information
+h2= User.model_name.human
 
 ul.list-group
   li.list-group-item
-    dt Id
+    dt= User.human_attribute_name(:id)
     dd = @user.id
   li.list-group-item
-    dt Email
+    dt= User.human_attribute_name(:email)
     dd = @user.email
 li.list-group-item
-  dt Sign up date
+  dt= t('.sign_up_date')
   dd = format_datetime(@user.created_at)
 
 hr
 
-h2 Runs
+h2= Run.model_name.human.pluralize
 
 ul.list-group
   li.list-group-item
-    ' Last run:
+    => t('.last_run')
     - if @last_run
       = render 'runs/card', run: @last_run
 
@@ -32,19 +32,19 @@ br
 ul.list-group
   li.list-group-item
     - total_duration_for_state = @user_runs.sum(:finished_in)
-    ' Total run duration:
+    => t('.total_run_duration')
     = format_duration(total_duration_for_state)
 
 hr
 
-h2 Runs by state
+h2= t('.runs_by_state')
 - @run_count_by_state.each do |state, run_count|
   ul.list-group
     li.list-group-item
-      - humanized_status = Run::ToHumanState.call(state_slug: state)
-      = "#{humanized_status}: #{run_count}"
+      = t("run_state.#{state}")
+      = ": #{run_count}"
     li.list-group-item
       - total_duration_for_state = @user_runs.where(state: state).sum(:finished_in)
-      ' Total duration for state:
+      => t('.total_run_duration')
       = format_duration(total_duration_for_state)
     hr

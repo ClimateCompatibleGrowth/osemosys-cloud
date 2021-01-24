@@ -1,14 +1,14 @@
-h1.mb-4 My models
+h1.mb-4= t('.my_models')
 
-.mb-2 = link_to('New Model', new_model_path, class: 'btn btn-primary')
+.mb-2 = link_to(t('helpers.submit.model.new'), new_model_path, class: 'btn btn-primary')
 
 br
 = paginate @models
 
 table.table.table-striped.table-hover
   tr
-    th ID
-    th Name
+    th= Model.human_attribute_name(:id)
+    th= Model.human_attribute_name(:name)
   - @models.each do |model|
     = link_to(model) do
       tr

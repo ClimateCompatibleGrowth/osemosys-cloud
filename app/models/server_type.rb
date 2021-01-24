@@ -1,8 +1,8 @@
 class ServerType
   def self.all
     [
-      new(name: 'Small server', slug: 'sidekiq'),
-      new(name: 'Large server', slug: 'z1d.3xlarge'),
+      new(slug: 'sidekiq', i18n_key: 'server_type.small'),
+      new(slug: 'z1d.3xlarge', i18n_key: 'server_type.large'),
     ].freeze
   end
 
@@ -16,10 +16,14 @@ class ServerType
     all.find { |server_type| server_type.slug == slug }
   end
 
-  def initialize(name:, slug:)
-    @name = name
+  def initialize(slug:, i18n_key:)
     @slug = slug
+    @i18n_key = i18n_key
   end
 
-  attr_reader :name, :slug
+  def name
+    I18n.t(i18n_key)
+  end
+
+  attr_reader :slug, :i18n_key
 end
