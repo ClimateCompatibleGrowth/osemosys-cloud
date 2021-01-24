@@ -1,4 +1,4 @@
-h1= t('.create_a_new_version')
+h1= t('helpers.submit.version.new')
 
 = simple_form_for(@version) do |f|
   = f.association :model, collection: current_user.models, include_blank: false

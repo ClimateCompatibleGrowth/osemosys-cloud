@@ -58,7 +58,17 @@ en:
     back: Go Back
     submit:
       run:
-        create: Create Run
+        new: New run
+        create: Create run
+        update: Update run
+      model:
+        new: New model
+        create: Create model
+        update: Update model
+      version:
+        new: New version
+        create: Create version
+        update: Update version
     time_ago: "%{time} ago"
   language:
     en: English
@@ -73,15 +83,10 @@ en:
   models:
     index:
       my_models: My models
-      new_model: New Model
-    new:
-      create_a_new_model: Create a new model
-    show:
-      new_version: New version
   pages:
     home:
-      or: or
       register: register
+      or: or
       sign_in: Sign in
       to_start: to start.
     not_found:
@@ -114,8 +119,6 @@ en:
       results_csv: Results (CSV)
       show_steps: Show steps
       start_run: Start run
-    new:
-      schedule_a_new_run: Schedule a new run
   server_type:
     large: Large server
     small: Small server
@@ -130,8 +133,3 @@ en:
   users:
     show:
       my_user_profile: My User Profile
-  versions:
-    new:
-      create_a_new_version: Create a new version
-    show:
-      new_run: New run

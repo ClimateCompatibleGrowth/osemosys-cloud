@@ -1,6 +1,6 @@
 h1 = @model.name
 
-.mb-2 = link_to(t('.new_version'), new_version_path(model_id: @model.id), class: 'btn btn-primary')
+.mb-2 = link_to(t('helpers.submit.version.new'), new_version_path(model_id: @model.id), class: 'btn btn-primary')
 
 table.table.table-striped.table-hover
   tr
