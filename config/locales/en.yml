@@ -14,18 +14,18 @@ en:
         post_process: Generate CSV files (run post-processing script)
         pre_process: Run pre-processing script
         server_type: Server type
+      user:
+        email: Email
+        locale: Language
+        runs_visible_to_admins: Runs visible to admins
       version:
         model: Model
         name: Name
-      user:
-        email: Email
-        runs_visible_to_admins: Runs visible to admins
-        locale: Language
     models:
       model: Model
       run: Run
-      version: Version
       user: User
+      version: Version
   admin:
     runs:
       index:
@@ -39,12 +39,23 @@ en:
         total_server_time_used: 'Total server time used:'
         user_statistics: User statistics
       show:
-        back: "Back"
         last_run: 'Last run:'
         runs_by_state: Runs by state
         sign_up_date: Sign up date
         total_run_duration: 'Total run duration:'
+  flash:
+    model:
+      created: Model created
+    run:
+      created: Run created
+      started: Run started
+      stopeed: Run stopped
+    user:
+      updated: User updated
+    version:
+      created: Run version created
   helpers:
+    back: Go Back
     submit:
       run:
         create: Create Run
@@ -83,15 +94,15 @@ en:
       subject: Run finished
       title: "Run finished: %{run_name}"
   run_state:
-    new: New
-    queued: Creating server
-    ongoing: Ongoing
-    succeeded: Succeeded
     failed: Failed
     finding_solution: Solving model
     generating_matrix: Generating matrix
-    preprocessing_data: Preprocessing data
+    new: New
+    ongoing: Ongoing
     postprocessing: Postprocessing result
+    preprocessing_data: Preprocessing data
+    queued: Creating server
+    succeeded: Succeeded
   runs:
     card:
       copied_to_clipboard: Copied to clipboard!
@@ -124,14 +135,3 @@ en:
       create_a_new_version: Create a new version
     show:
       new_run: New run
-  flash:
-    version:
-      created: Run version created
-    run:
-      created: Run created
-      started: Run started
-      stopeed: Run stopped
-    model:
-      created: Model created
-    user:
-      updated: User updated
