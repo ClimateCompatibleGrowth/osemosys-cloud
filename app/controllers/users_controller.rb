@@ -19,7 +19,7 @@ class UsersController < ApplicationController
   private
 
   def user_params
-    params.require(:user).permit(:runs_visible_to_admins)
+    params.require(:user).permit(:runs_visible_to_admins, :locale)
   end
 
   def restrict_access_to_correct_user
