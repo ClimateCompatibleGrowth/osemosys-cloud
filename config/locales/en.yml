@@ -67,8 +67,6 @@ en:
       create_a_new_model: Create a new model
     show:
       new_version: New version
-  models_controller:
-    model_created: Model created
   pages:
     home:
       or: or
@@ -107,12 +105,6 @@ en:
       start_run: Start run
     new:
       schedule_a_new_run: Schedule a new run
-  runs_controller:
-    run_created: Run created
-    run_started: Run started
-    run_stopped: Run stopped
-  users_controller:
-    user_updated: User updated
   server_type:
     large: Large server
     small: Small server
@@ -132,5 +124,14 @@ en:
       create_a_new_version: Create a new version
     show:
       new_run: New run
-  versions_controller:
-    run_version_created: Run version created
+  flash:
+    version:
+      created: Run version created
+    run:
+      created: Run created
+      started: Run started
+      stopeed: Run stopped
+    model:
+      created: Model created
+    user:
+      updated: User updated
