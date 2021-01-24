@@ -11,6 +11,13 @@ RSpec.describe 'Editing my profile', type: :system do
     visit user_path(user)
     expect(page).to have_content 'My User Profile'
     expect(page).to have_content user.email
+    select('Spanish', from: 'Language')
+    uncheck('user_runs_visible_to_admins')
+    click_on('Update User')
+    expect(page).to have_content('User updated')
+    user.reload
+    expect(user.locale).to eq('es')
+    expect(user.runs_visible_to_admins).to be(false)
   end
 
   it 'redirects to root for non signed in users' do

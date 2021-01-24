@@ -20,6 +20,7 @@ en:
       user:
         email: Email
         runs_visible_to_admins: Runs visible to admins
+        locale: Language
     models:
       model: Model
       run: Run
