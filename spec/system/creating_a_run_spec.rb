@@ -40,7 +40,7 @@ RSpec.describe 'Creating a run', type: :system do
 
     expect(page).to have_text('Sign in or register to start.')
 
-    visit versions_path
+    visit models_path
 
     expect(page).to have_text('You need to sign in or sign up before continuing.')
   end

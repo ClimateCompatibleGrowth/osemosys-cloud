@@ -3,10 +3,6 @@ class VersionsController < ApplicationController
     @version = Version.new(model_id: params[:model_id])
   end
 
-  def index
-    @versions = current_user.versions.order(id: :desc).page(params[:page])
-  end
-
   def show
     @version = current_user.versions.find_by(id: params[:id])
     @runs = @version.runs.for_index_view(params[:page])
