@@ -23,9 +23,9 @@ def main(data_infile, out_file):
 		for line in f:
 			if line.startswith('set YEAR'):
 				start_year = line.split(' ')[3]
-			if line.startswith('set COMMODITY'): # Extracts list of COMMODITIES from data file. Some models use FUEL instead. 
+			if line.startswith('set COMMODITY'): # Extracts list of COMMODITIES from data file. Some models use FUEL instead.
 				fuel_list = line.split(' ')[3:-1]
-			if line.startswith('set FUEL'): # Extracts list of FUELS from data file. Some models use COMMODITIES instead. 
+			if line.startswith('set FUEL'): # Extracts list of FUELS from data file. Some models use COMMODITIES instead.
 				fuel_list = line.split(' ')[3:-1]
 			if line.startswith('set TECHNOLOGY'):
 				tech_list = line.split(' ')[3:-1]
@@ -33,10 +33,10 @@ def main(data_infile, out_file):
 				storage_list = line.split(' ')[3:-1]
 			if line.startswith('set MODE_OF_OPERATION'):
 				mode_list = line.split(' ')[3:-1]
-			
+
 			if line.startswith(";"):
-					parsing = False   
-			
+					parsing = False
+
 			if parsing:
 				if line.startswith('['):
 					fuel = line.split(',')[2]
@@ -47,15 +47,15 @@ def main(data_infile, out_file):
 				else:
 					values = line.rstrip().split(' ')[1:]
 					mode = line.split(' ')[0]
-					
-					if param_current=='OutputActivityRatio':    
+
+					if param_current=='OutputActivityRatio':
 						data_out.append(tuple([fuel,tech,mode]))
 						for i in range(0,len(years)):
 							output_table.append(tuple([tech,fuel,mode,years[i],values[i]]))
-					
+
 					if param_current=='InputActivityRatio':
-						data_inp.append(tuple([fuel,tech,mode]))   
-					
+						data_inp.append(tuple([fuel,tech,mode]))
+
 					data_all.append(tuple([tech,mode]))
 
 					if param_current == 'param TechnologyToStorage' or param_current == 'param TechnologyToStorage':
@@ -65,7 +65,7 @@ def main(data_infile, out_file):
 							for i in range(0,len(mode_list)):
 								if values[i] != '0':
 									storage_to.append(tuple([storage,tech,mode_list[i]]))
-					
+
 			if line.startswith(('param OutputActivityRatio','param InputActivityRatio','param TechnologyToStorage','param TechnologyFromStorage')):
 				param_current = line.split(' ')[1]
 				parsing = True
@@ -100,13 +100,13 @@ def main(data_infile, out_file):
 						list_RES_outputs.append(('LNDAGRXXX', each_out[0], each_out[0]))
 				else:
 					list_RES_outputs.append((each_out[1],each_out[0],each_out[0]))
-	
+
 	list_RES = list(set(list_RES))
 	list_RES_outputs = list(set(list_RES_outputs))
 
 	f = Digraph('finite_state_machine', filename=out_file)
 	f.attr(rankdir='LR', size='8,5')
-	
+
 	for each in list_RES:
 		f.attr('node', shape='square')
 		f.edge(each[0], each[1], label=each[2])
@@ -114,8 +114,6 @@ def main(data_infile, out_file):
 	for each in list_RES_outputs:
 		f.attr('node', shape='doublecircle')
 		f.edge(each[0], each[2], label=each[2])
-
-	f.view()
 
 if __name__ == '__main__':
         data_infile = sys.argv[1]
