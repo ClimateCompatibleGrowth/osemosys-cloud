@@ -27,7 +27,7 @@ class GenerateResJob < ActiveJob::Base
   end
 
   def res_path
-    "./tmp/res-#{run.id}"
+    "/tmp/res-#{run.id}"
   end
 
   def logger
