@@ -1,5 +1,4 @@
 class GenerateResJob < ActiveJob::Base
-  queue_as :osemosys
   sidekiq_options retry: 0
 
   def perform(run_id)
