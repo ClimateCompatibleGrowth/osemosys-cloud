@@ -5,6 +5,6 @@ set -xue
 git reset --hard
 git pull
 bundle install
-pip install -r requirements.txt
+pip3 install -r requirements.txt
 sudo systemctl restart osemosys-cloud-sidekiq.service
 exit
