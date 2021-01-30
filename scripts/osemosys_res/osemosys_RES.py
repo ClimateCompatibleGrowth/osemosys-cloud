@@ -115,6 +115,8 @@ def main(data_infile, out_file):
 		f.attr('node', shape='doublecircle')
 		f.edge(each[0], each[2], label=each[2])
 
+	f.render()
+
 if __name__ == '__main__':
         data_infile = sys.argv[1]
         out_file = sys.argv[2]
