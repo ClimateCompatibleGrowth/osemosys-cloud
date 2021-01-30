@@ -13,7 +13,7 @@ module Commands
 
     def generate_res_command
       %(
-      python3 #{Rails.root.join('scripts/osemosys_res/osemosys_RES.py')}
+        ./venv/bin/python #{Rails.root.join('scripts/osemosys_res/osemosys_RES.py')}
               #{local_data_path}
               #{res_path}
       ).delete("\n")
