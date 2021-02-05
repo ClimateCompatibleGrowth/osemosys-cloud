@@ -30,6 +30,10 @@
       = link_to(t('.start_run'), start_run_path(run), method: :post, class: 'btn btn-success btn-lg btn-block')
       hr
 
+    - if run.res_file.attached?
+      .run-card__header
+        = link_to(rails_blob_path(run.res_file, disposition: 'inline'), target: '_blank') do
+          = image_tag run.res_file.preview(resize_to_limit: [100, 100])
     - if run.finished?
       .run-card__header
         =<> fa_icon('stopwatch')
