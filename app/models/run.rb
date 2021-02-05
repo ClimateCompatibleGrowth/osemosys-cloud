@@ -6,6 +6,8 @@ class Run < ApplicationRecord
   has_many :run_transitions, autosave: false
   has_one :ec2_instance, class_name: 'Ec2::Instance'
 
+  after_commit :generate_res_file, on: :create
+
   belongs_to :user
   belongs_to :version
   has_one_attached :model_file
@@ -93,5 +95,9 @@ class Run < ApplicationRecord
     if post_process.present? && pre_process.blank?
       errors.add(:post_process, 'can only be enabled if pre-processing is enabled')
     end
+  end
+
+  def generate_res_file
+    GenerateResJob.perform_later(id)
   end
 end
