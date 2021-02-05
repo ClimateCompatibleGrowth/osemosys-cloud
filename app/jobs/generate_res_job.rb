@@ -1,5 +1,5 @@
 class GenerateResJob < ActiveJob::Base
-  sidekiq_options retry: 0
+  sidekiq_options retry: 0, queue: 'low_priority'
 
   def perform(run_id)
     @run = Run.find(run_id)
