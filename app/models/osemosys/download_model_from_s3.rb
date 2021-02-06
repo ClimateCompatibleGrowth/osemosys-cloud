@@ -6,6 +6,8 @@ module Osemosys
     end
 
     def call
+      raise if Rails.env.test?
+
       logger.info 'Downloading input files...'
 
       logger.info 'Downloading model file...'

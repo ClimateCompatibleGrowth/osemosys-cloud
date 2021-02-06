@@ -55,7 +55,7 @@ RSpec.describe Osemosys::Solvers::Dummy do
         ).call
         end_time = Time.now
 
-        expect(end_time - start_time).to be < 0.1
+        expect(end_time - start_time).to be < 0.2
       end
     end
 
