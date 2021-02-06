@@ -6,7 +6,7 @@ class Run < ApplicationRecord
   has_many :run_transitions, autosave: false
   has_one :ec2_instance, class_name: 'Ec2::Instance'
 
-  # after_commit :generate_res_file, on: :create
+  after_commit :generate_res_file, on: :create
 
   belongs_to :user
   belongs_to :version
