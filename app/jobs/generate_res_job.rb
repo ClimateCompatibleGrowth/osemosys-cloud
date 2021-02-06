@@ -3,6 +3,8 @@ class GenerateResJob < ActiveJob::Base
   sidekiq_options retry: 0
 
   def perform(run_id)
+    return if Rails.env.test?
+
     @run = Run.find(run_id)
 
     Commands::GenerateRes.new(
@@ -21,19 +23,10 @@ class GenerateResJob < ActiveJob::Base
   attr_reader :run
 
   def model_and_data
-    @model_and_data ||= begin
-      if Rails.env.test?
-        OpenStruct.new(
-          local_model_path: ActiveStorage::Blob.service.send(:path_for, run.model_file.key),
-          local_data_path: ActiveStorage::Blob.service.send(:path_for, run.data_file.key),
-        )
-      else
-        Osemosys::DownloadModelFromS3.new(
-          run: run,
-          logger: logger,
-        ).call
-      end
-    end
+    @model_and_data ||= Osemosys::DownloadModelFromS3.new(
+      run: run,
+      logger: logger,
+    ).call
   end
 
   def res_path
