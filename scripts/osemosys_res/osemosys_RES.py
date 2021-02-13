@@ -86,27 +86,30 @@ def main(data_infile, out_file):
 			list_RES_inputs.append((each_inp[1],each_inp[0],each_inp[0]))
 
 	for each_out in data_out:
+		data_inp_matching_each_out = [each_inp for each_inp in data_inp if each_out[0] == each_inp[0]]
+		for each_inp in data_inp_matching_each_out:
+			if each_out[1].startswith('LNDAGR'):
+				list_RES.append(('LNDAGRXXX', each_inp[1], each_out[0]))
+			elif each_inp[1].startswith('LNDCP'):
+				list_RES.append((each_out[1], 'LNDCPXXXXXX', each_out[0]))
+			elif each_inp[1].startswith('LNDAGR'):
+				if each_inp[0].startswith('LCP'):
+					list_RES.append(('LNDCPXXXXXX', 'LNDAGRXXX', 'LCPXXXXXX'))
+				else:
+					list_RES.append((each_out[1], 'LNDAGRXXX', each_out[0]))
+			else:
+				list_RES.append((each_out[1], each_inp[1], each_out[0]))
+
+	data_out_not_in_input_fuels = [each_out for each_out in data_out if each_out[0] not in input_fuels]
+	for each_out in data_out_not_in_input_fuels:
 		for each_inp in data_inp:
-			if each_out[0] == each_inp[0]:
-				if each_out[1].startswith('LNDAGR'):
-					list_RES.append(('LNDAGRXXX', each_inp[1], each_out[0]))
-				elif each_inp[1].startswith('LNDCP'):
-					list_RES.append((each_out[1], 'LNDCPXXXXXX', each_out[0]))
-				elif each_inp[1].startswith('LNDAGR'):
-					if each_inp[0].startswith('LCP'):
-						list_RES.append(('LNDCPXXXXXX', 'LNDAGRXXX', 'LCPXXXXXX'))
-					else:
-						list_RES.append((each_out[1], 'LNDAGRXXX', each_out[0]))
+			if each_out[1].startswith('LNDAGR'):
+				if each_out[0].startswith('CRP'):
+					list_RES_outputs.append(('LNDAGRXXX', 'CRPXXX', 'CRPXXX'))
 				else:
-					list_RES.append((each_out[1], each_inp[1], each_out[0]))
-			if each_out[0] not in input_fuels:
-				if each_out[1].startswith('LNDAGR'):
-					if each_out[0].startswith('CRP'):
-						list_RES_outputs.append(('LNDAGRXXX', 'CRPXXX', 'CRPXXX'))
-					else:
-						list_RES_outputs.append(('LNDAGRXXX', each_out[0], each_out[0]))
-				else:
-					list_RES_outputs.append((each_out[1],each_out[0],each_out[0]))
+					list_RES_outputs.append(('LNDAGRXXX', each_out[0], each_out[0]))
+			else:
+				list_RES_outputs.append((each_out[1],each_out[0],each_out[0]))
 
 	list_RES = list(set(list_RES))
 	list_RES_outputs = list(set(list_RES_outputs))
