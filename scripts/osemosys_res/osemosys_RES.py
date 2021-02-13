@@ -111,9 +111,9 @@ def main(data_infile, out_file):
 			else:
 				list_RES_outputs.append((each_out[1],each_out[0],each_out[0]))
 
-	list_RES = list(set(list_RES))
-	list_RES_outputs = list(set(list_RES_outputs))
-	list_RES_inputs = list(set(list_RES_inputs))
+	list_RES = sorted(list(set(list_RES)))
+	list_RES_outputs = sorted(list(set(list_RES_outputs)))
+	list_RES_inputs = sorted(list(set(list_RES_inputs)))
 
 	f = Digraph('finite_state_machine', filename=out_file)
 	f.attr(rankdir='LR', size='8,5')
