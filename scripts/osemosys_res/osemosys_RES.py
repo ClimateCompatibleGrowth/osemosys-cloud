@@ -73,36 +73,47 @@ def main(data_infile, out_file):
 
 	list_RES = []
 	list_RES_outputs = []
+	list_RES_inputs = []
 	input_fuels = []
+	output_fuels = []
+
+	for each_out in data_out:
+		output_fuels.append(each_out[0])
 
 	for each_inp in data_inp:
 		input_fuels.append(each_inp[0])
+		if each_inp[0] not in output_fuels:
+			list_RES_inputs.append((each_inp[1],each_inp[0],each_inp[0]))
 
 	for each_out in data_out:
-		for each_inp in data_inp:
-			if each_out[0] == each_inp[0]:
-				if each_out[1].startswith('LNDAGR'):
-					list_RES.append(('LNDAGRXXX', each_inp[1], each_out[0]))
-				elif each_inp[1].startswith('LNDCP'):
-					list_RES.append((each_out[1], 'LNDCPXXXXXX', each_out[0]))
-				elif each_inp[1].startswith('LNDAGR'):
-					if each_inp[0].startswith('LCP'):
-						list_RES.append(('LNDCPXXXXXX', 'LNDAGRXXX', 'LCPXXXXXX'))
-					else:
-						list_RES.append((each_out[1], 'LNDAGRXXX', each_out[0]))
+		data_inp_matching_each_out = [each_inp for each_inp in data_inp if each_out[0] == each_inp[0]]
+		for each_inp in data_inp_matching_each_out:
+			if each_out[1].startswith('LNDAGR'):
+				list_RES.append(('LNDAGRXXX', each_inp[1], each_out[0]))
+			elif each_inp[1].startswith('LNDCP'):
+				list_RES.append((each_out[1], 'LNDCPXXXXXX', each_out[0]))
+			elif each_inp[1].startswith('LNDAGR'):
+				if each_inp[0].startswith('LCP'):
+					list_RES.append(('LNDCPXXXXXX', 'LNDAGRXXX', 'LCPXXXXXX'))
 				else:
-					list_RES.append((each_out[1], each_inp[1], each_out[0]))
-			if each_out[0] not in input_fuels:
-				if each_out[1].startswith('LNDAGR'):
-					if each_out[0].startswith('CRP'):
-						list_RES_outputs.append(('LNDAGRXXX', 'CRPXXX', 'CRPXXX'))
-					else:
-						list_RES_outputs.append(('LNDAGRXXX', each_out[0], each_out[0]))
-				else:
-					list_RES_outputs.append((each_out[1],each_out[0],each_out[0]))
+					list_RES.append((each_out[1], 'LNDAGRXXX', each_out[0]))
+			else:
+				list_RES.append((each_out[1], each_inp[1], each_out[0]))
 
-	list_RES = list(set(list_RES))
-	list_RES_outputs = list(set(list_RES_outputs))
+	data_out_not_in_input_fuels = [each_out for each_out in data_out if each_out[0] not in input_fuels]
+	for each_out in data_out_not_in_input_fuels:
+		for each_inp in data_inp:
+			if each_out[1].startswith('LNDAGR'):
+				if each_out[0].startswith('CRP'):
+					list_RES_outputs.append(('LNDAGRXXX', 'CRPXXX', 'CRPXXX'))
+				else:
+					list_RES_outputs.append(('LNDAGRXXX', each_out[0], each_out[0]))
+			else:
+				list_RES_outputs.append((each_out[1],each_out[0],each_out[0]))
+
+	list_RES = sorted(list(set(list_RES)))
+	list_RES_outputs = sorted(list(set(list_RES_outputs)))
+	list_RES_inputs = sorted(list(set(list_RES_inputs)))
 
 	f = Digraph('finite_state_machine', filename=out_file)
 	f.attr(rankdir='LR', size='8,5')
@@ -115,12 +126,13 @@ def main(data_infile, out_file):
 		f.attr('node', shape='doublecircle')
 		f.edge(each[0], each[2], label=each[2])
 
+	for each in list_RES_inputs:
+		f.attr('node', shape='doublecircle', fillcolor='red', style='filled')
+		f.edge(each[2], each[0], label=each[2])
+
 	f.render()
 
 if __name__ == '__main__':
         data_infile = sys.argv[1]
         out_file = sys.argv[2]
         main(data_infile, out_file)
-
-
-
