@@ -31,6 +31,7 @@ gem 'statesman'
 gem 'tty-command'
 gem 'turbolinks'
 gem 'uglifier'
+gem 'webpacker'
 
 group :development do
   gem 'better_errors'

@@ -42,3 +42,10 @@ output.txt.gz
 .DS_Store
 latest.dump
 venv
+
+/public/packs
+/public/packs-test
+/node_modules
+/yarn-error.log
+yarn-debug.log*
+.yarn-integrity

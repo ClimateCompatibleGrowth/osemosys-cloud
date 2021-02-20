@@ -2,8 +2,12 @@
   "name": "osemosys-cloud",
   "private": true,
   "dependencies": {
+    "@rails/webpacker": "5.2.1",
     "bootstrap": "^4",
     "jquery": "^3",
     "popper.js": "^1.14"
+  },
+  "devDependencies": {
+    "webpack-dev-server": "^3.11.2"
   }
 }
