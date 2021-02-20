@@ -40,5 +40,9 @@ class Run < ApplicationRecord
         run.update!(finished_in: finished_in)
       end
     end
+
+    after_transition do |run, _transition|
+      run.broadcast_update!
+    end
   end
 end
