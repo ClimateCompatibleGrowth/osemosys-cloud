@@ -40,13 +40,14 @@ group :development do
   gem 'guard-livereload'
   gem 'i18n_yaml_sorter'
   gem 'listen'
+  gem 'localedata'
   gem 'pry-rails'
-  gem 'rubocop', '0.74', require: false
-  gem 'rubocop-rspec', '1.36', require: false
+  gem 'rubocop', '1.9.1', require: false
+  gem 'rubocop-rails', require: false
+  gem 'rubocop-rspec', require: false
   gem 'spring'
   gem 'spring-commands-rspec'
   gem 'spring-watcher-listen'
-  gem 'localedata'
 end
 
 group :test do
