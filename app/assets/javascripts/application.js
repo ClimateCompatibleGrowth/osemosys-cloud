@@ -14,7 +14,4 @@
 //= require popper.js/dist/umd/popper.min.js
 //= require bootstrap/dist/js/bootstrap.js
 //= require vendor/jquery.color-2.1.2.min.js
-//= require rails-ujs
-//= require activestorage
-//= require turbolinks
 //= require_tree .
