@@ -278,6 +278,7 @@ GEM
     responders (3.0.1)
       actionpack (>= 5.0)
       railties (>= 5.0)
+    rexml (3.2.4)
     rspec-core (3.10.1)
       rspec-support (~> 3.10.0)
     rspec-expectations (3.10.1)
@@ -422,6 +423,7 @@ DEPENDENCIES
   rack (= 2.2.2)
   rails (~> 6.0.0)
   rails-i18n (~> 6.0.0)
+  rexml
   rspec-rails
   rubocop (= 0.74)
   rubocop-rspec (= 1.36)

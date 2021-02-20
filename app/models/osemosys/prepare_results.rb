@@ -1,7 +1,7 @@
 module Osemosys
   class PrepareResults
-    def self.call(*args)
-      new(*args).call
+    def self.call(**args)
+      new(**args).call
     end
 
     def initialize(output_path:, data_path:, metadata_path:, destination:, logger:)

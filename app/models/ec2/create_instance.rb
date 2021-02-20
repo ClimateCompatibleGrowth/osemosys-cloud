@@ -1,7 +1,7 @@
 module Ec2
   class CreateInstance
-    def self.call(*args)
-      new(*args).call
+    def self.call(**args)
+      new(**args).call
     end
 
     def initialize(run_id:, instance_type:)
