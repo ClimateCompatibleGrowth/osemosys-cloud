@@ -1,7 +1,7 @@
 module Ec2
   class StopInstance
-    def self.call(*args)
-      new(*args).call
+    def self.call(**args)
+      new(**args).call
     end
 
     def initialize(aws_id:)

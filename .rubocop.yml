@@ -1,12 +1,32 @@
-require: rubocop-rspec
+require:
+  - rubocop-rails
+  - rubocop-rspec
 
 AllCops:
-  TargetRubyVersion: 2.4
+  Exclude:
+    - "bin/bundle"
+    - "bin/rails"
+    - "bin/rake"
+    - "bin/rspec"
+    - "bin/rubocop"
+    - "bin/setup"
+    - "bin/update"
+    - "db/old_migrations/*"
+    - "db/schema.rb"
+    - "tmp/*"
+    - "vendor/**/*"
+  TargetRubyVersion: 3.0
 
-Metrics/LineLength:
+Layout/LineLength:
   Max: 100
 
+Metrics/MethodLength:
+  Enabled: false
+
 Metrics/ModuleLength:
+  Enabled: false
+
+Metrics/AbcSize:
   Enabled: false
 
 Layout/MultilineOperationIndentation:
@@ -15,13 +35,13 @@ Layout/MultilineOperationIndentation:
 Layout/FirstMethodArgumentLineBreak:
   Enabled: true
 
-Layout/AlignParameters:
+Layout/ParameterAlignment:
   EnforcedStyle: with_fixed_indentation
 
-Layout/AlignArguments:
+Layout/ArgumentAlignment:
   EnforcedStyle: with_fixed_indentation
 
-Layout/AlignHash:
+Layout/HashAlignment:
   Enabled: false
 
 Style/Documentation:
@@ -30,7 +50,7 @@ Style/Documentation:
 Style/FrozenStringLiteralComment:
   Enabled: false
 
-Layout/IndentFirstArgument:
+Layout/FirstArgumentIndentation:
   EnforcedStyle: consistent
 
 Layout/MultilineMethodCallIndentation:
@@ -41,6 +61,21 @@ Layout/DotPosition:
 
 Style/StringLiterals:
   EnforcedStyle: single_quotes
+
+Style/BlockDelimiters:
+  Description: Avoid using {...} for multi-line blocks (multiline chaining is always
+    ugly). Prefer {...} over do...end for single-line blocks.
+  StyleGuide: https://github.com/bbatsov/ruby-style-guide#single-line-blocks
+  Enabled: false
+
+Style/Lambda:
+  Description: 'Use the new lambda literal syntax for single-line blocks.'
+  Enabled: false
+
+Style/MultilineBlockChain:
+  Description: 'Avoid multi-line chains of blocks.'
+  StyleGuide: https://github.com/bbatsov/ruby-style-guide#single-line-blocks
+  Enabled: false
 
 Style/TrailingCommaInArguments:
   Enabled: true
@@ -78,22 +113,55 @@ Lint/AmbiguousBlockAssociation:
   Enabled: true
   Exclude:
     - spec/**/*_spec.rb
+    - spec/support/shared_examples/**/*.rb
 
 Naming/MemoizedInstanceVariableName:
-  EnforcedStyleForLeadingUnderscores: optional
+  EnforcedStyleForLeadingUnderscores: required
   SupportedStylesForLeadingUnderscores:
     - disallowed
     - required
     - optional
 
+Metrics/ClassLength:
+  Enabled: false
+
+Metrics/CyclomaticComplexity:
+  Exclude:
+    - app/models/**/*_parameters.rb
+    - app/models/subscription_item.rb
+    - app/models/venue.rb
+
+Metrics/ParameterLists:
+  Exclude:
+    - app/models/**/*_parameters.rb
+    - app/models/pdf_generators/components/heading_value_list.rb
+    - app/models/pdf_generators/components/key_value_list.rb
+    - app/services/create_venue_invoice.rb
+    - app/services/find_or_create_venue.rb
+    - app/services/smart_portal/create_shipping_address.rb
+
+Metrics/PerceivedComplexity:
+  Exclude:
+    - app/graphql/resolvers/create_comment_resolver.rb
+
+Naming/MethodParameterName:
+  Exclude:
+    - app/models/pdf_generators/components/list.rb
+
+Naming/PredicateName:
+  Exclude:
+    - app/graphql/*_type.rb
+    - app/graphql/**/*_type.rb
+    - app/graphql/**/type.rb
+
 Naming/RescuedExceptionsVariableName:
   PreferredName: exception
 
-Naming/FileName:
-  Enabled: false
-
 Lint/InheritException:
   EnforcedStyle: standard_error
+
+Style/GuardClause:
+  Enabled: false
 
 RSpec/ContextWording:
   Prefixes:
@@ -103,11 +171,388 @@ RSpec/ContextWording:
     - as
     - and
 
+RSpec/DescribeClass:
+  Exclude:
+    - spec/requests/**/*_spec.rb
+    - spec/lib/**/integration/**/*_spec.rb
+
 RSpec/DescribedClass:
   EnforcedStyle: explicit
 
 RSpec/ExampleLength:
   Enabled: false
 
+RSpec/ImplicitSubject:
+  EnforcedStyle: single_statement_only
+
+RSpec/PredicateMatcher:
+  Enabled: false
+
+RSpec/EmptyLineAfterExample:
+  Enabled: false
+
 RSpec/MultipleExpectations:
   Enabled: false
+
+Style/HashEachMethods:
+  Enabled: false
+
+Style/HashTransformKeys:
+  Enabled: true
+
+Style/HashTransformValues:
+  Enabled: true
+
+Style/RedundantSelf:
+  Enabled: true
+  Exclude:
+    - app/models/concerns/sluggable.rb
+
+RSpec/RepeatedExampleGroupDescription:
+  Enabled: true
+
+RSpec/RepeatedExampleGroupBody:
+  Enabled: true
+
+Lint/RaiseException:
+  Enabled: true
+
+Lint/StructNewOverride:
+  Enabled: true
+
+Style/ExponentialNotation:
+  Enabled: true
+
+Style/DisableCopsWithinSourceCodeDirective:
+  Enabled: false
+
+Layout/SpaceAroundMethodCallOperator:
+  Enabled: true
+
+Style/SlicingWithRange:
+  Enabled: true
+
+Layout/EmptyLinesAroundAttributeAccessor:
+  Enabled: true
+
+Lint/DeprecatedOpenSSLConstant:
+  Enabled: true
+
+Style/RedundantRegexpCharacterClass:
+  Enabled: true
+
+Style/RedundantRegexpEscape:
+  Enabled: true
+
+Lint/MixedRegexpCaptureTypes:
+  Enabled: true
+
+Style/RedundantFetchBlock:
+  Enabled: true
+
+Lint/ConstantResolution:
+  Enabled: false
+
+Style/AccessorGrouping:
+  Enabled: true
+
+Style/BisectedAttrAccessor:
+  Enabled: true
+
+Style/RedundantAssignment:
+  Enabled: true
+
+Lint/BinaryOperatorWithIdenticalOperands:
+  Enabled: true
+
+Lint/DuplicateElsifCondition:
+  Enabled: true
+
+Lint/DuplicateRescueException:
+  Enabled: true
+
+Lint/EmptyConditionalBody:
+  Enabled: true
+
+Lint/FloatComparison:
+  Enabled: true
+
+Lint/MissingSuper:
+  Enabled: true
+
+Lint/OutOfRangeRegexpRef:
+  Enabled: true
+
+Lint/SelfAssignment:
+  Enabled: true
+
+Lint/TopLevelReturnWithArgument:
+  Enabled: true
+
+Lint/UnreachableLoop:
+  Enabled: true
+
+Style/ArrayCoercion:
+  Enabled: true
+
+Style/CaseLikeIf:
+  Enabled: true
+
+Style/ExplicitBlockArgument:
+  Enabled: true
+
+Style/GlobalStdStream:
+  Enabled: true
+
+Style/HashAsLastArrayItem:
+  Enabled: false
+
+Style/HashLikeCase:
+  Enabled: true
+
+Style/OptionalBooleanParameter:
+  Enabled: true
+  Exclude:
+    - 'app/graphql/graphql_delete_model_mutation.rb'
+    - 'app/jobs/**/*'
+    - 'app/models/documented_enum.rb'
+    - 'app/models/sales_company_configuration.rb'
+    - 'app/services/external_invoice_customer_information.rb'
+    - 'spec/support/ensure_test_coverage_for_graphql_fields.rb'
+
+Style/RedundantFileExtensionInRequire:
+  Enabled: true
+
+Style/SingleArgumentDig:
+  Enabled: false
+
+Style/StringConcatenation:
+  Enabled: true
+
+RSpec/VerifiedDoubles:
+  Enabled: false
+
+Lint/DuplicateRequire:
+  Enabled: true
+
+Lint/EmptyFile:
+  Enabled: true
+
+Lint/TrailingCommaInAttributeDeclaration:
+  Enabled: true
+
+Lint/UselessMethodDefinition:
+  Enabled: true
+
+Style/CombinableLoops:
+  Enabled: true
+
+Style/KeywordParametersOrder:
+  Enabled: true
+
+Style/RedundantSelfAssignment:
+  Enabled: true
+
+Style/SoleNestedConditional:
+  Enabled: true
+
+RSpec/NestedGroups:
+  Enabled: false
+
+Layout/BeginEndAlignment:
+  Enabled: true
+
+Lint/ConstantDefinitionInBlock:
+  Enabled: true
+
+Lint/IdentityComparison:
+  Enabled: true
+
+Lint/UselessTimes:
+  Enabled: true
+
+Rails/ActiveRecordCallbacksOrder:
+  Enabled: true
+
+Rails/AfterCommitOverride:
+  Enabled: true
+
+Rails/FindById:
+  Enabled: true
+
+Rails/Inquiry:
+  Enabled: true
+
+Rails/MailerName:
+  Enabled: true
+
+Rails/MatchRoute:
+  Enabled: true
+
+Rails/NegateInclude:
+  Enabled: true
+
+Rails/Pluck:
+  Enabled: true
+
+Rails/PluckInWhere:
+  Enabled: true
+
+Rails/RenderInline:
+  Enabled: true
+
+Rails/RenderPlainText:
+  Enabled: true
+
+Rails/ShortI18n:
+  Enabled: true
+
+Rails/SquishedSQLHeredocs:
+  Enabled: true
+
+Rails/WhereExists:
+  Enabled: true
+
+Rails/WhereNot:
+  Enabled: true
+
+Rails/ApplicationRecord:
+  Enabled: true
+  Exclude:
+    - 'db/migrate/**/*.rb'
+    - 'lib/once/**/*.rb'
+    - 'lib/tasks/once/**/*.rake'
+
+Rails/HasManyOrHasOneDependent:
+  Enabled: true
+
+Rails/HasAndBelongsToMany:
+  Enabled: true
+
+Rails/UniqueValidationWithoutIndex:
+  Enabled: false
+
+Rails/SkipsModelValidations:
+  Enabled: true
+  Exclude:
+    - 'db/migrate/**/*.rb'
+    - 'lib/once/**/*.rb'
+    - 'lib/tasks/once/**/*.rake'
+
+Rails/ReversibleMigration:
+  Enabled: true
+  Exclude:
+    - 'db/migrate/20190812080839_remove_blueprint_id_subscription_item.rb'
+    - 'db/migrate/20191022105407_remove_connected_brands.rb'
+    - 'db/migrate/20191204000000_expand_money_fields_in_business_review_submissions.rb'
+
+Rails/NotNullColumn:
+  Enabled: false
+
+Rails/CreateTableWithTimestamps:
+  Enabled: true
+  Exclude:
+    - 'db/migrate/20180308072442_create_frame_agreement_product_join_table.rb'
+    - 'db/migrate/20190611091741_create_addon.rb'
+    - 'db/migrate/20191010152441_remove_couldnt_present_outcomes.rb'
+    - 'db/migrate/20191011072529_remove_surveys.rb'
+    - 'db/migrate/20191012135934_remove_return_visits.rb'
+    - 'db/migrate/20191022142059_remove_roles.rb'
+    - 'db/migrate/20191030151316_remove_sectors.rb'
+    - 'db/migrate/20191101075754_remove_dynamic_lists.rb'
+    - 'db/migrate/20201125152137_create_featurings.rb'
+
+Rails/AttributeDefaultBlockValue:
+  Enabled: true
+
+Rails/WhereEquals:
+  Enabled: true
+
+Style/SymbolProc:
+  Enabled: true
+  Exclude:
+    - 'spec/factories/**/*.rb'
+
+Lint/DuplicateBranch:
+  Enabled: true
+
+Lint/DuplicateRegexpCharacterClassElement:
+  Enabled: true
+
+Lint/EmptyBlock:
+  Enabled: true
+
+Lint/EmptyClass:
+  Enabled: true
+
+Lint/NoReturnInBeginEndBlocks:
+  Enabled: true
+
+Lint/ToEnumArguments:
+  Enabled: true
+
+Lint/UnmodifiedReduceAccumulator:
+  Enabled: true
+
+Style/ArgumentsForwarding:
+  Enabled: true
+
+Style/CollectionCompact:
+  Enabled: true
+
+Style/DocumentDynamicEvalDefinition:
+  Enabled: true
+
+Style/NegatedIfElseCondition:
+  Enabled: true
+
+Style/NilLambda:
+  Enabled: true
+
+Style/RedundantArgument:
+  Enabled: true
+
+Style/SwapValues:
+  Enabled: true
+
+Naming/VariableNumber:
+  CheckSymbols: false
+
+Layout/SpaceBeforeBrackets:
+  Enabled: true
+
+Lint/AmbiguousAssignment:
+  Enabled: true
+
+Lint/DeprecatedConstants:
+  Enabled: true
+
+Lint/LambdaWithoutLiteralBlock:
+  Enabled: true
+
+Lint/RedundantDirGlobSort:
+  Enabled: true
+
+Lint/UnexpectedBlockArity:
+  Enabled: true
+
+Style/EndlessMethod:
+  Enabled: true
+
+Style/HashExcept:
+  Enabled: true
+
+Lint/NumberedParameterAssignment:
+  Enabled: true
+
+Lint/OrAssignmentToConstant:
+  Enabled: true
+
+Lint/SymbolConversion:
+  Enabled: true
+
+Lint/TripleQuotes:
+  Enabled: true
+
+Style/IfWithBooleanLiteralBranches:
+  Enabled: true
