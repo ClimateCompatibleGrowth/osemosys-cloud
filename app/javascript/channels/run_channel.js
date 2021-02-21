@@ -6,15 +6,15 @@ const updateCard = (runId, content) => {
   $(`[data-run-card-run-id=${runId}]`).animate( {'backgroundColor': 'white'}, 200)
 }
 
-const subscribeToUpdates= (runId) => {
-  consumer.subscriptions.create({channel: 'RunChannel', run_id: runId}, {
+const subscribeToUpdates= () => {
+  console.log('subscribed')
+  consumer.subscriptions.create('RunChannel', {
     received(data) {
-      updateCard(runId, data['partial'])
+      updateCard(data['run_id'], data['partial'])
     },
   })
 }
+
 window.onload = () => {
-  document.querySelectorAll('[data-run-card-run-id]').forEach((runCard) => {
-    subscribeToUpdates(runCard.dataset.runCardRunId)
-  })
+  subscribeToUpdates()
 }

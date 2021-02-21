@@ -1,5 +1,5 @@
 class RunChannel < ApplicationCable::Channel
   def subscribed
-    stream_from "run_#{params[:run_id]}"
+    stream_from 'runs'
   end
 end

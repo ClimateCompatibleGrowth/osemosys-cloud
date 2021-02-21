@@ -90,7 +90,7 @@ class Run < ApplicationRecord
   end
 
   def broadcast_update!
-    ActionCable.server.broadcast("run_#{id}", { partial: to_card })
+    ActionCable.server.broadcast('runs', { run_id: id, partial: to_card })
   end
 
   private
