@@ -16,6 +16,7 @@ class GenerateResJob < ActiveJob::Base
       io: File.open("#{res_path}.pdf"),
       filename: File.basename(res_path),
     )
+    RefreshRunCard.perform_later(run_id)
   end
 
   private
