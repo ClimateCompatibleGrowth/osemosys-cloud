@@ -1,4 +1,4 @@
-FROM ruby:2.6.2
+FROM ruby:3.0.0
 RUN apt-get update -qq && apt-get install -y yarn postgresql-client tmux htop nodejs glpk-utils coinor-cbc zip python3-pandas
 RUN mkdir /osemosys-cloud
 WORKDIR /osemosys-cloud
