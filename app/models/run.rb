@@ -106,6 +106,6 @@ class Run < ApplicationRecord
   end
 
   def to_card
-    ApplicationController.render(partial: 'runs/card', locals: { run: self })
+    ApplicationController.render(partial: 'runs/card', locals: { run: Run.find(id) })
   end
 end

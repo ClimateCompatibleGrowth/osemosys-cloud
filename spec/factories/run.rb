@@ -27,14 +27,14 @@ FactoryBot.define do
     end
 
     data_file do
-      fixture_file_upload(
+      Rack::Test::UploadedFile.new(
         Rails.root.join('spec', 'data', 'empty_file.txt'),
         'text/plain',
       )
     end
 
     model_file do
-      fixture_file_upload(
+      Rack::Test::UploadedFile.new(
         Rails.root.join('spec', 'data', 'empty_file.txt'),
         'text/plain',
       )
@@ -49,14 +49,14 @@ FactoryBot.define do
       post_process { false }
 
       data_file do
-        fixture_file_upload(
+        Rack::Test::UploadedFile.new(
           Rails.root.join('spec', 'data', 'atlantis_data.txt'),
           'text/plain',
         )
       end
 
       model_file do
-        fixture_file_upload(
+        Rack::Test::UploadedFile.new(
           Rails.root.join('spec', 'data', 'atlantis_model.txt'),
           'text/plain',
         )
@@ -68,14 +68,14 @@ FactoryBot.define do
       post_process { true }
 
       data_file do
-        fixture_file_upload(
+        Rack::Test::UploadedFile.new(
           Rails.root.join('spec', 'data', 'atlantis_data_preprocessing.txt'),
           'text/plain',
         )
       end
 
       model_file do
-        fixture_file_upload(
+        Rack::Test::UploadedFile.new(
           Rails.root.join('spec', 'data', 'osemosys_with_preprocessed.txt'),
           'text/plain',
         )
@@ -84,14 +84,14 @@ FactoryBot.define do
 
     trait :faulty do
       data_file do
-        fixture_file_upload(
+        Rack::Test::UploadedFile.new(
           Rails.root.join('spec', 'data', 'empty_file.txt'),
           'text/plain',
         )
       end
 
       model_file do
-        fixture_file_upload(
+        Rack::Test::UploadedFile.new(
           Rails.root.join('spec', 'data', 'empty_file.txt'),
           'text/plain',
         )
