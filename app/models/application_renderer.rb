@@ -16,9 +16,9 @@ class ApplicationRenderer
     if Rails.env.development?
       'http://localhost:3000'
     elsif Rails.env.test?
-      'example.org'
+      'www.example.org'
     elsif Rails.env.production?
-      'osemosys-cloud.com'
+      'www.osemosys-cloud.com'
     end
   end
 end
