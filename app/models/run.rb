@@ -106,6 +106,17 @@ class Run < ApplicationRecord
   end
 
   def to_card
-    ApplicationController.render(partial: 'runs/card', locals: { run: Run.find(id) })
+    host = if Rails.env.development?
+             'http://localhost:3000'
+           elsif Rails.env.test?
+             'example.org'
+           elsif Rails.env.production?
+             'osemosys-cloud.com'
+           end
+
+    ApplicationController.renderer.new(
+      http_host: host,
+      https: Rails.env.production?,
+    ).render(partial: 'runs/card', locals: { run: Run.find(id) })
   end
 end
