@@ -42,7 +42,7 @@ class Run < ApplicationRecord
     end
 
     after_transition do |run, _transition|
-      run.broadcast_update!
+      RefreshRunCard.perform_later(run.id)
     end
   end
 end
