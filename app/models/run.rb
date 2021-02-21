@@ -89,6 +89,10 @@ class Run < ApplicationRecord
     end
   end
 
+  def broadcast_update!
+    ActionCable.server.broadcast('runs', { run_id: id, partial: to_card })
+  end
+
   private
 
   def only_postprocess_preprocessed_runs
@@ -99,5 +103,9 @@ class Run < ApplicationRecord
 
   def generate_res_file
     GenerateResJob.perform_later(id)
+  end
+
+  def to_card
+    ApplicationRenderer.render(partial: 'runs/card', locals: { run: Run.find(id) })
   end
 end

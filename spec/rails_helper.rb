@@ -31,11 +31,6 @@ rescue ActiveRecord::PendingMigrationError => exception
   exit 1
 end
 
-# https://blog.eq8.eu/til/factory-bot-trait-for-active-storange-has_attached.html
-FactoryBot::SyntaxRunner.class_eval do
-  include ActionDispatch::TestProcess
-end
-
 RSpec.configure do |config|
   config.include Devise::Test::IntegrationHelpers, type: :system
   config.include FactoryBot::Syntax::Methods
