@@ -7,6 +7,7 @@ table.table.table-sm
     th= User.human_attribute_name(:id)
     th= User.human_attribute_name(:email)
     th= User.human_attribute_name(:name)
+    th= User.human_attribute_name(:country_code)
     th= User.human_attribute_name(:created_at)
     th= Run.model_name.human.pluralize
     th= t('.last_run_at')
@@ -15,6 +16,7 @@ table.table.table-sm
       td = user.id
       td = link_to(user.email, admin_user_path(user.id))
       td = user.name
+      td = user.country_name
       td = user.created_at.strftime('%e %b %Y')
       td = link_to(admin_user_runs_path(user)) do
         = user.runs.length
