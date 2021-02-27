@@ -28,3 +28,4 @@ Turbolinks.start()
 ActiveStorage.start()
 
 importAll(require.context('../sprinkles', true, /.+\.js/))
+importAll(require.context('../vendor', true, /.+\.js/))
