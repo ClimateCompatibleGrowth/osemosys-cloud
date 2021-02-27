@@ -1,7 +1,7 @@
 module Admin
   class UsersController < AdminController
     def index
-      @all_users = User.order(:id)
+      @all_users = User.includes(:runs).order(:id).page(params[:page])
     end
 
     def show

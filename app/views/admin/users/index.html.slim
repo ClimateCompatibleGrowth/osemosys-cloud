@@ -1,9 +1,12 @@
 h1= t('.user_statistics')
 
+= paginate @all_users
+
 table.table.table-sm
   tr
     th= User.human_attribute_name(:id)
     th= User.human_attribute_name(:email)
+    th= User.human_attribute_name(:name)
     th= User.human_attribute_name(:created_at)
     th= Run.model_name.human.pluralize
     th= t('.last_run_at')
@@ -11,8 +14,11 @@ table.table.table-sm
     tr
       td = user.id
       td = link_to(user.email, admin_user_path(user.id))
-      td = format_datetime(user.created_at)
+      td = user.name
+      td = user.created_at.strftime('%e %b %Y')
       td = link_to(admin_user_runs_path(user)) do
-        = user.runs.count
+        = user.runs.length
         =< fa_icon('arrow-right')
-      td = format_datetime(user.runs&.last&.created_at)
+      td = user.runs&.last&.created_at&.strftime('%e %b %Y')
+
+= paginate @all_users

@@ -20,6 +20,7 @@ en:
         country_code: Country
         locale: Language
         runs_visible_to_admins: Runs visible to admins
+        created_at: Registration date
       version:
         model: Model
         name: Name
