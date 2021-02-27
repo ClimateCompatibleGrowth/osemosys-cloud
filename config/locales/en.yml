@@ -78,6 +78,8 @@ en:
   layouts:
     application:
       admin: Admin
+      users: Users
+      statistics: Statistics
       logout: Logout
       my_models: My models
       register: Register
