@@ -10,7 +10,7 @@ table.table.table-sm
   - @all_users.each do |user|
     tr
       td = user.id
-      td = link_to(user.email, admin_user_stat_path(user.id))
+      td = link_to(user.email, admin_user_path(user.id))
       td = format_datetime(user.created_at)
       td = link_to(admin_user_runs_path(user)) do
         = user.runs.count
