@@ -3,6 +3,8 @@ class User < ApplicationRecord
 
   enum locale: Language.to_enum_definition
 
+  validates :name, :country_code, :locale, presence: true
+
   has_many :models
   has_many :runs
   has_many :versions
