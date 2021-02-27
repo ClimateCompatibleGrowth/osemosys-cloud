@@ -8,6 +8,7 @@ gem 'aws-sdk-ec2'
 gem 'aws-sdk-s3'
 gem 'bootsnap', require: false
 gem 'bugsnag'
+gem 'country_select'
 gem 'devise'
 gem 'devise-bootstrap-views'
 gem 'devise-i18n'

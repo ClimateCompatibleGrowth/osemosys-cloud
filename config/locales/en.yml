@@ -16,6 +16,8 @@ en:
         server_type: Server type
       user:
         email: Email
+        name: Full name
+        country_code: Country
         locale: Language
         runs_visible_to_admins: Runs visible to admins
       version:
