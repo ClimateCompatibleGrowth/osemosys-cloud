@@ -15,11 +15,17 @@
 // const images = require.context('../images', true)
 // const imagePath = (name) => images(name, true)
 
+const importAll = (r) => r.keys().forEach(r);
+
 import Rails from '@rails/ujs'
 import Turbolinks from 'turbolinks'
 import * as ActiveStorage from '@rails/activestorage'
 import 'channels'
+import 'bootstrap'
 
 Rails.start()
 Turbolinks.start()
 ActiveStorage.start()
+
+importAll(require.context('../sprinkles', true, /.+\.js/))
+importAll(require.context('../vendor', true, /.+\.js/))

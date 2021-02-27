@@ -6,14 +6,13 @@ class RunsController < ApplicationController
   end
 
   def show
-    head :not_found unless request.xhr?
-
-    @run =
-      if current_user.admin?
-        Run.find(params[:id])
-      else
-        current_user.runs.find_by(id: params[:id])
-      end
+    if request.xhr?
+      run = Run.find(params[:id])
+      run.broadcast_update!
+      head :ok
+    else
+      head :not_found
+    end
   end
 
   def create

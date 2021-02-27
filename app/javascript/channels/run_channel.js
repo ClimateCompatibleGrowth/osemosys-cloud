@@ -7,7 +7,6 @@ const updateCard = (runId, content) => {
 }
 
 const subscribeToUpdates= () => {
-  console.log('subscribed')
   consumer.subscriptions.create('RunChannel', {
     received(data) {
       updateCard(data['run_id'], data['partial'])
