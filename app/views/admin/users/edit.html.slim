@@ -1,4 +1,4 @@
-h1= 'Changeme'
+h2 = t('.editing_user', name: @user.name, id: @user.id)
 
 = simple_form_for(@user, url: admin_user_path(@user)) do |f|
   = f.input :name

@@ -40,9 +40,7 @@ en:
         registered_users: 'Registered users:'
         total_server_time_used: 'Total server time used:'
       show:
-        last_run: 'Last run:'
         runs_by_state: Runs by state
-        total_run_duration: 'Total run duration:'
     users:
       index:
         last_run_at: Last run at
@@ -50,6 +48,10 @@ en:
       show:
         viewing_user: 'Viewing user %{user}'
         to_runs: "View runs"
+        total_run_duration: 'Total run duration:'
+        last_run: 'Last run:'
+      edit:
+        editing_user: "Editing %{name} (%{id})"
   flash:
     model:
       created: Model created
