@@ -42,12 +42,14 @@ en:
       show:
         last_run: 'Last run:'
         runs_by_state: Runs by state
-        sign_up_date: Sign up date
         total_run_duration: 'Total run duration:'
     users:
       index:
         last_run_at: Last run at
         user_statistics: User statistics
+      show:
+        viewing_user: 'Viewing user %{user}'
+        to_runs: "View runs"
   flash:
     model:
       created: Model created

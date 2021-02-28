@@ -8,8 +8,8 @@ module Admin
     def show
       @user = User.find(params[:id])
       @run_count_by_state = @user.runs.group(:state).count
+      @run_duration_by_state = @user.runs.group(:state).sum(:finished_in)
       @user_runs = @user.runs.order(id: :asc)
-      @last_run = @user_runs.last
     end
   end
 end
