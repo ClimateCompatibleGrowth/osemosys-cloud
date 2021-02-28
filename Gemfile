@@ -24,6 +24,7 @@ gem 'puma'
 gem 'rack', '2.2.2' # https://github.com/heartcombo/devise/issues/5273
 gem 'rails'
 gem 'rails-i18n'
+gem 'ransack'
 gem 'rexml'
 gem 'sassc-rails'
 gem 'sidekiq'
