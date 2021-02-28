@@ -11,5 +11,9 @@ module Admin
       @run_duration_by_state = @user.runs.group(:state).sum(:finished_in)
       @user_runs = @user.runs.order(id: :asc)
     end
+
+    def edit
+      @user = User.find(params[:id])
+    end
   end
 end

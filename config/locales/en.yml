@@ -64,6 +64,7 @@ en:
   helpers:
     back: Go Back
     clear: Clear
+    edit: Edit
     submit:
       model:
         create: Create model
