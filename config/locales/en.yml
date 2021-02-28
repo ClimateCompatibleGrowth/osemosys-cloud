@@ -16,8 +16,11 @@ en:
         server_type: Server type
       user:
         email: Email
+        name: Full name
+        country_code: Country
         locale: Language
         runs_visible_to_admins: Runs visible to admins
+        created_at: Registration date
       version:
         model: Model
         name: Name
@@ -31,18 +34,24 @@ en:
       index:
         access_denied: Access Denied
         not_allowed_to_see_runs: Not allowed to see runs for this user.
-    user_stats:
+    stats:
       index:
-        last_run_at: Last run at
         platform_statistics: Platform statistics
         registered_users: 'Registered users:'
         total_server_time_used: 'Total server time used:'
+      show:
+        runs_by_state: Runs by state
+    users:
+      index:
+        last_run_at: Last run at
         user_statistics: User statistics
       show:
-        last_run: 'Last run:'
-        runs_by_state: Runs by state
-        sign_up_date: Sign up date
+        viewing_user: 'Viewing user %{user}'
+        to_runs: "View runs"
         total_run_duration: 'Total run duration:'
+        last_run: 'Last run:'
+      edit:
+        editing_user: "Editing %{name} (%{id})"
   flash:
     model:
       created: Model created
@@ -56,6 +65,8 @@ en:
       created: Run version created
   helpers:
     back: Go Back
+    clear: Clear
+    edit: Edit
     submit:
       model:
         create: Create model
@@ -76,6 +87,8 @@ en:
   layouts:
     application:
       admin: Admin
+      users: Users
+      statistics: Statistics
       logout: Logout
       my_models: My models
       register: Register

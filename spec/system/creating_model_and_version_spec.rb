@@ -6,7 +6,7 @@ RSpec.describe 'Creating a model, version and a run', type: :system do
   end
 
   it 'works for logged in users' do
-    sign_in(User.create!(email: 'test@example.com', password: 'blehbleh'))
+    sign_in(create(:user))
     visit root_path
 
     click_on 'New model'

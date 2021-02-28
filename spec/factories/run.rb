@@ -2,8 +2,8 @@ FactoryBot.define do
   factory :run do
     name { 'My run' }
     description { 'My description' }
-    version
     user
+    version { association :version, user: user }
     server_type { 'z1d.3xlarge' }
 
     trait :queued do

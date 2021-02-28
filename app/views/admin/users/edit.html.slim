@@ -1,6 +1,6 @@
-h1= t('.my_user_profile')
+h2 = t('.editing_user', name: @user.name, id: @user.id)
 
-= simple_form_for(@user) do |f|
+= simple_form_for(@user, url: admin_user_path(@user)) do |f|
   = f.input :name
   = f.input :country_code
   = f.input :email, disabled: true

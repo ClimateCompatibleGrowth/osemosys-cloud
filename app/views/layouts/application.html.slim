@@ -17,7 +17,12 @@ html
           li.nav-item
             = link_to(current_user.email, user_path(current_user), class: 'nav-link')
           - if current_user.admin?
-            li.nav-item = link_to(t('.admin'), admin_user_stats_path, class: 'nav-link')
+            li.nav-item.dropdown
+              .nav-link.dropdown-toggle role='button' data-toggle='dropdown'
+                ' Admin
+              .dropdown-menu.dropdown-menu-right
+                = link_to(t('.users'), admin_users_path, class: 'dropdown-item')
+                = link_to(t('.statistics'), admin_stats_path, class: 'dropdown-item')
           li.nav-item = link_to(t('.logout'), destroy_user_session_path, method: :delete, class: 'nav-link')
         - else
           li.nav-item = link_to(t('.register'), new_user_registration_path, class: 'nav-link')

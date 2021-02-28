@@ -16,8 +16,8 @@ Rails.application.routes.draw do
   resources :users, only: %i[show update]
 
   namespace :admin do
-    resources :user_stats, only: %i[index show]
-    resources :users, only: [] do
+    resources :stats, only: %i[index]
+    resources :users, only: %i[index show edit update] do
       resources :runs, only: %i[index]
     end
   end

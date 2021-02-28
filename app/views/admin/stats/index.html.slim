@@ -1,0 +1,10 @@
+h1= t('.platform_statistics')
+
+ul.list-group
+  li.list-group-item
+    => t('.registered_users')
+    = @all_users.count
+  li.list-group-item
+    => t('.total_server_time_used')
+    - total_duration = Run.all.sum(:finished_in)
+    = format_duration(total_duration)

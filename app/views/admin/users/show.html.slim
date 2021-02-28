@@ -1,0 +1,60 @@
+h1 = t('.viewing_user', user: @user.email)
+.mb-2 = link_to(t('helpers.back'), admin_users_path)
+
+.container
+  .row
+    .col-sm.card.m-2
+      .card-body
+        h5 User information
+
+        table.table.table-sm.table-striped
+          tr
+            td = User.human_attribute_name(:id)
+            td = @user.id
+          tr
+            td = User.human_attribute_name(:name)
+            td = @user.name
+          tr
+            td = User.human_attribute_name(:country_code)
+            td = @user.country_name
+          tr
+            td = User.human_attribute_name(:email)
+            td = @user.email
+          tr
+            td = User.human_attribute_name(:created_at)
+            td = @user.created_at.strftime('%e %b %Y')
+
+        = link_to edit_admin_user_path(@user) do
+          .btn.btn-primary.btn-sm
+            = fa_icon('edit')
+            =< t('helpers.edit')
+
+    .col-sm.card.m-2
+      .card-body
+        h5 Runs
+
+        table.table.table-sm.table-striped
+          thead
+            tr
+              th State
+              th Count
+              th Duration
+          - @run_count_by_state.each do |state, run_count|
+            tr
+              td = t("run_state.#{state}")
+              td = run_count
+              td = format_duration(@run_duration_by_state[state])
+          tfoot
+            tr
+              - total_duration_for_state = @user_runs.sum(:finished_in)
+              td = t('.total_run_duration')
+              td = @user_runs.count
+              td = format_duration(total_duration_for_state)
+
+        = link_to(t('.to_runs'), admin_user_runs_path(@user))
+
+.card.m-2
+  .card-body
+    h5 = t('.last_run')
+    - if @user_runs.last
+      = render 'runs/card', run: @user_runs.last
