@@ -36,16 +36,18 @@ en:
         not_allowed_to_see_runs: Not allowed to see runs for this user.
     user_stats:
       index:
-        last_run_at: Last run at
         platform_statistics: Platform statistics
         registered_users: 'Registered users:'
         total_server_time_used: 'Total server time used:'
-        user_statistics: User statistics
       show:
         last_run: 'Last run:'
         runs_by_state: Runs by state
         sign_up_date: Sign up date
         total_run_duration: 'Total run duration:'
+    users:
+      index:
+        last_run_at: Last run at
+        user_statistics: User statistics
   flash:
     model:
       created: Model created
@@ -59,6 +61,7 @@ en:
       created: Run version created
   helpers:
     back: Go Back
+    clear: Clear
     submit:
       model:
         create: Create model
