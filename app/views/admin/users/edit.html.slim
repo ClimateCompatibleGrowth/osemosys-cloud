@@ -1,0 +1,10 @@
+h1= 'Changeme'
+
+= simple_form_for(@user, url: admin_user_path(@user)) do |f|
+  = f.input :name
+  = f.input :country_code
+  = f.input :email, disabled: true
+  = f.input :locale, collection: Language.all, include_blank: false,
+            label_method: :name, value_method: :slug
+  = f.input :runs_visible_to_admins, as: :boolean
+  = f.button :submit, class: 'btn btn-primary'

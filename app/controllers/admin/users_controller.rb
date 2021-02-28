@@ -15,5 +15,27 @@ module Admin
     def edit
       @user = User.find(params[:id])
     end
+
+    def update
+      @user = User.find(params[:id])
+      if @user.update(user_params)
+        flash.notice = t('flash.user.updated')
+        redirect_to action: :show
+      else
+        flash.now.alert = @user.errors.full_messages.to_sentence
+        render :edit
+      end
+    end
+
+    private
+
+    def user_params
+      params.require(:user).permit(
+        :country_code,
+        :locale,
+        :name,
+        :runs_visible_to_admins,
+      )
+    end
   end
 end
