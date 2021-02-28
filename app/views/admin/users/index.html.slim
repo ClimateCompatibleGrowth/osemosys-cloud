@@ -11,8 +11,8 @@ h1= t('.user_statistics')
 table.table.table-sm
   tr
     th= sort_link(@q, :id, User.human_attribute_name(:id))
-    th= sort_link(@q, :email, User.human_attribute_name(:email))
     th= sort_link(@q, :name, User.human_attribute_name(:name))
+    th= sort_link(@q, :email, User.human_attribute_name(:email))
     th= sort_link(@q, :country_code, User.human_attribute_name(:country_code))
     th= sort_link(@q, :created_at, User.human_attribute_name(:created_at))
     th= Run.model_name.human.pluralize
@@ -20,8 +20,8 @@ table.table.table-sm
   - @users.each do |user|
     tr
       td = user.id
-      td = link_to(user.email, admin_user_path(user.id))
       td = user.name
+      td = link_to(user.email, admin_user_path(user.id))
       td = user.country_name
       td = user.created_at.strftime('%e %b %Y')
       td = link_to(admin_user_runs_path(user)) do
