@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe 'Viewing the admin stats', type: :system do
+RSpec.describe 'Managing users as an admin', type: :system do
   before do
     driven_by(:rack_test)
   end
@@ -20,6 +20,7 @@ RSpec.describe 'Viewing the admin stats', type: :system do
     expect(page).to have_content(normal_user.email)
     expect(page).to have_content(swedish_user.email)
     expect(page).to have_content(admin.email)
+    expect(page).to have_content('Last run')
 
     select('Sweden', from: 'Country')
     click_on('Search')
@@ -60,13 +61,13 @@ RSpec.describe 'Viewing the admin stats', type: :system do
 
   it 'redirects to root for non admin users' do
     sign_in(create(:user))
-    visit admin_user_stats_path
+    visit admin_users_path
     expect(page).not_to have_content('User statistics')
     expect(page).to have_current_path('/models')
   end
 
   it 'redirects to root for non signed in users' do
-    visit admin_user_stats_path
+    visit admin_users_path
     expect(page).not_to have_content('User statistics')
     expect(page).to have_current_path('/users/sign_in')
   end

@@ -34,7 +34,7 @@ en:
       index:
         access_denied: Access Denied
         not_allowed_to_see_runs: Not allowed to see runs for this user.
-    user_stats:
+    stats:
       index:
         platform_statistics: Platform statistics
         registered_users: 'Registered users:'

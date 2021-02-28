@@ -22,7 +22,7 @@ html
                 ' Admin
               .dropdown-menu.dropdown-menu-right
                 = link_to(t('.users'), admin_users_path, class: 'dropdown-item')
-                = link_to(t('.statistics'), admin_user_stats_path, class: 'dropdown-item')
+                = link_to(t('.statistics'), admin_stats_path, class: 'dropdown-item')
           li.nav-item = link_to(t('.logout'), destroy_user_session_path, method: :delete, class: 'nav-link')
         - else
           li.nav-item = link_to(t('.register'), new_user_registration_path, class: 'nav-link')
