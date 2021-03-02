@@ -2,7 +2,7 @@ module Admin
   class UsersController < AdminController
     def index
       @q = User.ransack(params[:q])
-      @users = @q.result.includes(:runs).order(:id).page(params[:page])
+      @users = @q.result.includes(:runs).order(:id).page(params[:page]).per(50)
     end
 
     def show
