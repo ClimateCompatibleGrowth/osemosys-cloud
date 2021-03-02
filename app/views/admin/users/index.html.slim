@@ -27,6 +27,6 @@ table.table.table-sm
       td = link_to(admin_user_runs_path(user)) do
         = user.runs.length
         =< fa_icon('arrow-right')
-      td = user.runs&.last&.created_at&.strftime('%e %b %Y')
+      td = user.last_run&.created_at&.strftime('%e %b %Y')
 
 = paginate @users
