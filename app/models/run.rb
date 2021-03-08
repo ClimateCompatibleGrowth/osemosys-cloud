@@ -25,7 +25,7 @@ class Run < ApplicationRecord
   enum server_type: ServerType.to_enum_definition
   enum language: Language.to_enum_definition
 
-  scope :ordered, -> { order(:id) }
+  scope :ordered, -> { order(id: :desc) }
 
   def self.for_index_view(page)
     order(id: :desc)
