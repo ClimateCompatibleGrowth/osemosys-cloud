@@ -1,14 +1,25 @@
 module Admin
   class UsersController < AdminController
     def index
-      @q = User.ransack(params[:q])
-      @users = @q.result.includes(:runs).order(:id).page(params[:page]).per(50)
+      respond_to do |format|
+        @q = User.ransack(params[:q])
+        @q.sorts = 'id asc' if @q.sorts.empty?
+        @users = @q.result.includes(:runs).page(params[:page]).per(50)
+
+        format.html
+        format.csv do
+          send_data(
+            UsersToCsv.new(@users.per(1000)).generate,
+            filename: 'users.csv',
+          )
+        end
+      end
     end
 
     def show
       @user = User.find(params[:id])
-      @run_count_by_state = @user.runs.group(:state).count
-      @run_duration_by_state = @user.runs.group(:state).sum(:finished_in)
+      @run_count_by_state = @user.runs.unscoped.group(:state).count
+      @run_duration_by_state = @user.runs.unscoped.group(:state).sum(:finished_in)
       @user_runs = @user.runs.order(id: :asc)
     end
 

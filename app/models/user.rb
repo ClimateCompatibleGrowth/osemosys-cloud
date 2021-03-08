@@ -6,16 +6,12 @@ class User < ApplicationRecord
   validates :name, :country_code, :locale, presence: true
 
   has_many :models
-  has_many :runs
+  has_many :runs, -> { ordered }
   has_many :versions
 
   def country_name
     return '-' if country_code.blank?
 
     ISO3166::Country[country_code].translations[I18n.locale.to_s]
-  end
-
-  def last_run
-    runs.ordered.last
   end
 end
