@@ -11,7 +11,7 @@ h1= t('.user_statistics')
   = paginate @users
   = link_to params.permit!.merge(format: :csv), class:'btn btn-outline-primary ml-2 mb-3'
     => fa_icon('cloud-download-alt')
-    = t('helpers.csv')
+    ' CSV
 
 table.table.table-sm
   tr
