@@ -17,6 +17,7 @@ table.table.table-sm
     th= sort_link(@q, :created_at, User.human_attribute_name(:created_at))
     th= Run.model_name.human.pluralize
     th= t('.last_run_at')
+    th= t('.server_time')
   - @users.each do |user|
     tr
       td = user.id
@@ -28,5 +29,6 @@ table.table.table-sm
         = user.runs.length
         =< fa_icon('arrow-right')
       td = user.runs.first&.created_at&.strftime('%e %b %Y')
+      td = format_duration(user.runs.sum(:finished_in))
 
 = paginate @users

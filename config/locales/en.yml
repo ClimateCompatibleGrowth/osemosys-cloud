@@ -44,6 +44,7 @@ en:
     users:
       index:
         last_run_at: Last run at
+        server_time: Server time
         user_statistics: User statistics
       show:
         viewing_user: 'Viewing user %{user}'
