@@ -1,9 +1,19 @@
 module Admin
   class UsersController < AdminController
     def index
-      @q = User.ransack(params[:q])
-      @q.sorts = 'id asc' if @q.sorts.empty?
-      @users = @q.result.includes(:runs).page(params[:page]).per(50)
+      respond_to do |format|
+        @q = User.ransack(params[:q])
+        @q.sorts = 'id asc' if @q.sorts.empty?
+        @users = @q.result.includes(:runs).page(params[:page]).per(50)
+
+        format.html
+        format.csv do
+          send_data(
+            UsersToCsv.new(@users.per(1000)).generate,
+            filename: 'users.csv',
+          )
+        end
+      end
     end
 
     def show

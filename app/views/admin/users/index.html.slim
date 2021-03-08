@@ -6,7 +6,12 @@ h1= t('.user_statistics')
     = f.button :submit, class: 'btn btn-primary'
     = link_to t('helpers.clear'), request.path, class:'btn btn-outline-primary ml-2'
 
-= paginate @users
+.d-flex.justify-content-between
+  .empty
+  = paginate @users
+  = link_to params.permit!.merge(format: :csv), class:'btn btn-outline-primary ml-2 mb-3'
+    => fa_icon('cloud-download-alt')
+    = t('helpers.csv')
 
 table.table.table-sm
   tr
