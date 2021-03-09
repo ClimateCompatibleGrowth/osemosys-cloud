@@ -56,5 +56,5 @@ h1 = t('.viewing_user', user: @user.email)
 .card.m-2
   .card-body
     h5 = t('.last_run')
-    - if @user_runs.last
-      = render 'runs/card', run: @user_runs.last
+    - if @user_runs.present?
+      = render 'runs/card', run: @user_runs.first
