@@ -15,5 +15,8 @@ const subscribeToUpdates= () => {
 }
 
 window.onload = () => {
-  subscribeToUpdates()
+  const pageShowsRuns = document.getElementsByClassName('run-card').length > 0
+  if(pageShowsRuns) {
+    subscribeToUpdates()
+  }
 }
