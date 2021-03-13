@@ -14,4 +14,8 @@ class User < ApplicationRecord
 
     ISO3166::Country[country_code].translations[I18n.locale.to_s]
   end
+
+  def complete_profile_information?
+    name.present? && country_code.present?
+  end
 end
