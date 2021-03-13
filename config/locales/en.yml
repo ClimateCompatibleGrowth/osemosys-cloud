@@ -61,6 +61,7 @@ en:
       started: Run started
       stopeed: Run stopped
     user:
+      complete_profile_to_continue: Please fill in your profile information to continue.
       updated: User updated
     version:
       created: Run version created
