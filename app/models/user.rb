@@ -18,4 +18,8 @@ class User < ApplicationRecord
   def complete_profile_information?
     name.present? && country_code.present?
   end
+
+  def inactive?
+    !active?
+  end
 end

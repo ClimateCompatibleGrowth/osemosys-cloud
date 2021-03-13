@@ -21,6 +21,7 @@ en:
         locale: Language
         runs_visible_to_admins: Runs visible to admins
         created_at: Registration date
+        active: Active
       version:
         model: Model
         name: Name
@@ -53,6 +54,8 @@ en:
         last_run: 'Last run:'
       edit:
         editing_user: "Editing %{name} (%{id})"
+        dangerous_area: Dangerous area
+        active_hint: Unchecking this will make the user unable to access the platform. <b>You can lock yourself out of your account!</b>
   flash:
     model:
       created: Model created
@@ -107,6 +110,9 @@ en:
     not_found:
       page_not_found: Page not found
       page_not_found_body: This page has not been found. Try going back to the home page to access your models, versions and runs.
+    not_authorized:
+      title: Not authorized
+      body: Your account has been deactivated. If you think this is a mistake, please contact an administrator.
   run_mailer:
     run_finished_email:
       solving_time: Solving time

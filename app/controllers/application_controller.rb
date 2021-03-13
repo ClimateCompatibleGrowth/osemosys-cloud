@@ -4,6 +4,7 @@ class ApplicationController < ActionController::Base
   before_action :set_locale
   before_action :configure_permitted_parameters, if: :devise_controller?
   before_action :redirect_user_to_profile_page_if_incomplete_profile, unless: :devise_controller?
+  before_action :disallow_inactive_users, unless: :devise_controller?
 
   private
 
@@ -32,5 +33,9 @@ class ApplicationController < ActionController::Base
 
   def on_user_profile_page?
     controller_name == 'users' && (action_name == 'show' || action_name == 'update')
+  end
+
+  def disallow_inactive_users
+    render 'pages/not_authorized' and return if current_user&.inactive?
   end
 end

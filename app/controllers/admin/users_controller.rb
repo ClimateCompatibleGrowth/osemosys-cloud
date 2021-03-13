@@ -46,6 +46,7 @@ module Admin
         :locale,
         :name,
         :runs_visible_to_admins,
+        :active,
       )
     end
   end

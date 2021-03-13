@@ -8,6 +8,8 @@ Rails.application.routes.draw do
   end
 
   root to: 'pages#home'
+  get '/not_authorized', to: 'pages#not_authorized', as: :not_authorized
+
   resources :runs, only: %i[new create show]
   resources :versions, only: %i[new create show]
   resources :models, only: %i[new create index show]
