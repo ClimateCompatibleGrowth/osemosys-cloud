@@ -31,6 +31,6 @@ class ApplicationController < ActionController::Base
   end
 
   def on_user_profile_page?
-    controller_name == 'users' && action_name == 'show' || action_name == 'update'
+    controller_name == 'users' && (action_name == 'show' || action_name == 'update')
   end
 end
