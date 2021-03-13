@@ -21,6 +21,7 @@ en:
         locale: Language
         runs_visible_to_admins: Runs visible to admins
         created_at: Registration date
+        active: Active
       version:
         model: Model
         name: Name
