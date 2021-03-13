@@ -44,4 +44,12 @@ RSpec.describe 'Creating a run', type: :system do
 
     expect(page).to have_text('You need to sign in or sign up before continuing.')
   end
+
+  it 'renders not authorized for inactivated users' do
+    user = create(:user, active: false)
+    sign_in(user)
+    visit root_path
+
+    expect(page).to have_text('Not authorized')
+  end
 end

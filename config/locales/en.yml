@@ -107,6 +107,9 @@ en:
     not_found:
       page_not_found: Page not found
       page_not_found_body: This page has not been found. Try going back to the home page to access your models, versions and runs.
+    not_authorized:
+      title: Not authorized
+      body: Your account has been deactivated. If you think this is a mistake, please contact an administrator.
   run_mailer:
     run_finished_email:
       solving_time: Solving time
