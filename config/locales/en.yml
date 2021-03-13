@@ -54,6 +54,8 @@ en:
         last_run: 'Last run:'
       edit:
         editing_user: "Editing %{name} (%{id})"
+        dangerous_area: Dangerous area
+        active_hint: Unchecking this will make the user unable to access the platform. <b>You can lock yourself out of your account!</b>
   flash:
     model:
       created: Model created

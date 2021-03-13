@@ -7,5 +7,11 @@ h2 = t('.editing_user', name: @user.name, id: @user.id)
   = f.input :locale, collection: Language.all, include_blank: false,
             label_method: :name, value_method: :slug
   = f.input :runs_visible_to_admins, as: :boolean
-  = f.input :active, as: :boolean
+  .card.mb-3
+    .card-body
+      .badge.badge-warning
+        = fa_icon('exclamation-triangle')
+        =< t('.dangerous_area')
+      .mt-1
+        = f.input :active, as: :boolean, hint: t('.active_hint').html_safe
   = f.button :submit, class: 'btn btn-primary'
