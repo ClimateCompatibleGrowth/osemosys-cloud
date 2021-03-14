@@ -32,8 +32,8 @@
 
     - if run.res_file.attached?
       .run-card__header
-        = link_to(rails_blob_path(run.res_file, disposition: 'inline'), target: '_blank') do
-          = image_tag run.res_file.preview(resize_to_limit: [100, 100])
+        = link_to(run.res_file.url, target: '_blank') do
+          = image_tag run.res_file.preview(resize_to_limit: [100, 100]).url
     - if run.finished?
       .run-card__header
         =<> fa_icon('stopwatch')

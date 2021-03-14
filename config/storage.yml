@@ -8,3 +8,4 @@ amazon:
   secret_access_key: <%= Rails.application.credentials.dig(:aws, :secret_access_key) %>
   region: eu-west-1
   bucket: osemosys-cloud-development
+  public: true
