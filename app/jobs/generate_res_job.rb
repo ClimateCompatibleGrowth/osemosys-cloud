@@ -16,7 +16,8 @@ class GenerateResJob < ActiveJob::Base
       io: File.open("#{res_path}.pdf"),
       filename: File.basename(res_path),
     )
-    run.res_file.preview(resize_to_limit: [100, 100]).processed
+    run.reload
+    run.res_file.preview(resize_to_limit: [100, 100]).processed if run.res_file.previewable?
     RefreshRunCard.perform_later(run_id)
   end
 
