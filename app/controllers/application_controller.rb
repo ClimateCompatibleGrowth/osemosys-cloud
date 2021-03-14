@@ -38,4 +38,17 @@ class ApplicationController < ActionController::Base
   def disallow_inactive_users
     render 'pages/not_authorized' and return if current_user&.inactive?
   end
+
+  def append_info_to_payload(payload)
+    payload.merge!(
+      host: request.host,
+      ip: request.ip,
+      locale: I18n.locale,
+      request_id: request.request_id,
+      ua_application: request.headers['UA-Application'],
+      user_email: current_user&.email,
+      user_id: current_user&.id,
+    )
+    super
+  end
 end

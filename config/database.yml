@@ -4,7 +4,7 @@ default: &default
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
   database: <%= "osemosys_cloud_#{Rails.env}" %>
   variables:
-    statement_timeout: 5000
+    statement_timeout: 10_000
 
 development:
   <<: *default
