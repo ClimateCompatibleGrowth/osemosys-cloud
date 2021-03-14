@@ -361,6 +361,8 @@ GEM
     simplecov-html (0.12.3)
     simplecov_json_formatter (0.1.2)
     sixarm_ruby_unaccent (1.2.0)
+    skylight (5.0.1)
+      activesupport (>= 5.2.0)
     slim (4.1.0)
       temple (>= 0.7.6, < 0.9)
       tilt (>= 2.0.6, < 2.1)
@@ -462,6 +464,7 @@ DEPENDENCIES
   sidekiq
   simple_form
   simplecov
+  skylight
   slim-rails
   spring
   spring-commands-rspec
