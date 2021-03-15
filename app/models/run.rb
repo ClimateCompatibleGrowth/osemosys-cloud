@@ -96,6 +96,15 @@ class Run < ApplicationRecord
     ActionCable.server.broadcast('runs', { run_id: id, partial: to_card })
   end
 
+  def res_file_thumbnail_url
+    if cached_res_thumbnail_url.present?
+      cached_res_thumbnail_url
+    else
+      cache_res_file_thumbnail
+      res_file.preview(resize_to_limit: [100, 100]).processed.url
+    end
+  end
+
   private
 
   def only_postprocess_preprocessed_runs
@@ -110,5 +119,9 @@ class Run < ApplicationRecord
 
   def to_card
     ApplicationRenderer.render(partial: 'runs/card', locals: { run: Run.find(id) })
+  end
+
+  def cache_res_file_thumbnail
+    update(cached_res_thumbnail_url: res_file.preview(resize_to_limit: [100, 100]).processed.url)
   end
 end
