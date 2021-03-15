@@ -99,7 +99,7 @@ class Run < ApplicationRecord
   def res_file_thumbnail_url
     if cached_res_thumbnail_url.present?
       cached_res_thumbnail_url
-    else
+    elsif res_file.previewable?
       cache_res_file_thumbnail
       res_file.preview(resize_to_limit: [100, 100]).processed.url
     end
