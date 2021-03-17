@@ -2,9 +2,12 @@ version: 2
 jobs:
   test:
     docker:
-       - image: circleci/ruby:3.0.0-node-browsers
-       - image: circleci/postgres:13
-       - image: circleci/redis:3
+      - image: circleci/ruby:3.0.0-node-browsers
+      - image: circleci/postgres:13
+        environment:
+          POSTGRES_USER: circleci
+          POSTGRES_HOST_AUTH_METHOD: trust
+      - image: circleci/redis:3
     environment:
       - RACK_ENV: test
 
