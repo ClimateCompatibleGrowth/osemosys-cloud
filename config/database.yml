@@ -8,15 +8,12 @@ default: &default
 
 development:
   <<: *default
-  username: postgres
-  host: localhost
+  url: postgres://localhost
 
 test:
   <<: *default
-  username: postgres
-  host: localhost
+  url: postgres://localhost
 
 production:
   <<: *default
-  username: osemosys-cloud
-  password: <%= ENV['MYAPP_DATABASE_PASSWORD'] %>
+  url: <%= Rails.application.credentials.dig(:postgres, :url) %>
