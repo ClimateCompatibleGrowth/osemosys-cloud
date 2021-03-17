@@ -3,7 +3,7 @@ jobs:
   test:
     docker:
        - image: circleci/ruby:3.0.0-node-browsers
-       - image: circleci/postgres:10-alpine-postgis-ram
+       - image: circleci/postgres:13
        - image: circleci/redis:3
     environment:
       - RACK_ENV: test
