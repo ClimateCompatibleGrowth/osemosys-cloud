@@ -123,7 +123,10 @@ def generate_csv_files(data_file, results_file, base_folder=os.getcwd()):
             'TechnologyActivityChangeByMode':['r','t','m','y'],
             'TechnologyActivityChangeByModeCostTotal':['r','t','m','y'],
             'InputToNewCapacity':['r','t','f','y'],
-            'InputToTotalCapacity':['r','t','f','y'],            
+            'InputToTotalCapacity':['r','t','f','y'],
+            'DiscountedCapitalInvestment':['r','t','y'],
+            'DiscountedOperatingCost':['r','t','y'],
+            'TotalDiscountedCostByTechnology':['r','t','y'],            
             }
 
     for each in params:
