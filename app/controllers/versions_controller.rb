@@ -4,7 +4,7 @@ class VersionsController < ApplicationController
   end
 
   def show
-    @version = current_user.versions.find_by(id: params[:id])
+    @version = current_user.versions.kept.find_by(id: params[:id])
     if @version
       @runs = @version.runs.for_index_view(params[:page]).per(10)
     else
@@ -21,6 +21,34 @@ class VersionsController < ApplicationController
     else
       flash.now.alert = @version.errors.full_messages.to_sentence
       render :new
+    end
+  end
+
+  def edit
+    @version = current_user.versions.kept.find_by(id: params[:id])
+    redirect_to :not_found and return unless @version
+  end
+
+  def update
+    @version = current_user.versions.kept.find_by(id: params[:id])
+    redirect_to :not_found and return unless @version
+
+    if @version.update(version_params)
+      flash.notice = t('flash.version.updated')
+      redirect_to model_path(@version.model)
+    else
+      flash.now.alert = @version.errors.full_messages.to_sentence
+      render :edit
+    end
+  end
+
+  def destroy
+    @version = current_user.versions.kept.find_by(id: params[:id])
+    redirect_to :not_found and return unless @version
+
+    if @version.discard
+      flash.notice = t('flash.version.deleted')
+      redirect_to model_path(@version.model)
     end
   end
 

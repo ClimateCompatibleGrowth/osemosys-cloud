@@ -12,8 +12,8 @@ Rails.application.routes.draw do
   get '/not_found', to: 'pages#not_found', as: :not_found
 
   resources :runs, only: %i[new create show]
-  resources :versions, only: %i[new create show]
-  resources :models, only: %i[new create index show]
+  resources :versions
+  resources :models
   post '/run/:id/start', to: 'runs#start', as: :start_run
   post '/run/:id/stop', to: 'runs#stop', as: :stop_run
   resources :users, only: %i[show update]

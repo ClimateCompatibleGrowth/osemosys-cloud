@@ -25,7 +25,7 @@ h1 = t('.viewing_user', user: @user.email)
             td = @user.created_at.strftime('%e %b %Y')
 
         = link_to edit_admin_user_path(@user) do
-          .btn.btn-primary.btn-sm
+          .btn.btn-outline-primary.btn-sm
             = fa_icon('edit')
             =< t('helpers.edit')
 

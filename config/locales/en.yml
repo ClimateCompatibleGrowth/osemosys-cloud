@@ -59,6 +59,8 @@ en:
   flash:
     model:
       created: Model created
+      updated: Model updated
+      deleted: Model deleted
     run:
       created: Run created
       started: Run started
@@ -68,10 +70,14 @@ en:
       updated: User updated
     version:
       created: Run version created
+      updated: Run version updated
+      deleted: Run version deleted
   helpers:
     back: Go Back
     clear: Clear
     edit: Edit
+    delete: Delete
+    are_you_sure: Are you sure? This cannot be undone.
     submit:
       model:
         create: Create model

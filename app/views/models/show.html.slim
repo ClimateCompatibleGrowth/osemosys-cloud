@@ -1,13 +1,24 @@
 h1 = @model.name
 
-.mb-2 = link_to(t('helpers.submit.version.new'), new_version_path(model_id: @model.id), class: 'btn btn-primary')
+hr
+
+.float-right
+  = link_to(t('helpers.submit.version.new'), new_version_path(model_id: @model.id), class: 'btn btn-primary btn-sm')
+
+h3 = t('activerecord.models.version').pluralize
 
 table.table.table-striped.table-hover
   tr
     th= Version.human_attribute_name(:id)
     th= Version.human_attribute_name(:name)
+    th
   - @versions.each do |version|
     = link_to(version) do
-      tr
+      tr data-test-version-id=version.id
         td = version.id
         td = link_to(version.name, version)
+        td
+          .float-right = link_to edit_version_path(version) do
+            .btn.btn-outline-primary.btn-sm
+              = fa_icon('edit')
+              =< t('helpers.edit')

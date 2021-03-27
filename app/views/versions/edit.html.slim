@@ -1,0 +1,9 @@
+h1= t('helpers.submit.version.update')
+
+= render('versions/form', version: @version)
+
+.float-right
+  =< link_to(version_path(@version), method: :delete, data: { confirm: t('helpers.are_you_sure') }) do
+    .btn.btn-outline-danger.btn-sm
+      = fa_icon('trash-alt')
+      =< t('helpers.delete')

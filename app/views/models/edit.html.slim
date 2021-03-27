@@ -1,0 +1,9 @@
+h1= t('helpers.submit.model.update')
+
+= render('models/form', model: @model)
+
+.float-right
+  =< link_to(model_path(@model), method: :delete, data: { confirm: t('helpers.are_you_sure') }) do
+    .btn.btn-outline-danger.btn-sm
+      = fa_icon('trash-alt')
+      =< t('helpers.delete')
