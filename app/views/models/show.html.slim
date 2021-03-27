@@ -14,7 +14,7 @@ table.table.table-striped.table-hover
     th
   - @versions.each do |version|
     = link_to(version) do
-      tr
+      tr data-test-version-id=version.id
         td = version.id
         td = link_to(version.name, version)
         td

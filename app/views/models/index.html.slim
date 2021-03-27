@@ -14,7 +14,7 @@ table.table.table-striped.table-hover
     th
   - @models.each do |model|
     = link_to(model) do
-      tr
+      tr data-test-model-id=model.id
         td = model.id
         td = link_to(model.name, model)
         td
