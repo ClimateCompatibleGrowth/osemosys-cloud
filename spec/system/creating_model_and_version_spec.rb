@@ -28,6 +28,20 @@ RSpec.describe 'Creating a model, version and a run', type: :system do
     expect(page).to have_text('Model updated')
     expect(page).to have_text('My model 456')
 
+    visit models_path
+
+    click_on 'New model'
+
+    fill_in 'Name', with: 'My model to be deleted'
+    click_on 'Create model'
+
+    click_on 'Delete'
+
+    expect(page).to have_text('Model deleted')
+    expect(page).not_to have_text('My model to be deleted')
+
+    click_on('My model 456')
+
     click_on 'New version'
 
     fill_in 'Name', with: 'My version 123'
