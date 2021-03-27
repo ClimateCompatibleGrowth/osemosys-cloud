@@ -10,7 +10,7 @@ class ModelsController < ApplicationController
   def show
     @model = current_user.models.kept.find_by(id: params[:id])
     if @model
-      @versions = @model.versions.order(id: :desc)
+      @versions = @model.versions.kept.order(id: :desc)
     else
       redirect_to :not_found
     end

@@ -16,8 +16,18 @@ table.table.table-striped.table-hover
   tr
     th= Version.human_attribute_name(:id)
     th= Version.human_attribute_name(:name)
+    th
   - @versions.each do |version|
     = link_to(version) do
       tr
         td = version.id
         td = link_to(version.name, version)
+        td
+          =< link_to edit_version_path(version) do
+            .btn.btn-primary.btn-sm
+              = fa_icon('edit')
+              =< t('helpers.edit')
+          =< link_to(version_path(version), method: :delete, data: { confirm: t('helpers.are_you_sure') }) do
+            .btn.btn-danger.btn-sm
+              = fa_icon('trash-alt')
+              =< t('helpers.delete')

@@ -1,8 +1,18 @@
 h1 = @version.name
 
-.mb-2 = link_to(t('helpers.submit.run.new'), new_run_path(version_id: @version.id), class: 'btn btn-primary')
+.mb-2
+  = link_to(t('helpers.submit.run.new'), new_run_path(version_id: @version.id), class: 'btn btn-primary')
 
-br
+  .float-right
+    = link_to edit_version_path(@version) do
+      .btn.btn-primary.btn-sm
+        = fa_icon('edit')
+        =< t('helpers.edit')
+    =< link_to(version_path(@version), method: :delete, data: { confirm: t('helpers.are_you_sure') }) do
+      .btn.btn-danger.btn-sm
+        = fa_icon('trash-alt')
+        =< t('helpers.delete')
+
 = paginate @runs
 
 - @runs.each do |run|

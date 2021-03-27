@@ -70,6 +70,8 @@ en:
       updated: User updated
     version:
       created: Run version created
+      updated: Run version updated
+      deleted: Run version deleted
   helpers:
     back: Go Back
     clear: Clear
