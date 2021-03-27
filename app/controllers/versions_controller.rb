@@ -5,7 +5,11 @@ class VersionsController < ApplicationController
 
   def show
     @version = current_user.versions.find_by(id: params[:id])
-    @runs = @version.runs.for_index_view(params[:page]).per(10)
+    if @version
+      @runs = @version.runs.for_index_view(params[:page]).per(10)
+    else
+      redirect_to :not_found
+    end
   end
 
   def create

@@ -9,7 +9,11 @@ class ModelsController < ApplicationController
 
   def show
     @model = current_user.models.find_by(id: params[:id])
-    @versions = @model.versions.order(id: :desc)
+    if @model
+      @versions = @model.versions.order(id: :desc)
+    else
+      redirect_to :not_found
+    end
   end
 
   def create
