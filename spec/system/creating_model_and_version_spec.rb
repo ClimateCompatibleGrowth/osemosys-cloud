@@ -26,4 +26,16 @@ RSpec.describe 'Creating a model, version and a run', type: :system do
     expect(page).to have_text('My version 123')
     expect(page).to have_text('New run')
   end
+
+  it 'gracefully handles invalid urls' do
+    sign_in(create(:user))
+
+    visit(model_path(id: 3))
+
+    expect(page).to have_text('Page not found')
+
+    visit(version_path(id: 3))
+
+    expect(page).to have_text('Page not found')
+  end
 end

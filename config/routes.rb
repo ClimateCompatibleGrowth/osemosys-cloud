@@ -9,6 +9,7 @@ Rails.application.routes.draw do
 
   root to: 'pages#home'
   get '/not_authorized', to: 'pages#not_authorized', as: :not_authorized
+  get '/not_found', to: 'pages#not_found', as: :not_found
 
   resources :runs, only: %i[new create show]
   resources :versions, only: %i[new create show]
