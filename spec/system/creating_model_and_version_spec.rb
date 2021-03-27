@@ -17,6 +17,17 @@ RSpec.describe 'Creating a model, version and a run', type: :system do
     expect(page).to have_text('Model created')
     expect(page).to have_text('My model 123')
 
+    click_on 'Edit'
+
+    expect(page).to have_text('Update model')
+
+    fill_in 'Name', with: 'My model 456'
+
+    click_on 'Update model'
+
+    expect(page).to have_text('Model updated')
+    expect(page).to have_text('My model 456')
+
     click_on 'New version'
 
     fill_in 'Name', with: 'My version 123'
