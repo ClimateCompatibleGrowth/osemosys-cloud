@@ -1,16 +1,11 @@
 h1 = @model.name
 
-.mb-2
+hr
+
+.float-right
   = link_to(t('helpers.submit.version.new'), new_version_path(model_id: @model.id), class: 'btn btn-primary btn-sm')
-  .float-right
-    = link_to edit_model_path(@model) do
-      .btn.btn-primary.btn-sm
-        = fa_icon('edit')
-        =< t('helpers.edit')
-    =< link_to(model_path(@model), method: :delete, data: { confirm: t('helpers.are_you_sure') }) do
-      .btn.btn-danger.btn-sm
-        = fa_icon('trash-alt')
-        =< t('helpers.delete')
+
+h3 = t('activerecord.models.version').pluralize
 
 table.table.table-striped.table-hover
   tr
@@ -23,11 +18,7 @@ table.table.table-striped.table-hover
         td = version.id
         td = link_to(version.name, version)
         td
-          =< link_to edit_version_path(version) do
+          .float-right = link_to edit_version_path(version) do
             .btn.btn-primary.btn-sm
               = fa_icon('edit')
               =< t('helpers.edit')
-          =< link_to(version_path(version), method: :delete, data: { confirm: t('helpers.are_you_sure') }) do
-            .btn.btn-danger.btn-sm
-              = fa_icon('trash-alt')
-              =< t('helpers.delete')

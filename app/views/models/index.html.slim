@@ -1,6 +1,8 @@
-h1.mb-4= t('.my_models')
+h1 = t('.my_models')
 
-.mb-2 = link_to(t('helpers.submit.model.new'), new_model_path, class: 'btn btn-primary')
+hr
+
+.float-right.mb-2 = link_to(t('helpers.submit.model.new'), new_model_path, class: 'btn btn-primary btn-sm')
 
 br
 = paginate @models
@@ -16,11 +18,7 @@ table.table.table-striped.table-hover
         td = model.id
         td = link_to(model.name, model)
         td
-          =< link_to edit_model_path(model) do
+          .float-right = link_to edit_model_path(model) do
             .btn.btn-primary.btn-sm
               = fa_icon('edit')
               =< t('helpers.edit')
-          =< link_to(model_path(model), method: :delete, data: { confirm: t('helpers.are_you_sure') }) do
-            .btn.btn-danger.btn-sm
-              = fa_icon('trash-alt')
-              =< t('helpers.delete')
