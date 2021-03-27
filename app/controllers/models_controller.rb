@@ -28,6 +28,24 @@ class ModelsController < ApplicationController
     end
   end
 
+  def edit
+    @model = current_user.models.find_by(id: params[:id])
+    redirect_to :not_found and return unless @model
+  end
+
+  def update
+    @model = current_user.models.find_by(id: params[:id])
+    redirect_to :not_found and return unless @model
+
+    if @model.update(model_params)
+      flash.notice = t('flash.model.updated')
+      redirect_to model_path(@model)
+    else
+      flash.now.alert = @model.errors.full_messages.to_sentence
+      render :edit
+    end
+  end
+
   private
 
   def model_params

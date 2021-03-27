@@ -13,7 +13,7 @@ Rails.application.routes.draw do
 
   resources :runs, only: %i[new create show]
   resources :versions, only: %i[new create show]
-  resources :models, only: %i[new create index show]
+  resources :models
   post '/run/:id/start', to: 'runs#start', as: :start_run
   post '/run/:id/stop', to: 'runs#stop', as: :stop_run
   resources :users, only: %i[show update]

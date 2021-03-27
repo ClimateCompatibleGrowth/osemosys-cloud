@@ -9,8 +9,14 @@ table.table.table-striped.table-hover
   tr
     th= Model.human_attribute_name(:id)
     th= Model.human_attribute_name(:name)
+    th
   - @models.each do |model|
     = link_to(model) do
       tr
         td = model.id
         td = link_to(model.name, model)
+        td
+          = link_to edit_model_path(model) do
+            .btn.btn-primary.btn-sm
+              = fa_icon('edit')
+              =< t('helpers.edit')

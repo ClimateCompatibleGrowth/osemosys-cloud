@@ -59,6 +59,7 @@ en:
   flash:
     model:
       created: Model created
+      updated: Model updated
     run:
       created: Run created
       started: Run started
