@@ -73,6 +73,8 @@ en:
     back: Go Back
     clear: Clear
     edit: Edit
+    delete: Delete
+    are_you_sure: Are you sure?
     submit:
       model:
         create: Create model
