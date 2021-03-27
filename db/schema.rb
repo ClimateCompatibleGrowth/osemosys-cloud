@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_03_27_151507) do
+ActiveRecord::Schema.define(version: 2021_03_27_152423) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_stat_statements"
@@ -128,6 +128,8 @@ ActiveRecord::Schema.define(version: 2021_03_27_151507) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.bigint "model_id"
+    t.datetime "discarded_at"
+    t.index ["discarded_at"], name: "index_versions_on_discarded_at"
     t.index ["model_id"], name: "index_versions_on_model_id"
     t.index ["user_id"], name: "index_versions_on_user_id"
   end
