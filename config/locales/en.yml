@@ -75,7 +75,7 @@ en:
     clear: Clear
     edit: Edit
     delete: Delete
-    are_you_sure: Are you sure?
+    are_you_sure: Are you sure? This cannot be undone.
     submit:
       model:
         create: Create model
