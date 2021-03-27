@@ -60,6 +60,7 @@ en:
     model:
       created: Model created
       updated: Model updated
+      deleted: Model deleted
     run:
       created: Run created
       started: Run started
