@@ -20,8 +20,12 @@
     }
   }
 
-  &__header {
-    display: inline;
+  &__run-info {
+    display: flex;
+  }
+
+  &__section {
+    align-self: center;
     margin-right: 10px;
     margin-left: 20px;
   }

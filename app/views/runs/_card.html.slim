@@ -13,7 +13,7 @@
 
     =<> "#{run.id} - #{run.name} (#{run.humanized_status})"
     - if run.finished?
-      a.text-right data-toggle='collapse' href="#timeline-#{run.id}"
+      a.ml-3.text-right data-toggle='collapse' href="#timeline-#{run.id}"
         =<> fa_icon('chevron-down')
         => t('.show_steps')
     span.float-right
@@ -30,34 +30,35 @@
       = link_to(t('.start_run'), start_run_path(run), method: :post, class: 'btn btn-success btn-lg btn-block')
       hr
 
-    - if run.res_file.attached?
-      .run-card__header
-        = link_to(run.res_file.url, target: '_blank') do
-          = image_tag run.res_file_thumbnail_url
-    - if run.finished?
-      .run-card__header
-        =<> fa_icon('stopwatch')
-        = format_duration(run.finished_in)
+    .run-card__run-info
+      - if run.res_file.attached?
+        .run-card__section
+          = link_to(run.res_file.url, target: '_blank') do
+            = image_tag run.res_file_thumbnail_url
+      - if run.finished?
+        .run-card__section
+          =<> fa_icon('stopwatch')
+          = format_duration(run.finished_in)
 
-    .run-card__header
-      = t('.files')
-      - run_result = run.run_result
-      - if run_result.present?
-        =< download_button(run_result.result_file, label: t('.result'), style: 'primary') if run_result.result_file.attached?
-        =< download_button(run_result.csv_results, label: t('.results_csv'), style: 'primary') if run_result.csv_results.attached?
-        - if run_result.visualization_url
-          =<> link_to(run_result.visualization_url, class: 'btn btn-primary btn-sm', target: '_blank') do
-            =<> fa_icon('chart-bar')
-          =<> button_tag(type: :button, class: 'btn btn-outline-secondary btn-sm',
-            data: { 'copy-to-clipboard' => run_result.result_file_url, toggle: 'tooltip', trigger: 'manual' },
-            title: t('.copied_to_clipboard'))
-            =<> fa_icon('clipboard')
-      =< download_button(run.log_file, label: t('.log')) if run.log_file.attached?
-      =< download_button(run.model_file, label: t('.model')) if run.model_file.attached?
-      =< download_button(run.data_file, label: t('.data')) if run.data_file.attached?
+      .run-card__section
+        = t('.files')
+        - run_result = run.run_result
+        - if run_result.present?
+          =< download_button(run_result.result_file, label: t('.result'), style: 'primary') if run_result.result_file.attached?
+          =< download_button(run_result.csv_results, label: t('.results_csv'), style: 'primary') if run_result.csv_results.attached?
+          - if run_result.visualization_url
+            =<> link_to(run_result.visualization_url, class: 'btn btn-primary btn-sm', target: '_blank') do
+              =<> fa_icon('chart-bar')
+            =<> button_tag(type: :button, class: 'btn btn-outline-secondary btn-sm',
+              data: { 'copy-to-clipboard' => run_result.result_file_url, toggle: 'tooltip', trigger: 'manual' },
+              title: t('.copied_to_clipboard'))
+              =<> fa_icon('clipboard')
+        =< download_button(run.log_file, label: t('.log')) if run.log_file.attached?
+        =< download_button(run.model_file, label: t('.model')) if run.model_file.attached?
+        =< download_button(run.data_file, label: t('.data')) if run.data_file.attached?
 
-    .run-card__header
-     = link_to edit_run_path(run) do
-      .btn.btn-outline-primary.btn-sm
-        = fa_icon('edit')
-        =< t('helpers.edit')
+      .run-card__section.ml-auto
+       = link_to edit_run_path(run) do
+        .btn.btn-outline-primary.btn-sm
+          = fa_icon('edit')
+          =< t('helpers.edit')
