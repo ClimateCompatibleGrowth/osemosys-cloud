@@ -41,6 +41,34 @@ class RunsController < ApplicationController
     redirect_to version_path(run.version)
   end
 
+  def edit
+    @run = current_user.runs.kept.find_by(id: params[:id])
+    redirect_to :not_found and return unless @run
+  end
+
+  def update
+    @run = current_user.runs.kept.find_by(id: params[:id])
+    redirect_to :not_found and return unless @run
+
+    if @run.update(run_params)
+      flash.notice = t('flash.run.updated')
+      redirect_to version_path(@run.version)
+    else
+      flash.now.alert = @run.errors.full_messages.to_sentence
+      render :edit
+    end
+  end
+
+  def destroy
+    @run = current_user.runs.kept.find_by(id: params[:id])
+    redirect_to :not_found and return unless @run
+
+    if @run.discard
+      flash.notice = t('flash.run.deleted')
+      redirect_to version_path(@run.version)
+    end
+  end
+
   private
 
   def run_params

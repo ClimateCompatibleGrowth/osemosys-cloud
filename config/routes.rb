@@ -11,7 +11,7 @@ Rails.application.routes.draw do
   get '/not_authorized', to: 'pages#not_authorized', as: :not_authorized
   get '/not_found', to: 'pages#not_found', as: :not_found
 
-  resources :runs, only: %i[new create show]
+  resources :runs
   resources :versions
   resources :models
   post '/run/:id/start', to: 'runs#start', as: :start_run
