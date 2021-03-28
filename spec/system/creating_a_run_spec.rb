@@ -33,6 +33,22 @@ RSpec.describe 'Creating a run', type: :system do
     expect(page).to have_text 'Run created'
     expect(page).to have_text 'A Place Long Gone'
     expect(page).to have_text 'Spanish'
+
+    click_on 'Edit'
+
+    fill_in 'Name', with: 'Eldorado'
+    fill_in 'Description', with: 'A Wonderful place'
+    click_on 'Update run'
+
+    expect(page).to have_text 'Run updated'
+    expect(page).to have_text 'Eldorado'
+    expect(page).to have_text 'A Wonderful place'
+
+    click_on 'Edit'
+    click_on 'Delete'
+
+    expect(page).to have_text 'Run deleted'
+    expect(page).not_to have_text 'Eldorado'
   end
 
   it 'redirects to root for logged out users' do
