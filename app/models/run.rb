@@ -1,5 +1,7 @@
 class Run < ApplicationRecord
   extend Statesman::Adapters::ActiveRecordQueries[transition_class: RunTransition, initial_state: :new]
+  include Discard::Model
+
   delegate :current_state, :history, :transition_to, :transition_to!,
     :can_transition_to?, :last_transition, to: :state_machine
 

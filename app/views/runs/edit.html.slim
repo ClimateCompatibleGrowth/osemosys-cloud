@@ -1,0 +1,12 @@
+h1 = t('helpers.submit.run.update')
+
+= simple_form_for(@run) do |f|
+  = f.input :name
+  = f.input :description
+  = f.button :submit, class: 'btn btn-primary'
+
+.float-right
+  =< link_to(run_path(@run), method: :delete, data: { confirm: t('helpers.are_you_sure') }) do
+    .btn.btn-outline-danger.btn-sm
+      = fa_icon('trash-alt')
+      =< t('helpers.delete')

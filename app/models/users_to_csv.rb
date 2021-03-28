@@ -38,7 +38,7 @@ class UsersToCsv
       user.country_name,
       user.created_at.strftime('%e %b %Y'),
       user.runs.length,
-      user.runs.first&.created_at&.strftime('%e %b %Y') || '-',
+      user.runs.kept.first&.created_at&.strftime('%e %b %Y') || '-',
       ApplicationController.helpers.format_duration(user.runs.map(&:finished_in).compact.sum) || '-',
     ]
   end

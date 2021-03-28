@@ -65,6 +65,8 @@ en:
       created: Run created
       started: Run started
       stopeed: Run stopped
+      updated: Run updated
+      deleted: Run deleted
     user:
       complete_profile_to_continue: Please fill in your profile information to continue.
       updated: User updated
