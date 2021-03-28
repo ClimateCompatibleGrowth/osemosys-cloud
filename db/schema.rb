@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_03_27_152423) do
+ActiveRecord::Schema.define(version: 2021_03_28_174000) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_stat_statements"
@@ -100,6 +100,8 @@ ActiveRecord::Schema.define(version: 2021_03_27_152423) do
     t.string "server_type", null: false
     t.string "language", default: "en", null: false
     t.string "cached_res_thumbnail_url"
+    t.datetime "discarded_at"
+    t.index ["discarded_at"], name: "index_runs_on_discarded_at"
     t.index ["user_id"], name: "index_runs_on_user_id"
     t.index ["version_id"], name: "index_runs_on_version_id"
   end
