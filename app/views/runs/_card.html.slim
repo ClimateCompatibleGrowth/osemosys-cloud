@@ -14,7 +14,7 @@
     =<> "#{run.id} - #{run.name} (#{run.humanized_status})"
     - if run.finished?
       a.text-right data-toggle='collapse' href="#timeline-#{run.id}"
-        =<> fa_icon('table')
+        =<> fa_icon('chevron-down')
         => t('.show_steps')
     span.float-right
       = Language.from_slug(run.language).name
