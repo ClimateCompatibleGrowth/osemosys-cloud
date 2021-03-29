@@ -57,8 +57,9 @@
         =< download_button(run.model_file, label: t('.model')) if run.model_file.attached?
         =< download_button(run.data_file, label: t('.data')) if run.data_file.attached?
 
-      .run-card__section.ml-auto
-       = link_to edit_run_path(run) do
-        .btn.btn-outline-primary.btn-sm
-          = fa_icon('edit')
-          =< t('helpers.edit')
+      - if !view_as_admin
+        .run-card__section.ml-auto
+         = link_to edit_run_path(run) do
+          .btn.btn-outline-primary.btn-sm
+            = fa_icon('edit')
+            =< t('helpers.edit')

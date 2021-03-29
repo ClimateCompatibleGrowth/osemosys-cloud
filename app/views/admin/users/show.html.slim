@@ -57,4 +57,4 @@ h1 = t('.viewing_user', user: @user.email)
   .card-body
     h5 = t('.last_run')
     - if @user_runs.present?
-      = render 'runs/card', run: @user_runs.first
+      = render 'runs/card', run: @user_runs.first, view_as_admin: true

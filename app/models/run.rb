@@ -120,7 +120,10 @@ class Run < ApplicationRecord
   end
 
   def to_card
-    ApplicationRenderer.render(partial: 'runs/card', locals: { run: Run.find(id) })
+    ApplicationRenderer.render(
+      partial: 'runs/card',
+      locals: { run: Run.find(id), view_as_admin: false },
+    )
   end
 
   def cache_res_file_thumbnail

@@ -10,4 +10,4 @@ h3 = t('activerecord.models.run').pluralize
 = paginate @runs
 
 - @runs.each do |run|
-  = render 'runs/card', run: run
+  = render 'runs/card', run: run, view_as_admin: false

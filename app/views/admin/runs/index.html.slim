@@ -6,7 +6,7 @@
   = paginate @runs
 
   - @runs.each do |run|
-    = render 'runs/card', run: run
+    = render 'runs/card', run: run, view_as_admin: true
 
   = paginate @runs
 
