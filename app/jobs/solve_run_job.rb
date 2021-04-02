@@ -3,7 +3,7 @@ class SolveRunJob < ApplicationJob
   sidekiq_options retry: 0
 
   def perform(run_id:)
-    @run = Run.find(run_id)
+    run = Run.find(run_id)
 
     SolveRun.new(
       run: run,
