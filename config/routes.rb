@@ -8,11 +8,13 @@ Rails.application.routes.draw do
   end
 
   root to: 'pages#home'
+
   get '/not_authorized', to: 'pages#not_authorized', as: :not_authorized
   get '/not_found', to: 'pages#not_found', as: :not_found
+  match '/404', to: 'pages#not_found', via: :all
 
-  resources :runs
-  resources :versions
+  resources :runs, except: %i[index]
+  resources :versions, except: %i[index]
   resources :models
   post '/run/:id/start', to: 'runs#start', as: :start_run
   post '/run/:id/stop', to: 'runs#stop', as: :stop_run

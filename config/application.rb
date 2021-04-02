@@ -18,5 +18,7 @@ module OsemosysCloud
     config.i18n.available_locales = %i[en es]
     config.i18n.default_locale = :en
     config.i18n.fallbacks = { es: :en }
+
+    config.exceptions_app = routes
   end
 end
