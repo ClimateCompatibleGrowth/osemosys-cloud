@@ -1,4 +1,4 @@
-class GenerateResJob < ActiveJob::Base
+class GenerateResJob < ApplicationJob
   queue_as :low_priority
   sidekiq_options retry: 0
 
