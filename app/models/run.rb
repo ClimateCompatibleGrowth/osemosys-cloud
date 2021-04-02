@@ -107,6 +107,10 @@ class Run < ApplicationRecord
     end
   end
 
+  def failed?
+    current_state == 'failed'
+  end
+
   private
 
   def only_postprocess_preprocessed_runs

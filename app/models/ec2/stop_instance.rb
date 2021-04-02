@@ -10,6 +10,8 @@ module Ec2
 
     def call
       terminate_instance
+      return if ec2_instance.run.failed?
+
       set_run_as_failed
       set_instance_stopped_at
     end
