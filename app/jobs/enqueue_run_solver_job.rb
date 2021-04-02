@@ -1,14 +1,11 @@
 class EnqueueRunSolverJob < ApplicationJob
-  queue_as :osemosys
-  sidekiq_options retry: 0
-
   def perform(run_id:)
     @run = Run.find(run_id)
 
     if run_on_ec2?
       spawn_ec2_instance
     else
-      run_inline
+      enqueue_solve_run_job
     end
   end
 
@@ -27,11 +24,7 @@ class EnqueueRunSolverJob < ApplicationJob
     )
   end
 
-  def run_inline
-    SolveRun.new(
-      run: run,
-      solver: Osemosys::Solvers::Cbc,
-      logger: Logger.new(run.local_log_path),
-    ).call
+  def enqueue_solve_run_job
+    SolveRunJob.perform_later(run_id: run.id)
   end
 end
