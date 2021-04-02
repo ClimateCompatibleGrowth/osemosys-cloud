@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe SolveRunJob do
+RSpec.describe EnqueueRunSolverJob do
   context 'when running in production' do
     it 'runs on EC2 for runs set to run on EC2' do
       run = create(:run, :ec2)
@@ -8,7 +8,7 @@ RSpec.describe SolveRunJob do
       allow(Ec2::CreateInstance).to receive(:call)
       allow(SolveRun).to receive(:new)
 
-      SolveRunJob.new.perform(run_id: run.id)
+      EnqueueRunSolverJob.new.perform(run_id: run.id)
 
       expect(Ec2::CreateInstance).to have_received(:call).with(
         run_id: run.id, instance_type: 'z1d.3xlarge',
@@ -22,7 +22,7 @@ RSpec.describe SolveRunJob do
       allow(Ec2::CreateInstance).to receive(:call)
       allow(SolveRun).to receive(:new).and_return(double(call: true))
 
-      SolveRunJob.new.perform(run_id: run.id)
+      EnqueueRunSolverJob.new.perform(run_id: run.id)
 
       expect(SolveRun).to have_received(:new).with(
         run: run,
@@ -39,7 +39,7 @@ RSpec.describe SolveRunJob do
       allow(Ec2::CreateInstance).to receive(:call)
       allow(SolveRun).to receive(:new).and_return(double(call: true))
 
-      SolveRunJob.new.perform(run_id: run.id)
+      EnqueueRunSolverJob.new.perform(run_id: run.id)
 
       expect(SolveRun).to have_received(:new).with(
         run: run,
@@ -54,7 +54,7 @@ RSpec.describe SolveRunJob do
       allow(Ec2::CreateInstance).to receive(:call)
       allow(SolveRun).to receive(:new).and_return(double(call: true))
 
-      SolveRunJob.new.perform(run_id: run.id)
+      EnqueueRunSolverJob.new.perform(run_id: run.id)
 
       expect(SolveRun).to have_received(:new).with(
         run: run,

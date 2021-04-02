@@ -1,4 +1,4 @@
-class SolveRunJob < ActiveJob::Base
+class EnqueueRunSolverJob < ActiveJob::Base
   queue_as :osemosys
   sidekiq_options retry: 0
 
