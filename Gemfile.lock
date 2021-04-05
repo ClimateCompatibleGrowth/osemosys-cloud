@@ -385,7 +385,7 @@ GEM
       actionpack (>= 4.0)
       activesupport (>= 4.0)
       sprockets (>= 3.0.0)
-    statesman (8.0.1)
+    statesman (8.0.2)
     temple (0.8.2)
     thor (1.1.0)
     tilt (2.0.10)
