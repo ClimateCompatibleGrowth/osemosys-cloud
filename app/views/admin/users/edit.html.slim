@@ -9,7 +9,7 @@ h2 = t('.editing_user', name: @user.name, id: @user.id)
   = f.input :runs_visible_to_admins, as: :boolean
   = f.input :tag_list, collection: ActsAsTaggableOn::Tag.order(:name),
             input_html: { multiple: true }, value_method: :name,
-            label: User.human_attribute_name(:tags)
+            label: User.human_attribute_name(:tags), hint: t('.tag_list_hint')
 
   .card.mb-3
     .card-body
