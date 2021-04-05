@@ -10,6 +10,7 @@
     "jquery": "^3",
     "popper.js": "^1.14",
     "select2": "^4.1.0-rc.0",
+    "select2-bootstrap-5-theme": "^1.1.1",
     "turbolinks": "^5.2.0"
   },
   "devDependencies": {
