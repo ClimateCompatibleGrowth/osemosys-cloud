@@ -14,7 +14,7 @@ h1= t('.user_statistics')
     => fa_icon('cloud-download-alt')
     ' CSV
 
-table.table.table-sm
+table.table.table-sm.table-hover
   tr
     th= sort_link(@q, :id, User.human_attribute_name(:id))
     th= sort_link(@q, :name, User.human_attribute_name(:name))
