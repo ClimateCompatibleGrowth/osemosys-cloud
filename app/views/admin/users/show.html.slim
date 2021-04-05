@@ -23,6 +23,11 @@ h1 = t('.viewing_user', user: @user.email)
           tr
             td = User.human_attribute_name(:created_at)
             td = @user.created_at.strftime('%e %b %Y')
+          tr
+            td = User.human_attribute_name(:tags)
+            td
+              - @user.tags.each do |tag|
+                .badge.bg-secondary.text-light =< tag.name
 
         = link_to edit_admin_user_path(@user) do
           .btn.btn-outline-primary.btn-sm

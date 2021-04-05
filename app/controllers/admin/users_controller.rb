@@ -4,7 +4,7 @@ module Admin
       respond_to do |format|
         @q = User.ransack(params[:q])
         @q.sorts = 'id asc' if @q.sorts.empty?
-        @users = @q.result.includes(:runs).page(params[:page]).per(50)
+        @users = @q.result.includes(:runs, tags: :taggings).page(params[:page]).per(50)
 
         format.html
         format.csv do
@@ -47,6 +47,7 @@ module Admin
         :name,
         :runs_visible_to_admins,
         :active,
+        tag_list: [],
       )
     end
   end

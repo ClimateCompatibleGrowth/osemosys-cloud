@@ -1,4 +1,5 @@
 class User < ApplicationRecord
+  acts_as_taggable_on :tags
   devise :database_authenticatable, :registerable, :recoverable, :rememberable, :validatable
 
   enum locale: Language.to_enum_definition

@@ -12,6 +12,8 @@ RSpec.describe 'Managing users as an admin', type: :system do
     create(:run, :ongoing, user: normal_user)
     create(:run, :finished, user: normal_user)
     create(:run, :finished, user: normal_user, name: 'Last run')
+    ActsAsTaggableOn::Tag.create!(name: 'My tag')
+    ActsAsTaggableOn::Tag.create!(name: 'My other tag')
 
     sign_in(admin)
     visit admin_users_path
@@ -49,10 +51,13 @@ RSpec.describe 'Managing users as an admin', type: :system do
     expect(page).to have_content("Country can't be blank")
 
     select 'Sweden', from: 'Country'
+    select 'My tag', from: 'Tags'
     click_on 'Update User'
 
     expect(page).to have_content('User updated')
     expect(page).to have_content('Sweden')
+    expect(page).to have_content('My tag')
+    expect(page).not_to have_content('My other tag')
 
     click_on('View runs')
 
