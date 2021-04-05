@@ -51,7 +51,7 @@ RSpec.describe 'Managing users as an admin', type: :system do
     expect(page).to have_content("Country can't be blank")
 
     select 'Sweden', from: 'Country'
-    select 'My tag', from: 'Tag list'
+    select 'My tag', from: 'Tags'
     click_on 'Update User'
 
     expect(page).to have_content('User updated')
