@@ -24,7 +24,7 @@ table.table.table-sm.table-hover
     th= Run.model_name.human.pluralize
     th= t('.last_run_at')
     th= t('.server_time')
-    th tags
+    th= User.human_attribute_name(:tags)
   - @users.each do |user|
     tr
       td = user.id

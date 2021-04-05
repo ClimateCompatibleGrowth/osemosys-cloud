@@ -22,6 +22,7 @@ en:
         runs_visible_to_admins: Runs visible to admins
         created_at: Registration date
         active: Active
+        tags: Tags
       version:
         model: Model
         name: Name
