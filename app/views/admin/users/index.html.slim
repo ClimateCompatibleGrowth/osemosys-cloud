@@ -24,6 +24,7 @@ table.table.table-sm
     th= Run.model_name.human.pluralize
     th= t('.last_run_at')
     th= t('.server_time')
+    th tags
   - @users.each do |user|
     tr
       td = user.id
@@ -36,5 +37,8 @@ table.table.table-sm
         =< fa_icon('arrow-right')
       td = user.runs.first&.created_at&.strftime('%e %b %Y')
       td = format_duration(user.runs.map(&:finished_in).compact.sum)
+      td
+        - user.tags.each do |tag|
+          .badge.bg-secondary.text-light =< tag.name
 
 = paginate @users
