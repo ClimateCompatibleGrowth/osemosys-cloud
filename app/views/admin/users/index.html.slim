@@ -3,6 +3,7 @@ h1= t('.user_statistics')
 .border.my-4.p-3
   = search_form_for @q, url: admin_users_path do |f|
     = f.input :country_code_eq, label: User.human_attribute_name(:country_code), required: false
+    = f.input :tags_name_in, collection: ActsAsTaggableOn::Tag.order(:name), value_method: :name
     = f.button :submit, class: 'btn btn-primary'
     = link_to t('helpers.clear'), request.path, class:'btn btn-outline-primary ml-2'
 
