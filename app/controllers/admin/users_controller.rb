@@ -47,7 +47,7 @@ module Admin
         :name,
         :runs_visible_to_admins,
         :active,
-        :tag_list,
+        tag_list: [],
       )
     end
   end

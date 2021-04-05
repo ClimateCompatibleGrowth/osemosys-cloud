@@ -9,6 +9,7 @@
     "bootstrap": "^4",
     "jquery": "^3",
     "popper.js": "^1.14",
+    "select2": "^4.1.0-rc.0",
     "turbolinks": "^5.2.0"
   },
   "devDependencies": {
