@@ -3,133 +3,176 @@ es:
   activerecord:
     attributes:
       model:
-        name: 
+        name: Nombre
       run:
-        data_file: 
-        description: 
-        language: 
-        model_file: 
-        name: 
-        notify_when_finished: 
-        post_process: 
-        pre_process: 
-        server_type: 
+        data_file: Archivo de datos
+        description: Descripción
+        language: Idioma
+        model_file: Archivo de modelo
+        name: Nombre
+        notify_when_finished: 'Enviarme correo cuando termine la corrida '
+        post_process: Generar archivo CSV (ejecutar secuencia comandos de post-procesamiento)
+        pre_process: Ejecutar secuencia de comandos de pre-procesamiento
+        server_type: Tipo de servidor
       user:
-        email: 
-        locale: 
-        runs_visible_to_admins: 
+        active: 
+        country_code: País
+        created_at: Fecha de registro
+        email: Correo electrónico
+        locale: Idioma
+        name: Nombre completo
+        runs_visible_to_admins: Corrida visible a admins
+        tags: 
       version:
-        model: 
-        name: 
+        model: Modelo
+        name: Nombre
     models:
-      model: 
-      run: 
-      user: 
-      version: 
+      model: Modelo
+      run: Corrida
+      user: Usuario
+      version: Versión
   admin:
     runs:
       index:
-        access_denied: 
-        not_allowed_to_see_runs: 
+        access_denied: Acceso negado
+        not_allowed_to_see_runs: No tiene autorización para ver las corridas de este usuario
+    stats:
+      index:
+        platform_statistics: Estadísticas de la plataforma
+        registered_users: 'Usuarios registrados:'
+        total_server_time_used: 'Tiempo total del servidor utilizado:'
+      show:
+        runs_by_state: Corridas por estado
+    users:
+      edit:
+        active_hint: 
+        dangerous_area: 
+        editing_user: Editando %{name} (%{id})
+        tag_list_hint: 
+      index:
+        last_run_at: Última corrida a las
+        server_time: 
+        user_statistics: Estadísticas del usuario
+      show:
+        last_run: 'Última corrida:'
+        to_runs: Ver corridas
+        total_run_duration: 'Duración total de la corrida:'
+        viewing_user: Viewing user %{user}
     user_stats:
       index:
-        last_run_at: 
-        platform_statistics: 
-        registered_users: 
-        total_server_time_used: 
-        user_statistics: 
+        last_run_at: Última corrida a las
+        platform_statistics: Estadísticas de la plataforma
+        registered_users: 'Usuarios registrados:'
+        total_server_time_used: Tiempo total del servidor utilizado
+        user_statistics: Estadísticas del usuario
       show:
-        last_run: 
-        runs_by_state: 
-        sign_up_date: 
-        total_run_duration: 
+        last_run: 'Última corrida: '
+        runs_by_state: Corridas por estado
+        sign_up_date: Fecha de registro
+        total_run_duration: 'Duración total de la corrida:'
   flash:
     model:
-      created: 
-    run:
-      created: 
-      started: 
-      stopeed: 
-    user:
+      created: Modelo creado
+      deleted: 
       updated: 
+    run:
+      created: Corrida creada
+      deleted: 
+      started: Comienzo de la corrida
+      stopeed: Corrida detenida
+      updated: 
+    user:
+      complete_profile_to_continue: 
+      updated: Usuario actualizado
     version:
-      created: 
+      created: Versión de la corrida creada
+      deleted: 
+      updated: 
   helpers:
-    back: 
+    are_you_sure: 
+    back: Ir atrás
+    clear: 
+    delete: 
+    edit: Editar
     submit:
       model:
-        create: 
-        new: 
-        update: 
+        create: Crear modelo
+        new: Nuevo modelo
+        update: Actualizar modelo
       run:
-        create: 
-        new: 
-        update: 
+        create: 'Generar corrida '
+        new: Nueva corrida
+        update: Actualizar corrida
       version:
-        create: 
-        new: 
-        update: 
+        create: Crear versión
+        new: Nueva versión
+        update: Actualizar versión
     time_ago: 
   language:
-    en: 
-    es: 
+    en: Inglés
+    es: Español
   layouts:
     application:
-      admin: 
-      logout: 
-      my_models: 
-      register: 
-      sign_in: 
+      admin: Admin
+      logout: Cerrar sesión
+      my_models: Mis modelos
+      register: Registro
+      sign_in: Iniciar sesión
+      statistics: Estadísticas
+      users: Usuarios
   models:
     index:
-      my_models: 
+      my_models: Mis modelos
   pages:
     home:
-      or: 
-      register: 
-      sign_in: 
-      to_start: 
+      or: 'o '
+      register: registro
+      sign_in: Iniciar sesión
+      to_start: comenzar.
+    not_authorized:
+      body: 
+      title: 
     not_found:
-      page_not_found: 
-      page_not_found_body: 
+      page_not_found: Página no encontrada
+      page_not_found_body: Esta página no ha sido encontrada. Intente volver a la página de inicio para acceder a sus modelos, versiones y corridas.
   run_mailer:
     run_finished_email:
-      solving_time: 
-      status: 
-      subject: 
-      title: 
+      solving_time: Tiempo de solución
+      status: Estatus
+      subject: Corrida finalizada
+      title: 'Corrida finalizada: %{run_name}'
   runs:
     card:
-      copied_to_clipboard: 
-      data: 
-      files: 
-      log: 
-      model: 
-      result: 
-      results_csv: 
-      show_steps: 
-      start_run: 
+      copied_to_clipboard: Copiado al portapapeles!
+      data: Datos
+      files: 'Archivos:'
+      log: Logs
+      model: Modelo
+      result: Resultado
+      results_csv: Resultados (CSV)
+      show_steps: Mostrar pasos
+      start_run: Comenzar corrida
   run_state:
-    failed: 
-    finding_solution: 
-    generating_matrix: 
-    new: 
-    ongoing: 
-    postprocessing: 
-    preprocessing_data: 
-    queued: 
-    succeeded: 
+    failed: No se logró completar
+    finding_solution: Modelo encontrando solución
+    generating_matrix: Generando matríz
+    new: Nuevo
+    ongoing: En proceso
+    postprocessing: Resultados de post-procesamiento
+    preprocessing_data: Datos de pre-procesamiento
+    queued: Creando servidor
+    succeeded: Exitosa
   server_type:
-    large: 
-    small: 
+    large: Servidor grande
+    small: Servidor pequeño
   simple_form:
     error_notification:
-      default_message: 
-    'false': 
+      default_message: 'Favor de revisar los problemas a continuación:'
+    'false': false
     required:
-      mark: 
-      text: 
-    'true': 
+      mark: "*"
+      text: requerido
+    'true': true
   users:
     show:
-      my_user_profile: 
+      my_user_profile: Mi perfil de usuario

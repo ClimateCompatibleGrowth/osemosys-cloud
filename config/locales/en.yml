@@ -15,13 +15,13 @@ en:
         pre_process: Run pre-processing script
         server_type: Server type
       user:
-        email: Email
-        name: Full name
-        country_code: Country
-        locale: Language
-        runs_visible_to_admins: Runs visible to admins
-        created_at: Registration date
         active: Active
+        country_code: Country
+        created_at: Registration date
+        email: Email
+        locale: Language
+        name: Full name
+        runs_visible_to_admins: Runs visible to admins
         tags: Tags
       version:
         model: Model
@@ -44,44 +44,56 @@ en:
       show:
         runs_by_state: Runs by state
     users:
+      edit:
+        active_hint: Unchecking this will make the user unable to access the platform. <b>You can lock yourself out of your account!</b>
+        dangerous_area: Dangerous area
+        editing_user: Editing %{name} (%{id})
+        tag_list_hint: You can add a new tag by typing it in.
       index:
         last_run_at: Last run at
         server_time: Server time
         user_statistics: User statistics
       show:
-        viewing_user: 'Viewing user %{user}'
-        to_runs: "View runs"
-        total_run_duration: 'Total run duration:'
         last_run: 'Last run:'
-      edit:
-        editing_user: "Editing %{name} (%{id})"
-        dangerous_area: Dangerous area
-        active_hint: Unchecking this will make the user unable to access the platform. <b>You can lock yourself out of your account!</b>
-        tag_list_hint: You can add a new tag by typing it in.
+        to_runs: View runs
+        total_run_duration: 'Total run duration:'
+        viewing_user: Viewing user %{user}
+    user_stats:
+      index:
+        last_run_at: Last run at
+        platform_statistics: Platform statistics
+        registered_users: 'Registered users:'
+        total_server_time_used: 'Total server time used:'
+        user_statistics: User statistics
+      show:
+        last_run: 'Last run:'
+        runs_by_state: Runs by state
+        sign_up_date: Sign up date
+        total_run_duration: 'Total run duration:'
   flash:
     model:
       created: Model created
-      updated: Model updated
       deleted: Model deleted
+      updated: Model updated
     run:
       created: Run created
+      deleted: Run deleted
       started: Run started
       stopeed: Run stopped
       updated: Run updated
-      deleted: Run deleted
     user:
       complete_profile_to_continue: Please fill in your profile information to continue.
       updated: User updated
     version:
       created: Run version created
-      updated: Run version updated
       deleted: Run version deleted
+      updated: Run version updated
   helpers:
+    are_you_sure: Are you sure? This cannot be undone.
     back: Go Back
     clear: Clear
-    edit: Edit
     delete: Delete
-    are_you_sure: Are you sure? This cannot be undone.
+    edit: Edit
     submit:
       model:
         create: Create model
@@ -102,12 +114,12 @@ en:
   layouts:
     application:
       admin: Admin
-      users: Users
-      statistics: Statistics
       logout: Logout
       my_models: My models
       register: Register
       sign_in: Sign in
+      statistics: Statistics
+      users: Users
   models:
     index:
       my_models: My models
@@ -117,12 +129,12 @@ en:
       register: register
       sign_in: Sign in
       to_start: to start.
+    not_authorized:
+      body: Your account has been deactivated. If you think this is a mistake, please contact an administrator.
+      title: Not authorized
     not_found:
       page_not_found: Page not found
       page_not_found_body: This page has not been found. Try going back to the home page to access your models, versions and runs.
-    not_authorized:
-      title: Not authorized
-      body: Your account has been deactivated. If you think this is a mistake, please contact an administrator.
   run_mailer:
     run_finished_email:
       solving_time: Solving time
