@@ -15,14 +15,14 @@ es:
         pre_process: Ejecutar secuencia de comandos de pre-procesamiento
         server_type: Tipo de servidor
       user:
-        active: 
+        active: Activo
         country_code: País
         created_at: Fecha de registro
         email: Correo electrónico
         locale: Idioma
         name: Nombre completo
         runs_visible_to_admins: Corrida visible a admins
-        tags: 
+        tags: Etiquetas
       version:
         model: Modelo
         name: Nombre
@@ -45,13 +45,13 @@ es:
         runs_by_state: Corridas por estado
     users:
       edit:
-        active_hint: 
-        dangerous_area: 
+        active_hint: Desmarcar esta casilla hará que el usuario no pueda acceder a la plataforma. <b> Puede bloquear su cuenta!
+        dangerous_area: Área de peligro
         editing_user: Editando %{name} (%{id})
-        tag_list_hint: 
+        tag_list_hint: Puedes agregar una nueva etiqueta.
       index:
         last_run_at: Última corrida a las
-        server_time: 
+        server_time: Tiempo del servidor
         user_statistics: Estadísticas del usuario
       show:
         last_run: 'Última corrida:'
@@ -73,26 +73,26 @@ es:
   flash:
     model:
       created: Modelo creado
-      deleted: 
-      updated: 
+      deleted: Modelo borrado
+      updated: Modelo actualizado
     run:
       created: Corrida creada
-      deleted: 
+      deleted: Corrida borrada
       started: Comienzo de la corrida
       stopeed: Corrida detenida
-      updated: 
+      updated: Corrida actualizada
     user:
-      complete_profile_to_continue: 
+      complete_profile_to_continue: Favor de llenar la información de su perfil para continuar
       updated: Usuario actualizado
     version:
       created: Versión de la corrida creada
-      deleted: 
-      updated: 
+      deleted: Versión de la corrida borrada
+      updated: Versión de la corrida actualizada
   helpers:
-    are_you_sure: 
+    are_you_sure: Está seguro? este cambio no se puede deshacer
     back: Ir atrás
-    clear: 
-    delete: 
+    clear: Limpiar
+    delete: 'Borrar '
     edit: Editar
     submit:
       model:
@@ -107,7 +107,7 @@ es:
         create: Crear versión
         new: Nueva versión
         update: Actualizar versión
-    time_ago: 
+    time_ago: "%{time} tiempo transcurrido (not sure of translation)"
   language:
     en: Inglés
     es: Español
@@ -130,8 +130,8 @@ es:
       sign_in: Iniciar sesión
       to_start: comenzar.
     not_authorized:
-      body: 
-      title: 
+      body: Su cuenta ha sido desactivada. Si cree que esto es un error, favot de contactar al administrador
+      title: No autorizado
     not_found:
       page_not_found: Página no encontrada
       page_not_found_body: Esta página no ha sido encontrada. Intente volver a la página de inicio para acceder a sus modelos, versiones y corridas.
