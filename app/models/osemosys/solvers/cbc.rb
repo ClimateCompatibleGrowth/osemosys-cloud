@@ -48,6 +48,7 @@ module Osemosys
           local_data_path: input_file,
           lp_path: lp_path,
           logger: logger,
+          timeout: run.timeout.to_i,
         ).call
       end
 
@@ -57,6 +58,7 @@ module Osemosys
           lp_path: lp_path,
           output_path: output_path,
           logger: logger,
+          timeout: run.timeout.to_i,
         ).call
       end
 
