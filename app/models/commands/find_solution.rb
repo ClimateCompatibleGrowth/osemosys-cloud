@@ -1,9 +1,10 @@
 module Commands
   class FindSolution
-    def initialize(lp_path:, output_path:, logger:)
+    def initialize(lp_path:, output_path:, logger:, timeout:)
       @lp_path = lp_path
       @output_path = output_path
       @logger = logger
+      @timeout = timeout
     end
 
     def call
@@ -13,13 +14,13 @@ module Commands
 
     def cbc_command
       %(
-        cbc #{lp_path} solve solu #{output_path}
+        timeout #{timeout} cbc #{lp_path} solve solu #{output_path}
       )
     end
 
     private
 
-    attr_reader :lp_path, :output_path, :logger
+    attr_reader :lp_path, :output_path, :logger, :timeout
 
     def tty_command
       @tty_command ||= TTY::Command.new(output: logger, color: false)
