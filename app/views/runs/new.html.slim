@@ -20,7 +20,7 @@ h1 = t('helpers.submit.run.new')
         = f.input :description
       .col-sm
         = f.input :language, collection: Language.all, include_blank: false,
-          label_method: :name, value_method: :slug, default: 'en'
+          label_method: :name, value_method: :slug, selected: current_user.locale
     br
     = f.input :server_type, collection: ServerType.all, include_blank: false,
         label_method: :name, value_method: :slug, default: 'sidekiq'
