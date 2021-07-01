@@ -22,12 +22,12 @@ module Ec2
         image_id: 'ami-0942ea792bd48e31b', # Osemosys-Docker-new-db
         min_count: 1,
         max_count: 1,
-        key_name: 'aws-perso',
+        key_name: 'yboulkaid-osemosys',
         user_data: encoded_user_data,
-        security_group_ids: ['sg-234d125d'],
+        security_group_ids: ['sg-43911f25'],
         instance_type: instance_type,
         iam_instance_profile: {
-          name: 'Osemosys',
+          name: 'OsemosysEC2Role',
         },
         instance_initiated_shutdown_behavior: 'terminate',
       }
