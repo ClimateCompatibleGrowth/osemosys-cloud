@@ -1,8 +1,6 @@
 class RunsController < ApplicationController
   def new
     @run = Run.new(version_id: params[:version_id])
-
-    render 'pages/maintenance' and return unless current_user&.id == 1
   end
 
   def show

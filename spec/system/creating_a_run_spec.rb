@@ -5,7 +5,7 @@ RSpec.describe 'Creating a run', type: :system do
     driven_by(:rack_test)
   end
 
-  xit 'works for logged in users' do
+  it 'works for logged in users' do
     user = create(:user)
     sign_in(user)
     version = create(:version, name: 'Ethopia 2014', user: user)
