@@ -18,8 +18,9 @@ module Admin
 
     def show
       @user = User.find(params[:id])
-      @run_count_by_state = @user.runs.unscoped.group(:state).count
-      @run_duration_by_state = @user.runs.unscoped.group(:state).sum(:finished_in)
+      runs_by_state = Run.where(user_id: @user.id).select([:state]).group(:state)
+      @run_count_by_state = runs_by_state.count
+      @run_duration_by_state = runs_by_state.sum(:finished_in)
       @user_runs = @user.runs.kept.order(id: :asc)
     end
 
