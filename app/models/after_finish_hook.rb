@@ -15,7 +15,6 @@ class AfterFinishHook
   attr_reader :run
 
   def upload_log_file
-    sleep 1
     return unless File.exist?(log_path)
 
     run.log_file.attach(

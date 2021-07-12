@@ -9,4 +9,11 @@ task :solve_cbc_run, [:run_id] => :environment do |_task, args|
     solver: Osemosys::Solvers::Cbc,
     logger: logger,
   ).call
+
+  if File.exist?(log_path) && !run.log_file.attached?
+    run.log_file.attach(
+      io: File.open(log_path),
+      filename: File.basename(log_path),
+    )
+  end
 end
