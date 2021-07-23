@@ -9,10 +9,10 @@ run_id=$1
 shutdown_on_finish=$2
 
 cd /home/ubuntu/osemosys-cloud/ || exit
-bundle install
+/home/ubuntu/.asdf/shims/bundle install
 pip3 install -r requirements.txt
 
-bundle exec rake solve_cbc_run[$run_id]
+/home/ubuntu/.asdf/shims/bundle exec rake solve_cbc_run[$run_id]
 
 if $shutdown_on_finish; then
   # echo "Shutting down"
