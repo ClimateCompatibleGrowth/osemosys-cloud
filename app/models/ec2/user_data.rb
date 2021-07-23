@@ -19,7 +19,11 @@ module Ec2
     end
 
     def solve_run_command
-      "/home/ubuntu/osemosys-cloud/bin/deploy_and_solve_run.sh #{run_id} #{shutdown_on_finish}"
+      %(
+        cd /home/ubuntu/osemosys-cloud/
+        && git pull
+        && bin/deploy_and_solve_run.sh #{run_id} #{shutdown_on_finish}
+      ).delete("\n")
     end
   end
 end

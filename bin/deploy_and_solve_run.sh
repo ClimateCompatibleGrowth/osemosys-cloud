@@ -1,6 +1,6 @@
 #bin/sh
 
-# set -e
+set -e
 
 # https://www.davidpashley.com/articles/writing-robust-shell-scripts/
 set -xu
