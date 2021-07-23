@@ -7,7 +7,7 @@ RSpec.describe Ec2::UserData do
 
       decoded_output = Base64.decode64(output)
 
-      expect(decoded_output).to include('#!/usr/bin/env')
+      expect(decoded_output).to include('#!/bin/bash')
     end
 
     it 'includes the run id' do

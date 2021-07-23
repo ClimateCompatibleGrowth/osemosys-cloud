@@ -9,8 +9,6 @@ run_id=$1
 shutdown_on_finish=$2
 
 cd /home/ubuntu/osemosys-cloud/ || exit
-git reset --hard HEAD
-git pull
 bundle install
 pip3 install -r requirements.txt
 
