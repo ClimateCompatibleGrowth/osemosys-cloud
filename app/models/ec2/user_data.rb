@@ -14,8 +14,10 @@ module Ec2
     attr_reader :shutdown_on_finish, :run_id
 
     def user_data
-      "#!/usr/bin/env bash\n"\
-      "su - ubuntu -c '#{solve_run_command}'"
+      <<~BASH
+        #!/bin/bash
+        su - ubuntu -c '#{solve_run_command}'
+      BASH
     end
 
     def solve_run_command
