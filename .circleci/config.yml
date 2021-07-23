@@ -49,35 +49,6 @@ jobs:
           command: |
             bundle exec rspec --format progress
 
-  publish_docker_image:
-    docker:
-       - image: circleci/ruby:2.6.2-node-browsers
-    steps:
-      - checkout
-      - setup_remote_docker:
-          docker_layer_caching: true
-
-      - run:
-          name: Build docker image
-          command: |
-            docker-compose build osemosys
-
-      - run:
-          name: Publish docker image
-          command: |
-            echo "$DOCKER_PASS" | docker login --username $DOCKER_USER --password-stdin
-            docker push yboulkaid/osemosys:latest
-
-  deploy_to_heroku:
-    docker:
-       - image: circleci/ruby:2.6.2-node-browsers
-    steps:
-      - checkout
-      - run:
-          name: Deploy to heroku
-          command: |
-            git push https://heroku:$HEROKU_API_KEY@git.heroku.com/$HEROKU_APP_NAME.git master
-
   deploy_to_lighsail:
     machine:
       enabled: true
@@ -92,19 +63,7 @@ workflows:
   test-deploy:
     jobs:
       - test
-      - deploy_to_heroku:
-          requires:
-            - test
-          filters:
-            branches:
-              only: master
       - deploy_to_lighsail:
-          requires:
-            - test
-          filters:
-            branches:
-              only: master
-      - publish_docker_image:
           requires:
             - test
           filters:
