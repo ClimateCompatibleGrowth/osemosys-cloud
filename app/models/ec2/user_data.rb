@@ -15,11 +15,11 @@ module Ec2
 
     def user_data
       "#!/usr/bin/env bash\n"\
-      "su - ec2-user -c '#{solve_run_command}'"
+      "su - ubuntu -c '#{solve_run_command}'"
     end
 
     def solve_run_command
-      "curl https://gist.githubusercontent.com/yboulkaid/4df07a12a050a8f8470bdcf30470e077/raw/91504c0d7b30226032017feef740b4b5f31a7f55/ec2_osemosys_user_data.sh | sh -s #{run_id} #{shutdown_on_finish}"
+      "/home/ubuntu/osemosys-cloud/bin/deploy_and_solve_run.sh #{run_id} #{shutdown_on_finish}"
     end
   end
 end

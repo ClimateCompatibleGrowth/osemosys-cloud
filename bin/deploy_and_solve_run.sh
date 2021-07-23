@@ -8,7 +8,7 @@ set -xu
 run_id=$1
 shutdown_on_finish=$2
 
-cd osemosys-cloud/ || exit
+cd /home/ubuntu/osemosys-cloud/ || exit
 git reset --hard HEAD
 git pull
 bundle install
