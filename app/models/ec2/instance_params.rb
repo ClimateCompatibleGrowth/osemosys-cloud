@@ -7,7 +7,7 @@ module Ec2
 
     def to_h
       {
-        image_id: 'ami-0e78738f86e5a6de6', # Large server AMI
+        image_id: 'ami-0fe29051ecc9c069f', # Large server AMI
         min_count: 1,
         max_count: 1,
         key_name: 'yboulkaid-osemosys',
