@@ -2,8 +2,8 @@ version: 2
 jobs:
   test:
     docker:
-      - image: circleci/ruby:3.0.0-node-browsers
-      - image: circleci/postgres:13
+      - image: cimg/ruby:3.0.0-browsers
+      - image: cimg/postgres:13.4
         environment:
           POSTGRES_USER: circleci
           POSTGRES_HOST_AUTH_METHOD: trust
