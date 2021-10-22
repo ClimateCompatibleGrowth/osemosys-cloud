@@ -1,6 +1,7 @@
 #bin/sh
 
-set -e
+# Don't set -e, or the machines won't stop on failure!
+# set -e
 
 # https://www.davidpashley.com/articles/writing-robust-shell-scripts/
 set -xu
