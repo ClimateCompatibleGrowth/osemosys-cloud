@@ -6,9 +6,9 @@ html
     = csp_meta_tag
     = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload'
     = javascript_pack_tag 'application', 'data-turbolinks-track': 'reload'
-  body
+  body.d-flex.flex-column.min-vh-100
     .navbar.navbar-expand-lg.navbar-dark.bg-dark.mb-4
-      a.navbar-brand href=root_path Osemosys Cloud (alpha)
+      a.navbar-brand href=root_path Osemosys Cloud
       ul.navbar-nav
         li.nav-item = link_to(t('.my_models'), models_path, class: 'nav-link')
 
@@ -32,3 +32,10 @@ html
     .container
       = render 'common/flash'
       .mb-4 = yield
+
+    footer.navbar.navbar-dark.bg-dark.mt-auto
+      .navbar-brand.mx-auto
+        = link_to('https://climatecompatiblegrowth.com/', target: '_blank') do
+          = image_tag('CCG_white.svg', height: '100')
+        = link_to('https://www.un.org/en/desa', target: '_blank') do
+          = image_tag('un_desa-02-2020_en-block-white', height: '100')
