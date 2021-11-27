@@ -38,6 +38,7 @@ class SolveRun
         filename: File.basename(@solved_files.csv_file_path),
       )
     end
+    run_result.update!(feasible: @solved_files.feasible)
   end
 
   def local_files

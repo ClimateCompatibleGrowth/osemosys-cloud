@@ -16,7 +16,11 @@ module Osemosys
         postprocess_results if postprocess_results?
         print_summary
 
-        SolvedFiles.new(solved_file_path: zipped_output_path, csv_file_path: zipped_csv_path)
+        SolvedFiles.new(
+          solved_file_path: zipped_output_path,
+          csv_file_path: zipped_csv_path,
+          feasible: feasible?,
+        )
       end
 
       private
@@ -76,6 +80,13 @@ module Osemosys
           destination: zipped_csv_path,
           logger: logger,
         ).call
+      end
+
+      def feasible?
+        File.open(output_path) do |f|
+          first_line = f.first
+          !first_line.match?('Infeasible')
+        end
       end
 
       def print_summary
