@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_04_05_094756) do
+ActiveRecord::Schema.define(version: 2021_11_27_145817) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -69,6 +69,7 @@ ActiveRecord::Schema.define(version: 2021_04_05_094756) do
     t.bigint "run_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.boolean "feasible"
     t.index ["run_id"], name: "index_run_results_on_run_id"
   end
 

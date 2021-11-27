@@ -162,6 +162,7 @@ en:
     preprocessing_data: Preprocessing data
     queued: Creating server
     succeeded: Succeeded
+    unfeasible: Unfeasible
   server_type:
     large: Large server
     small: Small server

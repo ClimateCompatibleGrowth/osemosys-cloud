@@ -1,5 +1,5 @@
 .run-card data-run-card-run-id=run.id
-  .run-card__title-bar class=("run-card__title-bar--#{run.state}")
+  .run-card__title-bar class=(run.run_card_css_class)
     - if run.in_progress?
       =<> link_to(run_path(run), class: 'btn btn-light btn-sm', remote: true) do
         = fa_icon('sync')

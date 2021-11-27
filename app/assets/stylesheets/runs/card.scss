@@ -18,6 +18,10 @@
     &--failed {
       background: #f7c1c1;
     }
+
+    &--unfeasible {
+      background: #f2cda7;
+    }
   }
 
   &__run-info {

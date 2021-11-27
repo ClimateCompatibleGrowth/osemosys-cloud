@@ -71,7 +71,11 @@ class Run < ApplicationRecord
   end
 
   def humanized_status
-    I18n.t("run_state.#{state}")
+    if unfeasible?
+      I18n.t('run_state.unfeasible')
+    else
+      I18n.t("run_state.#{state}")
+    end
   end
 
   def finished?
@@ -109,6 +113,20 @@ class Run < ApplicationRecord
 
   def failed?
     current_state == 'failed'
+  end
+
+  def unfeasible?
+    return false if run_result.blank?
+
+    !run_result.feasible?
+  end
+
+  def run_card_css_class
+    if unfeasible?
+      'run-card__title-bar--unfeasible'
+    else
+      "run-card__title-bar--#{state}"
+    end
   end
 
   private
