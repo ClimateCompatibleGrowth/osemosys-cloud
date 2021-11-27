@@ -5,7 +5,7 @@ module Osemosys
     extend Dry::Configurable
     enable_test_interface
 
-    setting :s3_bucket, 'osemosys-cloud-production', reader: true
-    setting :dummy_solver_sleep_duration, 0, reader: true
+    setting :s3_bucket, default: 'osemosys-cloud-production', reader: true
+    setting :dummy_solver_sleep_duration, default: 0, reader: true
   end
 end
