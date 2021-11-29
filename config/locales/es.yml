@@ -57,7 +57,7 @@ es:
         last_run: 'Última corrida:'
         to_runs: Ver corridas
         total_run_duration: 'Duración total de la corrida:'
-        viewing_user: Viewing user %{user}
+        viewing_user: Observando usuario %{user}
     user_stats:
       index:
         last_run_at: Última corrida a las
@@ -107,7 +107,7 @@ es:
         create: Crear versión
         new: Nueva versión
         update: Actualizar versión
-    time_ago: "%{time} tiempo transcurrido (not sure of translation)"
+    time_ago: "%{time} tiempo transcurrido "
   language:
     en: Inglés
     es: Español
@@ -162,6 +162,7 @@ es:
     preprocessing_data: Datos de pre-procesamiento
     queued: Creando servidor
     succeeded: Exitosa
+    unfeasible: Inviable
   server_type:
     large: Servidor grande
     small: Servidor pequeño
