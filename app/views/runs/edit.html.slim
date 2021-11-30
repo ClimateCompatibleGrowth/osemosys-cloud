@@ -3,6 +3,8 @@ h1 = t('helpers.submit.run.update')
 = simple_form_for(@run) do |f|
   = f.input :name
   = f.input :description
+  = f.input :language, collection: Language.all, include_blank: false,
+    label_method: :name, value_method: :slug
   = f.button :submit, class: 'btn btn-primary'
 
 .float-right

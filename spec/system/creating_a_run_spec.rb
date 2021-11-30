@@ -38,11 +38,13 @@ RSpec.describe 'Creating a run', type: :system do
 
     fill_in 'Name', with: 'Eldorado'
     fill_in 'Description', with: 'A Wonderful place'
+    select('English', from: 'run_language')
     click_on 'Update run'
 
     expect(page).to have_text 'Run updated'
     expect(page).to have_text 'Eldorado'
     expect(page).to have_text 'A Wonderful place'
+    expect(page).to have_text 'English'
 
     click_on 'Edit'
     click_on 'Delete'
