@@ -92,7 +92,7 @@ class Run < ApplicationRecord
 
   def timeout
     if ec2?
-      10.hours
+      1.hour
     else
       2.minutes
     end
