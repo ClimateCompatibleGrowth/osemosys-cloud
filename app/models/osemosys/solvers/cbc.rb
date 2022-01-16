@@ -13,7 +13,11 @@ module Osemosys
         generate_input_file
         find_solution
         prepare_results
-        postprocess_results if postprocess_results?
+        if postprocess_results?
+          postprocess_results
+          generate_figures
+          zip_csv_folder
+        end
         print_summary
 
         SolvedFiles.new(
@@ -74,7 +78,17 @@ module Osemosys
           solution_file_path: output_path,
           logger: logger,
         ).call
+      end
 
+      def generate_figures
+        Commands::GenerateFigures.new(
+          csv_path: 'csv/',
+          language: run.language,
+          logger: logger,
+        ).call
+      end
+
+      def zip_csv_folder
         Commands::ZipFolder.new(
           folder: 'csv/',
           destination: zipped_csv_path,
