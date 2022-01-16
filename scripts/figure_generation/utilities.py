@@ -8,7 +8,7 @@ color_dict = None
 
 
 name_color_codes = pd.read_csv(
-        os.path.join(os.getcwd(), 'name_color_codes.csv'),
+        os.path.join(os.getcwd(), 'scripts', 'figure_generation', 'name_color_codes.csv'),
         encoding='latin-1')
 
 
