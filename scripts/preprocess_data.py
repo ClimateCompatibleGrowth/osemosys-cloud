@@ -34,6 +34,7 @@ import pandas as pd
 import os, sys
 from collections import defaultdict
 
+
 def main(data_infile, data_outfile):
 
     lines = []
@@ -42,11 +43,26 @@ def main(data_infile, data_outfile):
         for line in f1:
             if not line.startswith(('set MODEper','set MODEx', 'end;')):
                 lines.append(line)
-                
+
     with open(data_outfile, 'w') as f2:
         f2.writelines(lines)
 
     parsing = False
+    parsing_year = False
+    parsing_tech = False
+    parsing_fuel = False
+    parsing_mode = False
+    parsing_storage = False
+    parsing_emission = False
+
+    otoole = False
+
+    year_list = []
+    fuel_list = []
+    tech_list = []
+    storage_list = []
+    mode_list = []
+    emission_list = []
 
     data_all = []
     data_out = []
@@ -54,63 +70,191 @@ def main(data_infile, data_outfile):
     output_table = []
     storage_to = []
     storage_from = []
+    emission_table = []
+
+    params_to_check = ['OutputActivityRatio', 
+                       'InputActivityRatio', 
+                       'TechnologyToStorage', 
+                       'TechnologyFromStorage', 
+                       'EmissionActivityRatio']
 
     with open(data_infile, 'r') as f:
         for line in f:
+            if line.startswith('# Model file written by *otoole*'):
+                otoole = True
+            if parsing_year:
+                year_list += [line.strip()] if line.strip() not in ['', ';'] else []
+            if parsing_fuel:
+                fuel_list += [line.strip()] if line.strip() not in ['', ';'] else []
+            if parsing_tech:
+                tech_list += [line.strip()] if line.strip() not in ['', ';'] else []
+            if parsing_storage:
+                storage_list += [line.strip()] if line.strip() not in ['', ';'] else []
+            if parsing_mode:
+                mode_list += [line.strip()] if line.strip() not in ['', ';'] else []
+            if parsing_emission:
+                emission_list += [line.strip()] if line.strip() not in ['', ';'] else []
+
             if line.startswith('set YEAR'):
-                start_year = line.split(' ')[3]
-            if line.startswith('set COMMODITY'): # Extracts list of COMMODITIES from data file. Some models use FUEL instead. 
-                fuel_list = line.split(' ')[3:-1]
-            if line.startswith('set FUEL'): # Extracts list of FUELS from data file. Some models use COMMODITIES instead. 
-                fuel_list = line.split(' ')[3:-1]
-            if line.startswith('set TECHNOLOGY'):
-                tech_list = line.split(' ')[3:-1]
-            if line.startswith('set STORAGE'):
-                storage_list = line.split(' ')[3:-1]
-            if line.startswith('set MODE_OF_OPERATION'):
-                mode_list = line.split(' ')[3:-1]
-            
-            if line.startswith(";"):
-                    parsing = False   
-            
-            if parsing:
-                if line.startswith('['):
-                    fuel = line.split(',')[2]
-                    tech = line.split(',')[1]
-                elif line.startswith(start_year):
-                    years = line.rstrip(':= ;\n').split(' ')[0:]
-                    years = [i.strip(':=') for i in years]
+                if len(line.split('=')[1]) > 1:
+                    year_list = line.split(' ')[3:-1]
                 else:
-                    values = line.rstrip().split(' ')[1:]
-                    mode = line.split(' ')[0]
-                    
-                    if param_current=='OutputActivityRatio':    
-                        data_out.append(tuple([fuel,tech,mode]))
-                        data_all.append(tuple([tech,mode]))
-                        for i in range(0,len(years)):
-                            output_table.append(tuple([tech,fuel,mode,years[i],values[i]]))
-                    
-                    if param_current=='InputActivityRatio':
-                        data_inp.append(tuple([fuel,tech,mode]))   
-                        data_all.append(tuple([tech,mode]))
-                    
-                    if param_current == 'TechnologyToStorage' or param_current == 'TechnologyFromStorage':
-                        if not line.startswith(mode_list[0]):
-                            storage = line.split(' ')[0]
-                            values = line.rstrip().split(' ')[1:]
-                            for i in range(0,len(mode_list)):
-                                if values[i] != '0':
-                                    if param_current == 'TechnologyToStorage':
-                                        storage_to.append(tuple([storage,tech,mode_list[i]]))
-                                        data_all.append(tuple([tech,mode_list[i]]))
-                                    if param_current == 'TechnologyFromStorage':
-                                        storage_from.append(tuple([storage,tech,mode_list[i]]))
-                                        data_all.append(tuple([tech,mode_list[i]]))
-                    
-            if line.startswith(('param OutputActivityRatio','param InputActivityRatio','param TechnologyToStorage','param TechnologyFromStorage')):
-                param_current = line.split(' ')[1]
-                parsing = True
-            
+                    parsing_year = True
+            if line.startswith('set COMMODITY'):  # Extracts list of COMMODITIES from data file. Some models use FUEL instead.
+                if len(line.split('=')[1]) > 1:
+                    fuel_list = line.split(' ')[3:-1]
+                else:
+                    parsing_fuel = True
+            if line.startswith('set FUEL'):  # Extracts list of FUELS from data file. Some models use COMMODITIES instead.
+                if len(line.split('=')[1]) > 1:
+                    fuel_list = line.split(' ')[3:-1]
+                else:
+                    parsing_fuel = True
+            if line.startswith('set TECHNOLOGY'):
+                if len(line.split('=')[1]) > 1:
+                    tech_list = line.split(' ')[3:-1]
+                else:
+                    parsing_tech = True
+            if line.startswith('set STORAGE'):
+                if len(line.split('=')[1]) > 1:
+                    storage_list = line.split(' ')[3:-1]
+                else:
+                    parsing_storage = True
+            if line.startswith('set MODE_OF_OPERATION'):
+                if len(line.split('=')[1]) > 1:
+                    mode_list = line.split(' ')[3:-1]
+                else:
+                    parsing_mode = True
+            if line.startswith('set EMISSION'):
+                if len(line.split('=')[1]) > 1:
+                    emission_list = line.split(' ')[3:-1]
+                else:
+                    parsing_emission = True
+
+            if line.startswith(";"):
+                parsing_year = False
+                parsing_tech = False
+                parsing_fuel = False
+                parsing_mode = False
+                parsing_storage = False
+                parsing_emission = False            
+
+    start_year = year_list[0]
+
+    if not otoole:
+        with open(data_infile, 'r') as f:
+            for line in f:
+                if line.startswith(";"):
+                        parsing = False   
+
+                if parsing:
+                    if line.startswith('['):
+                        fuel = line.split(',')[2]
+                        tech = line.split(',')[1]
+                    elif line.startswith(start_year):
+                        years = line.rstrip(':= ;\n').split(' ')[0:]
+                        years = [i.strip(':=') for i in years]
+                    else:
+                        values = line.rstrip().split(' ')[1:]
+                        mode = line.split(' ')[0]
+
+                        if param_current =='OutputActivityRatio':    
+                            data_out.append(tuple([fuel, tech, mode]))
+                            data_all.append(tuple([tech, mode]))
+                            for i in range(0,len(years)):
+                                output_table.append(tuple([tech, fuel, mode, years[i], values[i]]))
+
+                        if param_current =='InputActivityRatio':
+                            data_inp.append(tuple([fuel, tech, mode]))   
+                            data_all.append(tuple([tech, mode]))
+
+                        if param_current == 'TechnologyToStorage' or param_current == 'TechnologyFromStorage':
+                            if not line.startswith(mode_list[0]):
+                                storage = line.split(' ')[0]
+                                values = line.rstrip().split(' ')[1:]
+                                for i in range(0, len(mode_list)):
+                                    if values[i] != '0':
+                                        if param_current == 'TechnologyToStorage':
+                                            storage_to.append(tuple([storage, tech, mode_list[i]]))
+                                            data_all.append(tuple([tech, mode_list[i]]))
+                                        if param_current == 'TechnologyFromStorage':
+                                            storage_from.append(tuple([storage, tech, mode_list[i]]))
+                                            data_all.append(tuple([tech, mode_list[i]]))
+
+                if line.startswith(('param OutputActivityRatio', 
+                                    'param InputActivityRatio', 
+                                    'param TechnologyToStorage', 
+                                    'param TechnologyFromStorage')):
+                    param_current = line.split(' ')[1]
+                    parsing = True
+
+    if otoole:
+        with open(data_infile, 'r') as f:
+            for line in f:
+                details = line.split(' ')
+                if line.startswith(";"):
+                    parsing = False
+                if parsing:
+                    if len(details) > 1:
+                        if param_current == 'OutputActivityRatio':
+                            tech = details[1].strip()
+                            fuel = details[2].strip()
+                            mode = details[3].strip()
+                            year = details[4].strip()
+                            value = details[5].strip()
+
+                            if float(value) != 0.0:
+                                data_out.append(tuple([fuel, tech, mode]))
+                                output_table.append(tuple([tech, fuel, mode, year, value]))
+                                data_all.append(tuple([tech, mode]))
+
+                        if param_current == 'InputActivityRatio':
+                            tech = details[1].strip()
+                            fuel = details[2].strip()
+                            mode = details[3].strip()
+                            value = details[5].strip()
+                            if float(value) != 0.0:
+                                data_inp.append(tuple([fuel, tech, mode]))
+                                data_all.append(tuple([tech, mode]))
+
+                        if param_current == 'TechnologyToStorage':
+                            tech = details[1].strip()
+                            storage = details[2].strip()
+                            mode = details[3].strip()
+                            value = details[4].strip()
+                            if value > 0.0:
+                                storage_to.append(tuple([storage, tech, mode]))
+                                data_all.append(tuple([storage, mode]))
+
+                        if param_current == 'TechnologyFromStorage':
+                            tech = details[1].strip()
+                            storage = details[2].strip()
+                            mode = details[3].strip()
+                            value = details[4].strip()
+                            if value > 0.0:
+                                storage_from.append(tuple([storage, tech, mode]))
+                                data_all.append(tuple([storage, mode]))
+
+                        if param_current == 'EmissionActivityRatio':
+                            tech = details[1].strip()
+                            emission = details[2].strip()
+                            mode = details[3].strip()
+                            value = details[5].strip()
+                            if float(value) != 0.0:
+                                emission_table.append(tuple([emission, tech, mode]))
+                                data_all.append(tuple([tech, mode]))
+
+                if any(param in line for param in params_to_check):
+                    param_current = details[-2]
+                    parsing = True
+
+    data_out = list(set(data_out))
+    data_inp = list(set(data_inp))
+    data_all = list(set(data_all))
+    storage_to = list(set(storage_to))
+    storage_from = list(set(storage_from))
+    emission_table = list(set(emission_table))
+    
     dict_out = defaultdict(list)
     dict_inp = defaultdict(list)
     dict_all = defaultdict(list)
