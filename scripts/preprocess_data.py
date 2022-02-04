@@ -35,7 +35,7 @@ import os, sys
 from collections import defaultdict
 
 
-def main(data_infile, data_outfile):
+def main(data_infile, data_outfile, model_file, model_processed):
 
     lines = []
 
@@ -137,7 +137,7 @@ def main(data_infile, data_outfile):
                 parsing_fuel = False
                 parsing_mode = False
                 parsing_storage = False
-                parsing_emission = False            
+                parsing_emission = False
 
     start_year = year_list[0]
 
@@ -145,7 +145,7 @@ def main(data_infile, data_outfile):
         with open(data_infile, 'r') as f:
             for line in f:
                 if line.startswith(";"):
-                        parsing = False   
+                    parsing = False
 
                 if parsing:
                     if line.startswith('['):
@@ -158,14 +158,14 @@ def main(data_infile, data_outfile):
                         values = line.rstrip().split(' ')[1:]
                         mode = line.split(' ')[0]
 
-                        if param_current =='OutputActivityRatio':    
+                        if param_current =='OutputActivityRatio':
                             data_out.append(tuple([fuel, tech, mode]))
                             data_all.append(tuple([tech, mode]))
                             for i in range(0,len(years)):
                                 output_table.append(tuple([tech, fuel, mode, years[i], values[i]]))
 
                         if param_current =='InputActivityRatio':
-                            data_inp.append(tuple([fuel, tech, mode]))   
+                            data_inp.append(tuple([fuel, tech, mode]))
                             data_all.append(tuple([tech, mode]))
 
                         if param_current == 'TechnologyToStorage' or param_current == 'TechnologyFromStorage':
@@ -181,9 +181,9 @@ def main(data_infile, data_outfile):
                                             storage_from.append(tuple([storage, tech, mode_list[i]]))
                                             data_all.append(tuple([tech, mode_list[i]]))
 
-                if line.startswith(('param OutputActivityRatio', 
-                                    'param InputActivityRatio', 
-                                    'param TechnologyToStorage', 
+                if line.startswith(('param OutputActivityRatio',
+                                    'param InputActivityRatio',
+                                    'param TechnologyToStorage',
                                     'param TechnologyFromStorage')):
                     param_current = line.split(' ')[1]
                     parsing = True
@@ -254,63 +254,135 @@ def main(data_infile, data_outfile):
     storage_to = list(set(storage_to))
     storage_from = list(set(storage_from))
     emission_table = list(set(emission_table))
-    
+
     dict_out = defaultdict(list)
     dict_inp = defaultdict(list)
     dict_all = defaultdict(list)
     dict_stt = defaultdict(list)
     dict_stf = defaultdict(list)
 
-    for fuel,tech,mode in data_out:
-        dict_out[fuel].append((mode,tech))
+    for fuel, tech, mode in data_out:
+        dict_out[fuel].append((mode, tech))
 
-    for fuel,tech,mode in data_inp:
-        dict_inp[fuel].append((mode,tech))
-        
-    for tech,mode in data_all:
+    for fuel, tech, mode in data_inp:
+        dict_inp[fuel].append((mode, tech))
+
+    for tech, mode in data_all:
         if mode not in dict_all[tech]:
             dict_all[tech].append(mode)
-            
-    for storage,tech,mode in storage_to:
-        dict_stt[storage].append((mode,tech))
 
-    for storage,tech,mode in storage_from:
-        dict_stf[storage].append((mode,tech))
+    for storage, tech, mode in storage_to:
+        dict_stt[storage].append((mode, tech))
+
+    for storage, tech, mode in storage_from:
+        dict_stf[storage].append((mode, tech))
 
     def file_output_function(if_dict, str_dict, set_list, set_name, extra_char):
         for each in set_list:
             if each in if_dict.keys():
                 line = set_name + str(each) + ']:=' + str(str_dict[each]) + extra_char
                 if set_list == tech_list:
-                    line = line.replace(',','').replace(':=[',':= ').replace(']*','').replace("'","")
+                    line = line.replace(',', '').replace(':=[', ':= ').replace(']*', '').replace("'", "")
                 else:
-                    line = line.replace('),',')').replace('[(',' (').replace(')]',')').replace("'","")
+                    line = line.replace('),', ')').replace('[(', ' (').replace(')]', ')').replace("'", "")
             else:
                 line = set_name + str(each) + ']:='
             file_out.write(line + ';' + '\n')
 
     # Append lines at the end of the data file
-    with open(data_outfile, 'w') as file_out: # 'a' to open in 'append' mode
-        
+    with open(data_outfile, 'w') as file_out:  # 'a' to open in 'append' mode
+
         file_out.writelines(lines)
-        
+
         file_output_function(dict_out, dict_out, fuel_list, 'set MODExTECHNOLOGYperFUELout[', '')
         file_output_function(dict_inp, dict_inp, fuel_list, 'set MODExTECHNOLOGYperFUELin[', '')
         file_output_function(dict_all, dict_all, tech_list, 'set MODEperTECHNOLOGY[', '*')
-        
+
         if '' not in storage_list:
             file_output_function(dict_stt, dict_stt, storage_list, 'set MODExTECHNOLOGYperSTORAGEto[', '')
             file_output_function(dict_stf, dict_stf, storage_list, 'set MODExTECHNOLOGYperSTORAGEfrom[', '')
-            
+
         file_out.write('end;')
+
+    with open(model_file, 'r') as model_in:
+
+        line_count = 0
+        parsing_sets = 0  # 0 - start; 1 - parsing main sets;
+        parsing_params = 0
+        parsing_all = 0
+        model_lines = []
+        set_list = []
+        sets_new = ['MODExTECHNOLOGYperFUELout',
+                    'MODExTECHNOLOGYperFUELin',
+                    'MODEperTECHNOLOGY',
+                    'MODExTECHNOLOGYperSTORAGEto',
+                    'MODExTECHNOLOGYperSTORAGEfrom',
+                    'TIMESLICEofSEASON',
+                    'TIMESLICEofDAYTYPE',
+                    'TIMESLICEofDAILYTIMEBRACKET',
+                    'TIMESLICEofSDB',
+                    'MODExTECHNOLOGYperEMISSION']
+
+        for line in model_in:
+            line_count += 1
+            set_name = ''
+
+            if line.startswith('set'):
+                set_name = line.replace('{', ' ').strip('#;{\n').split(' ')[1]
+                set_list.append(set_name)
+                if set_name not in sets_new:
+                    model_lines.append(line)
+                parsing_sets = 1
+
+            if parsing_sets == 1:
+                if line.startswith('#'):
+                    if not any(item in sets_new for item in set_list):
+                        model_lines.append('set MODEperTECHNOLOGY{TECHNOLOGY} within MODE_OF_OPERATION;\n')
+                        model_lines.append('set MODExTECHNOLOGYperFUELout{COMMODITY} within MODE_OF_OPERATION cross TECHNOLOGY;\n')
+                        model_lines.append('set MODExTECHNOLOGYperFUELin{COMMODITY} within MODE_OF_OPERATION cross TECHNOLOGY;\n')
+                        model_lines.append('set MODExTECHNOLOGYperSTORAGEto{STORAGE} within MODE_OF_OPERATION cross TECHNOLOGY;\n')
+                        model_lines.append('set MODExTECHNOLOGYperSTORAGEfrom{STORAGE} within MODE_OF_OPERATION cross TECHNOLOGY;\n')
+                    parsing_sets = 2
+
+            if line.startswith('param'):
+                model_lines.append(line)
+                parsing_params = 1
+                
+            if parsing_params == 1:
+                if line.startswith('\t'):
+                    model_lines.append(line)
+                    
+                if 'MODExTECHNOLOGYperFUELout' in line:
+                    sets_of_sets = True
+                if 'var' in line:
+                    if sets_of_sets:
+                        model_lines.append('set TIMESLICEofSEASON{ls in SEASON} within TIMESLICE := {l in TIMESLICE : Conversionls[l,ls] = 1};\n')
+                        model_lines.append('set TIMESLICEofDAYTYPE{ld in DAYTYPE} within TIMESLICE := {l in TIMESLICE : Conversionld[l,ld] = 1};\n')
+                        model_lines.append('set TIMESLICEofDAILYTIMEBRACKET{lh in DAILYTIMEBRACKET} within TIMESLICE := {l in TIMESLICE : Conversionlh[l,lh] = 1};\n')
+                        model_lines.append('set TIMESLICEofSDB{ls in SEASON, ld in DAYTYPE, lh in DAILYTIMEBRACKET} within TIMESLICE := TIMESLICEofSEASON[ls] inter TIMESLICEofDAYTYPE[ld] inter TIMESLICEofDAILYTIMEBRACKET[lh];\n')
+                        model_lines.append('set MODExTECHNOLOGYperEMISSION{e in EMISSION} within MODE_OF_OPERATION cross TECHNOLOGY\n')
+                        model_lines.append('    := {m in MODE_OF_OPERATION, t in TECHNOLOGY : exists{r in REGION, y in YEAR} EmissionActivityRatio[r,t,e,m,y] <> 0};\n')
+                    parsing_params = 2
+                    parsing_all = 1
+                    
+            if parsing_all == 1:
+                if not line.startswith('#'):
+                    model_lines.append(line)
+
+
+        with open(model_processed, 'w') as model_out:
+            model_out.writelines(model_lines)
+
 
 if __name__ == '__main__':
 
-    if len(sys.argv) != 3:
-        msg = "Usage: python {} <infile> <outfile>"
+    if len(sys.argv) != 5:
+        msg = "Usage: python {} <infile> <outfile> <model_file> <model_processed>"
         print(msg.format(sys.argv[0]))
         sys.exit(1)
     else:
         data_infile = sys.argv[1]
         data_outfile = sys.argv[2]
-        main(data_infile, data_outfile)
+        model_file = sys.argv[3]
+        model_processed = sys.argv[4]
+        main(data_infile, data_outfile, model_file, model_processed)
