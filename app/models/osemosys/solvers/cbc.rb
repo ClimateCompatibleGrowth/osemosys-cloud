@@ -9,7 +9,7 @@ module Osemosys
       end
 
       def call
-        preprocess_data_file if preprocess_data_file?
+        preprocess_data_file
         generate_input_file
         find_solution
         prepare_results
