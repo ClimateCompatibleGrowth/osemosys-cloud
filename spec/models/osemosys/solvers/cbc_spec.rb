@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe Osemosys::Solvers::Cbc do
   it 'solves the model with glpsol and cbc with pre and post-processing' do
-    run = create(:run, :queued, pre_process: true, post_process: true)
+    run = create(:run, :queued)
     model_path = "#{Rails.root}/spec/data/osemosys_with_preprocessed.txt"
     atlantis_data_path = "#{Rails.root}/spec/data/atlantis_data_preprocessing.txt"
 
