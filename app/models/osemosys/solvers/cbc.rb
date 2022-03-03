@@ -44,6 +44,8 @@ module Osemosys
         Commands::PreprocessDataFile.new(
           local_data_path: local_data_path,
           preprocessed_data_path: preprocessed_data_path,
+          model_file_path: local_model_path,
+          preprocessed_model_file_path: preprocessed_model_file_path,
           logger: logger,
         ).call
       end
@@ -52,7 +54,7 @@ module Osemosys
         run.transition_to!(:generating_matrix)
         input_file = preprocess_data_file? ? preprocessed_data_path : local_data_path
         Commands::GenerateInputFile.new(
-          local_model_path: local_model_path,
+          local_model_path: preprocessed_model_file_path,
           local_data_path: input_file,
           lp_path: lp_path,
           logger: logger,
@@ -107,6 +109,10 @@ module Osemosys
         logger.info 'Model solved!'
         logger.info ''
         logger.info "run_id: #{run.id}"
+      end
+
+      def preprocessed_model_file_path
+        "./data/model_#{run.id}.pre.txt"
       end
 
       def lp_path
