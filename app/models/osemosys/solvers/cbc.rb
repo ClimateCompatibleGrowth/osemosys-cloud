@@ -13,11 +13,9 @@ module Osemosys
         generate_input_file
         find_solution
         prepare_results
-        if postprocess_results?
-          postprocess_results
-          generate_figures
-          zip_csv_folder
-        end
+        postprocess_results
+        generate_figures
+        zip_csv_folder
         print_summary
 
         SolvedFiles.new(
@@ -28,10 +26,6 @@ module Osemosys
       end
 
       private
-
-      def postprocess_results?
-        run.post_process?
-      end
 
       attr_reader :local_data_path, :local_model_path, :run, :logger
 
