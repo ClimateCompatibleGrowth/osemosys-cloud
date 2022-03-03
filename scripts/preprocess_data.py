@@ -33,6 +33,7 @@ need to be introduced to its associated OSeMOSYS model file::
 import pandas as pd
 import os, sys
 from collections import defaultdict
+import re
 
 
 def main(data_infile, data_outfile, model_file, model_processed):
@@ -222,7 +223,7 @@ def main(data_infile, data_outfile, model_file, model_processed):
                             storage = details[2].strip()
                             mode = details[3].strip()
                             value = details[4].strip()
-                            if value > 0.0:
+                            if float(value) > 0.0:
                                 storage_to.append(tuple([storage, tech, mode]))
                                 data_all.append(tuple([storage, mode]))
 
@@ -231,7 +232,7 @@ def main(data_infile, data_outfile, model_file, model_processed):
                             storage = details[2].strip()
                             mode = details[3].strip()
                             value = details[4].strip()
-                            if value > 0.0:
+                            if float(value) > 0.0:
                                 storage_from.append(tuple([storage, tech, mode]))
                                 data_all.append(tuple([storage, mode]))
 
@@ -323,6 +324,9 @@ def main(data_infile, data_outfile, model_file, model_processed):
                     'TIMESLICEofSDB',
                     'MODExTECHNOLOGYperEMISSION']
 
+        sets_of_sets = False
+        var_count = 0
+
         for line in model_in:
             line_count += 1
             set_name = ''
@@ -332,14 +336,23 @@ def main(data_infile, data_outfile, model_file, model_processed):
                 set_list.append(set_name)
                 if set_name not in sets_new:
                     model_lines.append(line)
-                parsing_sets = 1
+                    parsing_sets = 1
 
             if parsing_sets == 1:
+
                 if line.startswith('#'):
-                    if not any(item in sets_new for item in set_list):
+                    # if not any(item in sets_new for item in set_list):
+
+                    if 'COMMODITY' in set_list:
                         model_lines.append('set MODEperTECHNOLOGY{TECHNOLOGY} within MODE_OF_OPERATION;\n')
                         model_lines.append('set MODExTECHNOLOGYperFUELout{COMMODITY} within MODE_OF_OPERATION cross TECHNOLOGY;\n')
                         model_lines.append('set MODExTECHNOLOGYperFUELin{COMMODITY} within MODE_OF_OPERATION cross TECHNOLOGY;\n')
+                        model_lines.append('set MODExTECHNOLOGYperSTORAGEto{STORAGE} within MODE_OF_OPERATION cross TECHNOLOGY;\n')
+                        model_lines.append('set MODExTECHNOLOGYperSTORAGEfrom{STORAGE} within MODE_OF_OPERATION cross TECHNOLOGY;\n')
+                    if 'FUEL' in set_list:
+                        model_lines.append('set MODEperTECHNOLOGY{TECHNOLOGY} within MODE_OF_OPERATION;\n')
+                        model_lines.append('set MODExTECHNOLOGYperFUELout{FUEL} within MODE_OF_OPERATION cross TECHNOLOGY;\n')
+                        model_lines.append('set MODExTECHNOLOGYperFUELin{FUEL} within MODE_OF_OPERATION cross TECHNOLOGY;\n')
                         model_lines.append('set MODExTECHNOLOGYperSTORAGEto{STORAGE} within MODE_OF_OPERATION cross TECHNOLOGY;\n')
                         model_lines.append('set MODExTECHNOLOGYperSTORAGEfrom{STORAGE} within MODE_OF_OPERATION cross TECHNOLOGY;\n')
                     parsing_sets = 2
@@ -347,15 +360,22 @@ def main(data_infile, data_outfile, model_file, model_processed):
             if line.startswith('param'):
                 model_lines.append(line)
                 parsing_params = 1
-                
+
             if parsing_params == 1:
                 if line.startswith('\t'):
                     model_lines.append(line)
-                    
+
+                if line.startswith('  '):
+                    if 'exists' not in line:
+                        model_lines.append(line)
+
                 if 'MODExTECHNOLOGYperFUELout' in line:
                     sets_of_sets = True
+
                 if 'var' in line:
-                    if sets_of_sets:
+                    var_count += 1
+                    # if sets_of_sets:
+                    if var_count == 1:
                         model_lines.append('set TIMESLICEofSEASON{ls in SEASON} within TIMESLICE := {l in TIMESLICE : Conversionls[l,ls] = 1};\n')
                         model_lines.append('set TIMESLICEofDAYTYPE{ld in DAYTYPE} within TIMESLICE := {l in TIMESLICE : Conversionld[l,ld] = 1};\n')
                         model_lines.append('set TIMESLICEofDAILYTIMEBRACKET{lh in DAILYTIMEBRACKET} within TIMESLICE := {l in TIMESLICE : Conversionlh[l,lh] = 1};\n')
@@ -364,7 +384,7 @@ def main(data_infile, data_outfile, model_file, model_processed):
                         model_lines.append('    := {m in MODE_OF_OPERATION, t in TECHNOLOGY : exists{r in REGION, y in YEAR} EmissionActivityRatio[r,t,e,m,y] <> 0};\n')
                     parsing_params = 2
                     parsing_all = 1
-                    
+
             if parsing_all == 1:
                 if not line.startswith('#'):
                     model_lines.append(line)
