@@ -29,10 +29,6 @@ module Osemosys
 
       private
 
-      def preprocess_data_file?
-        run.pre_process?
-      end
-
       def postprocess_results?
         run.post_process?
       end
@@ -52,10 +48,9 @@ module Osemosys
 
       def generate_input_file
         run.transition_to!(:generating_matrix)
-        input_file = preprocess_data_file? ? preprocessed_data_path : local_data_path
         Commands::GenerateInputFile.new(
           local_model_path: preprocessed_model_file_path,
-          local_data_path: input_file,
+          local_data_path: preprocessed_data_path,
           lp_path: lp_path,
           logger: logger,
           timeout: run.timeout.to_i,
