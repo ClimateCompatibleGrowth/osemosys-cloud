@@ -73,7 +73,7 @@ class RunsController < ApplicationController
 
   def run_params
     params.require(:run).permit(
-      :name, :model_file, :data_file, :description, :pre_process, :post_process,
+      :name, :model_file, :data_file, :description,
       :notify_when_finished, :version_id, :server_type, :language
     )
   end
