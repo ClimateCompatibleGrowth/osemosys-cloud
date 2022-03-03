@@ -9,15 +9,13 @@ module Osemosys
       end
 
       def call
-        preprocess_data_file if preprocess_data_file?
+        preprocess_data_file
         generate_input_file
         find_solution
         prepare_results
-        if postprocess_results?
-          postprocess_results
-          generate_figures
-          zip_csv_folder
-        end
+        postprocess_results
+        generate_figures
+        zip_csv_folder
         print_summary
 
         SolvedFiles.new(
@@ -29,14 +27,6 @@ module Osemosys
 
       private
 
-      def preprocess_data_file?
-        run.pre_process?
-      end
-
-      def postprocess_results?
-        run.post_process?
-      end
-
       attr_reader :local_data_path, :local_model_path, :run, :logger
 
       def preprocess_data_file
@@ -44,16 +34,17 @@ module Osemosys
         Commands::PreprocessDataFile.new(
           local_data_path: local_data_path,
           preprocessed_data_path: preprocessed_data_path,
+          model_file_path: local_model_path,
+          preprocessed_model_file_path: preprocessed_model_file_path,
           logger: logger,
         ).call
       end
 
       def generate_input_file
         run.transition_to!(:generating_matrix)
-        input_file = preprocess_data_file? ? preprocessed_data_path : local_data_path
         Commands::GenerateInputFile.new(
-          local_model_path: local_model_path,
-          local_data_path: input_file,
+          local_model_path: preprocessed_model_file_path,
+          local_data_path: preprocessed_data_path,
           lp_path: lp_path,
           logger: logger,
           timeout: run.timeout.to_i,
@@ -107,6 +98,10 @@ module Osemosys
         logger.info 'Model solved!'
         logger.info ''
         logger.info "run_id: #{run.id}"
+      end
+
+      def preprocessed_model_file_path
+        "./data/model_#{run.id}.pre.txt"
       end
 
       def lp_path
