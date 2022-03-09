@@ -264,7 +264,8 @@ def generate_csv_files(data_file, results_file, base_folder=os.getcwd()):
             'InputToTotalCapacity':['r','t','f','y'],
             'DiscountedCapitalInvestment':['r','t','y'],
             'DiscountedOperatingCost':['r','t','y'],
-            'TotalDiscountedCostByTechnology':['r','t','y'],            
+            'TotalDiscountedCostByTechnology':['r','t','y'],
+            'NumberOfNewTechnologyUnits':['r','t','y'],             
             }
 
     for each in params:
