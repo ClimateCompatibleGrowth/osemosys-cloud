@@ -81,6 +81,7 @@ def main(data_infile, data_outfile, model_file, model_processed):
 
     with open(data_infile, 'r') as f:
         for line in f:
+            line = line.rstrip().replace('\t', ' ')
             if line.startswith('# Model file written by *otoole*'):
                 otoole = True
             if parsing_year:
@@ -145,6 +146,7 @@ def main(data_infile, data_outfile, model_file, model_processed):
     if not otoole:
         with open(data_infile, 'r') as f:
             for line in f:
+                line = line.rstrip().replace('\t', ' ')
                 if line.startswith(";"):
                     parsing = False
 

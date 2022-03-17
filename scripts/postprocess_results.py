@@ -41,6 +41,7 @@ def generate_csv_files(data_file, results_file, base_folder=os.getcwd()):
 
     with open(data_file, 'r') as f:
         for line in f:
+            line = line.rstrip().replace('\t', ' ')
             if line.startswith('# Model file written by *otoole*'):
                 otoole = True
             if parsing_year:
@@ -57,7 +58,7 @@ def generate_csv_files(data_file, results_file, base_folder=os.getcwd()):
                 emission_list += [line.strip()] if line.strip() not in ['', ';'] else []
                 
             if line.startswith('set YEAR'):
-                if len(line.split('=')[1]) > 1:
+                if len(line.split('=')[1]) > 1:                    
                     year_list = line.split(' ')[3:-1]
                 else:
                     parsing_year = True
@@ -105,6 +106,7 @@ def generate_csv_files(data_file, results_file, base_folder=os.getcwd()):
     if not otoole:
         with open(data_file, 'r') as f:
             for line in f:
+                line = line.rstrip().replace('\t', ' ')
                 if line.startswith(";"):
                     parsing = False
 
@@ -282,6 +284,7 @@ def generate_csv_files(data_file, results_file, base_folder=os.getcwd()):
 
     with open(data_file, 'r') as f:
         for line in f:
+            line = line.rstrip().replace('\t', ' ')
             if line.startswith(";"):
                 parsing = False
             if parsing:
