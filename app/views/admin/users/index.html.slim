@@ -6,6 +6,8 @@ h1= t('.user_statistics')
     = f.input :tags_name_in, collection: ActsAsTaggableOn::Tag.with_taggings.ordered,
               value_method: :name, label: User.human_attribute_name(:tags).singularize,
               required: false
+    = f.input :admin_true, label: User.human_attribute_name(:admin), required: false,
+              collection: [[true, t('simple_form.true')], [false, t('simple_form.false')]]
     = f.button :submit, class: 'btn btn-primary'
     = link_to t('helpers.clear'), request.path, class:'btn btn-outline-primary ml-2'
 
