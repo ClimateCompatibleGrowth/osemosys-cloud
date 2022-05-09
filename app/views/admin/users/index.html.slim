@@ -21,6 +21,7 @@ h1= t('.user_statistics')
 table.table.table-sm.table-hover
   tr
     th= sort_link(@q, :id, User.human_attribute_name(:id))
+    th= sort_link(@q, :admin, User.human_attribute_name(:admin))
     th= sort_link(@q, :name, User.human_attribute_name(:name))
     th= sort_link(@q, :email, User.human_attribute_name(:email))
     th= sort_link(@q, :country_code, User.human_attribute_name(:country_code))
@@ -32,6 +33,7 @@ table.table.table-sm.table-hover
   - @users.each do |user|
     tr
       td = user.id
+      td = fa_icon('graduation-cap') if user.admin
       td = user.name
       td = link_to(user.email, admin_user_path(user.id))
       td = user.country_name
