@@ -9,7 +9,7 @@ module Admin
         format.html
         format.csv do
           send_data(
-            UsersToCsv.new(@users.per(1000)).generate,
+            UsersToCsv.new(@users.page(1).per(1000)).generate,
             filename: 'users.csv',
           )
         end
