@@ -24,9 +24,9 @@ jobs:
         with:
           bundler-cache: true
 
-      - name: Install osemosys dependencies
-        run: |
-          sudo apt-get update && sudo apt-get install glpk-utils coinor-cbc python3-pandas
+      # - name: Install osemosys dependencies
+      #   run: |
+      #     sudo apt-get update && sudo apt-get install glpk-utils coinor-cbc python3-pandas
 
       - name: Setup test database
         env:
