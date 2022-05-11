@@ -10,7 +10,7 @@ jobs:
         image: postgres:13
         env:
           POSTGRES_USER: osemosys_cloud
-          POSTGRES_DB: osemosys_cloud_test
+          POSTGRES_DB: osemosys_cloud
           POSTGRES_HOST_AUTH_METHOD: trust
           POSTGRES_PASSWORD: ""
         ports:
@@ -35,7 +35,8 @@ jobs:
           PGHOST: localhost
           PGUSER: osemosys_cloud
         run: |
-          bin/rails db:create db:schema:load
+          bin/rails db:create
+          bin/rails db:schema:load
 
       - name: Run tests
         run: bin/rspec --format progress
