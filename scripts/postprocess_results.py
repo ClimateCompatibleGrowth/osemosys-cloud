@@ -276,6 +276,8 @@ def generate_csv_files(data_file, results_file, base_folder=os.getcwd()):
             'StorageLevelDayTypeStart':['r','s','ls','ld','y'],
             'StorageLevelDayTypeFinish':['r','s','ls','ld','y'],
             'DiscountedSalvageValueStorage':['r','s','y'],
+            'Charging':['r','s','f','l','y'],
+            'Discharging':['r','s','f','l','y'],
             }
 
     for each in params:
