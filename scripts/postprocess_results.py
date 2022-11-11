@@ -279,6 +279,15 @@ def generate_csv_files(data_file, results_file, base_folder=os.getcwd()):
             'Charging':['r','s','f','l','y'],
             'Discharging':['r','s','f','l','y'],
             'RateOfNetStorageActivity':['r','s','ls','ld','lh','y'],
+            'NetChargeWithinYear':['r','s','ls','ld','lh','y'],
+            'NetChargeWithinDay':['r','s','ls','ld','lh','y'],
+            'StorageLowerLimit':['r','s','y'],
+            'StorageUpperLimit':['r','s','y'],
+            'AccumulatedNewStorageCapacity':['r','s','y'],
+            'CapitalInvestmentStorage':['r','s','y'],
+            'DiscountedCapitalInvestmentStorage':['r','s','y'],
+            'DiscountedSalvageValueStorage':['r','s','y'],
+            'TotalDiscountedStorageCost':['r','s','y'],
             }
 
     for each in params:
