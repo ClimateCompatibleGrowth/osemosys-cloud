@@ -7,10 +7,10 @@ module Ec2
 
     def to_h
       {
-        image_id: 'ami-0f35698393901dfc3', # Large server AMI
+        image_id: 'ami-08cc7751f1eb62c53', # Large server v4 AMI
         min_count: 1,
         max_count: 1,
-        key_name: 'yboulkaid-osemosys',
+        key_name: 'yboulkaid_osemosys_2023',
         user_data: encoded_user_data,
         security_group_ids: ['sg-43911f25'],
         instance_type: instance_type,
