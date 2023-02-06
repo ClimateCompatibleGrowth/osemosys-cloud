@@ -288,6 +288,7 @@ def generate_csv_files(data_file, results_file, base_folder=os.getcwd()):
             'DiscountedCapitalInvestmentStorage':['r','s','y'],
             'DiscountedSalvageValueStorage':['r','s','y'],
             'TotalDiscountedStorageCost':['r','s','y'],
+            'RateOfNetStorageActivity':['r','s','ls','ld','lh','y'],
             }
 
     for each in params:
