@@ -117,7 +117,7 @@ def main(data_infile, data_outfile, model_file, model_processed):
                     tech_list = line.split(' ')[3:-1]
                 else:
                     parsing_tech = True
-            if line.startswith('set STORAGE'):
+            if line.startswith('set STORAGE '): # Blank space required to avoid double counting from sets like STORAGEINTRAYEAR
                 if len(line.split('=')[1]) > 1:
                     storage_list = line.split(' ')[3:-1]
                 else:
