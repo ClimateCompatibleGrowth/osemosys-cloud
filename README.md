@@ -16,3 +16,4 @@ OSeMOSYS Cloud is supported by the [UN Department of Economic and Social Affairs
   server (~2min to start up, runs up to multiple hours).
 - User management
 - Admin backoffice
+
