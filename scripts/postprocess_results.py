@@ -292,6 +292,8 @@ def generate_csv_files(data_file, results_file, base_folder=os.getcwd()):
             }
 
     for each in params:
+        if each not in cols:
+            continue
         df_p = df[df.parameter == each]
         df_p[cols[each]] = df_p['id'].str.split(',',expand=True)
         cols[each].append('value')
